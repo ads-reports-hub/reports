@@ -43,7 +43,11 @@ function doPost(e) {
     }
 
     var data = sheet.getDataRange().getValues();
-    var headers = data[0].map(function (h) { return String(h).trim().toLowerCase(); });
+    var headers = data[0].map(function (h) {
+      var v = String(h).trim().toLowerCase();
+      if (v === 'клиент' || v === 'клиент:') return 'client';
+      return v;
+    });
     var clientCol = headers.indexOf('client');
     var linkCol = headers.indexOf('last_report_link');
     var updatedCol = headers.indexOf('last_updated');
