@@ -16,6 +16,7 @@
 import io
 import json
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -35,8 +36,16 @@ class MetaFetchError(Exception):
 def _get(path, token, **params):
     params["access_token"] = token
     url = f"{API}/{path}?{urllib.parse.urlencode(params)}"
-    with urllib.request.urlopen(url, timeout=30) as r:
-        data = json.load(r)
+    try:
+        with urllib.request.urlopen(url, timeout=30) as r:
+            data = json.load(r)
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace")
+        try:
+            message = json.loads(body)["error"]["message"]
+        except Exception:
+            message = body
+        raise MetaFetchError(f"Meta API error on {path}: {message}") from e
     if "error" in data:
         raise MetaFetchError(f"Meta API error on {path}: {data['error'].get('message')}")
     return data
