@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ data.client }} · Отчёт по рекламе · {{ data.period.label_ru }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Archivo+Black&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+/* ============================================================
+   БРЕНД: цвета и шрифты Elza Butirina (@elzabutirina), из BRANDING.pdf.
+   Этот файл СГЕНЕРИРОВАН из engine/templates/report.html.jinja, не
+   редактировать руками. Любые правки внешнего вида делаются в шаблоне,
+   иначе они потеряются при следующей автогенерации отчёта.
+
+   ШРИФТЫ (временная замена, пока нет файлов лицензии):
+   - TT Fors (платный, нет файла лицензии) -> замена: 'Sora' для основного
+     текста (--font-body).
+   - Заголовки/цифры (--font-display) намеренно другой шрифт. Замена:
+     'Archivo Black'.
+
+   ТЕМЫ: все "тонозависимые" цвета вынесены в переменные, которые
+   переопределяются в body.light ниже. Разметка не хардкодит цвета.
+
+   showDynamics: управляется полем data.showDynamics (из строки клиента
+   в таблице). Когда false, блоки с дельтами физически не попадают в
+   HTML (условный блок шаблона, не CSS display:none), а тексты от ИИ не
+   упоминают сравнение с прошлым периодом (обеспечивается промптом в
+   engine/commentary.py, не этим шаблоном).
+   ============================================================ */
+:root{
+  /* --- фирменные цвета (ровно из BRANDING.pdf) --- */
+  --pink:      #faa1d4;   /* ГЛАВНЫЙ АКЦЕНТНЫЙ */
+  --charcoal:  #2b2a2a;   /* ФОН (тёмная тема) / ТЕКСТ (светлая) */
+  --cream:     #f0f1ed;   /* ТЕКСТ (тёмная тема) / ФОН (светлая) */
+  --burgundy:  #a62e3e;   /* ДЛЯ ВЫДЕЛЕНИЯ ЭЛЕМЕНТОВ */
+  --pink-deep: #f17fc0;   /* насыщенный розовый для градиентов и графиков */
+
+  /* --- тёмная тема (база): фон и поверхности от charcoal --- */
+  --bg:        #2b2a2a;
+  --surface:   #343331;
+  --surface-2: #3c3a37;
+  --border:    rgba(240,241,237,.12);
+  --border-soft: rgba(240,241,237,.06);
+
+  /* --- текст от cream --- */
+  --text:      #f0f1ed;
+  --text-dim:  #c9c6bf;
+  --text-mute: #96938b;
+
+  /* --- тонозависимые акценты (переопределяются в body.light) --- */
+  --accent-text:    #faa1d4;  /* голый розовый текст на фоне страницы */
+  --burg-text:      #dd6d7a;  /* голый бордовый текст на фоне страницы */
+  --chip-pink-bg:   #4a2f3d;  /* плашка "хорошо/дёшево" */
+  --chip-pink-text: #faa1d4;
+  --chip-burg-bg:   #3d2225;  /* плашка "внимание/дороже" */
+  --chip-burg-text: #dd6d7a;
+  --chart-grid:     rgba(240,241,237,.08);
+  --hint-hover-text: #2b2a2a; /* текст на розовой кнопке "?" при наведении */
+  --mode-active-bg:  #dd6d7a; /* активная кнопка Кратко/Подробно */
+  --mode-active-text: #2b2a2a;
+
+  /* --- цвета полос демографии (одинаковы в обеих темах) --- */
+  --bar-men:   #f17fc0;
+  --bar-women: #dd6d7a;
+
+  /* --- шрифты --- */
+  --font-display: 'Archivo Black', Impact, sans-serif;
+  --font-body:    'Sora', system-ui, sans-serif;
+
+  /* --- геометрия --- */
+  --r:    14px;
+  --maxw: 1080px;
+  --shadow: 0 1px 2px rgba(0,0,0,.18), 0 8px 22px rgba(0,0,0,.22);
+}
+
+/* --- светлая тема: палитра из variant-f-light.html --- */
+body.light{
+  --bg:        #f0f1ed;
+  --surface:   #ffffff;
+  --surface-2: #f7f6f2;
+  --border:    rgba(43,42,42,.12);
+  --border-soft: rgba(43,42,42,.06);
+
+  --text:      #2b2a2a;
+  --text-dim:  #57544e;
+  --text-mute: #8a867c;
+
+  --accent-text:    #b8306f;  /* pink-ink: читаемый розовый на светлом */
+  --burg-text:      #a62e3e;
+  --chip-pink-bg:   #fbe4f1;  /* светлые пастельные плашки */
+  --chip-pink-text: #b8306f;
+  --chip-burg-bg:   #fbe6e8;
+  --chip-burg-text: #a62e3e;
+  --chart-grid:     rgba(43,42,42,.08);
+  --hint-hover-text: #ffffff;
+  --mode-active-bg:  #a62e3e;
+  --mode-active-text: #ffffff;
+
+  --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 22px rgba(0,0,0,.08);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  transition:background .25s,color .25s;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:28px 22px 56px}
+.panel,.kpi,.table-card,.textcard,.aud-card,.ad-card,.eu-note,.glossary,.insight{
+  transition:background .25s,border-color .25s;
+}
+
+/* ---------- шапка ---------- */
+header.head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.head-left{display:flex;align-items:center;gap:12px}
+.logo{
+  width:42px;height:42px;border-radius:12px;flex:none;
+  background:var(--pink);color:var(--charcoal);
+  display:grid;place-items:center;font-family:var(--font-display);font-size:16px;
+}
+.head-left h1{font-family:var(--font-display);font-weight:400;font-size:17px;letter-spacing:.005em}
+.head-left .sub{color:var(--text-dim);font-size:12.5px;margin-top:3px}
+.head-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.period{text-align:right;font-size:12.5px;color:var(--text-mute)}
+.period strong{display:block;color:var(--text);font-size:14px;font-weight:600}
+
+.toggles{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.theme-toggle,.lang-toggle,.mode-toggle{display:flex;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:4px}
+.theme-btn,.lang-btn,.mode-btn{
+  border:none;background:transparent;color:var(--text-mute);font-family:var(--font-display);
+  font-weight:400;font-size:11.5px;letter-spacing:.03em;padding:6px 12px;border-radius:999px;
+  cursor:pointer;transition:background .18s,color .18s;
+}
+.theme-btn.active,.lang-btn.active{background:var(--pink);color:var(--charcoal)}
+.mode-btn.active{background:var(--mode-active-bg);color:var(--mode-active-text)}
+.theme-btn:not(.active):hover,.lang-btn:not(.active):hover,.mode-btn:not(.active):hover{color:var(--text)}
+
+/* ---------- заголовки секций ---------- */
+h2.section{
+  font-family:var(--font-display);font-weight:400;font-size:13px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--accent-text);
+  margin:32px 0 13px;
+}
+
+/* ---------- инсайт-абзац ---------- */
+.insight{
+  background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--pink);
+  border-radius:var(--r);padding:16px 20px;font-size:14px;color:var(--text-dim);
+}
+.insight b{color:var(--accent-text)}
+
+/* ---------- KPI ---------- */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kpi{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:14px 16px;position:relative;overflow:hidden;
+}
+.kpi::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--pink)}
+.kpi .label{display:flex;align-items:center;gap:5px;flex-wrap:wrap;font-size:11.5px;color:var(--text-dim);margin-bottom:7px;text-transform:uppercase;letter-spacing:.03em}
+.kpi .value{font-family:var(--font-display);font-weight:400;font-size:21px;color:var(--text);letter-spacing:-.01em;white-space:nowrap}
+.kpi .meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px}
+.kpi .sub{font-size:10.5px;color:var(--text-mute)}
+.delta{display:inline-flex;align-items:center;padding:2px 8px;border-radius:999px;font-size:10.5px;font-weight:700;white-space:nowrap}
+.delta.neutral{background:var(--surface-2);color:var(--text-dim)}
+.delta.watch{background:var(--chip-burg-bg);color:var(--chip-burg-text)}
+.delta.good{background:var(--chip-pink-bg);color:var(--chip-pink-text)}
+
+/* ---------- KPI: подсказки «?» (только режим «Подробно») ---------- */
+.kpi-hint-wrap{position:relative;display:none}
+body.detailed .kpi-hint-wrap{display:inline-flex;animation:detailFade .3s ease}
+.kpi-hint{
+  width:14px;height:14px;border-radius:50%;border:1px solid var(--accent-text);color:var(--accent-text);
+  background:transparent;font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;
+  cursor:help;line-height:1;padding:0;font-family:var(--font-body);
+}
+.kpi-hint:hover,.kpi-hint:focus{background:var(--accent-text);color:var(--hint-hover-text);outline:none}
+.kpi-tip{
+  position:absolute;bottom:calc(100% + 8px);left:0;width:210px;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  font-size:11.5px;font-weight:400;line-height:1.5;text-transform:none;letter-spacing:normal;
+  padding:10px 12px;border-radius:10px;box-shadow:var(--shadow);
+  opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;transform:translateY(4px);z-index:30;
+}
+.kpi-tip::after{content:"";position:absolute;top:100%;left:14px;border:6px solid transparent;border-top-color:var(--surface-2)}
+.kpi-hint-wrap:hover .kpi-tip,.kpi-hint-wrap:focus-within .kpi-tip,.kpi-hint-wrap.open .kpi-tip{opacity:1;transform:translateY(0);pointer-events:auto}
+@media(max-width:520px){
+  .kpi-tip{width:170px;left:auto;right:0}
+  .kpi-tip::after{left:auto;right:14px}
+}
+
+/* ---------- detail-only: единый механизм показа/скрытия ---------- */
+@keyframes detailFade{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:translateY(0)}}
+.detail-block{display:none}
+body.detailed .detail-block{display:block;animation:detailFade .32s ease}
+tr.detail-row{display:none}
+body.detailed tr.detail-row{display:table-row}
+body.detailed tr.detail-row td{animation:detailFade .32s ease}
+
+/* ---------- графики ---------- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid2 > .panel{min-width:0} /* иначе canvas Chart.js не даёт ячейке грида сжаться и страница уезжает вбок */
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px 18px}
+.chart-box canvas{max-width:100%}
+.panel h3{font-family:var(--font-display);font-weight:400;font-size:13px;color:var(--text);margin-bottom:12px}
+.chart-box{position:relative;height:225px}
+
+/* ---------- таблица кампаний ---------- */
+.table-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.tbl-scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:660px}
+thead th{
+  text-align:right;padding:11px 13px;font-size:10px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--text-mute);border-bottom:1px solid var(--border);
+  white-space:nowrap;background:var(--surface-2);
+}
+thead th:first-child{text-align:left}
+tbody td{padding:11px 13px;text-align:right;border-bottom:1px solid var(--border-soft);font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--text)}
+tbody tr:last-child td{border-bottom:none}
+tbody td:first-child{text-align:left;white-space:normal}
+.camp-name{font-weight:600;font-size:13px}
+.camp-tag{display:inline-block;margin-top:3px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.tag-direct{background:var(--chip-burg-bg);color:var(--chip-burg-text)}
+.tag-traffic{background:var(--chip-pink-bg);color:var(--chip-pink-text)}
+.camp-aud{display:block;margin-top:4px;font-size:10.5px;color:var(--text-mute)}
+.val-strong{font-weight:700}
+.pill{display:inline-flex;align-items:center;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700}
+.pill.good{background:var(--chip-pink-bg);color:var(--chip-pink-text)}
+.pill.watch{background:var(--chip-burg-bg);color:var(--chip-burg-text)}
+tfoot td{padding:11px 13px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums;background:var(--surface-2)}
+tfoot td:first-child{text-align:left;text-transform:uppercase;font-size:10px;letter-spacing:.05em;color:var(--text-dim)}
+
+/* вердикт-строка под каждой кампанией (только «Подробно») */
+.verdict-cell{padding:12px 14px 14px !important;text-align:left !important;white-space:normal !important;background:var(--surface-2);font-size:12.5px;color:var(--text-dim);line-height:1.55}
+.verdict-cell b{color:var(--accent-text)}
+.verdict-cell .vlabel{color:var(--accent-text);font-family:var(--font-display);font-weight:400;font-size:10px;text-transform:uppercase;letter-spacing:.05em;margin-right:6px}
+
+/* объявления внутри кампании (только «Подробно») */
+.ads-cell{padding:12px 14px 14px !important;text-align:left !important;white-space:normal !important;background:var(--surface-2);border-top:1px dashed var(--border)}
+.ads-cell .alabel{display:block;color:var(--accent-text);font-family:var(--font-display);font-weight:400;font-size:10px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:9px}
+.adm-row{display:flex;flex-wrap:wrap;gap:10px}
+.adm{display:flex;align-items:center;gap:11px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:9px 13px 9px 9px;min-width:250px;flex:1 1 260px;max-width:420px}
+.adm img{width:52px;height:52px;border-radius:9px;object-fit:cover;flex:none;background:var(--surface-2)}
+.adm .adm-name{font-weight:600;font-size:12.5px;color:var(--text);line-height:1.3}
+.adm .adm-aud{font-size:11px;color:var(--text-mute);margin-top:1px}
+.adm .adm-met{font-size:11.5px;color:var(--text-dim);margin-top:4px;font-variant-numeric:tabular-nums}
+.adm .adm-met b{color:var(--accent-text);font-weight:700}
+@media(max-width:560px){.adm{max-width:none}}
+
+/* ---------- аудитории ---------- */
+.aud-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.aud-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 16px 15px}
+.aud-card.discovery{box-shadow:0 0 0 2px var(--pink)}
+.aud-star{
+  position:absolute;top:-11px;left:12px;display:inline-flex;align-items:center;gap:4px;
+  background:var(--pink);color:var(--charcoal);font-size:10px;font-weight:800;letter-spacing:.02em;
+  text-transform:uppercase;padding:4px 9px;border-radius:999px;
+}
+.aud-name{font-family:var(--font-display);font-weight:400;font-size:12.5px;color:var(--text)}
+.aud-ctr{font-family:var(--font-display);font-weight:400;font-size:20px;color:var(--accent-text);margin:8px 0 2px}
+.aud-stats{font-size:11.5px;color:var(--text-mute);font-variant-numeric:tabular-nums}
+.aud-note{font-size:12px;color:var(--text-dim);margin-top:9px;line-height:1.5}
+
+/* ---------- площадки и демография: горизонтальные полосы ---------- */
+.plat-row{display:grid;grid-template-columns:150px 1fr 235px;gap:10px;align-items:center;margin:8px 0}
+.plat-label{font-size:12px;font-weight:600;white-space:nowrap}
+.plat-stat{font-size:11.5px;color:var(--text-dim);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar-track{height:13px;background:var(--surface-2);border-radius:999px;overflow:hidden}
+.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--pink-deep),var(--pink));min-width:4px}
+.bar-fill.men{background:var(--bar-men)}
+.bar-fill.women{background:var(--bar-women)}
+.cap{margin-top:13px;font-size:12px;color:var(--text-mute);line-height:1.55}
+
+.demo-legend{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text-dim);margin-bottom:11px;flex-wrap:wrap}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
+.dot.men{background:var(--bar-men)}
+.dot.women{background:var(--bar-women)}
+.demo-legend .gap{width:6px}
+.demo-scale{margin-left:auto;color:var(--text-mute)}
+.demo-row{display:grid;grid-template-columns:70px 1fr 150px;gap:10px;align-items:center;margin:7px 0}
+.demo-label{font-size:11.5px;font-weight:600;white-space:nowrap}
+.demo-stat{font-size:11px;color:var(--text-dim);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.demo-stat.hot{color:var(--accent-text);font-weight:700}
+
+/* ---------- лучшие объявления ---------- */
+.ads-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ad-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  overflow:hidden;display:flex;flex-direction:column;position:relative;
+}
+.ad-card.best{box-shadow:0 0 0 2px var(--pink)}
+.ad-star{
+  position:absolute;top:10px;left:10px;z-index:2;display:inline-flex;align-items:center;gap:4px;
+  background:var(--pink);color:var(--charcoal);font-size:10px;font-weight:800;letter-spacing:.02em;
+  text-transform:uppercase;padding:5px 9px;border-radius:999px;
+}
+.ad-star.info{background:var(--burgundy);color:var(--cream)}
+.ad-visual{height:200px;background:var(--surface-2)}
+.ad-visual img{width:100%;height:100%;object-fit:cover;display:block}
+.ad-body{padding:13px 14px 15px;display:flex;flex-direction:column;gap:6px;flex:1}
+.ad-name{font-family:var(--font-display);font-weight:400;font-size:13px;color:var(--text)}
+.ad-cost{font-size:12px;color:var(--text-dim)}
+.ad-cost b{color:var(--accent-text);font-family:var(--font-display);font-weight:400}
+.ad-reason{font-size:12px;color:var(--text-dim);line-height:1.5}
+
+/* ---------- текстовые блоки: выводы, рекомендации ---------- */
+.textcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px}
+.textcard ol,.textcard ul{margin:0;padding-left:19px}
+.textcard li{font-size:13.5px;color:var(--text-dim);margin:8px 0}
+.textcard li b{color:var(--accent-text);font-weight:600}
+
+/* ---------- дисклеймер про переписки (ЕС) ---------- */
+.eu-note{
+  margin-top:32px;background:var(--chip-burg-bg);border:1px solid var(--border);
+  border-left:3px solid var(--burgundy);border-radius:var(--r);padding:16px 20px;
+}
+.eu-title{font-family:var(--font-display);font-weight:400;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--chip-burg-text);margin-bottom:7px}
+.eu-note p{font-size:13px;color:var(--text-dim);line-height:1.6}
+
+/* ---------- глоссарий (режим «Подробно») ---------- */
+.glossary{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.gloss-item{border-bottom:1px solid var(--border)}
+.gloss-item:last-child{border-bottom:none}
+.gloss-item summary{
+  list-style:none;cursor:pointer;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;
+  gap:12px;font-weight:400;font-size:13px;color:var(--text);transition:background .18s;font-family:var(--font-display);
+}
+.gloss-item summary::-webkit-details-marker{display:none}
+.gloss-item summary:hover{background:var(--surface-2)}
+.gloss-item summary .chev{color:var(--accent-text);transition:transform .25s;font-size:16px;flex:none}
+.gloss-item[open] summary .chev{transform:rotate(45deg)}
+.gloss-item .gloss-body{padding:0 18px 16px;font-size:12.5px;color:var(--text-dim);line-height:1.6}
+.gloss-body .ex{
+  display:block;margin-top:7px;padding:9px 11px;background:var(--surface-2);border-radius:9px;
+  font-size:12px;color:var(--text);border-left:3px solid var(--pink);
+}
+
+/* ---------- футер ---------- */
+footer.foot{margin-top:32px;font-size:12px;color:var(--text-mute);text-align:center}
+footer.foot .handle{color:var(--accent-text);margin-top:4px;display:block}
+
+@media (max-width:760px){
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .grid2{grid-template-columns:1fr}
+  .ads-grid{grid-template-columns:1fr}
+  .aud-grid{grid-template-columns:1fr;row-gap:22px}
+  .head-right{align-items:flex-end}
+}
+@media (max-width:640px){
+  .plat-row{grid-template-columns:1fr;gap:4px;margin:12px 0}
+  .plat-stat{text-align:left}
+  .demo-row{grid-template-columns:52px 1fr 128px;gap:7px}
+  .demo-stat{font-size:10px}
+}
+</style>
+</head>
+<body class="brief">
+<div class="wrap">
+
+  <header class="head">
+    <div class="head-left">
+      <div class="logo" aria-hidden="true">{{ data.client_initials | default('EB') }}</div>
+      <div>
+        <h1>{{ data.client }}</h1>
+        <div class="sub" data-i18n="header.sub">{{ i18n_static.ru['header.sub'] }}</div>
+      </div>
+    </div>
+    <div class="head-right">
+      <div class="period">
+        <strong data-i18n="header.dates">{{ data.period.label_ru }}</strong>
+        <span data-i18n="header.period">{{ i18n_static.ru['header.period'] }}</span>
+      </div>
+      <div class="toggles">
+        <div class="theme-toggle" role="group" aria-label="Тема оформления">
+          <button class="theme-btn active" id="btn-dark" onclick="setTheme('dark')" data-i18n="theme.dark">{{ i18n_static.ru['theme.dark'] }}</button>
+          <button class="theme-btn" id="btn-light" onclick="setTheme('light')" data-i18n="theme.light">{{ i18n_static.ru['theme.light'] }}</button>
+        </div>
+        <div class="mode-toggle" role="group" aria-label="Режим отчёта">
+          <button class="mode-btn active" id="btn-brief" onclick="setMode('brief')" data-i18n="mode.brief">{{ i18n_static.ru['mode.brief'] }}</button>
+          <button class="mode-btn" id="btn-detailed" onclick="setMode('detailed')" data-i18n="mode.detailed">{{ i18n_static.ru['mode.detailed'] }}</button>
+        </div>
+        <div class="lang-toggle" role="group" aria-label="Language / Язык">
+          <button class="lang-btn active" id="btn-ru" onclick="setLang('ru')">RU</button>
+          <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <h2 class="section" data-i18n="sec.insight">{{ i18n_static.ru['sec.insight'] }}</h2>
+  <div class="insight" data-i18n="insight.text">{{ data.insight_ru | safe }}</div>
+
+  <h2 class="section" data-i18n="sec.result">{{ i18n_static.ru['sec.result'] }}</h2>
+  <section class="kpis">
+    {% for k in kpi_defs %}
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="{{ k.key }}">{{ i18n_static.ru[k.key] }}</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="{{ k.key }}.tip">{{ i18n_static.ru[k.key ~ '.tip'] }}</span></span>
+      </div>
+      <div class="value"><span data-num="{{ k.raw }}" data-dec="{{ k.dec }}"{% if k.suffix %} data-suffix="{{ k.suffix }}"{% endif %}>{{ k.display_ru }}</span></div>
+      {% if data.showDynamics and k.delta is not none %}
+      <div class="meta">
+        <span class="delta {{ k.delta.cls }}" data-i18n="{{ k.key }}.delta">{{ k.delta.arrow }} {{ k.delta.text_ru }}</span>
+        <span class="sub" data-i18n="{{ k.key }}.prev">{{ k.delta.prev_ru }}</span>
+      </div>
+      {% elif k.sub_key %}
+      <div class="meta"><span class="sub" data-i18n="{{ k.sub_key }}">{{ i18n_static.ru[k.sub_key] }}</span></div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </section>
+
+  <h2 class="section" data-i18n="sec.compare">{{ i18n_static.ru['sec.compare'] }}</h2>
+  <div class="grid2">
+    <div class="panel"><h3 data-i18n="chart1.title">{{ i18n_static.ru['chart1.title'] }}</h3><div class="chart-box"><canvas id="clicksChart"></canvas></div></div>
+    <div class="panel"><h3 data-i18n="chart2.title">{{ i18n_static.ru['chart2.title'] }}</h3><div class="chart-box"><canvas id="cpcChart"></canvas></div></div>
+  </div>
+
+  <h2 class="section" data-i18n="sec.campaigns">{{ i18n_static.ru['sec.campaigns'] }}</h2>
+  <div class="table-card">
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="table.h.campaign">{{ i18n_static.ru['table.h.campaign'] }}</th>
+            <th data-i18n="table.h.reach">{{ i18n_static.ru['table.h.reach'] }}</th>
+            <th data-i18n="table.h.impr">{{ i18n_static.ru['table.h.impr'] }}</th>
+            <th data-i18n="table.h.clicks">{{ i18n_static.ru['table.h.clicks'] }}</th>
+            <th data-i18n="table.h.ctr">{{ i18n_static.ru['table.h.ctr'] }}</th>
+            <th data-i18n="table.h.cpc">{{ i18n_static.ru['table.h.cpc'] }}</th>
+            <th data-i18n="table.h.budget">{{ i18n_static.ru['table.h.budget'] }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in data.campaigns %}
+          {% set i = loop.index %}
+          <tr>
+            <td>
+              <div class="camp-name">{{ c.name }}</div>
+              <span class="camp-tag {{ 'tag-traffic' if c.tag_kind == 'traffic' else 'tag-direct' }}" data-i18n="camp{{ i }}.tag">{{ c.date }}</span>
+              <span class="camp-aud" data-i18n="camp{{ i }}.aud">{{ c.audience }}</span>
+            </td>
+            <td><span data-num="{{ c.reach }}" data-dec="0">{{ c.reach | fmt_ru(0) }}</span></td>
+            <td><span data-num="{{ c.impressions }}" data-dec="0">{{ c.impressions | fmt_ru(0) }}</span></td>
+            <td class="val-strong"><span data-num="{{ c.clicks }}" data-dec="0">{{ c.clicks | fmt_ru(0) }}</span></td>
+            <td><span data-num="{{ c.ctr }}" data-dec="2" data-suffix="%">{{ c.ctr | fmt_ru(2) }}%</span></td>
+            <td><span{% if c.cpc_pill %} class="pill {{ c.cpc_pill }}"{% endif %} data-num="{{ c.cpc }}" data-dec="2" data-suffix="Kč">{{ c.cpc | fmt_ru(2) }} Kč</span></td>
+            <td><span data-num="{{ c.spend }}" data-dec="0" data-suffix="Kč">{{ c.spend | fmt_ru(0) }} Kč</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="verdict-cell"><span class="vlabel" data-i18n="verdict.label">{{ i18n_static.ru['verdict.label'] }}</span><span data-i18n="camp{{ i }}.verdict">{{ c.verdict_ru | safe }}</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="ads-cell"><span class="alabel" data-i18n="ads.label">{{ i18n_static.ru['ads.label'] }}</span>
+              <div class="adm-row">
+                {% for a in c.ads %}
+                {% set adKey = ad_key_map[(i, loop.index)] %}
+                <div class="adm"><img src="{{ a.thumb }}" alt=""><div><div class="adm-name" data-i18n="{{ adKey }}.name">{{ a.label_ru }}</div><div class="adm-aud" data-i18n="{{ adKey }}.aud">{{ a.audience_ru }}</div><div class="adm-met" data-i18n="{{ adKey }}.met">{{ a.met_ru | safe }}</div></div></div>
+                {% endfor %}
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td data-i18n="table.total">{{ i18n_static.ru['table.total'] }}</td>
+            <td><span data-num="{{ data.totals.reach }}" data-dec="0">{{ data.totals.reach | fmt_ru(0) }}</span></td>
+            <td><span data-num="{{ data.totals.impressions }}" data-dec="0">{{ data.totals.impressions | fmt_ru(0) }}</span></td>
+            <td><span data-num="{{ data.totals.clicks }}" data-dec="0">{{ data.totals.clicks | fmt_ru(0) }}</span></td>
+            <td><span data-num="{{ data.totals.ctr }}" data-dec="2" data-suffix="%">{{ data.totals.ctr | fmt_ru(2) }}%</span></td>
+            <td><span data-num="{{ data.totals.cpc }}" data-dec="2" data-suffix="Kč">{{ data.totals.cpc | fmt_ru(2) }} Kč</span></td>
+            <td><span data-num="{{ data.totals.spend }}" data-dec="0" data-suffix="Kč">{{ data.totals.spend | fmt_ru(0) }} Kč</span></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  {% if data.audiences %}
+  <h2 class="section" data-i18n="sec.aud">{{ i18n_static.ru['sec.aud'] }}</h2>
+  <div class="aud-grid">
+    {% for aud in data.audiences %}
+    {% set i = loop.index %}
+    <article class="aud-card{{ ' discovery' if aud.discovery else '' }}">
+      {% if aud.discovery %}<span class="aud-star"><span aria-hidden="true">★</span><span data-i18n="aud{{ i }}.badge">{{ aud.badge_ru }}</span></span>{% endif %}
+      <div class="aud-name" data-i18n="aud{{ i }}.name">{{ aud.name_ru }}</div>
+      <div class="aud-ctr" data-i18n="aud{{ i }}.ctr">CTR {{ aud.ctr_range }}</div>
+      <div class="aud-stats" data-i18n="aud{{ i }}.stats">{{ aud.spend | fmt_ru(0) }} Kč · охват {{ aud.reach | fmt_ru(0) }}</div>
+      <p class="aud-note" data-i18n="aud{{ i }}.note">{{ aud.note_ru }}</p>
+    </article>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if data.platforms %}
+  <h2 class="section" data-i18n="sec.plat">{{ i18n_static.ru['sec.plat'] }}</h2>
+  <div class="panel">
+    {% for p in data.platforms %}
+    {% set i = loop.index %}
+    <div class="plat-row">
+      <span class="plat-label" data-i18n="plat{{ i }}.label">{{ p.label_ru }}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:{{ p.bar_pct }}%"></div></div>
+      <span class="plat-stat" data-i18n="plat{{ i }}.stat">{{ p.spend | fmt_ru(0) }} Kč · {{ p.clicks | fmt_ru(0) }} кликов · клик {{ p.cpc | fmt_ru(2) }} Kč</span>
+    </div>
+    {% endfor %}
+    <p class="cap" data-i18n="plat.note">{{ data.platforms_note_ru }}</p>
+  </div>
+  {% endif %}
+
+  {% if data.demographics %}
+  <h2 class="section" data-i18n="sec.demo">{{ i18n_static.ru['sec.demo'] }}</h2>
+  <div class="panel">
+    <div class="demo-legend">
+      <span class="dot men"></span><span data-i18n="demo.men">{{ i18n_static.ru['demo.men'] }}</span>
+      <span class="gap"></span>
+      <span class="dot women"></span><span data-i18n="demo.women">{{ i18n_static.ru['demo.women'] }}</span>
+      <span class="demo-scale" data-i18n="demo.scale">{{ i18n_static.ru['demo.scale'] }}</span>
+    </div>
+    {% for row in data.demographics.rows_sorted %}
+    {% set i = loop.index %}
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r{{ i }}.label">{{ row.label_ru }}</span>
+      <div class="bar-track"><div class="bar-fill {{ 'men' if row.gender == 'male' else 'women' }}" style="width:{{ row.bar_pct }}%"></div></div>
+      <span class="demo-stat{{ ' hot' if row.hot else '' }}" data-i18n="demo.r{{ i }}.stat">{{ row.spend | fmt_ru(0) }} Kč · CTR {{ row.ctr | fmt_ru(2) }}%</span>
+    </div>
+    {% endfor %}
+    <p class="cap" data-i18n="demo.note">{{ data.demographics.note_ru }}</p>
+  </div>
+  {% endif %}
+
+  {% if data.topAds %}
+  <h2 class="section" data-i18n="sec.ads">{{ i18n_static.ru['sec.ads'] }}</h2>
+  <div class="ads-grid">
+    {% for ad in data.topAds %}
+    {% set i = loop.index %}
+    <article class="ad-card{{ ' best' if ad.best else '' }}">
+      <span class="ad-star{{ '' if ad.best else ' info' }}"><span data-i18n="ad{{ i }}.badge">{{ ad.badge_ru }}</span></span>
+      <div class="ad-visual"><img src="{{ ad.thumb }}" alt="Превью креатива {{ ad.name_ru }}"></div>
+      <div class="ad-body">
+        <div class="ad-name" data-i18n="ad{{ i }}.name">{{ ad.name_ru }}</div>
+        <div class="ad-cost" data-i18n="ad{{ i }}.metric">{{ ad.metric_ru | safe }}</div>
+        <p class="ad-reason" data-i18n="ad{{ i }}.reason">{{ ad.reason_ru }}</p>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <h2 class="section" data-i18n="sec.findings">{{ i18n_static.ru['sec.findings'] }}</h2>
+  <div class="textcard"><ol>
+    {% for f in data.findings_ru %}
+    <li data-i18n="find.{{ loop.index }}">{{ f | safe }}</li>
+    {% endfor %}
+  </ol></div>
+
+  <h2 class="section" data-i18n="sec.recs">{{ i18n_static.ru['sec.recs'] }}</h2>
+  <div class="textcard"><ul>
+    {% for r in data.recommendations_ru %}
+    <li data-i18n="rec.{{ loop.index }}">{{ r | safe }}</li>
+    {% endfor %}
+  </ul></div>
+
+  {% if data.euNote_ru %}
+  <div class="eu-note">
+    <div class="eu-title" data-i18n="eu.title">{{ i18n_static.ru['eu.title'] }}</div>
+    <p data-i18n="eu.body">{{ data.euNote_ru }}</p>
+  </div>
+  {% endif %}
+
+  <h2 class="section detail-block" data-i18n="sec.glossary">{{ i18n_static.ru['sec.glossary'] }}</h2>
+  <div class="glossary detail-block">
+    {% for term_key in glossary_keys %}
+    <details class="gloss-item">
+      <summary><span data-i18n="{{ term_key }}.title">{{ i18n_static.ru[term_key ~ '.title'] }}</span><span class="chev">+</span></summary>
+      <div class="gloss-body" data-i18n="{{ term_key }}.body">{{ i18n_static.ru[term_key ~ '.body'] | safe }}</div>
+    </details>
+    {% endfor %}
+  </div>
+
+  <footer class="foot">
+    <span data-i18n="footer.text">{{ data.footer_ru }}</span>
+    <span class="handle">{{ data.handle | default('') }}</span>
+  </footer>
+
+</div>
+
+<script>
+/* ============================================================
+   I18N: словарь RU / EN. СГЕНЕРИРОВАН из data.json автогенератором
+   отчётов (engine/render.py), не редактировать руками.
+   ============================================================ */
+var i18n = {
+  ru: {{ i18n_ru_json | safe }},
+  en: {{ i18n_en_json | safe }}
+};
+
+var currentLang = 'ru';
+
+/* ---- Числа: форматирование по языку (RU: пробел + запятая, EN: запятая + точка) ---- */
+function fmtNum(n, dec, lang){
+  var f = Math.abs(Number(n)).toFixed(dec);
+  var parts = f.split('.');
+  var sep = lang === 'ru' ? ' ' : ',';
+  var intp = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+  var out = intp;
+  if(dec > 0) out += (lang === 'ru' ? ',' : '.') + parts[1];
+  return (Number(n) < 0 ? '-' : '') + out;
+}
+function formatNums(lang){
+  document.querySelectorAll('[data-num]').forEach(function(el){
+    var n = parseFloat(el.getAttribute('data-num'));
+    var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+    var suf = el.getAttribute('data-suffix') || '';
+    var txt = fmtNum(n, dec, lang);
+    if(suf === '%') txt += '%';
+    else if(suf) txt += ' ' + suf;
+    el.textContent = txt;
+  });
+}
+
+function setLang(lang){
+  currentLang = lang;
+  var dict = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key = el.getAttribute('data-i18n');
+    if(dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+  formatNums(lang);
+  document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang;
+  updateChartLang(lang);
+}
+
+/* ---- Режим: Кратко / Подробно ---- */
+function setMode(mode){
+  var detailed = mode === 'detailed';
+  document.body.classList.toggle('detailed', detailed);
+  document.body.classList.toggle('brief', !detailed);
+  document.getElementById('btn-brief').classList.toggle('active', !detailed);
+  document.getElementById('btn-detailed').classList.toggle('active', detailed);
+  requestAnimationFrame(function(){
+    setTimeout(function(){
+      allCharts.forEach(function(c){ try{ c.resize(); }catch(e){} });
+    }, 60);
+  });
+}
+
+/* ---- Тема: Тёмная / Светлая. Переключает body.light и перекрашивает графики ---- */
+function setTheme(theme){
+  var light = theme === 'light';
+  document.body.classList.toggle('light', light);
+  document.getElementById('btn-dark').classList.toggle('active', !light);
+  document.getElementById('btn-light').classList.toggle('active', light);
+  applyChartTheme();
+}
+
+/* ---- Подсказки KPI: тап на мобильных (hover недоступен) ---- */
+document.querySelectorAll('.kpi-hint-wrap').forEach(function(wrap){
+  wrap.addEventListener('click', function(e){
+    if(window.matchMedia('(hover: none)').matches){
+      e.stopPropagation();
+      document.querySelectorAll('.kpi-hint-wrap.open').forEach(function(o){ if(o !== wrap) o.classList.remove('open'); });
+      wrap.classList.toggle('open');
+    }
+  });
+});
+document.addEventListener('click', function(){
+  document.querySelectorAll('.kpi-hint-wrap.open').forEach(function(o){ o.classList.remove('open'); });
+});
+
+/* ---- Графики: разбивка по кампаниям текущего периода ---- */
+var clicksChart, cpcChart;
+var allCharts = [];
+var chartLabels = {
+  ru: {{ chart_labels_ru | safe }},
+  en: {{ chart_labels_en | safe }}
+};
+
+function updateChartLang(lang){
+  if(clicksChart){ clicksChart.data.labels = chartLabels[lang]; clicksChart.update(); }
+  if(cpcChart){ cpcChart.data.labels = chartLabels[lang]; cpcChart.update(); }
+}
+
+/* Читает актуальные цвета темы из CSS-переменных на body */
+function themeColors(){
+  var cs = getComputedStyle(document.body);
+  return {
+    text:  cs.getPropertyValue('--text').trim(),
+    mute:  cs.getPropertyValue('--text-mute').trim(),
+    grid:  cs.getPropertyValue('--chart-grid').trim(),
+    tipBg: cs.getPropertyValue('--surface-2').trim()
+  };
+}
+
+/* Применяет цвета темы к осям, сетке и тултипам обоих графиков */
+function applyChartTheme(){
+  var t = themeColors();
+  allCharts.forEach(function(chart){
+    chart.options.plugins.tooltip.backgroundColor = t.tipBg;
+    chart.options.plugins.tooltip.titleColor = t.text;
+    chart.options.plugins.tooltip.bodyColor = t.text;
+    chart.options.scales.x.ticks.color = t.text;
+    chart.options.scales.x.border.color = t.grid;
+    chart.options.scales.y.grid.color = t.grid;
+    chart.options.scales.y.ticks.color = t.mute;
+    chart.update();
+  });
+}
+
+window.addEventListener('load', function(){
+  if(typeof Chart === 'undefined') return;
+
+  var pink = '#faa1d4';
+  var pinkDeep = '#f17fc0';
+  var burgundy = '#a62e3e';
+
+  function baseOptions(labelCb, yTickCb){
+    return {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          padding: 10,
+          titleFont: { family: 'Sora', size: 12.5 },
+          bodyFont: { family: 'Sora', size: 12.5 },
+          callbacks: { label: labelCb }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, border: {}, ticks: { font: { family: 'Sora', size: 10.5 }, autoSkip: false } },
+        y: { beginAtZero: true, grid: {}, border: { display: false }, ticks: { font: { family: 'Sora', size: 10.5 }, callback: yTickCb } }
+      }
+    };
+  }
+
+  var clicksCtx = document.getElementById('clicksChart');
+  if(clicksCtx){
+    clicksChart = new Chart(clicksCtx, {
+      type: 'bar',
+      data: {
+        labels: chartLabels.ru,
+        datasets: [{
+          data: {{ chart_clicks_data | safe }},
+          backgroundColor: {{ chart_clicks_colors | safe }},
+          borderRadius: 6,
+          borderSkipped: false,
+          maxBarThickness: 56
+        }]
+      },
+      options: baseOptions(
+        function(c){ return fmtNum(c.parsed.y, 0, currentLang) + (currentLang === 'ru' ? ' кликов' : ' clicks'); },
+        function(v){ return fmtNum(v, 0, currentLang); }
+      )
+    });
+    allCharts.push(clicksChart);
+  }
+
+  var cpcCtx = document.getElementById('cpcChart');
+  if(cpcCtx){
+    cpcChart = new Chart(cpcCtx, {
+      type: 'bar',
+      data: {
+        labels: chartLabels.ru,
+        datasets: [{
+          data: {{ chart_cpc_data | safe }},
+          backgroundColor: {{ chart_cpc_colors | safe }},
+          borderRadius: 6,
+          borderSkipped: false,
+          maxBarThickness: 56
+        }]
+      },
+      options: baseOptions(
+        function(c){ return fmtNum(c.parsed.y, 2, currentLang) + (currentLang === 'ru' ? ' Kč за клик' : ' Kč per click'); },
+        function(v){ return v + ' Kč'; }
+      )
+    });
+    allCharts.push(cpcChart);
+  }
+
+  applyChartTheme();
+
+  /* Подстраховка от бага «canvas нулевой высоты» */
+  function fixAll(){ allCharts.forEach(function(c){ try{ c.resize(); }catch(e){} }); }
+  requestAnimationFrame(fixAll);
+  allCharts.forEach(function(chart){
+    var wrap = chart.canvas.closest('.chart-box');
+    if(!wrap) return;
+    if('ResizeObserver' in window){ new ResizeObserver(fixAll).observe(wrap); }
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(en){ if(en[0].isIntersecting) fixAll(); }, { threshold: .05 }).observe(wrap);
+    }
+  });
+  window.addEventListener('resize', fixAll);
+
+  formatNums(currentLang);
+});
+</script>
+
+</body>
+</html>
