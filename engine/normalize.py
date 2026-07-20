@@ -34,7 +34,7 @@ GOAL_KEYWORDS = [
 # Точка "·" важна: шаблон графиков режет подписи именно по ней.
 def _clean_campaign_name(name: str) -> str:
     parts = re.split(r"\s*[|—]\s*|\s+-\s+", name)
-    parts = [p.strip().rstrip(".").strip() for p in parts]
+    parts = [p.strip().strip(".").strip() for p in parts]
     parts = [p for p in parts if p]
     return " · ".join(parts)
 
