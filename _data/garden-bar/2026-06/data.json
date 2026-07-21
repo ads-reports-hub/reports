@@ -786,5 +786,7 @@
     "generatedBy": "automation"
   },
   "footer_ru": "Данные: Meta Marketing API · рекламный кабинет Garden Bar · период 1 – 30 июня",
-  "client_initials": "GB"
+  "client_initials": "GB",
+  "liza_comment_ru": "Тестовый комментарий от Лизы для проверки системы правок.",
+  "liza_comment_en": "Test comment from Liza to check the editing system."
 }
