@@ -567,6 +567,11 @@ footer.foot .handle{color:var(--accent-text);margin-top:4px;display:block}
     {% endfor %}
   </ul></div>
 
+  {% if data.liza_comment_ru %}
+  <h2 class="section" data-i18n="sec.liza_comment">{{ i18n_static.ru['sec.liza_comment'] }}</h2>
+  <div class="insight" data-i18n="liza.comment">{{ data.liza_comment_ru | safe }}</div>
+  {% endif %}
+
   {% if data.euNote_ru %}
   <div class="eu-note">
     <div class="eu-title" data-i18n="eu.title">{{ i18n_static.ru['eu.title'] }}</div>

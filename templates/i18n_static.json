@@ -10,6 +10,7 @@
 
     "sec.insight": "Коротко о месяце",
     "sec.result": "Общий результат за период",
+    "sec.liza_comment": "Комментарий",
 
     "kpi.spend": "Расход",
     "kpi.spend.tip": "Сколько Meta списала за показ рекламы в этом месяце.",
@@ -91,6 +92,7 @@
 
     "sec.insight": "The month in short",
     "sec.result": "Overall result for the period",
+    "sec.liza_comment": "Note",
 
     "kpi.spend": "Spend",
     "kpi.spend.tip": "What Meta charged for showing the ads this month.",

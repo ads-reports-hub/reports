@@ -137,6 +137,13 @@ def render_report(data: dict, out_dir: Path, assets_src_dir: Path | None = None)
     i18n_ru["header.dates"] = data["period"]["label_ru"]
     i18n_en["header.dates"] = data["period"]["label_en"]
 
+    i18n_ru["insight.text"] = data["insight_ru"]
+    i18n_en["insight.text"] = data.get("insight_en", data["insight_ru"])
+
+    if data.get("liza_comment_ru"):
+        i18n_ru["liza.comment"] = data["liza_comment_ru"]
+        i18n_en["liza.comment"] = data.get("liza_comment_en", data["liza_comment_ru"])
+
     for kd in kpi_defs:
         if kd["delta"]:
             i18n_ru[f"{kd['key']}.delta"] = f"{kd['delta']['arrow']} {kd['delta']['text_ru']}"
