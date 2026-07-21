@@ -28,6 +28,7 @@ import commentary
 import meta_client
 import normalize
 import render
+import report_store
 import sheet_client
 
 REPO_ROOT = Path(__file__).parent.parent
@@ -102,6 +103,7 @@ def run_one_client(client_row: dict, since: datetime.date, until: datetime.date,
 
     # ассеты уже лежат в out_dir/assets (meta_client писал их прямо туда)
     render.render_report(data, out_dir, assets_src_dir=None)
+    report_store.save(slug, period, data)
 
     return f"{PAGES_BASE_URL}/{slug}/{period}/"
 
