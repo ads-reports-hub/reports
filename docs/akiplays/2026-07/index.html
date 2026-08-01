@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akashi - Guitar Lessons · Отчёт по рекламе · 1 – 31 июля</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Archivo+Black&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+/* ============================================================
+   БРЕНД: цвета и шрифты Elza Butirina (@elzabutirina), из BRANDING.pdf.
+   Этот файл СГЕНЕРИРОВАН из engine/templates/report.html.jinja, не
+   редактировать руками. Любые правки внешнего вида делаются в шаблоне,
+   иначе они потеряются при следующей автогенерации отчёта.
+
+   ШРИФТЫ (временная замена, пока нет файлов лицензии):
+   - TT Fors (платный, нет файла лицензии) -> замена: 'Sora' для основного
+     текста (--font-body).
+   - Заголовки/цифры (--font-display) намеренно другой шрифт. Замена:
+     'Archivo Black'.
+
+   ТЕМЫ: все "тонозависимые" цвета вынесены в переменные, которые
+   переопределяются в body.light ниже. Разметка не хардкодит цвета.
+
+   showDynamics: управляется полем data.showDynamics (из строки клиента
+   в таблице). Когда false, блоки с дельтами физически не попадают в
+   HTML (условный блок шаблона, не CSS display:none), а тексты от ИИ не
+   упоминают сравнение с прошлым периодом (обеспечивается промптом в
+   engine/commentary.py, не этим шаблоном).
+   ============================================================ */
+:root{
+  /* --- фирменные цвета (ровно из BRANDING.pdf) --- */
+  --pink:      #faa1d4;   /* ГЛАВНЫЙ АКЦЕНТНЫЙ */
+  --charcoal:  #2b2a2a;   /* ФОН (тёмная тема) / ТЕКСТ (светлая) */
+  --cream:     #f0f1ed;   /* ТЕКСТ (тёмная тема) / ФОН (светлая) */
+  --burgundy:  #a62e3e;   /* ДЛЯ ВЫДЕЛЕНИЯ ЭЛЕМЕНТОВ */
+  --pink-deep: #f17fc0;   /* насыщенный розовый для градиентов и графиков */
+
+  /* --- тёмная тема (база): фон и поверхности от charcoal --- */
+  --bg:        #2b2a2a;
+  --surface:   #343331;
+  --surface-2: #3c3a37;
+  --border:    rgba(240,241,237,.12);
+  --border-soft: rgba(240,241,237,.06);
+
+  /* --- текст от cream --- */
+  --text:      #f0f1ed;
+  --text-dim:  #c9c6bf;
+  --text-mute: #96938b;
+
+  /* --- тонозависимые акценты (переопределяются в body.light) --- */
+  --accent-text:    #faa1d4;  /* голый розовый текст на фоне страницы */
+  --burg-text:      #dd6d7a;  /* голый бордовый текст на фоне страницы */
+  --chip-pink-bg:   #4a2f3d;  /* плашка "хорошо/дёшево" */
+  --chip-pink-text: #faa1d4;
+  --chip-burg-bg:   #3d2225;  /* плашка "внимание/дороже" */
+  --chip-burg-text: #dd6d7a;
+  --chart-grid:     rgba(240,241,237,.08);
+  --hint-hover-text: #2b2a2a; /* текст на розовой кнопке "?" при наведении */
+  --mode-active-bg:  #dd6d7a; /* активная кнопка Кратко/Подробно */
+  --mode-active-text: #2b2a2a;
+
+  /* --- цвета полос демографии (одинаковы в обеих темах) --- */
+  --bar-men:   #f17fc0;
+  --bar-women: #dd6d7a;
+
+  /* --- шрифты --- */
+  --font-display: 'Archivo Black', Impact, sans-serif;
+  --font-body:    'Sora', system-ui, sans-serif;
+
+  /* --- геометрия --- */
+  --r:    14px;
+  --maxw: 1080px;
+  --shadow: 0 1px 2px rgba(0,0,0,.18), 0 8px 22px rgba(0,0,0,.22);
+}
+
+/* --- светлая тема: палитра из variant-f-light.html --- */
+body.light{
+  --bg:        #f0f1ed;
+  --surface:   #ffffff;
+  --surface-2: #f7f6f2;
+  --border:    rgba(43,42,42,.12);
+  --border-soft: rgba(43,42,42,.06);
+
+  --text:      #2b2a2a;
+  --text-dim:  #57544e;
+  --text-mute: #8a867c;
+
+  --accent-text:    #b8306f;  /* pink-ink: читаемый розовый на светлом */
+  --burg-text:      #a62e3e;
+  --chip-pink-bg:   #fbe4f1;  /* светлые пастельные плашки */
+  --chip-pink-text: #b8306f;
+  --chip-burg-bg:   #fbe6e8;
+  --chip-burg-text: #a62e3e;
+  --chart-grid:     rgba(43,42,42,.08);
+  --hint-hover-text: #ffffff;
+  --mode-active-bg:  #a62e3e;
+  --mode-active-text: #ffffff;
+
+  --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 22px rgba(0,0,0,.08);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  transition:background .25s,color .25s;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:28px 22px 56px}
+.panel,.kpi,.table-card,.textcard,.aud-card,.ad-card,.eu-note,.glossary,.insight{
+  transition:background .25s,border-color .25s;
+}
+
+/* ---------- шапка ---------- */
+header.head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.head-left{display:flex;align-items:center;gap:12px}
+.logo{
+  width:42px;height:42px;border-radius:12px;flex:none;
+  background:var(--pink);color:var(--charcoal);
+  display:grid;place-items:center;font-family:var(--font-display);font-size:16px;
+}
+.head-left h1{font-family:var(--font-display);font-weight:400;font-size:17px;letter-spacing:.005em}
+.head-left .sub{color:var(--text-dim);font-size:12.5px;margin-top:3px}
+.head-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.period{text-align:right;font-size:12.5px;color:var(--text-mute)}
+.period strong{display:block;color:var(--text);font-size:14px;font-weight:600}
+
+.toggles{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.theme-toggle,.lang-toggle,.mode-toggle{display:flex;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:4px}
+.theme-btn,.lang-btn,.mode-btn{
+  border:none;background:transparent;color:var(--text-mute);font-family:var(--font-display);
+  font-weight:400;font-size:11.5px;letter-spacing:.03em;padding:6px 12px;border-radius:999px;
+  cursor:pointer;transition:background .18s,color .18s;
+}
+.theme-btn.active,.lang-btn.active{background:var(--pink);color:var(--charcoal)}
+.mode-btn.active{background:var(--mode-active-bg);color:var(--mode-active-text)}
+.theme-btn:not(.active):hover,.lang-btn:not(.active):hover,.mode-btn:not(.active):hover{color:var(--text)}
+
+/* ---------- заголовки секций ---------- */
+h2.section{
+  font-family:var(--font-display);font-weight:400;font-size:13px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--accent-text);
+  margin:32px 0 13px;
+}
+
+/* ---------- инсайт-абзац ---------- */
+.insight{
+  background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--pink);
+  border-radius:var(--r);padding:16px 20px;font-size:14px;color:var(--text-dim);
+}
+.insight b{color:var(--accent-text)}
+
+/* ---------- KPI ---------- */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kpi{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:14px 16px;position:relative;overflow:hidden;
+}
+.kpi::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--pink)}
+.kpi .label{display:flex;align-items:center;gap:5px;flex-wrap:wrap;font-size:11.5px;color:var(--text-dim);margin-bottom:7px;text-transform:uppercase;letter-spacing:.03em}
+.kpi .value{font-family:var(--font-display);font-weight:400;font-size:21px;color:var(--text);letter-spacing:-.01em;white-space:nowrap}
+.kpi .meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px}
+.kpi .sub{font-size:10.5px;color:var(--text-mute)}
+.delta{display:inline-flex;align-items:center;padding:2px 8px;border-radius:999px;font-size:10.5px;font-weight:700;white-space:nowrap}
+.delta.neutral{background:var(--surface-2);color:var(--text-dim)}
+.delta.watch{background:var(--chip-burg-bg);color:var(--chip-burg-text)}
+.delta.good{background:var(--chip-pink-bg);color:var(--chip-pink-text)}
+
+/* ---------- KPI: подсказки «?» (только режим «Подробно») ---------- */
+.kpi-hint-wrap{position:relative;display:none}
+body.detailed .kpi-hint-wrap{display:inline-flex;animation:detailFade .3s ease}
+.kpi-hint{
+  width:14px;height:14px;border-radius:50%;border:1px solid var(--accent-text);color:var(--accent-text);
+  background:transparent;font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;
+  cursor:help;line-height:1;padding:0;font-family:var(--font-body);
+}
+.kpi-hint:hover,.kpi-hint:focus{background:var(--accent-text);color:var(--hint-hover-text);outline:none}
+.kpi-tip{
+  position:absolute;bottom:calc(100% + 8px);left:0;width:210px;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  font-size:11.5px;font-weight:400;line-height:1.5;text-transform:none;letter-spacing:normal;
+  padding:10px 12px;border-radius:10px;box-shadow:var(--shadow);
+  opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;transform:translateY(4px);z-index:30;
+}
+.kpi-tip::after{content:"";position:absolute;top:100%;left:14px;border:6px solid transparent;border-top-color:var(--surface-2)}
+.kpi-hint-wrap:hover .kpi-tip,.kpi-hint-wrap:focus-within .kpi-tip,.kpi-hint-wrap.open .kpi-tip{opacity:1;transform:translateY(0);pointer-events:auto}
+@media(max-width:520px){
+  .kpi-tip{width:170px;left:auto;right:0}
+  .kpi-tip::after{left:auto;right:14px}
+}
+
+/* ---------- detail-only: единый механизм показа/скрытия ---------- */
+@keyframes detailFade{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:translateY(0)}}
+.detail-block{display:none}
+body.detailed .detail-block{display:block;animation:detailFade .32s ease}
+tr.detail-row{display:none}
+body.detailed tr.detail-row{display:table-row}
+body.detailed tr.detail-row td{animation:detailFade .32s ease}
+
+/* ---------- графики ---------- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid2 > .panel{min-width:0} /* иначе canvas Chart.js не даёт ячейке грида сжаться и страница уезжает вбок */
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px 18px}
+.chart-box canvas{max-width:100%}
+.panel h3{font-family:var(--font-display);font-weight:400;font-size:13px;color:var(--text);margin-bottom:12px}
+.chart-box{position:relative;height:225px}
+
+/* ---------- таблица кампаний ---------- */
+.table-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.tbl-scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:660px}
+thead th{
+  text-align:right;padding:11px 13px;font-size:10px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--text-mute);border-bottom:1px solid var(--border);
+  white-space:nowrap;background:var(--surface-2);
+}
+thead th:first-child{text-align:left}
+tbody td{padding:11px 13px;text-align:right;border-bottom:1px solid var(--border-soft);font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--text)}
+tbody tr:last-child td{border-bottom:none}
+tbody td:first-child{text-align:left;white-space:normal}
+.camp-name{font-weight:600;font-size:13px}
+.camp-tag{display:inline-block;margin-top:3px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.tag-direct{background:var(--chip-burg-bg);color:var(--chip-burg-text)}
+.tag-traffic{background:var(--chip-pink-bg);color:var(--chip-pink-text)}
+.camp-aud{display:block;margin-top:4px;font-size:10.5px;color:var(--text-mute)}
+.val-strong{font-weight:700}
+.pill{display:inline-flex;align-items:center;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700}
+.pill.good{background:var(--chip-pink-bg);color:var(--chip-pink-text)}
+.pill.watch{background:var(--chip-burg-bg);color:var(--chip-burg-text)}
+tfoot td{padding:11px 13px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums;background:var(--surface-2)}
+tfoot td:first-child{text-align:left;text-transform:uppercase;font-size:10px;letter-spacing:.05em;color:var(--text-dim)}
+
+/* вердикт-строка под каждой кампанией (только «Подробно») */
+.verdict-cell{padding:12px 14px 14px !important;text-align:left !important;white-space:normal !important;background:var(--surface-2);font-size:12.5px;color:var(--text-dim);line-height:1.55}
+.verdict-cell b{color:var(--accent-text)}
+.verdict-cell .vlabel{color:var(--accent-text);font-family:var(--font-display);font-weight:400;font-size:10px;text-transform:uppercase;letter-spacing:.05em;margin-right:6px}
+
+/* объявления внутри кампании (только «Подробно») */
+.ads-cell{padding:12px 14px 14px !important;text-align:left !important;white-space:normal !important;background:var(--surface-2);border-top:1px dashed var(--border)}
+.ads-cell .alabel{display:block;color:var(--accent-text);font-family:var(--font-display);font-weight:400;font-size:10px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:9px}
+.adm-row{display:flex;flex-wrap:wrap;gap:10px}
+.adm{display:flex;align-items:center;gap:11px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:9px 13px 9px 9px;min-width:250px;flex:1 1 260px;max-width:420px}
+.adm img{width:52px;height:52px;border-radius:9px;object-fit:cover;flex:none;background:var(--surface-2)}
+.adm .adm-name{font-weight:600;font-size:12.5px;color:var(--text);line-height:1.3}
+.adm .adm-aud{font-size:11px;color:var(--text-mute);margin-top:1px}
+.adm .adm-met{font-size:11.5px;color:var(--text-dim);margin-top:4px;font-variant-numeric:tabular-nums}
+.adm .adm-met b{color:var(--accent-text);font-weight:700}
+@media(max-width:560px){.adm{max-width:none}}
+
+/* ---------- аудитории ---------- */
+.aud-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.aud-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 16px 15px}
+.aud-card.discovery{box-shadow:0 0 0 2px var(--pink)}
+.aud-star{
+  position:absolute;top:-11px;left:12px;display:inline-flex;align-items:center;gap:4px;
+  background:var(--pink);color:var(--charcoal);font-size:10px;font-weight:800;letter-spacing:.02em;
+  text-transform:uppercase;padding:4px 9px;border-radius:999px;
+}
+.aud-name{font-family:var(--font-display);font-weight:400;font-size:12.5px;color:var(--text)}
+.aud-ctr{font-family:var(--font-display);font-weight:400;font-size:20px;color:var(--accent-text);margin:8px 0 2px}
+.aud-stats{font-size:11.5px;color:var(--text-mute);font-variant-numeric:tabular-nums}
+.aud-note{font-size:12px;color:var(--text-dim);margin-top:9px;line-height:1.5}
+
+/* ---------- площадки и демография: горизонтальные полосы ---------- */
+.plat-row{display:grid;grid-template-columns:150px 1fr 235px;gap:10px;align-items:center;margin:8px 0}
+.plat-label{font-size:12px;font-weight:600;white-space:nowrap}
+.plat-stat{font-size:11.5px;color:var(--text-dim);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar-track{height:13px;background:var(--surface-2);border-radius:999px;overflow:hidden}
+.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--pink-deep),var(--pink));min-width:4px}
+.bar-fill.men{background:var(--bar-men)}
+.bar-fill.women{background:var(--bar-women)}
+.cap{margin-top:13px;font-size:12px;color:var(--text-mute);line-height:1.55}
+
+.demo-legend{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text-dim);margin-bottom:11px;flex-wrap:wrap}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
+.dot.men{background:var(--bar-men)}
+.dot.women{background:var(--bar-women)}
+.demo-legend .gap{width:6px}
+.demo-scale{margin-left:auto;color:var(--text-mute)}
+.demo-row{display:grid;grid-template-columns:70px 1fr 150px;gap:10px;align-items:center;margin:7px 0}
+.demo-label{font-size:11.5px;font-weight:600;white-space:nowrap}
+.demo-stat{font-size:11px;color:var(--text-dim);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.demo-stat.hot{color:var(--accent-text);font-weight:700}
+
+/* ---------- лучшие объявления ---------- */
+.ads-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ad-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  overflow:hidden;display:flex;flex-direction:column;position:relative;
+}
+.ad-card.best{box-shadow:0 0 0 2px var(--pink)}
+.ad-star{
+  position:absolute;top:10px;left:10px;z-index:2;display:inline-flex;align-items:center;gap:4px;
+  background:var(--pink);color:var(--charcoal);font-size:10px;font-weight:800;letter-spacing:.02em;
+  text-transform:uppercase;padding:5px 9px;border-radius:999px;
+}
+.ad-star.info{background:var(--burgundy);color:var(--cream)}
+.ad-visual{height:200px;background:var(--surface-2)}
+.ad-visual img{width:100%;height:100%;object-fit:cover;display:block}
+.ad-body{padding:13px 14px 15px;display:flex;flex-direction:column;gap:6px;flex:1}
+.ad-name{font-family:var(--font-display);font-weight:400;font-size:13px;color:var(--text)}
+.ad-cost{font-size:12px;color:var(--text-dim)}
+.ad-cost b{color:var(--accent-text);font-family:var(--font-display);font-weight:400}
+.ad-reason{font-size:12px;color:var(--text-dim);line-height:1.5}
+
+/* ---------- текстовые блоки: выводы, рекомендации ---------- */
+.textcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px}
+.textcard ol,.textcard ul{margin:0;padding-left:19px}
+.textcard li{font-size:13.5px;color:var(--text-dim);margin:8px 0}
+.textcard li b{color:var(--accent-text);font-weight:600}
+
+/* ---------- дисклеймер про переписки (ЕС) ---------- */
+.eu-note{
+  margin-top:32px;background:var(--chip-burg-bg);border:1px solid var(--border);
+  border-left:3px solid var(--burgundy);border-radius:var(--r);padding:16px 20px;
+}
+.eu-title{font-family:var(--font-display);font-weight:400;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--chip-burg-text);margin-bottom:7px}
+.eu-note p{font-size:13px;color:var(--text-dim);line-height:1.6}
+
+/* ---------- глоссарий (режим «Подробно») ---------- */
+.glossary{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.gloss-item{border-bottom:1px solid var(--border)}
+.gloss-item:last-child{border-bottom:none}
+.gloss-item summary{
+  list-style:none;cursor:pointer;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;
+  gap:12px;font-weight:400;font-size:13px;color:var(--text);transition:background .18s;font-family:var(--font-display);
+}
+.gloss-item summary::-webkit-details-marker{display:none}
+.gloss-item summary:hover{background:var(--surface-2)}
+.gloss-item summary .chev{color:var(--accent-text);transition:transform .25s;font-size:16px;flex:none}
+.gloss-item[open] summary .chev{transform:rotate(45deg)}
+.gloss-item .gloss-body{padding:0 18px 16px;font-size:12.5px;color:var(--text-dim);line-height:1.6}
+.gloss-body .ex{
+  display:block;margin-top:7px;padding:9px 11px;background:var(--surface-2);border-radius:9px;
+  font-size:12px;color:var(--text);border-left:3px solid var(--pink);
+}
+
+/* ---------- футер ---------- */
+footer.foot{margin-top:32px;font-size:12px;color:var(--text-mute);text-align:center}
+footer.foot .handle{color:var(--accent-text);margin-top:4px;display:block}
+
+@media (max-width:760px){
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .grid2{grid-template-columns:1fr}
+  .ads-grid{grid-template-columns:1fr}
+  .aud-grid{grid-template-columns:1fr;row-gap:22px}
+  .head-right{align-items:flex-end}
+}
+@media (max-width:640px){
+  .plat-row{grid-template-columns:1fr;gap:4px;margin:12px 0}
+  .plat-stat{text-align:left}
+  .demo-row{grid-template-columns:52px 1fr 128px;gap:7px}
+  .demo-stat{font-size:10px}
+}
+</style>
+</head>
+<body class="brief">
+<div class="wrap">
+
+  <header class="head">
+    <div class="head-left">
+      <div class="logo" aria-hidden="true">A-</div>
+      <div>
+        <h1>Akashi - Guitar Lessons</h1>
+        <div class="sub" data-i18n="header.sub">Отчёт по рекламе · Meta Ads (Instagram / Facebook)</div>
+      </div>
+    </div>
+    <div class="head-right">
+      <div class="period">
+        <strong data-i18n="header.dates">1 – 31 июля</strong>
+        <span data-i18n="header.period">месячный отчёт</span>
+      </div>
+      <div class="toggles">
+        <div class="theme-toggle" role="group" aria-label="Тема оформления">
+          <button class="theme-btn active" id="btn-dark" onclick="setTheme('dark')" data-i18n="theme.dark">Тёмная</button>
+          <button class="theme-btn" id="btn-light" onclick="setTheme('light')" data-i18n="theme.light">Светлая</button>
+        </div>
+        <div class="mode-toggle" role="group" aria-label="Режим отчёта">
+          <button class="mode-btn active" id="btn-brief" onclick="setMode('brief')" data-i18n="mode.brief">Кратко</button>
+          <button class="mode-btn" id="btn-detailed" onclick="setMode('detailed')" data-i18n="mode.detailed">Подробно</button>
+        </div>
+        <div class="lang-toggle" role="group" aria-label="Language / Язык">
+          <button class="lang-btn active" id="btn-ru" onclick="setLang('ru')">RU</button>
+          <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <h2 class="section" data-i18n="sec.insight">Коротко о месяце</h2>
+  <div class="insight" data-i18n="insight.text">За период потрачено <b>45 997 Kč</b>, охвачено <b>700 595</b> человек. Основной бюджет ушёл на кампании с ретаргетингом Instagram-аудитории, они же показали лучшую вовлечённость: <b>2,27–2,56% CTR</b>. Средняя цена клика по всем кампаниям составила <b>2,01 Kč</b>, что нормально для этого типа аудитории и цели (переписки в директ).</div>
+
+  <h2 class="section" data-i18n="sec.result">Общий результат за период</h2>
+  <section class="kpis">
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.spend">Расход</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.spend.tip">Сколько Meta списала за показ рекламы в этом месяце.</span></span>
+      </div>
+      <div class="value"><span data-num="45997.26" data-dec="0" data-suffix="Kč">45 997</span></div>
+      
+    </div>
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.reach">Охват</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.reach.tip">Сколько разных людей увидели рекламу хотя бы раз. Один человек считается один раз.</span></span>
+      </div>
+      <div class="value"><span data-num="700595" data-dec="0">700 595</span></div>
+      
+    </div>
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.impr">Показы</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.impr.tip">Сколько всего раз реклама появилась на экранах. Больше, чем людей, потому что один человек видит рекламу несколько раз.</span></span>
+      </div>
+      <div class="value"><span data-num="1183539" data-dec="0">1 183 539</span></div>
+      
+    </div>
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.clicks">Клики</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.clicks.tip">Сколько раз люди нажали на рекламу.</span></span>
+      </div>
+      <div class="value"><span data-num="22880" data-dec="0">22 880</span></div>
+      
+    </div>
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.ctr">CTR</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.ctr.tip">Доля кликнувших из всех, кто увидел рекламу.</span></span>
+      </div>
+      <div class="value"><span data-num="1.93" data-dec="2" data-suffix="%">1,93</span></div>
+      
+    </div>
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.cpc">CPC</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.cpc.tip">Средняя цена одного клика по счёту за месяц.</span></span>
+      </div>
+      <div class="value"><span data-num="2.01" data-dec="2" data-suffix="Kč">2,01</span></div>
+      
+    </div>
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.freq">Частота</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.freq.tip">Сколько раз в среднем один человек видел рекламу. Чем частота выше, тем больше риск, что аудитория подустала от одного и того же креатива.</span></span>
+      </div>
+      <div class="value"><span data-num="1.69" data-dec="2">1,69</span></div>
+      
+      <div class="meta"><span class="sub" data-i18n="kpi.freq.sub">показы ÷ охват</span></div>
+      
+    </div>
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.eng">Взаимодействия</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.eng.tip">Лайки, комментарии, сохранения, клики и просмотры видео: любые действия людей с рекламой.</span></span>
+      </div>
+      <div class="value"><span data-num="393643" data-dec="0">393 643</span></div>
+      
+      <div class="meta"><span class="sub" data-i18n="kpi.eng.sub">лайки, комментарии, видео, клики</span></div>
+      
+    </div>
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.video">Видео-просмотры</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.video.tip">Сколько раз люди запускали видео в рекламе.</span></span>
+      </div>
+      <div class="value"><span data-num="363187" data-dec="0">363 187</span></div>
+      
+      <div class="meta"><span class="sub" data-i18n="kpi.video.sub">запуски видео в рекламе</span></div>
+      
+    </div>
+    
+  </section>
+
+  <h2 class="section" data-i18n="sec.compare">Сравнение кампаний</h2>
+  <div class="grid2">
+    <div class="panel"><h3 data-i18n="chart1.title">Клики по кампаниям</h3><div class="chart-box"><canvas id="clicksChart"></canvas></div></div>
+    <div class="panel"><h3 data-i18n="chart2.title">Цена клика по кампаниям, Kč</h3><div class="chart-box"><canvas id="cpcChart"></canvas></div></div>
+  </div>
+
+  <h2 class="section" data-i18n="sec.campaigns">Кампании</h2>
+  <div class="table-card">
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="table.h.campaign">Кампания</th>
+            <th data-i18n="table.h.reach">Охват</th>
+            <th data-i18n="table.h.impr">Показы</th>
+            <th data-i18n="table.h.clicks">Клики</th>
+            <th data-i18n="table.h.ctr">CTR</th>
+            <th data-i18n="table.h.cpc">CPC</th>
+            <th data-i18n="table.h.budget">Бюджет</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          
+          <tr>
+            <td>
+              <div class="camp-name">Sales · workshop funnel · test audience · leads 11.7</div>
+              <span class="camp-tag tag-direct" data-i18n="camp1.tag"></span>
+              <span class="camp-aud" data-i18n="camp1.aud">INDIAN</span>
+            </td>
+            <td><span data-num="151406" data-dec="0">151 406</span></td>
+            <td><span data-num="170436" data-dec="0">170 436</span></td>
+            <td class="val-strong"><span data-num="4362" data-dec="0">4 362</span></td>
+            <td><span data-num="2.56" data-dec="2" data-suffix="%">2,56%</span></td>
+            <td><span data-num="1.84" data-dec="2" data-suffix="Kč">1,84 Kč</span></td>
+            <td><span data-num="8036.49" data-dec="0" data-suffix="Kč">8 036 Kč</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="verdict-cell"><span class="vlabel" data-i18n="verdict.label">Вывод</span><span data-i18n="camp1.verdict">Кампания на аудитории INDIAN показала самый высокий CTR (2,56%) и один из самых дешёвых кликов (1,84 Kč). Это значит, что креатив зашёл этой группе лучше всего, и стоит увеличить её долю в бюджете.</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="ads-cell"><span class="alabel" data-i18n="ads.label">Объявления кампании</span>
+              <div class="adm-row">
+                
+                
+                <div class="adm"><img src="assets/120251423043370216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd1.name">Объявление 1</div><div class="adm-aud" data-i18n="campAd1.aud">INDIAN</div><div class="adm-met" data-i18n="campAd1.met">4 119 кликов · CTR 2,61% · CPC <b>1,77 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251427840780216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd2.name">Объявление 2</div><div class="adm-aud" data-i18n="campAd2.aud">INDIAN</div><div class="adm-met" data-i18n="campAd2.met">98 кликов · CTR 2,48% · CPC <b>2,04 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251427889590216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd3.name">Объявление 3</div><div class="adm-aud" data-i18n="campAd3.aud">INDIAN</div><div class="adm-met" data-i18n="campAd3.met">145 кликов · CTR 1,69% · CPC <b>3,83 Kč</b></div></div></div>
+                
+              </div>
+            </td>
+          </tr>
+          
+          
+          <tr>
+            <td>
+              <div class="camp-name">direct ads · IG + WhatsApp · Test Audience · 15.7</div>
+              <span class="camp-tag tag-direct" data-i18n="camp2.tag"></span>
+              <span class="camp-aud" data-i18n="camp2.aud">WhatsApp = IG retarget audience</span>
+            </td>
+            <td><span data-num="122570" data-dec="0">122 570</span></td>
+            <td><span data-num="145756" data-dec="0">145 756</span></td>
+            <td class="val-strong"><span data-num="2335" data-dec="0">2 335</span></td>
+            <td><span data-num="1.6" data-dec="2" data-suffix="%">1,60%</span></td>
+            <td><span data-num="2.35" data-dec="2" data-suffix="Kč">2,35 Kč</span></td>
+            <td><span data-num="5477.47" data-dec="0" data-suffix="Kč">5 477 Kč</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="verdict-cell"><span class="vlabel" data-i18n="verdict.label">Вывод</span><span data-i18n="camp2.verdict">Кампания на WhatsApp/IG ретаргет показала низкий CTR (1,6%) и самый дорогой клик (2,35 Kč) при низкой частоте показов (1,19). Возможно, аудитория ещё не прогрета или креатив требует доработки.</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="ads-cell"><span class="alabel" data-i18n="ads.label">Объявления кампании</span>
+              <div class="adm-row">
+                
+                
+                <div class="adm"><img src="assets/120251546672610216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd4.name">Объявление 1</div><div class="adm-aud" data-i18n="campAd4.aud">WhatsApp = IG retarget audience</div><div class="adm-met" data-i18n="campAd4.met">193 кликов · CTR 0,96% · CPC <b>3,03 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251558956800216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd5.name">Объявление 2</div><div class="adm-aud" data-i18n="campAd5.aud">WhatsApp = IG retarget audience</div><div class="adm-met" data-i18n="campAd5.met">135 кликов · CTR 1,10% · CPC <b>5,74 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251558971380216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd6.name">Объявление 3</div><div class="adm-aud" data-i18n="campAd6.aud">WhatsApp = IG retarget audience</div><div class="adm-met" data-i18n="campAd6.met">378 кликов · CTR 1,29% · CPC <b>3,26 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251559039580216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd7.name">Объявление 3</div><div class="adm-aud" data-i18n="campAd7.aud">IG | Retarget Audience -</div><div class="adm-met" data-i18n="campAd7.met">58 кликов · CTR 1,15% · CPC <b>5,47 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251559039590216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd8.name">Объявление 1</div><div class="adm-aud" data-i18n="campAd8.aud">IG | Retarget Audience -</div><div class="adm-met" data-i18n="campAd8.met">658 кликов · CTR 3,00% · CPC <b>0,64 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251559039610216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd9.name">Объявление 2</div><div class="adm-aud" data-i18n="campAd9.aud">IG | Retarget Audience -</div><div class="adm-met" data-i18n="campAd9.met">913 кликов · CTR 1,60% · CPC <b>2,35 Kč</b></div></div></div>
+                
+              </div>
+            </td>
+          </tr>
+          
+          
+          <tr>
+            <td>
+              <div class="camp-name">Sales · workshop funnel · test audience · leads 15.7</div>
+              <span class="camp-tag tag-direct" data-i18n="camp3.tag"></span>
+              <span class="camp-aud" data-i18n="camp3.aud">Retarget IG</span>
+            </td>
+            <td><span data-num="300652" data-dec="0">300 652</span></td>
+            <td><span data-num="402698" data-dec="0">402 698</span></td>
+            <td class="val-strong"><span data-num="9153" data-dec="0">9 153</span></td>
+            <td><span data-num="2.27" data-dec="2" data-suffix="%">2,27%</span></td>
+            <td><span class="pill good" data-num="1.66" data-dec="2" data-suffix="Kč">1,66 Kč</span></td>
+            <td><span data-num="15216.53" data-dec="0" data-suffix="Kč">15 217 Kč</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="verdict-cell"><span class="vlabel" data-i18n="verdict.label">Вывод</span><span data-i18n="camp3.verdict">Самая крупная кампания (15 216 Kč) на ретаргете IG сработала отлично: CTR 2,27%, клик 1,66 Kč. Охват в 300 тысяч при частоте 1,34 говорит о том, что аудитория ещё не устала от объявлений.</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="ads-cell"><span class="alabel" data-i18n="ads.label">Объявления кампании</span>
+              <div class="adm-row">
+                
+                
+                <div class="adm"><img src="assets/120251558129460216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd10.name">Объявление 1</div><div class="adm-aud" data-i18n="campAd10.aud">Retarget IG</div><div class="adm-met" data-i18n="campAd10.met">6 369 кликов · CTR 2,56% · CPC <b>1,48 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251558129480216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd11.name">Объявление 2</div><div class="adm-aud" data-i18n="campAd11.aud">Retarget IG</div><div class="adm-met" data-i18n="campAd11.met">17 кликов · CTR 4,94% · CPC <b>0,77 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251558432670216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd12.name">Объявление 3</div><div class="adm-aud" data-i18n="campAd12.aud">Retarget IG</div><div class="adm-met" data-i18n="campAd12.met">219 кликов · CTR 0,89% · CPC <b>5,02 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251588301100216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd13.name">Объявление 4</div><div class="adm-aud" data-i18n="campAd13.aud">Retarget IG</div><div class="adm-met" data-i18n="campAd13.met">2 548 кликов · CTR 1,98% · CPC <b>1,83 Kč</b></div></div></div>
+                
+              </div>
+            </td>
+          </tr>
+          
+          
+          <tr>
+            <td>
+              <div class="camp-name">direct ads · IG + WhatsApp · Test Audience · updated · 16.7</div>
+              <span class="camp-tag tag-direct" data-i18n="camp4.tag"></span>
+              <span class="camp-aud" data-i18n="camp4.aud">WhatsApp = IG retarget audience</span>
+            </td>
+            <td><span data-num="148126" data-dec="0">148 126</span></td>
+            <td><span data-num="311148" data-dec="0">311 148</span></td>
+            <td class="val-strong"><span data-num="4365" data-dec="0">4 365</span></td>
+            <td><span data-num="1.4" data-dec="2" data-suffix="%">1,40%</span></td>
+            <td><span class="pill watch" data-num="2.51" data-dec="2" data-suffix="Kč">2,51 Kč</span></td>
+            <td><span data-num="10938.13" data-dec="0" data-suffix="Kč">10 938 Kč</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="verdict-cell"><span class="vlabel" data-i18n="verdict.label">Вывод</span><span data-i18n="camp4.verdict">Обновлённая версия кампании на WhatsApp/IG ретаргет получила частоту 2,1 (выше остальных) и дорогой клик (2,51 Kč). Высокая частота при низком CTR (1,4%) может означать, что люди видят объявление слишком часто и перестают реагировать.</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="ads-cell"><span class="alabel" data-i18n="ads.label">Объявления кампании</span>
+              <div class="adm-row">
+                
+                
+                <div class="adm"><img src="assets/120251588455820216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd14.name">Объявление 2</div><div class="adm-aud" data-i18n="campAd14.aud">WhatsApp = IG retarget audience</div><div class="adm-met" data-i18n="campAd14.met">307 кликов · CTR 1,39% · CPC <b>6,22 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251588455840216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd15.name">Объявление 1</div><div class="adm-aud" data-i18n="campAd15.aud">WhatsApp = IG retarget audience</div><div class="adm-met" data-i18n="campAd15.met">1 101 кликов · CTR 1,34% · CPC <b>0,87 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251588455860216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd16.name">Объявление 2</div><div class="adm-aud" data-i18n="campAd16.aud">IG | Retarget Audience -</div><div class="adm-met" data-i18n="campAd16.met">1 147 кликов · CTR 1,85% · CPC <b>2,35 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251588455870216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd17.name">Объявление 3</div><div class="adm-aud" data-i18n="campAd17.aud">IG | Retarget Audience -</div><div class="adm-met" data-i18n="campAd17.met">391 кликов · CTR 1,32% · CPC <b>4,59 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251588455880216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd18.name">Объявление 1</div><div class="adm-aud" data-i18n="campAd18.aud">IG | Retarget Audience -</div><div class="adm-met" data-i18n="campAd18.met">440 кликов · CTR 1,43% · CPC <b>2,23 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251588455890216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd19.name">Объявление 3</div><div class="adm-aud" data-i18n="campAd19.aud">WhatsApp = IG retarget audience</div><div class="adm-met" data-i18n="campAd19.met">979 кликов · CTR 1,16% · CPC <b>2,65 Kč</b></div></div></div>
+                
+              </div>
+            </td>
+          </tr>
+          
+          
+          <tr>
+            <td>
+              <div class="camp-name">Sales · workshop funnel · LAL · leads 25.7</div>
+              <span class="camp-tag tag-direct" data-i18n="camp5.tag"></span>
+              <span class="camp-aud" data-i18n="camp5.aud">LAL</span>
+            </td>
+            <td><span data-num="145382" data-dec="0">145 382</span></td>
+            <td><span data-num="153501" data-dec="0">153 501</span></td>
+            <td class="val-strong"><span data-num="2665" data-dec="0">2 665</span></td>
+            <td><span data-num="1.74" data-dec="2" data-suffix="%">1,74%</span></td>
+            <td><span data-num="2.37" data-dec="2" data-suffix="Kč">2,37 Kč</span></td>
+            <td><span data-num="6328.64" data-dec="0" data-suffix="Kč">6 329 Kč</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="verdict-cell"><span class="vlabel" data-i18n="verdict.label">Вывод</span><span data-i18n="camp5.verdict">Кампания на lookalike-аудиторию показала средний результат: CTR 1,74%, клик 2,37 Kč. Частота 1,06 говорит о том, что это свежая аудитория, но вовлечённость ниже, чем у прогретого ретаргета.</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="ads-cell"><span class="alabel" data-i18n="ads.label">Объявления кампании</span>
+              <div class="adm-row">
+                
+                
+                <div class="adm"><img src="assets/120251776446360216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd20.name">Объявление 4</div><div class="adm-aud" data-i18n="campAd20.aud">LAL</div><div class="adm-met" data-i18n="campAd20.met">1 193 кликов · CTR 1,50% · CPC <b>3,24 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251776446370216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd21.name">Объявление 2</div><div class="adm-aud" data-i18n="campAd21.aud">LAL</div><div class="adm-met" data-i18n="campAd21.met">27 кликов · CTR 2,34% · CPC <b>1,28 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251776446380216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd22.name">Объявление 1</div><div class="adm-aud" data-i18n="campAd22.aud">LAL</div><div class="adm-met" data-i18n="campAd22.met">1 431 кликов · CTR 1,98% · CPC <b>1,68 Kč</b></div></div></div>
+                
+                
+                <div class="adm"><img src="assets/120251776446390216.jpg" alt=""><div><div class="adm-name" data-i18n="campAd23.name">Объявление 3</div><div class="adm-aud" data-i18n="campAd23.aud">LAL</div><div class="adm-met" data-i18n="campAd23.met">14 кликов · CTR 1,87% · CPC <b>2,16 Kč</b></div></div></div>
+                
+              </div>
+            </td>
+          </tr>
+          
+        </tbody>
+        <tfoot>
+          <tr>
+            <td data-i18n="table.total">Итого / среднее</td>
+            <td><span data-num="700595" data-dec="0">700 595</span></td>
+            <td><span data-num="1183539" data-dec="0">1 183 539</span></td>
+            <td><span data-num="22880" data-dec="0">22 880</span></td>
+            <td><span data-num="1.93" data-dec="2" data-suffix="%">1,93%</span></td>
+            <td><span data-num="2.01" data-dec="2" data-suffix="Kč">2,01 Kč</span></td>
+            <td><span data-num="45997.26" data-dec="0" data-suffix="Kč">45 997 Kč</span></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  
+  <h2 class="section" data-i18n="sec.aud">Аудитории</h2>
+  <div class="aud-grid">
+    
+    
+    <article class="aud-card">
+      
+      <div class="aud-name" data-i18n="aud1.name">Retarget IG</div>
+      <div class="aud-ctr" data-i18n="aud1.ctr">CTR 2.27%</div>
+      <div class="aud-stats" data-i18n="aud1.stats">15 217 Kč · охват 300 652</div>
+      <p class="aud-note" data-i18n="aud1.note">Самая результативная аудитория по CTR (2,27%) и охвату, получила наибольший бюджет (15 216 Kč) оправданно.</p>
+    </article>
+    
+    
+    <article class="aud-card">
+      
+      <div class="aud-name" data-i18n="aud2.name">IG | Retarget Audience -</div>
+      <div class="aud-ctr" data-i18n="aud2.ctr">CTR 1,62–1,94%</div>
+      <div class="aud-stats" data-i18n="aud2.stats">8 364 Kč · охват 166 896</div>
+      <p class="aud-note" data-i18n="aud2.note">Показала средний CTR (1,62–1,94%) при охвате 166 896, работает стабильно, но без выдающихся результатов.</p>
+    </article>
+    
+    
+    <article class="aud-card">
+      
+      <div class="aud-name" data-i18n="aud3.name">WhatsApp = IG retarget audience</div>
+      <div class="aud-ctr" data-i18n="aud3.ctr">CTR 1,14–1,26%</div>
+      <div class="aud-stats" data-i18n="aud3.stats">8 052 Kč · охват 120 709</div>
+      <p class="aud-note" data-i18n="aud3.note">Самый низкий CTR среди всех аудиторий (1,14–1,26%), при этом получила 8 051 Kč бюджета, стоит пересмотреть креативы для неё.</p>
+    </article>
+    
+    
+    <article class="aud-card discovery">
+      <span class="aud-star"><span aria-hidden="true">★</span><span data-i18n="aud4.badge">Лучшая аудитория</span></span>
+      <div class="aud-name" data-i18n="aud4.name">INDIAN</div>
+      <div class="aud-ctr" data-i18n="aud4.ctr">CTR 2.56%</div>
+      <div class="aud-stats" data-i18n="aud4.stats">8 036 Kč · охват 151 406</div>
+      <p class="aud-note" data-i18n="aud4.note">Лидер по вовлечённости с CTR 2,56% и приемлемым охватом 151 406, явно откликается на текущие креативы.</p>
+    </article>
+    
+    
+    <article class="aud-card">
+      
+      <div class="aud-name" data-i18n="aud5.name">LAL</div>
+      <div class="aud-ctr" data-i18n="aud5.ctr">CTR 1.74%</div>
+      <div class="aud-stats" data-i18n="aud5.stats">6 329 Kč · охват 145 382</div>
+      <p class="aud-note" data-i18n="aud5.note">Lookalike-аудитория показала CTR 1,74%, что неплохо для холодной аудитории, но уступает прогретым сегментам.</p>
+    </article>
+    
+  </div>
+  
+
+  
+  <h2 class="section" data-i18n="sec.plat">Площадки</h2>
+  <div class="panel">
+    
+    
+    <div class="plat-row">
+      <span class="plat-label" data-i18n="plat1.label">Instagram · Reels</span>
+      <div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div>
+      <span class="plat-stat" data-i18n="plat1.stat">32 461 Kč · 15 142 кликов · клик 2,14 Kč</span>
+    </div>
+    
+    
+    <div class="plat-row">
+      <span class="plat-label" data-i18n="plat2.label">Instagram · лента</span>
+      <div class="bar-track"><div class="bar-fill" style="width:22.87%"></div></div>
+      <span class="plat-stat" data-i18n="plat2.stat">7 424 Kč · 2 635 кликов · клик 2,82 Kč</span>
+    </div>
+    
+    
+    <div class="plat-row">
+      <span class="plat-label" data-i18n="plat3.label">Instagram · сторис</span>
+      <div class="bar-track"><div class="bar-fill" style="width:7.27%"></div></div>
+      <span class="plat-stat" data-i18n="plat3.stat">2 360 Kč · 563 кликов · клик 4,19 Kč</span>
+    </div>
+    
+    
+    <div class="plat-row">
+      <span class="plat-label" data-i18n="plat4.label">Facebook · Reels</span>
+      <div class="bar-track"><div class="bar-fill" style="width:4.74%"></div></div>
+      <span class="plat-stat" data-i18n="plat4.stat">1 538 Kč · 1 165 кликов · клик 1,32 Kč</span>
+    </div>
+    
+    
+    <div class="plat-row">
+      <span class="plat-label" data-i18n="plat5.label">Facebook · лента</span>
+      <div class="bar-track"><div class="bar-fill" style="width:4.28%"></div></div>
+      <span class="plat-stat" data-i18n="plat5.stat">1 391 Kč · 1 659 кликов · клик 0,84 Kč</span>
+    </div>
+    
+    
+    <div class="plat-row">
+      <span class="plat-label" data-i18n="plat6.label">Facebook · сторис</span>
+      <div class="bar-track"><div class="bar-fill" style="width:0.28%"></div></div>
+      <span class="plat-stat" data-i18n="plat6.stat">92 Kč · 34 кликов · клик 2,70 Kč</span>
+    </div>
+    
+    <p class="cap" data-i18n="plat.note">Instagram Reels забрал 70% бюджета (32 461 Kč) и дал самое большое количество кликов (15 142) по цене 2,14 Kč. Facebook-лента показала самый дешёвый клик (0,84 Kč), но получила минимум трафика, стоит протестировать там больше бюджета.</p>
+  </div>
+  
+
+  
+  <h2 class="section" data-i18n="sec.demo">Аудитория по полу и возрасту</h2>
+  <div class="panel">
+    <div class="demo-legend">
+      <span class="dot men"></span><span data-i18n="demo.men">мужчины</span>
+      <span class="gap"></span>
+      <span class="dot women"></span><span data-i18n="demo.women">женщины</span>
+      <span class="demo-scale" data-i18n="demo.scale">длина полосы: расход за месяц</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r1.label">М 18-24</span>
+      <div class="bar-track"><div class="bar-fill men" style="width:100.0%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r1.stat">14 090 Kč · CTR 1,54%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r2.label">М 25-34</span>
+      <div class="bar-track"><div class="bar-fill men" style="width:97.4%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r2.stat">13 724 Kč · CTR 1,98%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r3.label">М 35-44</span>
+      <div class="bar-track"><div class="bar-fill men" style="width:31.14%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r3.stat">4 388 Kč · CTR 3,09%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r4.label">Ж 18-24</span>
+      <div class="bar-track"><div class="bar-fill women" style="width:30.89%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r4.stat">4 352 Kč · CTR 2,09%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r5.label">Ж 25-34</span>
+      <div class="bar-track"><div class="bar-fill women" style="width:29.34%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r5.stat">4 135 Kč · CTR 2,99%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r6.label">Ж 35-44</span>
+      <div class="bar-track"><div class="bar-fill women" style="width:17.03%"></div></div>
+      <span class="demo-stat hot" data-i18n="demo.r6.stat">2 399 Kč · CTR 3,90%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r7.label">М 45-54</span>
+      <div class="bar-track"><div class="bar-fill men" style="width:8.09%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r7.stat">1 140 Kč · CTR 3,21%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r8.label">Ж 45-54</span>
+      <div class="bar-track"><div class="bar-fill women" style="width:4.99%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r8.stat">703 Kč · CTR 3,65%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r9.label">М 55-64</span>
+      <div class="bar-track"><div class="bar-fill men" style="width:1.61%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r9.stat">227 Kč · CTR 3,72%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r10.label">Ж 55-64</span>
+      <div class="bar-track"><div class="bar-fill women" style="width:1.01%"></div></div>
+      <span class="demo-stat hot" data-i18n="demo.r10.stat">142 Kč · CTR 3,83%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r11.label">М 65+</span>
+      <div class="bar-track"><div class="bar-fill men" style="width:0.94%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r11.stat">133 Kč · CTR 2,84%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r12.label">Ж 65+</span>
+      <div class="bar-track"><div class="bar-fill women" style="width:0.61%"></div></div>
+      <span class="demo-stat hot" data-i18n="demo.r12.stat">86 Kč · CTR 5,10%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r13.label">М Unknown</span>
+      <div class="bar-track"><div class="bar-fill men" style="width:0.0%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r13.stat">0 Kč · CTR 0,00%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r14.label">Ж Unknown</span>
+      <div class="bar-track"><div class="bar-fill women" style="width:0.0%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r14.stat">0 Kč · CTR 0,00%</span>
+    </div>
+    
+    <p class="cap" data-i18n="demo.note">Женщины 35+ показывают CTR от 3,65% до 5,1%, но получают меньше 10% бюджета. Молодые мужчины 18–24 забирают 14 090 Kč при CTR всего 1,54%. Перераспределение в сторону женщин 25–54 лет может снизить стоимость клика.</p>
+  </div>
+  
+
+  
+  <h2 class="section" data-i18n="sec.ads">Лучшие объявления</h2>
+  <div class="ads-grid">
+    
+    
+    <article class="ad-card best">
+      <span class="ad-star"><span data-i18n="ad1.badge">Лучший отклик</span></span>
+      <div class="ad-visual"><img src="assets/120251558129480216.jpg" alt="Превью креатива Sales · workshop funnel · test audience · leads 15.7"></div>
+      <div class="ad-body">
+        <div class="ad-name" data-i18n="ad1.name">Sales · workshop funnel · test audience · leads 15.7</div>
+        <div class="ad-cost" data-i18n="ad1.metric">CTR 4.94% · CPC 0.77 Kč</div>
+        <p class="ad-reason" data-i18n="ad1.reason">Объявление из кампании на ретаргет IG собрало максимальную вовлечённость (179 486 взаимодействий с постом) и высокий CTR 2,27%.</p>
+      </div>
+    </article>
+    
+    
+    <article class="ad-card">
+      <span class="ad-star info"><span data-i18n="ad2.badge">Самый дешёвый клик</span></span>
+      <div class="ad-visual"><img src="assets/120251559039590216.jpg" alt="Превью креатива direct ads · IG + WhatsApp · Test Audience · 15.7"></div>
+      <div class="ad-body">
+        <div class="ad-name" data-i18n="ad2.name">direct ads · IG + WhatsApp · Test Audience · 15.7</div>
+        <div class="ad-cost" data-i18n="ad2.metric">CTR 3.0% · CPC 0.64 Kč</div>
+        <p class="ad-reason" data-i18n="ad2.reason">Объявление показало один из самых низких CPC (2,35 Kč) в своей кампании, несмотря на общий невысокий CTR группы.</p>
+      </div>
+    </article>
+    
+  </div>
+  
+
+  <h2 class="section" data-i18n="sec.findings">Основные выводы</h2>
+  <div class="textcard"><ol>
+    
+    <li data-i18n="find.1">Потрачено 45 997 Kč, охвачено 700 595 человек со средней частотой показов 1,69.</li>
+    
+    <li data-i18n="find.2">Кампании на ретаргетинг Instagram-аудитории показали CTR от 2,27% до 2,56%, что в 1,5–2 раза выше холодных аудиторий.</li>
+    
+    <li data-i18n="find.3">Instagram Reels получил 32 461 Kč (70% бюджета) и дал 15 142 клика по цене 2,14 Kč, что делает его основной площадкой.</li>
+    
+    <li data-i18n="find.4">Женщины 35–64 лет показывают CTR до 5,1%, но получают менее 10% бюджета, в то время как молодые мужчины 18–24 (CTR 1,54%) забирают 14 090 Kč.</li>
+    
+    <li data-i18n="find.5">Кампания на lookalike-аудиторию показала CTR 1,74% и клик 2,37 Kč, уступая прогретым ретаргет-сегментам.</li>
+    
+    <li data-i18n="find.6">Обновлённая кампания на WhatsApp/IG ретаргет достигла частоты 2,1, что привело к падению CTR до 1,4% и росту CPC до 2,51 Kč.</li>
+    
+  </ol></div>
+
+  <h2 class="section" data-i18n="sec.recs">Рекомендации</h2>
+  <div class="textcard"><ul>
+    
+    <li data-i18n="rec.1">Увеличить бюджет на кампанию INDIAN (сейчас 8 036 Kč) и ретаргет IG (15 216 Kč), они показывают лучший CTR и самый дешёвый клик.</li>
+    
+    <li data-i18n="rec.2">Перераспределить часть бюджета с молодых мужчин 18–24 (14 090 Kč, CTR 1,54%) на женщин 25–54 лет (CTR 2,99–3,9%).</li>
+    
+    <li data-i18n="rec.3">Протестировать увеличение бюджета на Facebook-ленту: сейчас там всего 1 390 Kč, но клик стоит 0,84 Kč (самый дешёвый).</li>
+    
+    <li data-i18n="rec.4">Снизить частоту показов в обновлённой кампании WhatsApp/IG ретаргет (сейчас 2,1) или обновить креатив, чтобы вернуть CTR выше 2%.</li>
+    
+    <li data-i18n="rec.5">Проверить, почему аудитория WhatsApp/IG ретаргет показывает CTR 1,14–1,26%: возможно, нужен другой формат креатива или дополнительный прогрев.</li>
+    
+    <li data-i18n="rec.6">Запустить отдельную кампанию на женщин 35+ с бюджетом хотя бы 5 000 Kč, учитывая их высокий CTR (3,65–5,1%).</li>
+    
+  </ul></div>
+
+  
+
+  
+  <div class="eu-note">
+    <div class="eu-title" data-i18n="eu.title">Про переписки в директ</div>
+    <p data-i18n="eu.body">Важно знать: в рекламных кабинетах ЕС Meta не показывает число начатых переписок в директ. Кампании «IG direct» реально приводят людей в сообщения, но эта цифра в отчёте технически недоступна. Реальное число обращений видно только вручную (в директе или через учёт менеджеров).</p>
+  </div>
+  
+
+  <h2 class="section detail-block" data-i18n="sec.glossary">Словарик терминов</h2>
+  <div class="glossary detail-block">
+    
+    <details class="gloss-item">
+      <summary><span data-i18n="term1.title">Охват: сколько людей вас увидели</span><span class="chev">+</span></summary>
+      <div class="gloss-body" data-i18n="term1.body">Число разных людей, которым хотя бы раз показали рекламу. Каждый человек считается один раз, даже если видел рекламу несколько дней подряд.</div>
+    </details>
+    
+    <details class="gloss-item">
+      <summary><span data-i18n="term2.title">Показы: сколько раз реклама мелькнула</span><span class="chev">+</span></summary>
+      <div class="gloss-body" data-i18n="term2.body">Сколько всего раз реклама появилась на экранах. Их всегда больше, чем людей, потому что одному человеку рекламу показывают несколько раз, так лучше запоминается.</div>
+    </details>
+    
+    <details class="gloss-item">
+      <summary><span data-i18n="term3.title">Частота: как часто один человек видит рекламу</span><span class="chev">+</span></summary>
+      <div class="gloss-body" data-i18n="term3.body">Показы, делённые на охват. Пока частота 1–3, реклама мягко напоминает о себе. Когда выше 3–4, одни и те же люди видят её слишком часто и начинают пролистывать.</div>
+    </details>
+    
+    <details class="gloss-item">
+      <summary><span data-i18n="term4.title">CTR: насколько реклама цепляет</span><span class="chev">+</span></summary>
+      <div class="gloss-body" data-i18n="term4.body">Кликабельность: доля тех, кто нажал на рекламу, из всех увидевших. Чем выше, тем интереснее объявление для аудитории.</div>
+    </details>
+    
+    <details class="gloss-item">
+      <summary><span data-i18n="term5.title">CPC: цена одного клика</span><span class="chev">+</span></summary>
+      <div class="gloss-body" data-i18n="term5.body">Сколько в среднем стоил один переход по рекламе. Чем ниже, тем дешевле обходится внимание аудитории.</div>
+    </details>
+    
+    <details class="gloss-item">
+      <summary><span data-i18n="term6.title">Взаимодействия: любые действия с рекламой</span><span class="chev">+</span></summary>
+      <div class="gloss-body" data-i18n="term6.body">Лайки, комментарии, сохранения, клики и просмотры видео вместе. Показывают, что реклама не просто мелькает: с ней что-то делают.</div>
+    </details>
+    
+    <details class="gloss-item">
+      <summary><span data-i18n="term7.title">Видео-просмотры: сколько раз смотрели видео</span><span class="chev">+</span></summary>
+      <div class="gloss-body" data-i18n="term7.body">Сколько раз люди запускали видео в рекламе. Важная метрика для роликов: она показывает, что креатив смотрят, а не пролистывают.</div>
+    </details>
+    
+  </div>
+
+  <footer class="foot">
+    <span data-i18n="footer.text">Данные: Meta Marketing API · рекламный кабинет Akashi - Guitar Lessons · период 1 – 31 июля</span>
+    <span class="handle"></span>
+  </footer>
+
+</div>
+
+<script>
+/* ============================================================
+   I18N: словарь RU / EN. СГЕНЕРИРОВАН из data.json автогенератором
+   отчётов (engine/render.py), не редактировать руками.
+   ============================================================ */
+var i18n = {
+  ru: {"header.sub": "Отчёт по рекламе · Meta Ads (Instagram / Facebook)", "header.period": "месячный отчёт", "theme.dark": "Тёмная", "theme.light": "Светлая", "mode.brief": "Кратко", "mode.detailed": "Подробно", "sec.insight": "Коротко о месяце", "sec.result": "Общий результат за период", "sec.liza_comment": "Комментарий", "kpi.spend": "Расход", "kpi.spend.tip": "Сколько Meta списала за показ рекламы в этом месяце.", "kpi.reach": "Охват", "kpi.reach.tip": "Сколько разных людей увидели рекламу хотя бы раз. Один человек считается один раз.", "kpi.impr": "Показы", "kpi.impr.tip": "Сколько всего раз реклама появилась на экранах. Больше, чем людей, потому что один человек видит рекламу несколько раз.", "kpi.clicks": "Клики", "kpi.clicks.tip": "Сколько раз люди нажали на рекламу.", "kpi.ctr": "CTR", "kpi.ctr.tip": "Доля кликнувших из всех, кто увидел рекламу.", "kpi.cpc": "CPC", "kpi.cpc.tip": "Средняя цена одного клика по счёту за месяц.", "kpi.freq": "Частота", "kpi.freq.tip": "Сколько раз в среднем один человек видел рекламу. Чем частота выше, тем больше риск, что аудитория подустала от одного и того же креатива.", "kpi.freq.sub": "показы ÷ охват", "kpi.eng": "Взаимодействия", "kpi.eng.tip": "Лайки, комментарии, сохранения, клики и просмотры видео: любые действия людей с рекламой.", "kpi.eng.sub": "лайки, комментарии, видео, клики", "kpi.video": "Видео-просмотры", "kpi.video.tip": "Сколько раз люди запускали видео в рекламе.", "kpi.video.sub": "запуски видео в рекламе", "sec.compare": "Сравнение кампаний", "chart1.title": "Клики по кампаниям", "chart2.title": "Цена клика по кампаниям, Kč", "sec.campaigns": "Кампании", "table.h.campaign": "Кампания", "table.h.reach": "Охват", "table.h.impr": "Показы", "table.h.clicks": "Клики", "table.h.ctr": "CTR", "table.h.cpc": "CPC", "table.h.budget": "Бюджет", "table.total": "Итого / среднее", "verdict.label": "Вывод", "ads.label": "Объявления кампании", "sec.aud": "Аудитории", "sec.plat": "Площадки", "sec.demo": "Аудитория по полу и возрасту", "demo.men": "мужчины", "demo.women": "женщины", "demo.scale": "длина полосы: расход за месяц", "sec.ads": "Лучшие объявления", "sec.findings": "Основные выводы", "sec.recs": "Рекомендации", "eu.title": "Про переписки в директ", "sec.glossary": "Словарик терминов", "term1.title": "Охват: сколько людей вас увидели", "term1.body": "Число разных людей, которым хотя бы раз показали рекламу. Каждый человек считается один раз, даже если видел рекламу несколько дней подряд.", "term2.title": "Показы: сколько раз реклама мелькнула", "term2.body": "Сколько всего раз реклама появилась на экранах. Их всегда больше, чем людей, потому что одному человеку рекламу показывают несколько раз, так лучше запоминается.", "term3.title": "Частота: как часто один человек видит рекламу", "term3.body": "Показы, делённые на охват. Пока частота 1–3, реклама мягко напоминает о себе. Когда выше 3–4, одни и те же люди видят её слишком часто и начинают пролистывать.", "term4.title": "CTR: насколько реклама цепляет", "term4.body": "Кликабельность: доля тех, кто нажал на рекламу, из всех увидевших. Чем выше, тем интереснее объявление для аудитории.", "term5.title": "CPC: цена одного клика", "term5.body": "Сколько в среднем стоил один переход по рекламе. Чем ниже, тем дешевле обходится внимание аудитории.", "term6.title": "Взаимодействия: любые действия с рекламой", "term6.body": "Лайки, комментарии, сохранения, клики и просмотры видео вместе. Показывают, что реклама не просто мелькает: с ней что-то делают.", "term7.title": "Видео-просмотры: сколько раз смотрели видео", "term7.body": "Сколько раз люди запускали видео в рекламе. Важная метрика для роликов: она показывает, что креатив смотрят, а не пролистывают.", "header.dates": "1 – 31 июля", "insight.text": "За период потрачено <b>45 997 Kč</b>, охвачено <b>700 595</b> человек. Основной бюджет ушёл на кампании с ретаргетингом Instagram-аудитории, они же показали лучшую вовлечённость: <b>2,27–2,56% CTR</b>. Средняя цена клика по всем кампаниям составила <b>2,01 Kč</b>, что нормально для этого типа аудитории и цели (переписки в директ).", "camp1.tag": "", "camp1.aud": "INDIAN", "camp1.verdict": "Кампания на аудитории INDIAN показала самый высокий CTR (2,56%) и один из самых дешёвых кликов (1,84 Kč). Это значит, что креатив зашёл этой группе лучше всего, и стоит увеличить её долю в бюджете.", "campAd1.name": "Объявление 1", "campAd1.aud": "INDIAN", "campAd1.met": "4 119 кликов · CTR 2,61% · CPC <b>1,77 Kč</b>", "campAd2.name": "Объявление 2", "campAd2.aud": "INDIAN", "campAd2.met": "98 кликов · CTR 2,48% · CPC <b>2,04 Kč</b>", "campAd3.name": "Объявление 3", "campAd3.aud": "INDIAN", "campAd3.met": "145 кликов · CTR 1,69% · CPC <b>3,83 Kč</b>", "camp2.tag": "", "camp2.aud": "WhatsApp = IG retarget audience", "camp2.verdict": "Кампания на WhatsApp/IG ретаргет показала низкий CTR (1,6%) и самый дорогой клик (2,35 Kč) при низкой частоте показов (1,19). Возможно, аудитория ещё не прогрета или креатив требует доработки.", "campAd4.name": "Объявление 1", "campAd4.aud": "WhatsApp = IG retarget audience", "campAd4.met": "193 кликов · CTR 0,96% · CPC <b>3,03 Kč</b>", "campAd5.name": "Объявление 2", "campAd5.aud": "WhatsApp = IG retarget audience", "campAd5.met": "135 кликов · CTR 1,10% · CPC <b>5,74 Kč</b>", "campAd6.name": "Объявление 3", "campAd6.aud": "WhatsApp = IG retarget audience", "campAd6.met": "378 кликов · CTR 1,29% · CPC <b>3,26 Kč</b>", "campAd7.name": "Объявление 3", "campAd7.aud": "IG | Retarget Audience -", "campAd7.met": "58 кликов · CTR 1,15% · CPC <b>5,47 Kč</b>", "campAd8.name": "Объявление 1", "campAd8.aud": "IG | Retarget Audience -", "campAd8.met": "658 кликов · CTR 3,00% · CPC <b>0,64 Kč</b>", "campAd9.name": "Объявление 2", "campAd9.aud": "IG | Retarget Audience -", "campAd9.met": "913 кликов · CTR 1,60% · CPC <b>2,35 Kč</b>", "camp3.tag": "", "camp3.aud": "Retarget IG", "camp3.verdict": "Самая крупная кампания (15 216 Kč) на ретаргете IG сработала отлично: CTR 2,27%, клик 1,66 Kč. Охват в 300 тысяч при частоте 1,34 говорит о том, что аудитория ещё не устала от объявлений.", "campAd10.name": "Объявление 1", "campAd10.aud": "Retarget IG", "campAd10.met": "6 369 кликов · CTR 2,56% · CPC <b>1,48 Kč</b>", "campAd11.name": "Объявление 2", "campAd11.aud": "Retarget IG", "campAd11.met": "17 кликов · CTR 4,94% · CPC <b>0,77 Kč</b>", "campAd12.name": "Объявление 3", "campAd12.aud": "Retarget IG", "campAd12.met": "219 кликов · CTR 0,89% · CPC <b>5,02 Kč</b>", "campAd13.name": "Объявление 4", "campAd13.aud": "Retarget IG", "campAd13.met": "2 548 кликов · CTR 1,98% · CPC <b>1,83 Kč</b>", "camp4.tag": "", "camp4.aud": "WhatsApp = IG retarget audience", "camp4.verdict": "Обновлённая версия кампании на WhatsApp/IG ретаргет получила частоту 2,1 (выше остальных) и дорогой клик (2,51 Kč). Высокая частота при низком CTR (1,4%) может означать, что люди видят объявление слишком часто и перестают реагировать.", "campAd14.name": "Объявление 2", "campAd14.aud": "WhatsApp = IG retarget audience", "campAd14.met": "307 кликов · CTR 1,39% · CPC <b>6,22 Kč</b>", "campAd15.name": "Объявление 1", "campAd15.aud": "WhatsApp = IG retarget audience", "campAd15.met": "1 101 кликов · CTR 1,34% · CPC <b>0,87 Kč</b>", "campAd16.name": "Объявление 2", "campAd16.aud": "IG | Retarget Audience -", "campAd16.met": "1 147 кликов · CTR 1,85% · CPC <b>2,35 Kč</b>", "campAd17.name": "Объявление 3", "campAd17.aud": "IG | Retarget Audience -", "campAd17.met": "391 кликов · CTR 1,32% · CPC <b>4,59 Kč</b>", "campAd18.name": "Объявление 1", "campAd18.aud": "IG | Retarget Audience -", "campAd18.met": "440 кликов · CTR 1,43% · CPC <b>2,23 Kč</b>", "campAd19.name": "Объявление 3", "campAd19.aud": "WhatsApp = IG retarget audience", "campAd19.met": "979 кликов · CTR 1,16% · CPC <b>2,65 Kč</b>", "camp5.tag": "", "camp5.aud": "LAL", "camp5.verdict": "Кампания на lookalike-аудиторию показала средний результат: CTR 1,74%, клик 2,37 Kč. Частота 1,06 говорит о том, что это свежая аудитория, но вовлечённость ниже, чем у прогретого ретаргета.", "campAd20.name": "Объявление 4", "campAd20.aud": "LAL", "campAd20.met": "1 193 кликов · CTR 1,50% · CPC <b>3,24 Kč</b>", "campAd21.name": "Объявление 2", "campAd21.aud": "LAL", "campAd21.met": "27 кликов · CTR 2,34% · CPC <b>1,28 Kč</b>", "campAd22.name": "Объявление 1", "campAd22.aud": "LAL", "campAd22.met": "1 431 кликов · CTR 1,98% · CPC <b>1,68 Kč</b>", "campAd23.name": "Объявление 3", "campAd23.aud": "LAL", "campAd23.met": "14 кликов · CTR 1,87% · CPC <b>2,16 Kč</b>", "aud1.name": "Retarget IG", "aud1.ctr": "CTR 2.27%", "aud1.stats": "15 217 Kč · охват 300 652", "aud1.note": "Самая результативная аудитория по CTR (2,27%) и охвату, получила наибольший бюджет (15 216 Kč) оправданно.", "aud2.name": "IG | Retarget Audience -", "aud2.ctr": "CTR 1,62–1,94%", "aud2.stats": "8 364 Kč · охват 166 896", "aud2.note": "Показала средний CTR (1,62–1,94%) при охвате 166 896, работает стабильно, но без выдающихся результатов.", "aud3.name": "WhatsApp = IG retarget audience", "aud3.ctr": "CTR 1,14–1,26%", "aud3.stats": "8 052 Kč · охват 120 709", "aud3.note": "Самый низкий CTR среди всех аудиторий (1,14–1,26%), при этом получила 8 051 Kč бюджета, стоит пересмотреть креативы для неё.", "aud4.name": "INDIAN", "aud4.ctr": "CTR 2.56%", "aud4.stats": "8 036 Kč · охват 151 406", "aud4.note": "Лидер по вовлечённости с CTR 2,56% и приемлемым охватом 151 406, явно откликается на текущие креативы.", "aud4.badge": "Лучшая аудитория", "aud5.name": "LAL", "aud5.ctr": "CTR 1.74%", "aud5.stats": "6 329 Kč · охват 145 382", "aud5.note": "Lookalike-аудитория показала CTR 1,74%, что неплохо для холодной аудитории, но уступает прогретым сегментам.", "plat1.label": "Instagram · Reels", "plat1.stat": "32 461 Kč · 15 142 кликов · клик 2,14 Kč", "plat2.label": "Instagram · лента", "plat2.stat": "7 424 Kč · 2 635 кликов · клик 2,82 Kč", "plat3.label": "Instagram · сторис", "plat3.stat": "2 360 Kč · 563 кликов · клик 4,19 Kč", "plat4.label": "Facebook · Reels", "plat4.stat": "1 538 Kč · 1 165 кликов · клик 1,32 Kč", "plat5.label": "Facebook · лента", "plat5.stat": "1 391 Kč · 1 659 кликов · клик 0,84 Kč", "plat6.label": "Facebook · сторис", "plat6.stat": "92 Kč · 34 кликов · клик 2,70 Kč", "plat.note": "Instagram Reels забрал 70% бюджета (32 461 Kč) и дал самое большое количество кликов (15 142) по цене 2,14 Kč. Facebook-лента показала самый дешёвый клик (0,84 Kč), но получила минимум трафика, стоит протестировать там больше бюджета.", "demo.r1.label": "М 18-24", "demo.r1.stat": "14 090 Kč · CTR 1,54%", "demo.r2.label": "М 25-34", "demo.r2.stat": "13 724 Kč · CTR 1,98%", "demo.r3.label": "М 35-44", "demo.r3.stat": "4 388 Kč · CTR 3,09%", "demo.r4.label": "Ж 18-24", "demo.r4.stat": "4 352 Kč · CTR 2,09%", "demo.r5.label": "Ж 25-34", "demo.r5.stat": "4 135 Kč · CTR 2,99%", "demo.r6.label": "Ж 35-44", "demo.r6.stat": "2 399 Kč · CTR 3,90%", "demo.r7.label": "М 45-54", "demo.r7.stat": "1 140 Kč · CTR 3,21%", "demo.r8.label": "Ж 45-54", "demo.r8.stat": "703 Kč · CTR 3,65%", "demo.r9.label": "М 55-64", "demo.r9.stat": "227 Kč · CTR 3,72%", "demo.r10.label": "Ж 55-64", "demo.r10.stat": "142 Kč · CTR 3,83%", "demo.r11.label": "М 65+", "demo.r11.stat": "133 Kč · CTR 2,84%", "demo.r12.label": "Ж 65+", "demo.r12.stat": "86 Kč · CTR 5,10%", "demo.r13.label": "М Unknown", "demo.r13.stat": "0 Kč · CTR 0,00%", "demo.r14.label": "Ж Unknown", "demo.r14.stat": "0 Kč · CTR 0,00%", "demo.note": "Женщины 35+ показывают CTR от 3,65% до 5,1%, но получают меньше 10% бюджета. Молодые мужчины 18–24 забирают 14 090 Kč при CTR всего 1,54%. Перераспределение в сторону женщин 25–54 лет может снизить стоимость клика.", "ad1.badge": "Лучший отклик", "ad1.name": "Sales · workshop funnel · test audience · leads 15.7", "ad1.metric": "CTR 4.94% · CPC 0.77 Kč", "ad1.reason": "Объявление из кампании на ретаргет IG собрало максимальную вовлечённость (179 486 взаимодействий с постом) и высокий CTR 2,27%.", "ad2.badge": "Самый дешёвый клик", "ad2.name": "direct ads · IG + WhatsApp · Test Audience · 15.7", "ad2.metric": "CTR 3.0% · CPC 0.64 Kč", "ad2.reason": "Объявление показало один из самых низких CPC (2,35 Kč) в своей кампании, несмотря на общий невысокий CTR группы.", "find.1": "Потрачено 45 997 Kč, охвачено 700 595 человек со средней частотой показов 1,69.", "find.2": "Кампании на ретаргетинг Instagram-аудитории показали CTR от 2,27% до 2,56%, что в 1,5–2 раза выше холодных аудиторий.", "find.3": "Instagram Reels получил 32 461 Kč (70% бюджета) и дал 15 142 клика по цене 2,14 Kč, что делает его основной площадкой.", "find.4": "Женщины 35–64 лет показывают CTR до 5,1%, но получают менее 10% бюджета, в то время как молодые мужчины 18–24 (CTR 1,54%) забирают 14 090 Kč.", "find.5": "Кампания на lookalike-аудиторию показала CTR 1,74% и клик 2,37 Kč, уступая прогретым ретаргет-сегментам.", "find.6": "Обновлённая кампания на WhatsApp/IG ретаргет достигла частоты 2,1, что привело к падению CTR до 1,4% и росту CPC до 2,51 Kč.", "rec.1": "Увеличить бюджет на кампанию INDIAN (сейчас 8 036 Kč) и ретаргет IG (15 216 Kč), они показывают лучший CTR и самый дешёвый клик.", "rec.2": "Перераспределить часть бюджета с молодых мужчин 18–24 (14 090 Kč, CTR 1,54%) на женщин 25–54 лет (CTR 2,99–3,9%).", "rec.3": "Протестировать увеличение бюджета на Facebook-ленту: сейчас там всего 1 390 Kč, но клик стоит 0,84 Kč (самый дешёвый).", "rec.4": "Снизить частоту показов в обновлённой кампании WhatsApp/IG ретаргет (сейчас 2,1) или обновить креатив, чтобы вернуть CTR выше 2%.", "rec.5": "Проверить, почему аудитория WhatsApp/IG ретаргет показывает CTR 1,14–1,26%: возможно, нужен другой формат креатива или дополнительный прогрев.", "rec.6": "Запустить отдельную кампанию на женщин 35+ с бюджетом хотя бы 5 000 Kč, учитывая их высокий CTR (3,65–5,1%).", "eu.body": "Важно знать: в рекламных кабинетах ЕС Meta не показывает число начатых переписок в директ. Кампании «IG direct» реально приводят людей в сообщения, но эта цифра в отчёте технически недоступна. Реальное число обращений видно только вручную (в директе или через учёт менеджеров).", "footer.text": "Данные: Meta Marketing API · рекламный кабинет Akashi - Guitar Lessons · период 1 – 31 июля"},
+  en: {"header.sub": "Ad report · Meta Ads (Instagram / Facebook)", "header.period": "monthly report", "theme.dark": "Dark", "theme.light": "Light", "mode.brief": "Brief", "mode.detailed": "Detailed", "sec.insight": "The month in short", "sec.result": "Overall result for the period", "sec.liza_comment": "Note", "kpi.spend": "Spend", "kpi.spend.tip": "What Meta charged for showing the ads this month.", "kpi.reach": "Reach", "kpi.reach.tip": "How many different people saw the ads at least once. Each person counts once.", "kpi.impr": "Impressions", "kpi.impr.tip": "How many times the ads appeared on screens in total. More than people, because one person sees an ad several times.", "kpi.clicks": "Clicks", "kpi.clicks.tip": "How many times people clicked the ads.", "kpi.ctr": "CTR", "kpi.ctr.tip": "The share of people who clicked out of everyone who saw the ads.", "kpi.cpc": "CPC", "kpi.cpc.tip": "The average price of one click across the account this month.", "kpi.freq": "Frequency", "kpi.freq.tip": "How many times one person saw the ads on average. The higher the frequency, the greater the risk the audience is getting tired of the same creative.", "kpi.freq.sub": "impressions ÷ reach", "kpi.eng": "Interactions", "kpi.eng.tip": "Likes, comments, saves, clicks and video views: any actions people take with the ads.", "kpi.eng.sub": "likes, comments, videos, clicks", "kpi.video": "Video views", "kpi.video.tip": "How many times people played the videos in the ads.", "kpi.video.sub": "video plays in the ads", "sec.compare": "Campaign comparison", "chart1.title": "Clicks by campaign", "chart2.title": "Cost per click by campaign, Kč", "sec.campaigns": "Campaigns", "table.h.campaign": "Campaign", "table.h.reach": "Reach", "table.h.impr": "Impressions", "table.h.clicks": "Clicks", "table.h.ctr": "CTR", "table.h.cpc": "CPC", "table.h.budget": "Budget", "table.total": "Total / average", "verdict.label": "Verdict", "ads.label": "Campaign ads", "sec.aud": "Audiences", "sec.plat": "Placements", "sec.demo": "Audience by gender and age", "demo.men": "men", "demo.women": "women", "demo.scale": "bar length: spend for the month", "sec.ads": "Top ads", "sec.findings": "Key takeaways", "sec.recs": "Recommendations", "eu.title": "About Direct conversations", "sec.glossary": "Glossary of terms", "term1.title": "Reach: how many people saw you", "term1.body": "The number of different people who were shown the ads at least once. Each person counts once, even if they saw the ad several days in a row.", "term2.title": "Impressions: how many times the ad appeared", "term2.body": "How many times the ads appeared on screens in total. There are always more impressions than people, because the same person is shown the ad several times, which helps it stick.", "term3.title": "Frequency: how often one person sees the ad", "term3.body": "Impressions divided by reach. At 1–3 the ad gently reminds about itself. Above 3–4 the same people see it too often and start scrolling past.", "term4.title": "CTR: how well the ad grabs attention", "term4.body": "Click-through rate: the share of viewers who clicked the ad. The higher it is, the more interesting the ad looks to the audience.", "term5.title": "CPC: the price of one click", "term5.body": "The average cost of one click on the ad. The lower it is, the cheaper the audience's attention.", "term6.title": "Interactions: any actions with the ad", "term6.body": "Likes, comments, saves, clicks and video views combined. They show the ad is not just flashing by: people do something with it.", "term7.title": "Video views: how many times the videos were watched", "term7.body": "How many times people played the videos in the ads. An important metric for video creatives: it shows the ad is watched, not scrolled past.", "header.dates": "Jul 1 – 31", "insight.text": "Spent <b>45,997 Kč</b>, reached <b>700,595</b> people. Most budget went to Instagram retargeting campaigns, which also delivered the best engagement: <b>2.27–2.56% CTR</b>. Average cost per click across all campaigns was <b>2.01 Kč</b>, which is solid for this audience type and goal (direct messages).", "camp1.tag": "", "camp1.aud": "INDIAN", "camp1.verdict": "The INDIAN audience campaign delivered the highest CTR (2.56%) and one of the cheapest clicks (1.84 Kč). This means the creative resonated very well with this group, and it's worth allocating more budget here.", "campAd1.name": "Ad 1", "campAd1.aud": "INDIAN", "campAd1.met": "4,119 clicks · CTR 2.61% · CPC <b>1.77 Kč</b>", "campAd2.name": "Ad 2", "campAd2.aud": "INDIAN", "campAd2.met": "98 clicks · CTR 2.48% · CPC <b>2.04 Kč</b>", "campAd3.name": "Ad 3", "campAd3.aud": "INDIAN", "campAd3.met": "145 clicks · CTR 1.69% · CPC <b>3.83 Kč</b>", "camp2.tag": "", "camp2.aud": "WhatsApp = IG retarget audience", "camp2.verdict": "The WhatsApp/IG retargeting campaign showed a low CTR (1.6%) and the most expensive click (2.35 Kč) with low frequency (1.19). The audience might not be warmed up enough, or the creative needs refinement.", "campAd4.name": "Ad 1", "campAd4.aud": "WhatsApp = IG retarget audience", "campAd4.met": "193 clicks · CTR 0.96% · CPC <b>3.03 Kč</b>", "campAd5.name": "Ad 2", "campAd5.aud": "WhatsApp = IG retarget audience", "campAd5.met": "135 clicks · CTR 1.10% · CPC <b>5.74 Kč</b>", "campAd6.name": "Ad 3", "campAd6.aud": "WhatsApp = IG retarget audience", "campAd6.met": "378 clicks · CTR 1.29% · CPC <b>3.26 Kč</b>", "campAd7.name": "Ad 3", "campAd7.aud": "IG | Retarget Audience -", "campAd7.met": "58 clicks · CTR 1.15% · CPC <b>5.47 Kč</b>", "campAd8.name": "Ad 1", "campAd8.aud": "IG | Retarget Audience -", "campAd8.met": "658 clicks · CTR 3.00% · CPC <b>0.64 Kč</b>", "campAd9.name": "Ad 2", "campAd9.aud": "IG | Retarget Audience -", "campAd9.met": "913 clicks · CTR 1.60% · CPC <b>2.35 Kč</b>", "camp3.tag": "", "camp3.aud": "Retarget IG", "camp3.verdict": "The largest campaign (15,216 Kč) on IG retargeting performed excellently: 2.27% CTR, 1.66 Kč per click. A reach of 300k with frequency of 1.34 indicates the audience isn't fatigued yet.", "campAd10.name": "Ad 1", "campAd10.aud": "Retarget IG", "campAd10.met": "6,369 clicks · CTR 2.56% · CPC <b>1.48 Kč</b>", "campAd11.name": "Ad 2", "campAd11.aud": "Retarget IG", "campAd11.met": "17 clicks · CTR 4.94% · CPC <b>0.77 Kč</b>", "campAd12.name": "Ad 3", "campAd12.aud": "Retarget IG", "campAd12.met": "219 clicks · CTR 0.89% · CPC <b>5.02 Kč</b>", "campAd13.name": "Ad 4", "campAd13.aud": "Retarget IG", "campAd13.met": "2,548 clicks · CTR 1.98% · CPC <b>1.83 Kč</b>", "camp4.tag": "", "camp4.aud": "WhatsApp = IG retarget audience", "camp4.verdict": "The updated WhatsApp/IG retargeting campaign had a frequency of 2.1 (higher than others) and expensive clicks (2.51 Kč). High frequency with low CTR (1.4%) suggests people are seeing the ad too often and tuning out.", "campAd14.name": "Ad 2", "campAd14.aud": "WhatsApp = IG retarget audience", "campAd14.met": "307 clicks · CTR 1.39% · CPC <b>6.22 Kč</b>", "campAd15.name": "Ad 1", "campAd15.aud": "WhatsApp = IG retarget audience", "campAd15.met": "1,101 clicks · CTR 1.34% · CPC <b>0.87 Kč</b>", "campAd16.name": "Ad 2", "campAd16.aud": "IG | Retarget Audience -", "campAd16.met": "1,147 clicks · CTR 1.85% · CPC <b>2.35 Kč</b>", "campAd17.name": "Ad 3", "campAd17.aud": "IG | Retarget Audience -", "campAd17.met": "391 clicks · CTR 1.32% · CPC <b>4.59 Kč</b>", "campAd18.name": "Ad 1", "campAd18.aud": "IG | Retarget Audience -", "campAd18.met": "440 clicks · CTR 1.43% · CPC <b>2.23 Kč</b>", "campAd19.name": "Ad 3", "campAd19.aud": "WhatsApp = IG retarget audience", "campAd19.met": "979 clicks · CTR 1.16% · CPC <b>2.65 Kč</b>", "camp5.tag": "", "camp5.aud": "LAL", "camp5.verdict": "The lookalike audience campaign showed average results: 1.74% CTR, 2.37 Kč per click. Frequency of 1.06 indicates a fresh audience, but engagement is lower than warmed-up retargeting groups.", "campAd20.name": "Ad 4", "campAd20.aud": "LAL", "campAd20.met": "1,193 clicks · CTR 1.50% · CPC <b>3.24 Kč</b>", "campAd21.name": "Ad 2", "campAd21.aud": "LAL", "campAd21.met": "27 clicks · CTR 2.34% · CPC <b>1.28 Kč</b>", "campAd22.name": "Ad 1", "campAd22.aud": "LAL", "campAd22.met": "1,431 clicks · CTR 1.98% · CPC <b>1.68 Kč</b>", "campAd23.name": "Ad 3", "campAd23.aud": "LAL", "campAd23.met": "14 clicks · CTR 1.87% · CPC <b>2.16 Kč</b>", "aud1.name": "Retarget IG", "aud1.ctr": "CTR 2.27%", "aud1.stats": "15,217 Kč · reach 300,652", "aud1.note": "The most effective audience by CTR (2.27%) and reach, received the largest budget (15,216 Kč) for good reason.", "aud2.name": "IG | Retarget Audience -", "aud2.ctr": "CTR 1,62–1,94%", "aud2.stats": "8,364 Kč · reach 166,896", "aud2.note": "Delivered average CTR (1.62–1.94%) with 166,896 reach, performs steadily but without standout results.", "aud3.name": "WhatsApp = IG retarget audience", "aud3.ctr": "CTR 1,14–1,26%", "aud3.stats": "8,052 Kč · reach 120,709", "aud3.note": "The lowest CTR among all audiences (1.14–1.26%), yet received 8,051 Kč budget; worth revisiting creatives for this group.", "aud4.name": "INDIAN", "aud4.ctr": "CTR 2.56%", "aud4.stats": "8,036 Kč · reach 151,406", "aud4.note": "Top performer in engagement with 2.56% CTR and solid reach of 151,406, clearly resonates with current creatives.", "aud4.badge": "Best audience", "aud5.name": "LAL", "aud5.ctr": "CTR 1.74%", "aud5.stats": "6,329 Kč · reach 145,382", "aud5.note": "Lookalike audience delivered 1.74% CTR, which is decent for a cold audience but lags behind warmed-up segments.", "plat1.label": "Instagram · Reels", "plat1.stat": "32,461 Kč · 15,142 clicks · 2.14 Kč per click", "plat2.label": "Instagram · feed", "plat2.stat": "7,424 Kč · 2,635 clicks · 2.82 Kč per click", "plat3.label": "Instagram · stories", "plat3.stat": "2,360 Kč · 563 clicks · 4.19 Kč per click", "plat4.label": "Facebook · Reels", "plat4.stat": "1,538 Kč · 1,165 clicks · 1.32 Kč per click", "plat5.label": "Facebook · feed", "plat5.stat": "1,391 Kč · 1,659 clicks · 0.84 Kč per click", "plat6.label": "Facebook · stories", "plat6.stat": "92 Kč · 34 clicks · 2.70 Kč per click", "plat.note": "Instagram Reels took 70% of the budget (32,461 Kč) and delivered the most clicks (15,142) at 2.14 Kč each. Facebook feed showed the cheapest click (0.84 Kč) but received minimal traffic; worth testing more budget there.", "demo.r1.label": "M 18-24", "demo.r1.stat": "14,090 Kč · CTR 1.54%", "demo.r2.label": "M 25-34", "demo.r2.stat": "13,724 Kč · CTR 1.98%", "demo.r3.label": "M 35-44", "demo.r3.stat": "4,388 Kč · CTR 3.09%", "demo.r4.label": "F 18-24", "demo.r4.stat": "4,352 Kč · CTR 2.09%", "demo.r5.label": "F 25-34", "demo.r5.stat": "4,135 Kč · CTR 2.99%", "demo.r6.label": "F 35-44", "demo.r6.stat": "2,399 Kč · CTR 3.90%", "demo.r7.label": "M 45-54", "demo.r7.stat": "1,140 Kč · CTR 3.21%", "demo.r8.label": "F 45-54", "demo.r8.stat": "703 Kč · CTR 3.65%", "demo.r9.label": "M 55-64", "demo.r9.stat": "227 Kč · CTR 3.72%", "demo.r10.label": "F 55-64", "demo.r10.stat": "142 Kč · CTR 3.83%", "demo.r11.label": "M 65+", "demo.r11.stat": "133 Kč · CTR 2.84%", "demo.r12.label": "F 65+", "demo.r12.stat": "86 Kč · CTR 5.10%", "demo.r13.label": "M Unknown", "demo.r13.stat": "0 Kč · CTR 0.00%", "demo.r14.label": "F Unknown", "demo.r14.stat": "0 Kč · CTR 0.00%", "demo.note": "Women 35+ show CTR from 3.65% to 5.1%, yet receive less than 10% of budget. Young men 18–24 take 14,090 Kč with only 1.54% CTR. Reallocating toward women 25–54 could lower cost per click.", "ad1.badge": "Best response", "ad1.name": "Sales · workshop funnel · test audience · leads 15.7", "ad1.metric": "CTR 4.94% · CPC 0.77 Kč", "ad1.reason": "Ad from the IG retargeting campaign gathered the highest engagement (179,486 post interactions) and strong 2.27% CTR.", "ad2.badge": "Cheapest click", "ad2.name": "direct ads · IG + WhatsApp · Test Audience · 15.7", "ad2.metric": "CTR 3.0% · CPC 0.64 Kč", "ad2.reason": "Ad delivered one of the lowest CPCs (2.35 Kč) in its campaign, despite the group's overall modest CTR.", "find.1": "Spent 45,997 Kč, reached 700,595 people with an average frequency of 1.69.", "find.2": "Instagram retargeting campaigns delivered CTR from 2.27% to 2.56%, which is 1.5–2x higher than cold audiences.", "find.3": "Instagram Reels received 32,461 Kč (70% of budget) and generated 15,142 clicks at 2.14 Kč, making it the primary placement.", "find.4": "Women 35–64 show CTR up to 5.1% but receive less than 10% of budget, while young men 18–24 (1.54% CTR) take 14,090 Kč.", "find.5": "Lookalike audience campaign showed 1.74% CTR and 2.37 Kč per click, lagging behind warmed-up retargeting segments.", "find.6": "Updated WhatsApp/IG retargeting campaign reached frequency of 2.1, leading to CTR drop to 1.4% and CPC rise to 2.51 Kč.", "rec.1": "Increase budget for the INDIAN campaign (currently 8,036 Kč) and IG retargeting (15,216 Kč), as they show the best CTR and cheapest clicks.", "rec.2": "Reallocate part of the budget from young men 18–24 (14,090 Kč, 1.54% CTR) to women 25–54 (2.99–3.9% CTR).", "rec.3": "Test increasing budget on Facebook feed: currently only 1,390 Kč there, but clicks cost 0.84 Kč (the cheapest).", "rec.4": "Lower frequency in the updated WhatsApp/IG retargeting campaign (currently 2.1) or refresh the creative to bring CTR back above 2%.", "rec.5": "Review why the WhatsApp/IG retargeting audience shows 1.14–1.26% CTR: it may need a different creative format or additional warming.", "rec.6": "Launch a separate campaign targeting women 35+ with at least 5,000 Kč budget, given their high CTR (3.65–5.1%).", "eu.body": "Worth knowing: in EU ad accounts Meta does not report the number of started Direct conversations. The IG direct campaigns do bring people into messages, but that number is technically unavailable in reporting. The real count of inquiries is only visible manually (in Direct or via a managers' log).", "footer.text": "Data: Meta Marketing API · Akashi - Guitar Lessons ad account · Jul 1 – 31"}
+};
+
+var currentLang = 'ru';
+
+/* ---- Числа: форматирование по языку (RU: пробел + запятая, EN: запятая + точка) ---- */
+function fmtNum(n, dec, lang){
+  var f = Math.abs(Number(n)).toFixed(dec);
+  var parts = f.split('.');
+  var sep = lang === 'ru' ? ' ' : ',';
+  var intp = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+  var out = intp;
+  if(dec > 0) out += (lang === 'ru' ? ',' : '.') + parts[1];
+  return (Number(n) < 0 ? '-' : '') + out;
+}
+function formatNums(lang){
+  document.querySelectorAll('[data-num]').forEach(function(el){
+    var n = parseFloat(el.getAttribute('data-num'));
+    var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+    var suf = el.getAttribute('data-suffix') || '';
+    var txt = fmtNum(n, dec, lang);
+    if(suf === '%') txt += '%';
+    else if(suf) txt += ' ' + suf;
+    el.textContent = txt;
+  });
+}
+
+function setLang(lang){
+  currentLang = lang;
+  var dict = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key = el.getAttribute('data-i18n');
+    if(dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+  formatNums(lang);
+  document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang;
+  updateChartLang(lang);
+}
+
+/* ---- Режим: Кратко / Подробно ---- */
+function setMode(mode){
+  var detailed = mode === 'detailed';
+  document.body.classList.toggle('detailed', detailed);
+  document.body.classList.toggle('brief', !detailed);
+  document.getElementById('btn-brief').classList.toggle('active', !detailed);
+  document.getElementById('btn-detailed').classList.toggle('active', detailed);
+  requestAnimationFrame(function(){
+    setTimeout(function(){
+      allCharts.forEach(function(c){ try{ c.resize(); }catch(e){} });
+    }, 60);
+  });
+}
+
+/* ---- Тема: Тёмная / Светлая. Переключает body.light и перекрашивает графики ---- */
+function setTheme(theme){
+  var light = theme === 'light';
+  document.body.classList.toggle('light', light);
+  document.getElementById('btn-dark').classList.toggle('active', !light);
+  document.getElementById('btn-light').classList.toggle('active', light);
+  applyChartTheme();
+}
+
+/* ---- Подсказки KPI: тап на мобильных (hover недоступен) ---- */
+document.querySelectorAll('.kpi-hint-wrap').forEach(function(wrap){
+  wrap.addEventListener('click', function(e){
+    if(window.matchMedia('(hover: none)').matches){
+      e.stopPropagation();
+      document.querySelectorAll('.kpi-hint-wrap.open').forEach(function(o){ if(o !== wrap) o.classList.remove('open'); });
+      wrap.classList.toggle('open');
+    }
+  });
+});
+document.addEventListener('click', function(){
+  document.querySelectorAll('.kpi-hint-wrap.open').forEach(function(o){ o.classList.remove('open'); });
+});
+
+/* ---- Графики: разбивка по кампаниям текущего периода ---- */
+var clicksChart, cpcChart;
+var allCharts = [];
+var chartLabels = {
+  ru: [["Sales", "workshop funnel   test audience   leads 11.7"], ["direct ads", "IG + WhatsApp   Test Audience   15.7"], ["Sales", "workshop funnel   test audience   leads 15.7"], ["direct ads", "IG + WhatsApp   Test Audience   updated   16.7"], ["Sales", "workshop funnel   LAL   leads 25.7"]],
+  en: [["Sales", "workshop funnel   test audience   leads 11.7"], ["direct ads", "IG + WhatsApp   Test Audience   15.7"], ["Sales", "workshop funnel   test audience   leads 15.7"], ["direct ads", "IG + WhatsApp   Test Audience   updated   16.7"], ["Sales", "workshop funnel   LAL   leads 25.7"]]
+};
+
+function updateChartLang(lang){
+  if(clicksChart){ clicksChart.data.labels = chartLabels[lang]; clicksChart.update(); }
+  if(cpcChart){ cpcChart.data.labels = chartLabels[lang]; cpcChart.update(); }
+}
+
+/* Читает актуальные цвета темы из CSS-переменных на body */
+function themeColors(){
+  var cs = getComputedStyle(document.body);
+  return {
+    text:  cs.getPropertyValue('--text').trim(),
+    mute:  cs.getPropertyValue('--text-mute').trim(),
+    grid:  cs.getPropertyValue('--chart-grid').trim(),
+    tipBg: cs.getPropertyValue('--surface-2').trim()
+  };
+}
+
+/* Применяет цвета темы к осям, сетке и тултипам обоих графиков */
+function applyChartTheme(){
+  var t = themeColors();
+  allCharts.forEach(function(chart){
+    chart.options.plugins.tooltip.backgroundColor = t.tipBg;
+    chart.options.plugins.tooltip.titleColor = t.text;
+    chart.options.plugins.tooltip.bodyColor = t.text;
+    chart.options.scales.x.ticks.color = t.text;
+    chart.options.scales.x.border.color = t.grid;
+    chart.options.scales.y.grid.color = t.grid;
+    chart.options.scales.y.ticks.color = t.mute;
+    chart.update();
+  });
+}
+
+window.addEventListener('load', function(){
+  if(typeof Chart === 'undefined') return;
+
+  var pink = '#faa1d4';
+  var pinkDeep = '#f17fc0';
+  var burgundy = '#a62e3e';
+
+  function baseOptions(labelCb, yTickCb){
+    return {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          padding: 10,
+          titleFont: { family: 'Sora', size: 12.5 },
+          bodyFont: { family: 'Sora', size: 12.5 },
+          callbacks: { label: labelCb }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, border: {}, ticks: { font: { family: 'Sora', size: 10.5 }, autoSkip: false } },
+        y: { beginAtZero: true, grid: {}, border: { display: false }, ticks: { font: { family: 'Sora', size: 10.5 }, callback: yTickCb } }
+      }
+    };
+  }
+
+  var clicksCtx = document.getElementById('clicksChart');
+  if(clicksCtx){
+    clicksChart = new Chart(clicksCtx, {
+      type: 'bar',
+      data: {
+        labels: chartLabels.ru,
+        datasets: [{
+          data: [4362, 2335, 9153, 4365, 2665],
+          backgroundColor: ["#f17fc0", "#f17fc0", "#faa1d4", "#f17fc0", "#f17fc0"],
+          borderRadius: 6,
+          borderSkipped: false,
+          maxBarThickness: 56
+        }]
+      },
+      options: baseOptions(
+        function(c){ return fmtNum(c.parsed.y, 0, currentLang) + (currentLang === 'ru' ? ' кликов' : ' clicks'); },
+        function(v){ return fmtNum(v, 0, currentLang); }
+      )
+    });
+    allCharts.push(clicksChart);
+  }
+
+  var cpcCtx = document.getElementById('cpcChart');
+  if(cpcCtx){
+    cpcChart = new Chart(cpcCtx, {
+      type: 'bar',
+      data: {
+        labels: chartLabels.ru,
+        datasets: [{
+          data: [1.84, 2.35, 1.66, 2.51, 2.37],
+          backgroundColor: ["#f17fc0", "#f17fc0", "#faa1d4", "#a62e3e", "#f17fc0"],
+          borderRadius: 6,
+          borderSkipped: false,
+          maxBarThickness: 56
+        }]
+      },
+      options: baseOptions(
+        function(c){ return fmtNum(c.parsed.y, 2, currentLang) + (currentLang === 'ru' ? ' Kč за клик' : ' Kč per click'); },
+        function(v){ return v + ' Kč'; }
+      )
+    });
+    allCharts.push(cpcChart);
+  }
+
+  applyChartTheme();
+
+  /* Подстраховка от бага «canvas нулевой высоты» */
+  function fixAll(){ allCharts.forEach(function(c){ try{ c.resize(); }catch(e){} }); }
+  requestAnimationFrame(fixAll);
+  allCharts.forEach(function(chart){
+    var wrap = chart.canvas.closest('.chart-box');
+    if(!wrap) return;
+    if('ResizeObserver' in window){ new ResizeObserver(fixAll).observe(wrap); }
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(en){ if(en[0].isIntersecting) fixAll(); }, { threshold: .05 }).observe(wrap);
+    }
+  });
+  window.addEventListener('resize', fixAll);
+
+  formatNums(currentLang);
+});
+</script>
+
+</body>
+</html>

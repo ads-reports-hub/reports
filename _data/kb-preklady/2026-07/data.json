@@ -1,0 +1,581 @@
+{
+  "client": "KB Preklady",
+  "accountId": "act_32456485993942764",
+  "period": {
+    "since": "2026-07-01",
+    "until": "2026-07-31",
+    "label_ru": "1 – 31 июля",
+    "label_en": "Jul 1 – 31"
+  },
+  "prevPeriod": {
+    "since": "2026-06-01",
+    "until": "2026-06-30",
+    "label_ru": "1 – 30 июня",
+    "label_en": "Jun 1 – 30"
+  },
+  "platform": "Meta Ads (Instagram / Facebook)",
+  "currency": "Kč",
+  "source": "Meta Marketing API",
+  "showDynamics": false,
+  "totals": {
+    "spend": 11003.01,
+    "reach": 41214,
+    "impressions": 121077,
+    "frequency": 2.94,
+    "clicks": 2646,
+    "ctr": 2.19,
+    "cpc": 4.16,
+    "linkClicks": 1058,
+    "postEngagement": 15680,
+    "videoViews": 14294,
+    "reactions": 201,
+    "comments": 31,
+    "saves": 67
+  },
+  "prevTotals": {
+    "spend": 8204.16,
+    "reach": 19531,
+    "impressions": 67758,
+    "frequency": 3.47,
+    "clicks": 1362,
+    "ctr": 2.01,
+    "cpc": 6.02
+  },
+  "campaigns": [
+    {
+      "name": "Лиды · Вакансия · Pardubice",
+      "date": "",
+      "goal_ru": "переписки в директ",
+      "goal_en": "Direct messages",
+      "reach": 10642,
+      "impressions": 36288,
+      "frequency": 3.41,
+      "spend": 4464.7,
+      "clicks": 1132,
+      "ctr": 3.12,
+      "cpc": 3.94,
+      "linkClicks": 451,
+      "postEngagement": 572,
+      "videoViews": 64,
+      "audience": "Pardubice, женщины",
+      "ads": [
+        {
+          "adId": "120250376606950418",
+          "thumb": "assets/120250376606950418.jpg",
+          "label_ru": "Объявление 2",
+          "label_en": "Ad 2",
+          "audience_ru": "Pardubice, женщины",
+          "audience_en": "Pardubice, женщины",
+          "spend": 146.91,
+          "clicks": 27,
+          "ctr": 2.68,
+          "cpc": 5.44,
+          "met_ru": "27 кликов · CTR 2,68% · CPC <b>5,44 Kč</b>",
+          "met_en": "27 clicks · CTR 2.68% · CPC <b>5.44 Kč</b>"
+        },
+        {
+          "adId": "120250376606980418",
+          "thumb": "assets/120250376606980418.jpg",
+          "label_ru": "Объявление 1",
+          "label_en": "Ad 1",
+          "audience_ru": "Pardubice, женщины",
+          "audience_en": "Pardubice, женщины",
+          "spend": 4317.79,
+          "clicks": 1105,
+          "ctr": 3.13,
+          "cpc": 3.91,
+          "met_ru": "1 105 кликов · CTR 3,13% · CPC <b>3,91 Kč</b>",
+          "met_en": "1,105 clicks · CTR 3.13% · CPC <b>3.91 Kč</b>"
+        }
+      ],
+      "verdict_ru": "Кампания по вакансии в Пардубице сработала очень хорошо: CTR 3.12% и цена клика 3.94 Kč при таргетинге на местных женщин. Это говорит о том, что предложение попало точно в нужную аудиторию и вызвало интерес.",
+      "verdict_en": "The Pardubice vacancy campaign performed very well: 3.12% CTR and 3.94 Kč cost per click targeting local women. This indicates the offer resonated precisely with the right audience and generated strong interest.",
+      "tag_kind": "direct",
+      "cpc_pill": "good"
+    },
+    {
+      "name": "Доверенности · лиды · директ+фб · 25.6 · ukr",
+      "date": "",
+      "goal_ru": "переписки в директ",
+      "goal_en": "Direct messages",
+      "reach": 31745,
+      "impressions": 84789,
+      "frequency": 2.67,
+      "spend": 6538.31,
+      "clicks": 1514,
+      "ctr": 1.79,
+      "cpc": 4.32,
+      "linkClicks": 607,
+      "postEngagement": 15108,
+      "videoViews": 14230,
+      "audience": "общая - укр",
+      "ads": [
+        {
+          "adId": "120250566861920418",
+          "thumb": "assets/120250566861920418.jpg",
+          "label_ru": "Объявление 2 видео инст",
+          "label_en": "Ad 2 видео инст",
+          "audience_ru": "общая - укр",
+          "audience_en": "общая - укр",
+          "spend": 5363.27,
+          "clicks": 1308,
+          "ctr": 1.82,
+          "cpc": 4.1,
+          "met_ru": "1 308 кликов · CTR 1,82% · CPC <b>4,10 Kč</b>",
+          "met_en": "1,308 clicks · CTR 1.82% · CPC <b>4.10 Kč</b>"
+        },
+        {
+          "adId": "120250567979690418",
+          "thumb": "assets/120250567979690418.jpg",
+          "label_ru": "Объявление 3",
+          "label_en": "Ad 3",
+          "audience_ru": "общая - укр",
+          "audience_en": "общая - укр",
+          "spend": 1026.6,
+          "clicks": 180,
+          "ctr": 1.56,
+          "cpc": 5.7,
+          "met_ru": "180 кликов · CTR 1,56% · CPC <b>5,70 Kč</b>",
+          "met_en": "180 clicks · CTR 1.56% · CPC <b>5.70 Kč</b>"
+        },
+        {
+          "adId": "120251433868430418",
+          "thumb": "assets/120251433868430418.jpg",
+          "label_ru": "Объявление 4 инст",
+          "label_en": "Ad 4 инст",
+          "audience_ru": "общая - укр",
+          "audience_en": "общая - укр",
+          "spend": 148.44,
+          "clicks": 26,
+          "ctr": 1.72,
+          "cpc": 5.71,
+          "met_ru": "26 кликов · CTR 1,72% · CPC <b>5,71 Kč</b>",
+          "met_en": "26 clicks · CTR 1.72% · CPC <b>5.71 Kč</b>"
+        }
+      ],
+      "verdict_ru": "Кампания по доверенностям для украинской аудитории охватила широкий круг (31 745 человек) и собрала много видеопросмотров (14 230), но CTR ниже (1.79%), что нормально для более общего таргетинга. Цена клика 4.32 Kč остаётся разумной для этой задачи.",
+      "verdict_en": "The power of attorney campaign for the Ukrainian audience reached a wide circle (31,745 people) and collected many video views (14,230), but CTR is lower (1.79%), which is normal for broader targeting. Cost per click of 4.32 Kč remains reasonable for this objective.",
+      "tag_kind": "direct",
+      "cpc_pill": "watch"
+    }
+  ],
+  "audiences": [
+    {
+      "name_ru": "общая - укр",
+      "name_en": "общая - укр",
+      "spend": 6538.31,
+      "reach": 31745,
+      "ctr_range": "1.79%",
+      "badge_ru": null,
+      "badge_en": null,
+      "note_ru": "Общая украинская аудитория показала CTR 1.79% при широком охвате, что ожидаемо для менее узкого таргетинга.",
+      "note_en": "The general Ukrainian audience showed 1.79% CTR with broad reach, which is expected for less narrow targeting.",
+      "discovery": false
+    },
+    {
+      "name_ru": "Pardubice, женщины",
+      "name_en": "Pardubice, женщины",
+      "spend": 4464.7,
+      "reach": 10642,
+      "ctr_range": "3.12%",
+      "badge_ru": "Лучшая аудитория",
+      "badge_en": "Best audience",
+      "note_ru": "Женщины в Пардубице дали CTR 3.12%, почти в два раза выше, что указывает на сильную релевантность предложения для этой группы.",
+      "note_en": "Women in Pardubice delivered 3.12% CTR, nearly double the rate, indicating strong offer relevance for this group.",
+      "discovery": true
+    }
+  ],
+  "platforms": [
+    {
+      "key": "facebook_feed",
+      "label_ru": "Facebook · лента",
+      "label_en": "Facebook · feed",
+      "reach": 21488,
+      "spend": 4100.15,
+      "clicks": 1501,
+      "cpc": 2.73,
+      "bar_pct": 100.0
+    },
+    {
+      "key": "facebook_reels",
+      "label_ru": "Facebook · Reels",
+      "label_en": "Facebook · Reels",
+      "reach": 18028,
+      "spend": 3042.05,
+      "clicks": 554,
+      "cpc": 5.49,
+      "bar_pct": 74.19
+    },
+    {
+      "key": "instagram_stories",
+      "label_ru": "Instagram · сторис",
+      "label_en": "Instagram · stories",
+      "reach": 3544,
+      "spend": 1168.29,
+      "clicks": 195,
+      "cpc": 5.99,
+      "bar_pct": 28.49
+    },
+    {
+      "key": "instagram_reels",
+      "label_ru": "Instagram · Reels",
+      "label_en": "Instagram · Reels",
+      "reach": 5441,
+      "spend": 1041.56,
+      "clicks": 182,
+      "cpc": 5.72,
+      "bar_pct": 25.4
+    },
+    {
+      "key": "instagram_feed",
+      "label_ru": "Instagram · лента",
+      "label_en": "Instagram · feed",
+      "reach": 3056,
+      "spend": 830.16,
+      "clicks": 73,
+      "cpc": 11.37,
+      "bar_pct": 20.25
+    },
+    {
+      "key": "facebook_stories",
+      "label_ru": "Facebook · сторис",
+      "label_en": "Facebook · stories",
+      "reach": 1339,
+      "spend": 359.62,
+      "clicks": 51,
+      "cpc": 7.05,
+      "bar_pct": 8.77
+    }
+  ],
+  "demographics": {
+    "rows": [
+      {
+        "gender": "female",
+        "age": "18-24",
+        "reach": 1591,
+        "spend": 601.3,
+        "ctr": 2.22,
+        "hot": false,
+        "label_ru": "Ж 18-24",
+        "label_en": "F 18-24",
+        "bar_pct": 28.12
+      },
+      {
+        "gender": "male",
+        "age": "18-24",
+        "reach": 738,
+        "spend": 174.97,
+        "ctr": 2.04,
+        "hot": false,
+        "label_ru": "М 18-24",
+        "label_en": "M 18-24",
+        "bar_pct": 8.18
+      },
+      {
+        "gender": "female",
+        "age": "25-34",
+        "reach": 4392,
+        "spend": 1530.98,
+        "ctr": 2.61,
+        "hot": false,
+        "label_ru": "Ж 25-34",
+        "label_en": "F 25-34",
+        "bar_pct": 71.59
+      },
+      {
+        "gender": "male",
+        "age": "25-34",
+        "reach": 4057,
+        "spend": 695.72,
+        "ctr": 1.22,
+        "hot": false,
+        "label_ru": "М 25-34",
+        "label_en": "M 25-34",
+        "bar_pct": 32.53
+      },
+      {
+        "gender": "female",
+        "age": "35-44",
+        "reach": 5820,
+        "spend": 2138.43,
+        "ctr": 2.5,
+        "hot": false,
+        "label_ru": "Ж 35-44",
+        "label_en": "F 35-44",
+        "bar_pct": 100.0
+      },
+      {
+        "gender": "male",
+        "age": "35-44",
+        "reach": 6898,
+        "spend": 1312.65,
+        "ctr": 1.45,
+        "hot": false,
+        "label_ru": "М 35-44",
+        "label_en": "M 35-44",
+        "bar_pct": 61.38
+      },
+      {
+        "gender": "female",
+        "age": "45-54",
+        "reach": 4809,
+        "spend": 1682.79,
+        "ctr": 2.91,
+        "hot": true,
+        "label_ru": "Ж 45-54",
+        "label_en": "F 45-54",
+        "bar_pct": 78.69
+      },
+      {
+        "gender": "male",
+        "age": "45-54",
+        "reach": 5979,
+        "spend": 1460.71,
+        "ctr": 1.77,
+        "hot": false,
+        "label_ru": "М 45-54",
+        "label_en": "M 45-54",
+        "bar_pct": 68.31
+      },
+      {
+        "gender": "female",
+        "age": "55-64",
+        "reach": 1670,
+        "spend": 557.58,
+        "ctr": 2.81,
+        "hot": true,
+        "label_ru": "Ж 55-64",
+        "label_en": "F 55-64",
+        "bar_pct": 26.07
+      },
+      {
+        "gender": "male",
+        "age": "55-64",
+        "reach": 2170,
+        "spend": 494.42,
+        "ctr": 1.98,
+        "hot": false,
+        "label_ru": "М 55-64",
+        "label_en": "M 55-64",
+        "bar_pct": 23.12
+      },
+      {
+        "gender": "female",
+        "age": "65+",
+        "reach": 533,
+        "spend": 174.6,
+        "ctr": 4.58,
+        "hot": true,
+        "label_ru": "Ж 65+",
+        "label_en": "F 65+",
+        "bar_pct": 8.16
+      },
+      {
+        "gender": "male",
+        "age": "65+",
+        "reach": 521,
+        "spend": 145.74,
+        "ctr": 2.75,
+        "hot": false,
+        "label_ru": "М 65+",
+        "label_en": "M 65+",
+        "bar_pct": 6.82
+      }
+    ],
+    "note_ru": "Женщины всех возрастов кликают активнее мужчин (CTR от 2.22% до 4.58% против 1.22–2.75% у мужчин), особенно выделяются женщины 65+ с CTR 4.58%. Бюджет распределён пропорционально охвату, но можно усилить самые отзывчивые группы.",
+    "note_en": "Women across all ages click more actively than men (CTR from 2.22% to 4.58% versus 1.22–2.75% for men), with women 65+ standing out at 4.58% CTR. Budget is distributed proportionally to reach, but the most responsive groups could be amplified.",
+    "rows_sorted": [
+      {
+        "gender": "female",
+        "age": "35-44",
+        "reach": 5820,
+        "spend": 2138.43,
+        "ctr": 2.5,
+        "hot": false,
+        "label_ru": "Ж 35-44",
+        "label_en": "F 35-44",
+        "bar_pct": 100.0
+      },
+      {
+        "gender": "female",
+        "age": "45-54",
+        "reach": 4809,
+        "spend": 1682.79,
+        "ctr": 2.91,
+        "hot": true,
+        "label_ru": "Ж 45-54",
+        "label_en": "F 45-54",
+        "bar_pct": 78.69
+      },
+      {
+        "gender": "female",
+        "age": "25-34",
+        "reach": 4392,
+        "spend": 1530.98,
+        "ctr": 2.61,
+        "hot": false,
+        "label_ru": "Ж 25-34",
+        "label_en": "F 25-34",
+        "bar_pct": 71.59
+      },
+      {
+        "gender": "male",
+        "age": "45-54",
+        "reach": 5979,
+        "spend": 1460.71,
+        "ctr": 1.77,
+        "hot": false,
+        "label_ru": "М 45-54",
+        "label_en": "M 45-54",
+        "bar_pct": 68.31
+      },
+      {
+        "gender": "male",
+        "age": "35-44",
+        "reach": 6898,
+        "spend": 1312.65,
+        "ctr": 1.45,
+        "hot": false,
+        "label_ru": "М 35-44",
+        "label_en": "M 35-44",
+        "bar_pct": 61.38
+      },
+      {
+        "gender": "male",
+        "age": "25-34",
+        "reach": 4057,
+        "spend": 695.72,
+        "ctr": 1.22,
+        "hot": false,
+        "label_ru": "М 25-34",
+        "label_en": "M 25-34",
+        "bar_pct": 32.53
+      },
+      {
+        "gender": "female",
+        "age": "18-24",
+        "reach": 1591,
+        "spend": 601.3,
+        "ctr": 2.22,
+        "hot": false,
+        "label_ru": "Ж 18-24",
+        "label_en": "F 18-24",
+        "bar_pct": 28.12
+      },
+      {
+        "gender": "female",
+        "age": "55-64",
+        "reach": 1670,
+        "spend": 557.58,
+        "ctr": 2.81,
+        "hot": true,
+        "label_ru": "Ж 55-64",
+        "label_en": "F 55-64",
+        "bar_pct": 26.07
+      },
+      {
+        "gender": "male",
+        "age": "55-64",
+        "reach": 2170,
+        "spend": 494.42,
+        "ctr": 1.98,
+        "hot": false,
+        "label_ru": "М 55-64",
+        "label_en": "M 55-64",
+        "bar_pct": 23.12
+      },
+      {
+        "gender": "male",
+        "age": "18-24",
+        "reach": 738,
+        "spend": 174.97,
+        "ctr": 2.04,
+        "hot": false,
+        "label_ru": "М 18-24",
+        "label_en": "M 18-24",
+        "bar_pct": 8.18
+      },
+      {
+        "gender": "female",
+        "age": "65+",
+        "reach": 533,
+        "spend": 174.6,
+        "ctr": 4.58,
+        "hot": true,
+        "label_ru": "Ж 65+",
+        "label_en": "F 65+",
+        "bar_pct": 8.16
+      },
+      {
+        "gender": "male",
+        "age": "65+",
+        "reach": 521,
+        "spend": 145.74,
+        "ctr": 2.75,
+        "hot": false,
+        "label_ru": "М 65+",
+        "label_en": "M 65+",
+        "bar_pct": 6.82
+      }
+    ]
+  },
+  "topAds": [
+    {
+      "adId": "120250376606980418",
+      "thumb": "assets/120250376606980418.jpg",
+      "name_ru": "Лиды · Вакансия · Pardubice",
+      "name_en": "Лиды · Вакансия · Pardubice",
+      "badge_ru": "Лучший отклик",
+      "badge_en": "Best response",
+      "metric_ru": "CTR 3.13% · CPC 3.91 Kč",
+      "metric_en": "CTR 3.13% · CPC 3.91 Kč",
+      "best": true,
+      "reason_ru": "Это объявление из кампании по вакансии получило самый высокий отклик аудитории благодаря точному попаданию в интересы местных женщин.",
+      "reason_en": "This ad from the vacancy campaign received the highest audience response due to precise alignment with local women's interests."
+    }
+  ],
+  "insight_ru": "За период потрачено <b>11 003 Kč</b>, реклама охватила <b>41 214 человек</b> и получила <b>2 646 кликов</b>. Средняя цена клика составила <b>4.16 Kč</b>, при этом кампания по вакансии в Пардубице показала заметно более активное взаимодействие аудитории. Основной бюджет ушёл на Facebook ленту, которая дала самые доступные клики.",
+  "insight_en": "The period spent <b>11,003 Kč</b>, reaching <b>41,214 people</b> and generating <b>2,646 clicks</b>. Average cost per click was <b>4.16 Kč</b>, with the Pardubice vacancy campaign showing noticeably higher audience engagement. Most budget went to Facebook Feed, which delivered the most affordable clicks.",
+  "platforms_note_ru": "Facebook лента принесла самые дешёвые клики (2.73 Kč) и собрала больше трети всех кликов. Instagram лента оказалась дорогой (11.37 Kč за клик), в то время как Reels на обеих платформах показали средние результаты.",
+  "platforms_note_en": "Facebook Feed delivered the cheapest clicks (2.73 Kč) and collected over a third of all clicks. Instagram Feed proved expensive (11.37 Kč per click), while Reels on both platforms showed average results.",
+  "findings_ru": [
+    "Кампания по вакансии в Пардубице с таргетингом на женщин показала CTR 3.12%, что в 1.7 раза выше общего результата (2.19%).",
+    "Facebook лента дала 1 501 клик по цене 2.73 Kč, что на 34% дешевле среднего CPC 4.16 Kč.",
+    "Женщины показывают CTR от 2.22% до 4.58% во всех возрастных группах, тогда как мужчины – от 1.22% до 2.75%.",
+    "Instagram лента оказалась самой дорогой позицией (11.37 Kč за клик) при малом объёме кликов (73).",
+    "Кампания по доверенностям собрала 14 230 видеопросмотров, что говорит о внимании к контенту даже при более низком CTR 1.79%.",
+    "Женщины 65+ показали CTR 4.58% при небольшом охвате (533 человека), что указывает на высокую вовлечённость этой группы."
+  ],
+  "findings_en": [
+    "The Pardubice vacancy campaign targeting women showed 3.12% CTR, which is 1.7 times higher than the overall result (2.19%).",
+    "Facebook Feed delivered 1,501 clicks at 2.73 Kč, which is 34% cheaper than the average CPC of 4.16 Kč.",
+    "Women show CTR from 2.22% to 4.58% across all age groups, while men range from 1.22% to 2.75%.",
+    "Instagram Feed proved the most expensive placement (11.37 Kč per click) with low click volume (73).",
+    "The power of attorney campaign collected 14,230 video views, indicating content attention even with lower CTR of 1.79%.",
+    "Women 65+ showed 4.58% CTR with small reach (533 people), indicating high engagement in this group."
+  ],
+  "recommendations_ru": [
+    "Увеличить бюджет на Facebook ленту, так как она даёт клики в два раза дешевле среднего и собирает больше всего трафика.",
+    "Усилить таргетинг на женщин 25–54 лет и протестировать отдельные креативы для женщин 65+, учитывая их высокий CTR 4.58%.",
+    "Пересмотреть размещение в Instagram ленте: либо отключить, либо создать специальный креатив, так как текущая цена 11.37 Kč слишком высока.",
+    "Продолжить локальные кампании с узким таргетингом по типу Пардубице, так как они показывают CTR почти в два раза выше общего.",
+    "Сохранить видеоформат для кампаний с широкой аудиторией (как доверенности), чтобы поддерживать узнаваемость и интерес.",
+    "Отслеживать конверсии в директ после кликов, чтобы понять, какие аудитории не только кликают, но и пишут."
+  ],
+  "recommendations_en": [
+    "Increase budget for Facebook Feed, as it delivers clicks at half the average cost and generates the most traffic.",
+    "Strengthen targeting for women 25–54 and test separate creatives for women 65+, given their high 4.58% CTR.",
+    "Review Instagram Feed placement: either disable it or create a specialized creative, as the current 11.37 Kč cost is too high.",
+    "Continue local campaigns with narrow targeting like Pardubice, as they show nearly double the overall CTR.",
+    "Maintain video format for broad audience campaigns (like power of attorney) to sustain brand awareness and interest.",
+    "Track conversions to Direct after clicks to understand which audiences not only click but also message."
+  ],
+  "euNote_ru": "Важно знать: в рекламных кабинетах ЕС Meta не показывает число начатых переписок в директ. Кампании «IG direct» реально приводят людей в сообщения, но эта цифра в отчёте технически недоступна. Реальное число обращений видно только вручную (в директе или через учёт менеджеров).",
+  "euNote_en": "Worth knowing: in EU ad accounts Meta does not report the number of started Direct conversations. The IG direct campaigns do bring people into messages, but that number is technically unavailable in reporting. The real count of inquiries is only visible manually (in Direct or via a managers' log).",
+  "meta": {
+    "generatedAt": "2026-08-01T08:36:41.672703Z",
+    "generatedBy": "automation"
+  },
+  "footer_ru": "Данные: Meta Marketing API · рекламный кабинет KB Preklady · период 1 – 31 июля",
+  "client_initials": "KP"
+}
