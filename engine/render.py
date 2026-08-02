@@ -34,6 +34,14 @@ KPI_METRICS = [
     ("kpi.video",  "videoViews",     0, None, "kpi.video.sub"),
 ]
 
+# Показываются только клиентам, у которых реально настроено отслеживание
+# конверсий (иначе Meta присылает 0, и пустая карточка только путает) - см.
+# фильтр по totals.get(field) в render_report.
+CONDITIONAL_KPI_METRICS = [
+    ("kpi.leads", "leads",      0, None, None),
+    ("kpi.cart",  "addToCart",  0, None, None),
+]
+
 GLOSSARY_KEYS = ["term1", "term2", "term3", "term4", "term5", "term6", "term7"]
 
 
@@ -54,9 +62,9 @@ def fmt_en(value, dec):
     return ("-" + f) if value < 0 else f
 
 
-def build_kpi_defs(totals, prev_totals, show_dynamics):
+def build_kpi_defs(totals, prev_totals, show_dynamics, metrics=KPI_METRICS):
     defs = []
-    for key, field, dec, suffix, sub_key in KPI_METRICS:
+    for key, field, dec, suffix, sub_key in metrics:
         raw = totals.get(field)
         entry = {
             "key": key,
@@ -128,6 +136,9 @@ def render_report(data: dict, out_dir: Path, assets_src_dir: Path | None = None)
     campaigns = data.get("campaigns", [])
 
     kpi_defs = build_kpi_defs(totals, prev_totals, show_dynamics)
+    active_conditional = [m for m in CONDITIONAL_KPI_METRICS if totals.get(m[1])]
+    if active_conditional:
+        kpi_defs += build_kpi_defs(totals, prev_totals, show_dynamics, metrics=active_conditional)
     ad_key_map = build_ad_key_map(campaigns)
 
     # ---- собираем полные RU/EN словари: статичные строки интерфейса + контент ----

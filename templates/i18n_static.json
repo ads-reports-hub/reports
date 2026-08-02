@@ -33,6 +33,10 @@
     "kpi.video": "Видео-просмотры",
     "kpi.video.tip": "Сколько раз люди запускали видео в рекламе.",
     "kpi.video.sub": "запуски видео в рекламе",
+    "kpi.leads": "Лиды",
+    "kpi.leads.tip": "Сколько людей оставили заявку: через форму для лидов или через пиксель на сайте.",
+    "kpi.cart": "Добавления в корзину",
+    "kpi.cart.tip": "Сколько раз товар добавили в корзину на сайте (по данным пикселя).",
 
     "sec.compare": "Сравнение кампаний",
     "chart1.title": "Клики по кампаниям",
@@ -115,6 +119,10 @@
     "kpi.video": "Video views",
     "kpi.video.tip": "How many times people played the videos in the ads.",
     "kpi.video.sub": "video plays in the ads",
+    "kpi.leads": "Leads",
+    "kpi.leads.tip": "How many people submitted a lead: via a lead form or via the website pixel.",
+    "kpi.cart": "Add to cart",
+    "kpi.cart.tip": "How many times a product was added to cart on the website (per pixel data).",
 
     "sec.compare": "Campaign comparison",
     "chart1.title": "Clicks by campaign",

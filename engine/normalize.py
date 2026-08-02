@@ -58,6 +58,18 @@ def _actions_map(actions_list):
     return m
 
 
+# Лиды и добавления в корзину Meta присылает под разными action_type в
+# зависимости от источника (форма для лидов, пиксель на сайте, Conversions
+# API) - клиент может использовать любой из них, поэтому суммируем все
+# известные варианты, а не полагаемся на один конкретный.
+LEAD_ACTION_TYPES = ["lead", "offsite_conversion.fb_pixel_lead", "onsite_conversion.lead_grouped"]
+ADD_TO_CART_ACTION_TYPES = ["add_to_cart", "offsite_conversion.fb_pixel_add_to_cart", "onsite_conversion.add_to_cart"]
+
+
+def _actions_sum(actions: dict, action_types: list[str]) -> int:
+    return int(sum(actions.get(t, 0) for t in action_types))
+
+
 def _row_totals(row: dict) -> dict:
     actions = _actions_map(row.get("actions"))
     return {
@@ -74,6 +86,8 @@ def _row_totals(row: dict) -> dict:
         "reactions": int(actions.get("post_reaction", 0)),
         "comments": int(actions.get("comment", 0)),
         "saves": int(actions.get("onsite_conversion.post_save", 0)),
+        "leads": _actions_sum(actions, LEAD_ACTION_TYPES),
+        "addToCart": _actions_sum(actions, ADD_TO_CART_ACTION_TYPES),
     }
 
 
@@ -87,7 +101,7 @@ def build_prev_totals(prev_account_raw: dict | None) -> dict | None:
         return None
     row = prev_account_raw["data"][0]
     t = _row_totals(row)
-    return {k: t[k] for k in ("spend", "reach", "impressions", "frequency", "clicks", "ctr", "cpc")}
+    return {k: t[k] for k in ("spend", "reach", "impressions", "frequency", "clicks", "ctr", "cpc", "leads", "addToCart")}
 
 
 def build_campaigns(campaigns_raw: dict, adsets_raw: dict, ads_raw: dict) -> list[dict]:
