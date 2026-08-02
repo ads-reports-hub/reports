@@ -688,6 +688,9 @@ var chartLabels = {
   ru: {{ chart_labels_ru | safe }},
   en: {{ chart_labels_en | safe }}
 };
+/* Подписи на оси обрезаны по длине (см. render.py); полное название
+   кампании - для подсказки при наведении/тапе - берём отсюда. */
+var chartFullNames = {{ chart_full_names | safe }};
 
 function updateChartLang(lang){
   if(clicksChart){ clicksChart.data.labels = chartLabels[lang]; clicksChart.update(); }
@@ -737,7 +740,10 @@ window.addEventListener('load', function(){
           padding: 10,
           titleFont: { family: 'Sora', size: 12.5 },
           bodyFont: { family: 'Sora', size: 12.5 },
-          callbacks: { label: labelCb }
+          callbacks: {
+            label: labelCb,
+            title: function(items){ return items.length ? chartFullNames[items[0].dataIndex] : ''; }
+          }
         }
       },
       scales: {

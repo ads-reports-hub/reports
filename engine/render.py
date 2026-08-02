@@ -18,7 +18,7 @@ TEMPLATE_DIR = ENGINE_DIR.parent / "templates"
 
 # Метрики выше "ниже = лучше" (например CPC); всё остальное в KPI_METRICS
 # считается "выше = лучше", если не указано иное.
-LOWER_IS_BETTER = {"cpc"}
+LOWER_IS_BETTER = {"cpc", "costPerLead", "costPerCart"}
 NEUTRAL_METRICS = {"spend", "frequency"}
 
 # (i18n-ключ, поле в totals, знаков после запятой, суффикс, ключ доп. подписи)
@@ -38,8 +38,10 @@ KPI_METRICS = [
 # конверсий (иначе Meta присылает 0, и пустая карточка только путает) - см.
 # фильтр по totals.get(field) в render_report.
 CONDITIONAL_KPI_METRICS = [
-    ("kpi.leads", "leads",      0, None, None),
-    ("kpi.cart",  "addToCart",  0, None, None),
+    ("kpi.leads",        "leads",       0, None, None),
+    ("kpi.cost_lead",    "costPerLead", 2, "Kč", None),
+    ("kpi.cart",         "addToCart",   0, None, None),
+    ("kpi.cost_cart",    "costPerCart", 2, "Kč", None),
 ]
 
 GLOSSARY_KEYS = ["term1", "term2", "term3", "term4", "term5", "term6", "term7"]
@@ -97,6 +99,22 @@ def build_kpi_defs(totals, prev_totals, show_dynamics, metrics=KPI_METRICS):
                 }
         defs.append(entry)
     return defs
+
+
+CHART_LABEL_MAX_CHARS = 14
+
+
+def _truncate(text: str, max_chars: int = CHART_LABEL_MAX_CHARS) -> str:
+    text = text.strip()
+    if len(text) <= max_chars:
+        return text
+    return text[: max_chars - 1].rstrip() + "…"
+
+
+def _chart_label_lines(name: str) -> list[str]:
+    line1 = name.split("·")[0].strip()
+    line2 = " ".join(name.split("·")[1:]).strip()
+    return [_truncate(line1), _truncate(line2)]
 
 
 def campaign_tag_kind(campaign):
@@ -269,7 +287,18 @@ def render_report(data: dict, out_dir: Path, assets_src_dir: Path | None = None)
     data["client_initials"] = "".join(w[0] for w in data["client"].split()[:2]).upper()
 
     # ---- графики: только текущий период, по кампаниям ----
-    chart_labels_ru = [[c["name"].split("·")[0].strip(), " ".join(c["name"].split("·")[1:]).strip()] for c in campaigns]
+    # Подписи оси режем по символу "·" на две строки (у большинства кампаний
+    # он есть после _clean_campaign_name). Но у клиентов, которые продвигают
+    # готовые публикации прямо из Instagram, Meta сама называет кампанию
+    # длинным предложением без единого разделителя ("Публикация в Instagram:
+    # Добро пожаловать в..."), и такая строка не режется вообще - без
+    # обрезки по длине она наезжает на соседние подписи на узком экране.
+    # Обрезаем КАЖДУЮ строку до фиксированной длины независимо от того,
+    # нашёлся разделитель или нет - тогда длина подписи никогда не зависит
+    # от того, как конкретный клиент называет кампании в Meta. Полное
+    # название всё равно видно в подсказке при наведении/тапе (chart_full_names).
+    chart_full_names = [c["name"] for c in campaigns]
+    chart_labels_ru = [_chart_label_lines(c["name"]) for c in campaigns]
     pink, pink_deep, burgundy = "#faa1d4", "#f17fc0", "#a62e3e"
     max_clicks = max((c["clicks"] for c in campaigns), default=0)
     clicks_colors = [pink if c["clicks"] == max_clicks and max_clicks else pink_deep for c in campaigns]
@@ -292,6 +321,7 @@ def render_report(data: dict, out_dir: Path, assets_src_dir: Path | None = None)
         "i18n_en_json": json.dumps(i18n_en, ensure_ascii=False),
         "chart_labels_ru": json.dumps(chart_labels_ru, ensure_ascii=False),
         "chart_labels_en": json.dumps(chart_labels_ru, ensure_ascii=False),  # переводы кампаний не критичны на графике
+        "chart_full_names": json.dumps(chart_full_names, ensure_ascii=False),
         "chart_clicks_data": json.dumps([c["clicks"] for c in campaigns]),
         "chart_clicks_colors": json.dumps(clicks_colors),
         "chart_cpc_data": json.dumps([c["cpc"] for c in campaigns]),
