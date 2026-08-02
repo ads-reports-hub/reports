@@ -40,7 +40,17 @@ jobs:
           git add --ignore-errors docs/ _data/
           if git diff --cached --quiet; then
             echo "No report changes to commit"
-          else
-            git commit -m "Apply manual report edits $(date -u +%Y-%m-%dT%H:%M)"
-            git push
+            exit 0
           fi
+          git commit -m "Apply manual report edits $(date -u +%Y-%m-%dT%H:%M)"
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              exit 0
+            fi
+            echo "push rejected (attempt $attempt), rebasing onto latest main and retrying"
+            git pull --rebase origin main
+            sleep $((RANDOM % 10 + 1))
+          done
+          echo "::error::could not push after 5 attempts"
+          exit 1
