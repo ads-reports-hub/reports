@@ -18,9 +18,9 @@
   "source": "Meta Marketing API",
   "showDynamics": false,
   "totals": {
-    "spend": 5987.64,
+    "spend": 5988.1,
     "reach": 28084,
-    "impressions": 61647,
+    "impressions": 61655,
     "frequency": 2.2,
     "clicks": 2814,
     "ctr": 4.56,
@@ -30,7 +30,11 @@
     "videoViews": 5033,
     "reactions": 117,
     "comments": 10,
-    "saves": 16
+    "saves": 16,
+    "leads": 0,
+    "costPerLead": 0,
+    "addToCart": 210,
+    "costPerCart": 28.51
   },
   "prevTotals": {
     "spend": 6540.44,
@@ -39,7 +43,11 @@
     "frequency": 2.17,
     "clicks": 1354,
     "ctr": 3.75,
-    "cpc": 4.83
+    "cpc": 4.83,
+    "leads": 0,
+    "costPerLead": 0,
+    "addToCart": 120,
+    "costPerCart": 54.5
   },
   "campaigns": [
     {
@@ -102,8 +110,8 @@
           "met_en": "4 clicks · CTR 3.15% · CPC <b>7.03 Kč</b>"
         }
       ],
-      "verdict_ru": "Кампания принесла 111 кликов по цене 1,7 Kč – самой низкой среди всех запусков. Низкая частота показов (1,12) говорит о том, что аудитория видела объявления впервые и охотно реагировала. Это хороший старт для теста новых креативов.",
-      "verdict_en": "This campaign delivered 111 clicks at 1.7 Kč per click – the lowest cost across all launches. A frequency of 1.12 shows the audience saw ads mostly for the first time and responded willingly. It's a solid starting point for testing new creatives.",
+      "verdict_ru": "Кампания с 6 июля показала самый дешёвый клик – <b>1,7 Kč</b>, хотя охват был скромным (1 870 человек). Частота показов низкая (1,12), значит, аудитория видела объявления редко, что хорошо для первого знакомства.",
+      "verdict_en": "The July 6 campaign delivered the cheapest click at <b>1.7 Kč</b>, though reach was modest (1,870 people). Low frequency (1.12) means the audience didn't see your ads too often, which is ideal for initial exposure.",
       "tag_kind": "direct",
       "cpc_pill": "good"
     },
@@ -167,8 +175,8 @@
           "met_en": "140 clicks · CTR 3.65% · CPC <b>2.76 Kč</b>"
         }
       ],
-      "verdict_ru": "Собрала 4 726 взаимодействий и 4 123 просмотра видео при охвате 10 825 человек. Клик обошёлся в 2,73 Kč – выше среднего из-за роста частоты до 1,64, но объём вовлечения компенсирует затраты. Аудитория активно смотрит и реагирует на Reels.",
-      "verdict_en": "Generated 4,726 engagements and 4,123 video views with a reach of 10,825 people. Cost per click was 2.73 Kč – above average due to frequency climbing to 1.64 – but the engagement volume justifies the spend. The audience actively watches and responds to Reels.",
+      "verdict_ru": "Кампания с 7 июля собрала больше всего просмотров видео – <b>4 123</b> – и дала <b>4 726</b> вовлечений. Клик обошёлся в <b>2,73 Kč</b>, что дороже среднего, но видеоконтент сработал на узнаваемость.",
+      "verdict_en": "The July 7 campaign generated the most video views – <b>4,123</b> – and delivered <b>4,726 engagements</b>. Click cost was <b>2.73 Kč</b>, above average, but the video content worked well for brand awareness.",
       "tag_kind": "direct",
       "cpc_pill": "watch"
     },
@@ -232,8 +240,8 @@
           "met_en": "129 clicks · CTR 5.87% · CPC <b>2.70 Kč</b>"
         }
       ],
-      "verdict_ru": "Самая масштабная кампания: охват почти 18 000, 1 440 кликов по 1,86 Kč. Частота 1,78 – чуть выше, но CTR 4,51% остаётся стабильным. Креативы не надоели, бюджет отработан эффективно.",
-      "verdict_en": "The largest campaign by reach: nearly 18,000 people, 1,440 clicks at 1.86 Kč each. Frequency of 1.78 is slightly elevated, yet CTR held steady at 4.51%. Creatives haven't worn out; budget was spent efficiently.",
+      "verdict_ru": "Кампания с 17 июля получила самый большой охват – <b>17 971 человек</b> и <b>1 440 кликов</b> по цене <b>1,86 Kč</b>. Это основная кампания месяца, которая сбалансированно отработала и по цене, и по масштабу.",
+      "verdict_en": "The July 17 campaign achieved the largest reach – <b>17,971 people</b> – and <b>1,440 clicks</b> at <b>1.86 Kč</b>. This was your main campaign for the month, delivering balanced performance on both cost and scale.",
       "tag_kind": "direct",
       "cpc_pill": null
     },
@@ -242,10 +250,10 @@
       "date": "",
       "goal_ru": "переписки в директ",
       "goal_en": "Direct messages",
-      "reach": 6515,
-      "impressions": 9793,
+      "reach": 6522,
+      "impressions": 9801,
       "frequency": 1.5,
-      "spend": 1149.28,
+      "spend": 1149.74,
       "clicks": 542,
       "ctr": 5.53,
       "cpc": 2.12,
@@ -261,12 +269,12 @@
           "label_en": "Ad 2",
           "audience_ru": "B2C - CZ, 24+",
           "audience_en": "B2C - CZ, 24+",
-          "spend": 313.32,
+          "spend": 313.78,
           "clicks": 173,
-          "ctr": 5.19,
+          "ctr": 5.18,
           "cpc": 1.81,
-          "met_ru": "173 кликов · CTR 5,19% · CPC <b>1,81 Kč</b>",
-          "met_en": "173 clicks · CTR 5.19% · CPC <b>1.81 Kč</b>"
+          "met_ru": "173 кликов · CTR 5,18% · CPC <b>1,81 Kč</b>",
+          "met_en": "173 clicks · CTR 5.18% · CPC <b>1.81 Kč</b>"
         },
         {
           "adId": "120249551260730050",
@@ -283,8 +291,8 @@
           "met_en": "369 clicks · CTR 5.71% · CPC <b>2.27 Kč</b>"
         }
       ],
-      "verdict_ru": "Запуск со статикой и целью на переписки показал CTR 5,53% – лучший результат. Клик стоит 2,12 Kč, что разумно для цели на директ. 542 клика за неделю – аудитория готова к диалогу.",
-      "verdict_en": "Static-format launch targeting direct messages achieved a 5.53% CTR – the best result. Cost per click of 2.12 Kč is reasonable for a DM objective. 542 clicks in a week signal an audience ready to engage in conversation.",
+      "verdict_ru": "Кампания с 27 июля нацелена на переписки и показала высокий CTR – <b>5,53%</b> – при клике <b>2,12 Kč</b>. Статика сработала лучше Reels для прямого отклика, хотя просмотров видео почти не было.",
+      "verdict_en": "The July 27 campaign aimed at direct messages and delivered a strong CTR of <b>5.53%</b> with a <b>2.12 Kč</b> click. Static images outperformed Reels for direct response, though video views were minimal.",
       "tag_kind": "direct",
       "cpc_pill": null
     }
@@ -293,13 +301,13 @@
     {
       "name_ru": "B2C - CZ, 24+",
       "name_en": "B2C - CZ, 24+",
-      "spend": 5987.64,
-      "reach": 37181,
+      "spend": 5988.1,
+      "reach": 37188,
       "ctr_range": "4,05–5,53%",
       "badge_ru": null,
       "badge_en": null,
-      "note_ru": "Единственная аудитория показала стабильный CTR от 4,05% до 5,53% в зависимости от креатива и цели кампании.",
-      "note_en": "The sole audience segment delivered consistent CTR between 4.05% and 5.53%, varying by creative and campaign objective.",
+      "note_ru": "Аудитория B2C (Чехия, 24+) показала стабильный CTR от <b>4,05% до 5,53%</b> во всех кампаниях, что говорит о точном таргетинге.",
+      "note_en": "The B2C audience (Czech Republic, 24+) maintained a steady CTR between <b>4.05% and 5.53%</b> across all campaigns, indicating precise targeting.",
       "discovery": false
     }
   ],
@@ -309,7 +317,7 @@
       "label_ru": "Facebook · лента",
       "label_en": "Facebook · feed",
       "reach": 14936,
-      "spend": 3002.47,
+      "spend": 3002.93,
       "clicks": 1626,
       "cpc": 1.85,
       "bar_pct": 100.0
@@ -322,7 +330,7 @@
       "spend": 821.42,
       "clicks": 405,
       "cpc": 2.03,
-      "bar_pct": 27.36
+      "bar_pct": 27.35
     },
     {
       "key": "facebook_reels",
@@ -332,7 +340,7 @@
       "spend": 760.48,
       "clicks": 276,
       "cpc": 2.76,
-      "bar_pct": 25.33
+      "bar_pct": 25.32
     },
     {
       "key": "instagram_feed",
@@ -371,7 +379,7 @@
         "gender": "female",
         "age": "18-24",
         "reach": 2702,
-        "spend": 354.13,
+        "spend": 354.18,
         "ctr": 2.43,
         "hot": false,
         "label_ru": "Ж 18-24",
@@ -387,7 +395,7 @@
         "hot": false,
         "label_ru": "М 18-24",
         "label_en": "M 18-24",
-        "bar_pct": 59.46
+        "bar_pct": 59.45
       },
       {
         "gender": "female",
@@ -398,51 +406,51 @@
         "hot": false,
         "label_ru": "Ж 25-34",
         "label_en": "F 25-34",
-        "bar_pct": 77.54
+        "bar_pct": 77.53
       },
       {
         "gender": "male",
         "age": "25-34",
         "reach": 5508,
-        "spend": 624.67,
+        "spend": 624.69,
         "ctr": 4.14,
         "hot": false,
         "label_ru": "М 25-34",
         "label_en": "M 25-34",
-        "bar_pct": 85.73
+        "bar_pct": 85.72
       },
       {
         "gender": "female",
         "age": "35-44",
         "reach": 1865,
-        "spend": 428.17,
-        "ctr": 3.69,
+        "spend": 428.32,
+        "ctr": 3.68,
         "hot": false,
         "label_ru": "Ж 35-44",
         "label_en": "F 35-44",
-        "bar_pct": 58.76
+        "bar_pct": 58.77
       },
       {
         "gender": "male",
         "age": "35-44",
         "reach": 2832,
-        "spend": 387.96,
+        "spend": 388.05,
         "ctr": 4.37,
         "hot": false,
         "label_ru": "М 35-44",
         "label_en": "M 35-44",
-        "bar_pct": 53.24
+        "bar_pct": 53.25
       },
       {
         "gender": "female",
         "age": "45-54",
         "reach": 1489,
-        "spend": 536.44,
+        "spend": 536.47,
         "ctr": 4.35,
         "hot": false,
         "label_ru": "Ж 45-54",
         "label_en": "F 45-54",
-        "bar_pct": 73.62
+        "bar_pct": 73.61
       },
       {
         "gender": "male",
@@ -464,7 +472,7 @@
         "hot": false,
         "label_ru": "Ж 55-64",
         "label_en": "F 55-64",
-        "bar_pct": 57.97
+        "bar_pct": 57.96
       },
       {
         "gender": "male",
@@ -475,7 +483,7 @@
         "hot": true,
         "label_ru": "М 55-64",
         "label_en": "M 55-64",
-        "bar_pct": 48.27
+        "bar_pct": 48.26
       },
       {
         "gender": "female",
@@ -486,13 +494,13 @@
         "hot": true,
         "label_ru": "Ж 65+",
         "label_en": "F 65+",
-        "bar_pct": 94.32
+        "bar_pct": 94.31
       },
       {
         "gender": "male",
         "age": "65+",
         "reach": 1320,
-        "spend": 728.65,
+        "spend": 728.77,
         "ctr": 6.64,
         "hot": true,
         "label_ru": "М 65+",
@@ -522,14 +530,14 @@
         "bar_pct": 0.0
       }
     ],
-    "note_ru": "Мужчины 55–64 года и женщины 65+ кликают активнее всех (6,72% и 7,68% CTR), но получают непропорционально много бюджета. Молодые женщины 18–24 показывают CTR всего 2,43% – низший результат среди сегментов.",
-    "note_en": "Men aged 55–64 and women 65+ click most eagerly (6.72% and 7.68% CTR) yet consume a disproportionately large share of budget. Young women 18–24 register only 2.43% CTR – the weakest segment performance.",
+    "note_ru": "Самый высокий CTR показали женщины 65+ – <b>7,68%</b> – и мужчины 55–64 лет – <b>6,72%</b>. При этом старшие группы получили непропорционально много бюджета: <b>1 416 Kč</b> на 2 374 человека 65+, хотя молодые группы (18–34) охватили больше людей, но с меньшими тратами.",
+    "note_en": "Highest CTR came from women 65+ at <b>7.68%</b> and men 55–64 at <b>6.72%</b>. However, older groups received disproportionately high spend: <b>1,416 Kč</b> for 2,374 people aged 65+, while younger groups (18–34) reached more people but with lower budgets.",
     "rows_sorted": [
       {
         "gender": "male",
         "age": "65+",
         "reach": 1320,
-        "spend": 728.65,
+        "spend": 728.77,
         "ctr": 6.64,
         "hot": true,
         "label_ru": "М 65+",
@@ -545,18 +553,18 @@
         "hot": true,
         "label_ru": "Ж 65+",
         "label_en": "F 65+",
-        "bar_pct": 94.32
+        "bar_pct": 94.31
       },
       {
         "gender": "male",
         "age": "25-34",
         "reach": 5508,
-        "spend": 624.67,
+        "spend": 624.69,
         "ctr": 4.14,
         "hot": false,
         "label_ru": "М 25-34",
         "label_en": "M 25-34",
-        "bar_pct": 85.73
+        "bar_pct": 85.72
       },
       {
         "gender": "female",
@@ -567,18 +575,18 @@
         "hot": false,
         "label_ru": "Ж 25-34",
         "label_en": "F 25-34",
-        "bar_pct": 77.54
+        "bar_pct": 77.53
       },
       {
         "gender": "female",
         "age": "45-54",
         "reach": 1489,
-        "spend": 536.44,
+        "spend": 536.47,
         "ctr": 4.35,
         "hot": false,
         "label_ru": "Ж 45-54",
         "label_en": "F 45-54",
-        "bar_pct": 73.62
+        "bar_pct": 73.61
       },
       {
         "gender": "male",
@@ -589,18 +597,18 @@
         "hot": false,
         "label_ru": "М 18-24",
         "label_en": "M 18-24",
-        "bar_pct": 59.46
+        "bar_pct": 59.45
       },
       {
         "gender": "female",
         "age": "35-44",
         "reach": 1865,
-        "spend": 428.17,
-        "ctr": 3.69,
+        "spend": 428.32,
+        "ctr": 3.68,
         "hot": false,
         "label_ru": "Ж 35-44",
         "label_en": "F 35-44",
-        "bar_pct": 58.76
+        "bar_pct": 58.77
       },
       {
         "gender": "female",
@@ -611,18 +619,18 @@
         "hot": false,
         "label_ru": "Ж 55-64",
         "label_en": "F 55-64",
-        "bar_pct": 57.97
+        "bar_pct": 57.96
       },
       {
         "gender": "male",
         "age": "35-44",
         "reach": 2832,
-        "spend": 387.96,
+        "spend": 388.05,
         "ctr": 4.37,
         "hot": false,
         "label_ru": "М 35-44",
         "label_en": "M 35-44",
-        "bar_pct": 53.24
+        "bar_pct": 53.25
       },
       {
         "gender": "male",
@@ -639,7 +647,7 @@
         "gender": "female",
         "age": "18-24",
         "reach": 2702,
-        "spend": 354.13,
+        "spend": 354.18,
         "ctr": 2.43,
         "hot": false,
         "label_ru": "Ж 18-24",
@@ -655,7 +663,7 @@
         "hot": true,
         "label_ru": "М 55-64",
         "label_en": "M 55-64",
-        "bar_pct": 48.27
+        "bar_pct": 48.26
       },
       {
         "gender": "female",
@@ -692,8 +700,8 @@
       "metric_ru": "CTR 5.87% · CPC 2.7 Kč",
       "metric_en": "CTR 5.87% · CPC 2.7 Kč",
       "best": true,
-      "reason_ru": "Объявление из кампании 17.7 получило наибольшее количество взаимодействий благодаря широкому охвату и стабильному CTR 4,51%.",
-      "reason_en": "The ad from the July 17 campaign earned the most engagement thanks to broad reach and a steady 4.51% CTR."
+      "reason_ru": "Объявление из кампании 17 июля собрало максимальное количество кликов и вовлечений благодаря сильному креативу и широкому охвату.",
+      "reason_en": "This ad from the July 17 campaign generated the highest number of clicks and engagements thanks to strong creative and broad reach."
     },
     {
       "adId": "120249012426830050",
@@ -705,50 +713,50 @@
       "metric_ru": "CTR 5.44% · CPC 1.5 Kč",
       "metric_en": "CTR 5.44% · CPC 1.5 Kč",
       "best": false,
-      "reason_ru": "Креатив из кампании 6.7 обеспечил самую низкую цену клика – 1,7 Kč – при свежей аудитории и частоте 1,12.",
-      "reason_en": "The creative from the July 6 campaign secured the lowest cost per click – 1.7 Kč – with a fresh audience and 1.12 frequency."
+      "reason_ru": "Объявление из кампании 6 июля получило самую низкую цену клика – <b>1,7 Kč</b> – из-за точного попадания в интересы аудитории на старте месяца.",
+      "reason_en": "This ad from the July 6 campaign achieved the lowest click cost – <b>1.7 Kč</b> – by precisely matching audience interests early in the month."
     }
   ],
-  "insight_ru": "За период на рекламу потрачено <b>5 987,64 Kč</b>, объявления увидели <b>28 084 человека</b>. Средняя стоимость клика – <b>2,13 Kč</b>, что показывает хорошую отзывчивость аудитории. Кампании с акцентом на вовлечённость через Reels собрали основной объём взаимодействий, а запуск с целью на переписки в директ показал самый высокий процент кликов.",
-  "insight_en": "The period's ad spend totaled <b>5,987.64 Kč</b>, reaching <b>28,084 people</b>. Average cost per click came in at <b>2.13 Kč</b>, indicating strong audience responsiveness. Campaigns focused on Reels engagement drove most interactions, while the direct-message objective delivered the highest click-through rate.",
-  "platforms_note_ru": "Лента Facebook собрала 1 626 кликов по 1,85 Kč – самая эффективная площадка. Instagram Reels дороже (2,03 Kč), но хорошо работает для видеоконтента, тогда как сторис Facebook показывает клик по 9,15 Kč и требует пересмотра.",
-  "platforms_note_en": "Facebook Feed drove 1,626 clicks at 1.85 Kč – the most efficient placement. Instagram Reels cost more (2.03 Kč) but performs well for video, while Facebook Stories at 9.15 Kč per click needs reevaluation.",
+  "insight_ru": "За период вы потратили <b>5 988 Kč</b> и охватили <b>28 084 человека</b>. Люди кликали активно: <b>2 814 кликов</b> по средней цене <b>2,13 Kč</b>. Объявления запустили <b>210 добавлений товаров в корзину</b>, что обошлось в <b>28,51 Kč</b> за каждое действие.",
+  "insight_en": "During this period, you spent <b>5,988 Kč</b> and reached <b>28,084 people</b>. Clicks were strong: <b>2,814 clicks</b> at an average cost of <b>2.13 Kč</b>. Your ads drove <b>210 add-to-cart actions</b>, costing <b>28.51 Kč</b> per cart.",
+  "platforms_note_ru": "Лучше всего сработала лента Facebook – <b>3 003 Kč</b> бюджета дали <b>1 626 кликов</b> по <b>1,85 Kč</b>. Instagram Reels собрал <b>405 кликов</b> по <b>2,03 Kč</b>, а сторис Instagram показали <b>1,82 Kč</b> за клик, что тоже выгодно.",
+  "platforms_note_en": "Facebook feed performed best – <b>3,003 Kč</b> spent generated <b>1,626 clicks</b> at <b>1.85 Kč</b>. Instagram Reels delivered <b>405 clicks</b> at <b>2.03 Kč</b>, while Instagram stories came in at <b>1.82 Kč</b> per click, also efficient.",
   "findings_ru": [
-    "Средняя стоимость клика 2,13 Kč при охвате 28 084 человек – аудитория откликается активно и без лишних затрат.",
-    "Кампании с целью на вовлечённость через Reels собрали 7 516 взаимодействий, включая 5 033 просмотра видео.",
-    "Лента Facebook принесла клик по 1,85 Kč, тогда как сторис Facebook – по 9,15 Kč: разница в 5 раз требует перераспределения бюджета.",
-    "Мужчины 55–64 и женщины 65+ показали CTR 6,72% и 7,68%, но на них ушло 1 437,92 Kč – почти четверть всех расходов.",
-    "Кампания 27.7 со статикой достигла CTR 5,53% при цели на переписки – лучший результат кликабельности за период.",
-    "Частота показов от 1,12 до 1,78 говорит о том, что креативы ещё не надоели аудитории и могут масштабироваться."
+    "За период собрали <b>2 814 кликов</b> по средней цене <b>2,13 Kč</b>, что говорит о заинтересованной аудитории и хорошем качестве креативов.",
+    "Лента Facebook принесла <b>1 626 кликов</b> по самой низкой цене – <b>1,85 Kč</b>, это почти половина всех кликов и самая выгодная позиция показа.",
+    "Люди 55+ кликают охотнее всех (CTR <b>6,72–7,68%</b>), но на них ушло <b>2 490 Kč</b> при охвате всего <b>4 507 человек</b>, тогда как молодёжь 18–34 охватила <b>15 728 человек</b> за <b>1 977 Kč</b>.",
+    "Видеоконтент в Reels собрал <b>5 033 просмотра</b> и <b>4 726 вовлечений</b> в кампании от 7 июля, хотя клики были дороже (<b>2,73 Kč</b>).",
+    "Частота показов оставалась комфортной – от <b>1,12 до 1,78</b> в разных кампаниях, значит, люди не успели устать от объявлений.",
+    "Кампания со статикой (27 июля) показала самый высокий CTR – <b>5,53%</b> – и цену клика <b>2,12 Kč</b>, что подтверждает: для прямого действия картинка работает лучше видео."
   ],
   "findings_en": [
-    "Average cost per click of 2.13 Kč with a reach of 28,084 people shows the audience responds actively without excess spend.",
-    "Engagement-focused Reels campaigns generated 7,516 interactions, including 5,033 video views.",
-    "Facebook Feed delivered clicks at 1.85 Kč, while Facebook Stories cost 9.15 Kč – a fivefold difference calling for budget reallocation.",
-    "Men 55–64 and women 65+ posted 6.72% and 7.68% CTR but consumed 1,437.92 Kč – nearly a quarter of total spend.",
-    "The July 27 static campaign hit a 5.53% CTR with a direct-message objective – the period's best click-through performance.",
-    "Frequency ranging from 1.12 to 1.78 indicates creatives haven't fatigued the audience and can scale further."
+    "Generated <b>2,814 clicks</b> at an average cost of <b>2.13 Kč</b>, indicating engaged audiences and strong creative quality.",
+    "Facebook feed delivered <b>1,626 clicks</b> at the lowest cost – <b>1.85 Kč</b> – accounting for nearly half of all clicks and proving the most cost-efficient placement.",
+    "People aged 55+ click most eagerly (CTR <b>6.72–7.68%</b>), but consumed <b>2,490 Kč</b> for only <b>4,507 people</b> reached, while the 18–34 age group reached <b>15,728 people</b> for <b>1,977 Kč</b>.",
+    "Video content in Reels collected <b>5,033 views</b> and <b>4,726 engagements</b> in the July 7 campaign, though clicks were more expensive (<b>2.73 Kč</b>).",
+    "Frequency remained comfortable – between <b>1.12 and 1.78</b> across campaigns – meaning people didn't experience ad fatigue.",
+    "The static-image campaign (July 27) achieved the highest CTR – <b>5.53%</b> – and a <b>2.12 Kč</b> click cost, confirming that images drive direct action better than video."
   ],
   "recommendations_ru": [
-    "Отключить показы в сторис Facebook (CPC 9,15 Kč) и перенести бюджет в ленту Facebook и Instagram Reels.",
-    "Дать больше бюджета сегментам с высоким CTR (мужчины 55–64, женщины 65+), но следить за окупаемостью на этапе конверсии.",
-    "Проверить креативы для женщин 18–24: их CTR 2,43% почти втрое ниже среднего – возможно, нужны другие форматы или месседжи.",
-    "Запустить новую кампанию со статикой на переписки в директ: формат показал CTR 5,53% и может привлечь больше диалогов.",
-    "Увеличить частоту до 2,5–3 в успешных кампаниях (6.7 и 17.7), чтобы проверить, сохранится ли отклик при большем давлении.",
-    "Протестировать отдельные креативы для ленты Facebook – она даёт самый дешёвый клик и заслуживает персональных объявлений."
+    "Увеличить долю бюджета на ленту Facebook: она даёт <b>1,85 Kč</b> за клик и приносит половину всех кликов при высокой стабильности.",
+    "Перераспределить часть бюджета с возрастной группы 65+ (высокий CTR, но дорогой охват) на молодёжь 25–34 лет, где CTR <b>4,14–4,38%</b> и охват в 3 раза больше за те же деньги.",
+    "Добавить больше статичных креативов для кампаний с целью переписок или покупок: CTR <b>5,53%</b> и клик <b>2,12 Kč</b> показали, что картинка работает на действие.",
+    "Запустить отдельную кампанию на Instagram Stories с бюджетом 800–1 000 Kč: позиция показала <b>1,82 Kč</b> за клик, но получила мало денег (549 Kč).",
+    "Протестировать креативы с акцентом на женщин 55–64 и мужчин 45–54: обе группы дают CTR выше <b>5%</b> и при этом охватывают больше людей, чем группа 65+.",
+    "Отслеживать стоимость добавления в корзину (<b>28,51 Kč</b>) и сравнивать её со средним чеком: если чек выше 300 Kč, это рентабельно, если ниже – стоит пересмотреть аудитории или офферы."
   ],
   "recommendations_en": [
-    "Turn off Facebook Stories placements (9.15 Kč CPC) and shift budget to Facebook Feed and Instagram Reels.",
-    "Allocate more budget to high-CTR segments (men 55–64, women 65+) but monitor downstream conversion to ensure profitability.",
-    "Review creatives for women 18–24: their 2.43% CTR is nearly three times below average – consider different formats or messaging.",
-    "Launch a new static campaign targeting direct messages: the format delivered 5.53% CTR and can attract more conversations.",
-    "Raise frequency to 2.5–3 in successful campaigns (July 6 and 17) to test whether response holds under increased pressure.",
-    "Test dedicated creatives for Facebook Feed – it yields the cheapest click and deserves tailored ad content."
+    "Allocate more budget to Facebook feed: it delivers clicks at <b>1.85 Kč</b> and accounts for half of all clicks with high consistency.",
+    "Shift some budget from the 65+ age group (high CTR but expensive reach) to the 25–34 segment, where CTR is <b>4.14–4.38%</b> and reach is 3x larger for the same spend.",
+    "Add more static creatives for campaigns targeting messages or purchases: CTR of <b>5.53%</b> and <b>2.12 Kč</b> per click show that images drive action effectively.",
+    "Launch a dedicated Instagram Stories campaign with 800–1,000 Kč budget: the placement delivered <b>1.82 Kč</b> per click but received limited spend (549 Kč).",
+    "Test creatives targeting women 55–64 and men 45–54: both groups deliver CTR above <b>5%</b> while reaching more people than the 65+ segment.",
+    "Monitor add-to-cart cost (<b>28.51 Kč</b>) and compare it to your average order value: if orders exceed 300 Kč, this is profitable; if lower, revisit your audiences or offers."
   ],
   "euNote_ru": "Важно знать: в рекламных кабинетах ЕС Meta не показывает число начатых переписок в директ. Кампании «IG direct» реально приводят людей в сообщения, но эта цифра в отчёте технически недоступна. Реальное число обращений видно только вручную (в директе или через учёт менеджеров).",
   "euNote_en": "Worth knowing: in EU ad accounts Meta does not report the number of started Direct conversations. The IG direct campaigns do bring people into messages, but that number is technically unavailable in reporting. The real count of inquiries is only visible manually (in Direct or via a managers' log).",
   "meta": {
-    "generatedAt": "2026-08-01T08:35:49.530257Z",
+    "generatedAt": "2026-08-02T18:47:01.635226Z",
     "generatedBy": "automation"
   },
   "footer_ru": "Данные: Meta Marketing API · рекламный кабинет Aruko · период 1 – 31 июля",
