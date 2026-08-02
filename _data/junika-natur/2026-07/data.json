@@ -30,7 +30,11 @@
     "videoViews": 4734,
     "reactions": 123,
     "comments": 4,
-    "saves": 42
+    "saves": 42,
+    "leads": 0,
+    "costPerLead": 0,
+    "addToCart": 0,
+    "costPerCart": 0
   },
   "prevTotals": null,
   "campaigns": [
@@ -94,8 +98,8 @@
           "met_en": "524 clicks · CTR 3.55% · CPC <b>0.39 Kč</b>"
         }
       ],
-      "verdict_ru": "Самая крупная кампания по бюджету (214,28 Kč) показала стабильный результат: охват 10 199, клик по 0,39 Kč, CTR 3,53%. Цена выше средней, потому что это основная кампания с долгим сроком показа и накопленной частотой 1,52.",
-      "verdict_en": "The largest campaign by budget (214.28 Kč) delivered stable results: reach of 10,199, CPC of 0.39 Kč, CTR 3.53%. The cost is higher than average because this is the main campaign with a longer run time and accumulated frequency of 1.52.",
+      "verdict_ru": "Самая крупная кампания месяца, съела 214,28 Kč бюджета и охватила более 10 тысяч человек. Цена клика 0,39 Kč выше средней по аккаунту, но это нормально для первой волны охвата широкой аудитории. Получили 3 311 вовлечений и 2 608 просмотров видео.",
+      "verdict_en": "Your biggest campaign of the month, spending 214.28 Kč and reaching over 10,000 people. The 0.39 Kč cost per click is above account average, which is typical for the first wave of broad audience reach. Generated 3,311 engagements and 2,608 video views.",
       "tag_kind": "direct",
       "cpc_pill": null
     },
@@ -159,8 +163,8 @@
           "met_en": "61 clicks · CTR 3.33% · CPC <b>0.21 Kč</b>"
         }
       ],
-      "verdict_ru": "Короткая кампания с лучшим соотношением цены и отклика: клик всего 0,19 Kč при CTR 4,45%. Низкая частота 1,15 означает, что аудитория видела объявления реже и реагировала активнее.",
-      "verdict_en": "A short campaign with the best price-to-response ratio: CPC of just 0.19 Kč with a 4.45% CTR. Low frequency of 1.15 means the audience saw the ads less often and responded more actively.",
+      "verdict_ru": "Эта кампания показала лучшие результаты по цене: клик всего 0,19 Kč при CTR 4,45%. Скорее всего, алгоритм уже нашёл наиболее заинтересованных людей после предыдущей кампании. При скромном бюджете 35,74 Kč получили 1 063 вовлечения.",
+      "verdict_en": "This campaign delivered the best cost efficiency: just 0.19 Kč per click with a 4.45% CTR. The algorithm likely found the most interested people after the previous campaign warmed up the audience. With a modest 35.74 Kč budget, you gained 1,063 engagements.",
       "tag_kind": "direct",
       "cpc_pill": null
     },
@@ -224,8 +228,8 @@
           "met_en": "246 clicks · CTR 3.92% · CPC <b>0.17 Kč</b>"
         }
       ],
-      "verdict_ru": "Сильный результат при небольшом бюджете (60,14 Kč): охват 6 601, клик по 0,18 Kč, CTR 4,27%. Это самая выгодная кампания по стоимости клика, аудитория свежая (частота 1,2) и реагирует охотно.",
-      "verdict_en": "Strong performance on a modest budget (60.14 Kč): reach of 6,601, CPC of 0.18 Kč, CTR 4.27%. This is the most cost-effective campaign per click, with a fresh audience (frequency 1.2) responding eagerly.",
+      "verdict_ru": "Очень эффективная кампания с ценой клика 0,18 Kč и CTR 4,27%. На 60,14 Kč охватили 6 601 человека и получили 1 534 вовлечения. Такая низкая цена говорит о том, что креатив действительно зашёл аудитории.",
+      "verdict_en": "Highly efficient campaign with 0.18 Kč per click and 4.27% CTR. For 60.14 Kč you reached 6,601 people and earned 1,534 engagements. This low cost indicates your creative truly resonated with the audience.",
       "tag_kind": "direct",
       "cpc_pill": "good"
     },
@@ -275,8 +279,8 @@
           "met_en": "10 clicks · CTR 2.94% · CPC <b>0.91 Kč</b>"
         }
       ],
-      "verdict_ru": "Тестовая кампания на переписки с минимальным бюджетом (10,78 Kč) и охватом 355 человек. Клик дорогой (0,77 Kč), потому что цель другая: не просто вовлечение, а начало диалога, что требует более глубокого действия от пользователя.",
-      "verdict_en": "Test campaign for direct messages with minimal budget (10.78 Kč) and reach of 355 people. CPC is high (0.77 Kč) because the goal is different: not just engagement, but starting a conversation, which requires a deeper action from the user.",
+      "verdict_ru": "Тестовая кампания на переписки с небольшим бюджетом 10,78 Kč. Цена клика 0,77 Kč заметно выше, что нормально для цели \"сообщения\" – Meta показывает рекламу тем, кто склонен писать, а таких людей меньше. Охватили 355 человек, получили 14 кликов.",
+      "verdict_en": "A small test campaign for direct messages with a 10.78 Kč budget. The 0.77 Kč cost per click is notably higher, which is normal for a 'messages' objective – Meta targets people inclined to write, and that's a smaller pool. Reached 355 people with 14 clicks.",
       "tag_kind": "direct",
       "cpc_pill": "watch"
     }
@@ -290,8 +294,8 @@
       "ctr_range": "3,26–4,45%",
       "badge_ru": null,
       "badge_en": null,
-      "note_ru": "Единственная аудитория (женщины 30–55, Германия) показала CTR от 3,26% до 4,45% в зависимости от кампании, что говорит о правильном попадании в интересы и потребности целевой группы.",
-      "note_en": "The single audience (women 30–55, Germany) achieved CTR ranging from 3.26% to 4.45% depending on the campaign, indicating accurate alignment with the target group's interests and needs.",
+      "note_ru": "Единственная аудитория месяца – женщины 30–55 лет в Германии – показала стабильный CTR от 3,26% до 4,45% в разных кампаниях.",
+      "note_en": "The only audience this month – women 30–55 in Germany – delivered consistent CTR ranging from 3.26% to 4.45% across campaigns.",
       "discovery": false
     }
   ],
@@ -481,8 +485,8 @@
         "bar_pct": 0.08
       }
     ],
-    "note_ru": "Мужчины кликают активнее женщин во всех возрастах (CTR 4,33–5,34% против 2,75–6,31%), но получают меньше бюджета из-за узости таргетинга на женскую аудиторию. Самый высокий отклик у женщин 65+ (CTR 6,31%) и мужчин 55–64 (CTR 5,04%), хотя их доля в охвате невелика.",
-    "note_en": "Men click more actively than women across all age groups (CTR 4.33–5.34% vs. 2.75–6.31%), but receive less budget due to narrow targeting focused on female audiences. The highest response comes from women 65+ (CTR 6.31%) and men 55–64 (CTR 5.04%), though their share of reach is small.",
+    "note_ru": "Мужчины кликают активнее женщин во всех возрастах (CTR 4,33–5,34% против 2,75–4,38% у женщин), но получают непропорционально малый бюджет. Женщины 65+ показали рекордный CTR 6,31%, но на них потрачено всего 11,10 Kč. Основная часть денег идёт на женщин 25–44 лет, хотя их отклик ниже.",
+    "note_en": "Men click more actively than women across all ages (CTR 4.33–5.34% vs. 2.75–4.38% for women), yet receive disproportionately less budget. Women 65+ showed a record 6.31% CTR but received only 11.10 Kč. Most spending goes to women 25–44, even though their response rates are lower.",
     "rows_sorted": [
       {
         "gender": "female",
@@ -618,8 +622,8 @@
       "metric_ru": "CTR 5.95% · CPC 0.18 Kč",
       "metric_en": "CTR 5.95% · CPC 0.18 Kč",
       "best": true,
-      "reason_ru": "Объявление из этой кампании получило лучший отклик благодаря высокому CTR 4,27% и низкой цене клика 0,18 Kč при свежей аудитории (частота 1,2).",
-      "reason_en": "This ad achieved the best response due to a high CTR of 4.27% and low CPC of 0.18 Kč with a fresh audience (frequency 1.2)."
+      "reason_ru": "Кампания получила наибольшее количество вовлечений (1 534) при очень низкой цене клика 0,18 Kč и высоком CTR 4,27%.",
+      "reason_en": "The campaign generated the highest engagement count (1,534) with a very low 0.18 Kč cost per click and strong 4.27% CTR."
     },
     {
       "adId": "120249556020230329",
@@ -631,50 +635,50 @@
       "metric_ru": "CTR 5.26% · CPC 0.16 Kč",
       "metric_en": "CTR 5.26% · CPC 0.16 Kč",
       "best": false,
-      "reason_ru": "Это объявление показало самый дешёвый клик (0,19 Kč) при сильном CTR 4,45%, потому что аудитория видела его редко (частота 1,15) и реагировала живо.",
-      "reason_en": "This ad delivered the cheapest click (0.19 Kč) with a strong CTR of 4.45% because the audience saw it infrequently (frequency 1.15) and responded actively."
+      "reason_ru": "Показала самую низкую цену клика за весь период – всего 0,19 Kč при CTR 4,45%, что говорит об отличном попадании в интересы аудитории.",
+      "reason_en": "Achieved the lowest cost per click of the entire period – just 0.19 Kč with a 4.45% CTR, indicating excellent audience targeting."
     }
   ],
-  "insight_ru": "За период бюджет <b>320,94 Kč</b> охватил <b>19 025 человек</b> и собрал <b>1 085 кликов</b> по <b>0,3 Kč</b> за клик. Все кампании работали на вовлечённость через Reels, только одна тестовая нацелена на переписки. CTR в среднем <b>3,87%</b>, что показывает хорошую реакцию аудитории на контент.",
-  "insight_en": "The budget of <b>320.94 Kč</b> reached <b>19,025 people</b> and generated <b>1,085 clicks</b> at <b>0.3 Kč</b> per click. All campaigns focused on Reels engagement, with one test campaign targeting direct messages. Average CTR of <b>3.87%</b> indicates strong audience response to the content.",
-  "platforms_note_ru": "Instagram Stories собрали больше всего кликов (629 за 175,84 Kč, клик по 0,28 Kč), потому что туда ушла большая часть бюджета. Facebook показал самый дешёвый клик (0,16–0,17 Kč в ленте и Reels), но охват там минимальный из-за малого бюджета.",
-  "platforms_note_en": "Instagram Stories generated the most clicks (629 for 175.84 Kč, CPC 0.28 Kč) because that's where most of the budget went. Facebook showed the cheapest clicks (0.16–0.17 Kč in Feed and Reels), but reach there is minimal due to low budget allocation.",
+  "insight_ru": "За период вы потратили <b>320,94 Kč</b> и охватили <b>19 025 человек</b> в Германии. Все кампании были направлены на вовлечённость через Reels, кроме небольшого теста на переписки в конце месяца. Средняя цена клика составила <b>0,30 Kč</b>, а CTR <b>3,87%</b> показывает хороший интерес аудитории к контенту.",
+  "insight_en": "During this period you spent <b>320.94 Kč</b> and reached <b>19,025 people</b> in Germany. All campaigns focused on Reels engagement, except for a small direct message test at the end of the month. The average cost per click was <b>0.30 Kč</b>, while the <b>3.87% CTR</b> indicates strong audience interest in your content.",
+  "platforms_note_ru": "Больше половины бюджета (175,84 Kč) ушло в сторис Instagram, где цена клика 0,28 Kč. Лента и Reels в Instagram дали клик по 0,34–0,35 Kč. Facebook съел всего 13,39 Kč, но показал самую низкую цену клика – 0,16–0,17 Kč в ленте и Reels.",
+  "platforms_note_en": "Over half the budget (175.84 Kč) went to Instagram Stories, delivering clicks at 0.28 Kč each. Instagram Feed and Reels cost 0.34–0.35 Kč per click. Facebook consumed only 13.39 Kč but showed the lowest cost per click – 0.16–0.17 Kč in Feed and Reels.",
   "findings_ru": [
-    "Основной бюджет 320,94 Kč принёс 1 085 кликов по средней цене 0,3 Kč, что в два раза дешевле обычной цены клика в Meta для вовлечения.",
-    "Кампании с низкой частотой показа (1,15–1,2) дали самый высокий CTR (4,27–4,45%) и самый дешёвый клик (0,18–0,19 Kč), потому что аудитория не успела устать от креативов.",
-    "Instagram Stories получили 55% бюджета (175,84 Kč) и принесли 58% всех кликов (629), подтверждая, что это основная площадка для охвата и вовлечения вашей аудитории.",
-    "Мужчины показывают CTR выше женщин (4,33–5,34% против 2,75–6,31% в зависимости от возраста), но охват у них в 3–5 раз меньше из-за фокуса таргетинга на женскую аудиторию.",
-    "Тестовая кампания на переписки дала дорогой клик (0,77 Kč), но это нормально: цель требует более глубокого действия, чем просто просмотр или лайк.",
-    "Все 1 117 кликов по ссылкам и 6 039 взаимодействий с постами показывают, что контент (Reels) цепляет аудиторию и вызывает желание узнать больше."
+    "Все три основные кампании на Reels показали CTR выше 3,5%, что говорит о сильном интересе аудитории к видеоконтенту.",
+    "Вторая и третья кампании (14.7 и 27.7) получили цену клика в два раза ниже первой (0,18–0,19 Kč против 0,39 Kč), вероятно, благодаря прогреву аудитории.",
+    "Мужчины всех возрастов демонстрируют CTR на 1–2 процентных пункта выше женщин, но получают лишь 20% от общего бюджета.",
+    "Instagram Stories съедают 55% бюджета (175,84 Kč), хотя Facebook показывает клик почти вдвое дешевле (0,16 Kč против 0,28 Kč).",
+    "Женщины 65+ и мужчины 55–64 лет показали самый высокий CTR (6,31% и 5,04%), но на них выделено всего 14,17 Kč суммарно.",
+    "Тестовая кампания на переписки дала цену клика 0,77 Kč – в 2,5 раза дороже средней, что характерно для целей с высоким порогом действия."
   ],
   "findings_en": [
-    "The main budget of 320.94 Kč generated 1,085 clicks at an average cost of 0.3 Kč, which is half the typical Meta CPC for engagement campaigns.",
-    "Campaigns with low frequency (1.15–1.2) achieved the highest CTR (4.27–4.45%) and cheapest clicks (0.18–0.19 Kč) because the audience didn't experience creative fatigue.",
-    "Instagram Stories received 55% of the budget (175.84 Kč) and delivered 58% of all clicks (629), confirming it as the primary platform for reaching and engaging your audience.",
-    "Men show higher CTR than women (4.33–5.34% vs. 2.75–6.31% depending on age), but their reach is 3–5 times smaller due to targeting focus on female audiences.",
-    "The test campaign for direct messages resulted in expensive clicks (0.77 Kč), but this is normal: the goal requires deeper action than just viewing or liking.",
-    "All 1,117 link clicks and 6,039 post engagements demonstrate that the content (Reels) resonates with the audience and sparks interest to learn more."
+    "All three main Reels campaigns showed CTR above 3.5%, indicating strong audience interest in video content.",
+    "The second and third campaigns (14.7 and 27.7) achieved cost per click half that of the first (0.18–0.19 Kč vs. 0.39 Kč), likely due to audience warm-up.",
+    "Men across all ages demonstrate CTR 1–2 percentage points higher than women, yet receive only 20% of total budget.",
+    "Instagram Stories consume 55% of budget (175.84 Kč), even though Facebook delivers clicks nearly twice as cheap (0.16 Kč vs. 0.28 Kč).",
+    "Women 65+ and men 55–64 showed the highest CTR (6.31% and 5.04%), but received only 14.17 Kč combined.",
+    "The test campaign for messages produced a 0.77 Kč cost per click – 2.5 times the average, which is typical for high-threshold action objectives."
   ],
   "recommendations_ru": [
-    "Запустить больше коротких кампаний (5–7 дней) со свежими креативами, чтобы держать частоту показа ниже 1,3 и сохранять высокий CTR, как в кампаниях 14.7 и 27.7.",
-    "Выделить 15–20% бюджета на мужскую аудиторию 25–54 лет отдельной кампанией: их CTR стабильно выше (4,33–5,34%), и они могут дать дополнительный охват по низкой цене.",
-    "Увеличить долю бюджета на Facebook ленту и Reels (сейчас всего 11,28 Kč): там клик дешевле (0,16–0,17 Kč), и это поможет снизить среднюю цену клика по всем кампаниям.",
-    "Продолжить тестировать кампании на переписки, но добавить автоматические ответы или лид-форму в Stories: это снизит порог входа и уменьшит цену целевого действия.",
-    "Ротировать креативы в основной кампании (IG · Reels · WMN · 10.7) каждые 10–12 дней, чтобы не дать частоте вырасти выше 1,5 и удерживать CPC на уровне 0,3 Kč.",
-    "Проверить, какие конкретно Reels дали CTR выше 4%: повторить их формат, тему или визуальный стиль в новых креативах для следующих кампаний."
+    "Дать больше бюджета на мужскую аудиторию 25–64 лет: они показывают CTR 4,33–5,34%, но сейчас получают менее пятой части денег.",
+    "Протестировать отдельную кампанию на женщин и мужчин 55+ с увеличенным бюджетом – их CTR 5,04–6,31% значительно выше среднего по аккаунту.",
+    "Перераспределить часть бюджета с Instagram Stories на Facebook Feed и Reels, где цена клика 0,16–0,17 Kč вдвое ниже.",
+    "Запустить полноценную кампанию на переписки (не тестовую) с бюджетом от 100 Kč, чтобы понять реальную цену лида при масштабе.",
+    "Продолжить использовать креативы из кампаний 14.7 и 27.7 – они дали лучшее соотношение цены и отклика (0,18–0,19 Kč, CTR 4,27–4,45%).",
+    "Настроить отдельные группы объявлений для разных возрастов внутри текущей аудитории, чтобы Meta могла оптимизировать бюджет по возрасту автоматически."
   ],
   "recommendations_en": [
-    "Launch more short campaigns (5–7 days) with fresh creatives to keep frequency below 1.3 and maintain high CTR, as seen in campaigns 14.7 and 27.7.",
-    "Allocate 15–20% of budget to a separate campaign targeting men aged 25–54: their CTR is consistently higher (4.33–5.34%), and they can provide additional reach at low cost.",
-    "Increase budget share for Facebook Feed and Reels (currently only 11.28 Kč): clicks there are cheaper (0.16–0.17 Kč), which will help lower average CPC across all campaigns.",
-    "Continue testing campaigns for direct messages, but add automated responses or lead forms in Stories: this will lower the entry barrier and reduce cost per desired action.",
-    "Rotate creatives in the main campaign (IG · Reels · WMN · 10.7) every 10–12 days to prevent frequency from exceeding 1.5 and maintain CPC at 0.3 Kč.",
-    "Review which specific Reels achieved CTR above 4%: replicate their format, topic, or visual style in new creatives for upcoming campaigns."
+    "Allocate more budget to male audiences aged 25–64: they show 4.33–5.34% CTR but currently receive less than one-fifth of spending.",
+    "Test a dedicated campaign for people 55+ with increased budget – their 5.04–6.31% CTR significantly exceeds account average.",
+    "Shift some budget from Instagram Stories to Facebook Feed and Reels, where cost per click of 0.16–0.17 Kč is half the price.",
+    "Launch a full-scale messages campaign (not a test) with at least 100 Kč budget to understand true lead cost at scale.",
+    "Continue using creatives from campaigns 14.7 and 27.7 – they delivered the best cost-to-response ratio (0.18–0.19 Kč, CTR 4.27–4.45%).",
+    "Set up separate ad sets for different age groups within your current audience so Meta can automatically optimize budget by age."
   ],
   "euNote_ru": "Важно знать: в рекламных кабинетах ЕС Meta не показывает число начатых переписок в директ. Кампании «IG direct» реально приводят людей в сообщения, но эта цифра в отчёте технически недоступна. Реальное число обращений видно только вручную (в директе или через учёт менеджеров).",
   "euNote_en": "Worth knowing: in EU ad accounts Meta does not report the number of started Direct conversations. The IG direct campaigns do bring people into messages, but that number is technically unavailable in reporting. The real count of inquiries is only visible manually (in Direct or via a managers' log).",
   "meta": {
-    "generatedAt": "2026-08-01T08:38:51.356305Z",
+    "generatedAt": "2026-08-02T18:48:59.377426Z",
     "generatedBy": "automation"
   },
   "footer_ru": "Данные: Meta Marketing API · рекламный кабинет JuniKa Natur · период 1 – 31 июля",
