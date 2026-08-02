@@ -18,19 +18,23 @@
   "source": "Meta Marketing API",
   "showDynamics": false,
   "totals": {
-    "spend": 11003.01,
+    "spend": 11003.35,
     "reach": 41214,
-    "impressions": 121077,
+    "impressions": 121085,
     "frequency": 2.94,
-    "clicks": 2646,
+    "clicks": 2647,
     "ctr": 2.19,
     "cpc": 4.16,
     "linkClicks": 1058,
-    "postEngagement": 15680,
-    "videoViews": 14294,
+    "postEngagement": 15685,
+    "videoViews": 14299,
     "reactions": 201,
     "comments": 31,
-    "saves": 67
+    "saves": 67,
+    "leads": 282,
+    "costPerLead": 39.02,
+    "addToCart": 0,
+    "costPerCart": 0
   },
   "prevTotals": {
     "spend": 8204.16,
@@ -39,7 +43,11 @@
     "frequency": 3.47,
     "clicks": 1362,
     "ctr": 2.01,
-    "cpc": 6.02
+    "cpc": 6.02,
+    "leads": 104,
+    "costPerLead": 78.89,
+    "addToCart": 0,
+    "costPerCart": 0
   },
   "campaigns": [
     {
@@ -88,8 +96,8 @@
           "met_en": "1,105 clicks · CTR 3.13% · CPC <b>3.91 Kč</b>"
         }
       ],
-      "verdict_ru": "Кампания по вакансии в Пардубице сработала очень хорошо: CTR 3.12% и цена клика 3.94 Kč при таргетинге на местных женщин. Это говорит о том, что предложение попало точно в нужную аудиторию и вызвало интерес.",
-      "verdict_en": "The Pardubice vacancy campaign performed very well: 3.12% CTR and 3.94 Kč cost per click targeting local women. This indicates the offer resonated precisely with the right audience and generated strong interest.",
+      "verdict_ru": "Вакансия в Pardубице показала сильный результат: CTR 3.12% говорит о том, что объявление попало точно в нужную аудиторию. Клик обошёлся в 3.94 Kč, что хорошо для локальной кампании на женщин. Высокая частота показов (3.41) означает, что одни и те же люди видели рекламу несколько раз, это нормально для узкого географического таргетинга.",
+      "verdict_en": "The Pardubice job ad performed strongly: 3.12% CTR shows the message resonated with the right audience. At 3.94 Kč per click, this is solid for a local campaign targeting women. The frequency of 3.41 means the same people saw the ad multiple times, which is typical for narrow geographic targeting.",
       "tag_kind": "direct",
       "cpc_pill": "good"
     },
@@ -99,15 +107,15 @@
       "goal_ru": "переписки в директ",
       "goal_en": "Direct messages",
       "reach": 31745,
-      "impressions": 84789,
+      "impressions": 84797,
       "frequency": 2.67,
-      "spend": 6538.31,
-      "clicks": 1514,
+      "spend": 6538.65,
+      "clicks": 1515,
       "ctr": 1.79,
       "cpc": 4.32,
       "linkClicks": 607,
-      "postEngagement": 15108,
-      "videoViews": 14230,
+      "postEngagement": 15113,
+      "videoViews": 14235,
       "audience": "общая - укр",
       "ads": [
         {
@@ -117,12 +125,12 @@
           "label_en": "Ad 2 видео инст",
           "audience_ru": "общая - укр",
           "audience_en": "общая - укр",
-          "spend": 5363.27,
-          "clicks": 1308,
+          "spend": 5363.61,
+          "clicks": 1309,
           "ctr": 1.82,
           "cpc": 4.1,
-          "met_ru": "1 308 кликов · CTR 1,82% · CPC <b>4,10 Kč</b>",
-          "met_en": "1,308 clicks · CTR 1.82% · CPC <b>4.10 Kč</b>"
+          "met_ru": "1 309 кликов · CTR 1,82% · CPC <b>4,10 Kč</b>",
+          "met_en": "1,309 clicks · CTR 1.82% · CPC <b>4.10 Kč</b>"
         },
         {
           "adId": "120250567979690418",
@@ -153,8 +161,8 @@
           "met_en": "26 clicks · CTR 1.72% · CPC <b>5.71 Kč</b>"
         }
       ],
-      "verdict_ru": "Кампания по доверенностям для украинской аудитории охватила широкий круг (31 745 человек) и собрала много видеопросмотров (14 230), но CTR ниже (1.79%), что нормально для более общего таргетинга. Цена клика 4.32 Kč остаётся разумной для этой задачи.",
-      "verdict_en": "The power of attorney campaign for the Ukrainian audience reached a wide circle (31,745 people) and collected many video views (14,230), but CTR is lower (1.79%), which is normal for broader targeting. Cost per click of 4.32 Kč remains reasonable for this objective.",
+      "verdict_ru": "Кампания на украинскую аудиторию охватила широкий круг людей (31 745 человек) и собрала много вовлечения: 15 113 взаимодействий и 14 235 просмотров видео. CTR 1.79% ниже, чем у вакансии, но это объясняется более широкой и разнородной аудиторией. Клик за 4.32 Kč разумен для общей кампании на услугу доверенностей.",
+      "verdict_en": "The Ukrainian audience campaign reached a broad group (31,745 people) and generated strong engagement: 15,113 interactions and 14,235 video views. The 1.79% CTR is lower than the job ad, but that's expected for a wider, more diverse audience. At 4.32 Kč per click, the cost is reasonable for a general service campaign about power of attorney.",
       "tag_kind": "direct",
       "cpc_pill": "watch"
     }
@@ -163,13 +171,13 @@
     {
       "name_ru": "общая - укр",
       "name_en": "общая - укр",
-      "spend": 6538.31,
+      "spend": 6538.65,
       "reach": 31745,
       "ctr_range": "1.79%",
       "badge_ru": null,
       "badge_en": null,
-      "note_ru": "Общая украинская аудитория показала CTR 1.79% при широком охвате, что ожидаемо для менее узкого таргетинга.",
-      "note_en": "The general Ukrainian audience showed 1.79% CTR with broad reach, which is expected for less narrow targeting.",
+      "note_ru": "Широкая украинская аудитория охватила больше людей, но кликала реже (CTR 1.79%), что естественно для менее специфичной группы.",
+      "note_en": "The broad Ukrainian audience reached more people but clicked less often (1.79% CTR), which is typical for a less specific segment.",
       "discovery": false
     },
     {
@@ -180,8 +188,8 @@
       "ctr_range": "3.12%",
       "badge_ru": "Лучшая аудитория",
       "badge_en": "Best audience",
-      "note_ru": "Женщины в Пардубице дали CTR 3.12%, почти в два раза выше, что указывает на сильную релевантность предложения для этой группы.",
-      "note_en": "Women in Pardubice delivered 3.12% CTR, nearly double the rate, indicating strong offer relevance for this group.",
+      "note_ru": "Женщины из Pardубице показали высокую заинтересованность (CTR 3.12%), реклама вакансии попала точно в цель.",
+      "note_en": "Women in Pardubice showed strong interest (3.12% CTR), indicating the job ad hit the mark.",
       "discovery": true
     }
   ],
@@ -191,8 +199,8 @@
       "label_ru": "Facebook · лента",
       "label_en": "Facebook · feed",
       "reach": 21488,
-      "spend": 4100.15,
-      "clicks": 1501,
+      "spend": 4100.39,
+      "clicks": 1502,
       "cpc": 2.73,
       "bar_pct": 100.0
     },
@@ -201,7 +209,7 @@
       "label_ru": "Facebook · Reels",
       "label_en": "Facebook · Reels",
       "reach": 18028,
-      "spend": 3042.05,
+      "spend": 3042.12,
       "clicks": 554,
       "cpc": 5.49,
       "bar_pct": 74.19
@@ -211,7 +219,7 @@
       "label_ru": "Instagram · сторис",
       "label_en": "Instagram · stories",
       "reach": 3544,
-      "spend": 1168.29,
+      "spend": 1168.28,
       "clicks": 195,
       "cpc": 5.99,
       "bar_pct": 28.49
@@ -221,7 +229,7 @@
       "label_ru": "Instagram · Reels",
       "label_en": "Instagram · Reels",
       "reach": 5441,
-      "spend": 1041.56,
+      "spend": 1041.55,
       "clicks": 182,
       "cpc": 5.72,
       "bar_pct": 25.4
@@ -231,7 +239,7 @@
       "label_ru": "Instagram · лента",
       "label_en": "Instagram · feed",
       "reach": 3056,
-      "spend": 830.16,
+      "spend": 830.15,
       "clicks": 73,
       "cpc": 11.37,
       "bar_pct": 20.25
@@ -286,12 +294,12 @@
         "gender": "male",
         "age": "25-34",
         "reach": 4057,
-        "spend": 695.72,
+        "spend": 695.77,
         "ctr": 1.22,
         "hot": false,
         "label_ru": "М 25-34",
         "label_en": "M 25-34",
-        "bar_pct": 32.53
+        "bar_pct": 32.54
       },
       {
         "gender": "female",
@@ -308,7 +316,7 @@
         "gender": "male",
         "age": "35-44",
         "reach": 6898,
-        "spend": 1312.65,
+        "spend": 1312.66,
         "ctr": 1.45,
         "hot": false,
         "label_ru": "М 35-44",
@@ -319,18 +327,18 @@
         "gender": "female",
         "age": "45-54",
         "reach": 4809,
-        "spend": 1682.79,
+        "spend": 1682.87,
         "ctr": 2.91,
         "hot": true,
         "label_ru": "Ж 45-54",
         "label_en": "F 45-54",
-        "bar_pct": 78.69
+        "bar_pct": 78.7
       },
       {
         "gender": "male",
         "age": "45-54",
         "reach": 5979,
-        "spend": 1460.71,
+        "spend": 1460.79,
         "ctr": 1.77,
         "hot": false,
         "label_ru": "М 45-54",
@@ -351,13 +359,13 @@
       {
         "gender": "male",
         "age": "55-64",
-        "reach": 2170,
-        "spend": 494.42,
-        "ctr": 1.98,
+        "reach": 2171,
+        "spend": 494.54,
+        "ctr": 1.99,
         "hot": false,
         "label_ru": "М 55-64",
         "label_en": "M 55-64",
-        "bar_pct": 23.12
+        "bar_pct": 23.13
       },
       {
         "gender": "female",
@@ -382,8 +390,8 @@
         "bar_pct": 6.82
       }
     ],
-    "note_ru": "Женщины всех возрастов кликают активнее мужчин (CTR от 2.22% до 4.58% против 1.22–2.75% у мужчин), особенно выделяются женщины 65+ с CTR 4.58%. Бюджет распределён пропорционально охвату, но можно усилить самые отзывчивые группы.",
-    "note_en": "Women across all ages click more actively than men (CTR from 2.22% to 4.58% versus 1.22–2.75% for men), with women 65+ standing out at 4.58% CTR. Budget is distributed proportionally to reach, but the most responsive groups could be amplified.",
+    "note_ru": "Женщины кликали активнее мужчин во всех возрастах, особенно выделились 45-54 года (CTR 2.91%) и 65+ (CTR 4.58%). При этом женщины 35-44 получили больше всего бюджета (2 138 Kč), хотя их CTR (2.5%) был ниже, чем у старших групп. Стоит проверить, не упускаете ли вы возможности в аудитории 45+.",
+    "note_en": "Women clicked more actively than men across all ages, with 45-54 (2.91% CTR) and 65+ (4.58% CTR) standing out. However, women 35-44 received the most budget (2,138 Kč) despite their lower CTR (2.5%) compared to older groups. Worth checking if you're missing opportunities in the 45+ segment.",
     "rows_sorted": [
       {
         "gender": "female",
@@ -400,12 +408,12 @@
         "gender": "female",
         "age": "45-54",
         "reach": 4809,
-        "spend": 1682.79,
+        "spend": 1682.87,
         "ctr": 2.91,
         "hot": true,
         "label_ru": "Ж 45-54",
         "label_en": "F 45-54",
-        "bar_pct": 78.69
+        "bar_pct": 78.7
       },
       {
         "gender": "female",
@@ -422,7 +430,7 @@
         "gender": "male",
         "age": "45-54",
         "reach": 5979,
-        "spend": 1460.71,
+        "spend": 1460.79,
         "ctr": 1.77,
         "hot": false,
         "label_ru": "М 45-54",
@@ -433,7 +441,7 @@
         "gender": "male",
         "age": "35-44",
         "reach": 6898,
-        "spend": 1312.65,
+        "spend": 1312.66,
         "ctr": 1.45,
         "hot": false,
         "label_ru": "М 35-44",
@@ -444,12 +452,12 @@
         "gender": "male",
         "age": "25-34",
         "reach": 4057,
-        "spend": 695.72,
+        "spend": 695.77,
         "ctr": 1.22,
         "hot": false,
         "label_ru": "М 25-34",
         "label_en": "M 25-34",
-        "bar_pct": 32.53
+        "bar_pct": 32.54
       },
       {
         "gender": "female",
@@ -476,13 +484,13 @@
       {
         "gender": "male",
         "age": "55-64",
-        "reach": 2170,
-        "spend": 494.42,
-        "ctr": 1.98,
+        "reach": 2171,
+        "spend": 494.54,
+        "ctr": 1.99,
         "hot": false,
         "label_ru": "М 55-64",
         "label_en": "M 55-64",
-        "bar_pct": 23.12
+        "bar_pct": 23.13
       },
       {
         "gender": "male",
@@ -530,50 +538,50 @@
       "metric_ru": "CTR 3.13% · CPC 3.91 Kč",
       "metric_en": "CTR 3.13% · CPC 3.91 Kč",
       "best": true,
-      "reason_ru": "Это объявление из кампании по вакансии получило самый высокий отклик аудитории благодаря точному попаданию в интересы местных женщин.",
-      "reason_en": "This ad from the vacancy campaign received the highest audience response due to precise alignment with local women's interests."
+      "reason_ru": "Объявление вызвало самый сильный отклик аудитории благодаря точному попаданию в интересы женщин Pardубице, которые искали работу.",
+      "reason_en": "This ad generated the strongest audience response by precisely matching the interests of women in Pardubice looking for work."
     }
   ],
-  "insight_ru": "За период потрачено <b>11 003 Kč</b>, реклама охватила <b>41 214 человек</b> и получила <b>2 646 кликов</b>. Средняя цена клика составила <b>4.16 Kč</b>, при этом кампания по вакансии в Пардубице показала заметно более активное взаимодействие аудитории. Основной бюджет ушёл на Facebook ленту, которая дала самые доступные клики.",
-  "insight_en": "The period spent <b>11,003 Kč</b>, reaching <b>41,214 people</b> and generating <b>2,646 clicks</b>. Average cost per click was <b>4.16 Kč</b>, with the Pardubice vacancy campaign showing noticeably higher audience engagement. Most budget went to Facebook Feed, which delivered the most affordable clicks.",
-  "platforms_note_ru": "Facebook лента принесла самые дешёвые клики (2.73 Kč) и собрала больше трети всех кликов. Instagram лента оказалась дорогой (11.37 Kč за клик), в то время как Reels на обеих платформах показали средние результаты.",
-  "platforms_note_en": "Facebook Feed delivered the cheapest clicks (2.73 Kč) and collected over a third of all clicks. Instagram Feed proved expensive (11.37 Kč per click), while Reels on both platforms showed average results.",
+  "insight_ru": "За период вы потратили <b>11 003 Kč</b> и охватили <b>41 214 человек</b>. Реклама сработала по-разному: вакансия в Pardубице дала <b>CTR 3.12%</b> и клик за <b>3.94 Kč</b>, а кампания на украинскую аудиторию показала <b>1.79% CTR</b> при <b>4.32 Kč за клик</b>. Женщины реагировали активнее мужчин, особенно в возрасте 45-54 и 65+, а лента Facebook принесла самые дешёвые клики.",
+  "insight_en": "You spent <b>11,003 Kč</b> and reached <b>41,214 people</b> during this period. The two campaigns performed differently: the Pardubice job ad achieved <b>3.12% CTR</b> at <b>3.94 Kč per click</b>, while the Ukrainian audience campaign showed <b>1.79% CTR</b> at <b>4.32 Kč per click</b>. Women responded more actively than men, especially ages 45-54 and 65+, and Facebook Feed delivered the cheapest clicks.",
+  "platforms_note_ru": "Лента Facebook принесла самые дешёвые клики (2.73 Kč) и забрала большую часть бюджета (4 100 Kč). Reels на обеих платформах и сторис в Instagram стоили дороже (5.49–5.99 Kč за клик), но это нормально: такие форматы работают больше на охват и вовлечение, чем на прямые переходы.",
+  "platforms_note_en": "Facebook Feed delivered the cheapest clicks (2.73 Kč) and consumed the largest budget share (4,100 Kč). Reels on both platforms and Instagram Stories cost more (5.49–5.99 Kč per click), but that's expected: these formats drive reach and engagement rather than direct clicks.",
   "findings_ru": [
-    "Кампания по вакансии в Пардубице с таргетингом на женщин показала CTR 3.12%, что в 1.7 раза выше общего результата (2.19%).",
-    "Facebook лента дала 1 501 клик по цене 2.73 Kč, что на 34% дешевле среднего CPC 4.16 Kč.",
-    "Женщины показывают CTR от 2.22% до 4.58% во всех возрастных группах, тогда как мужчины – от 1.22% до 2.75%.",
-    "Instagram лента оказалась самой дорогой позицией (11.37 Kč за клик) при малом объёме кликов (73).",
-    "Кампания по доверенностям собрала 14 230 видеопросмотров, что говорит о внимании к контенту даже при более низком CTR 1.79%.",
-    "Женщины 65+ показали CTR 4.58% при небольшом охвате (533 человека), что указывает на высокую вовлечённость этой группы."
+    "Вы охватили 41 214 человек за 11 003 Kč, средняя частота показов составила 2.94 раза на человека.",
+    "Вакансия в Pardубице показала CTR 3.12% и клик за 3.94 Kč, что говорит о точном попадании в аудиторию.",
+    "Кампания на украинскую аудиторию собрала 15 113 взаимодействий и 14 235 просмотров видео, хотя CTR был ниже (1.79%).",
+    "Женщины 45-54 и 65+ показали самый высокий CTR (2.91% и 4.58%), но получили меньше бюджета, чем группа 35-44.",
+    "Лента Facebook принесла клики по 2.73 Kč, тогда как Reels и сторис стоили от 5.49 до 11.37 Kč за клик.",
+    "Общий CTR по всем кампаниям составил 2.19%, средняя цена клика – 4.16 Kč."
   ],
   "findings_en": [
-    "The Pardubice vacancy campaign targeting women showed 3.12% CTR, which is 1.7 times higher than the overall result (2.19%).",
-    "Facebook Feed delivered 1,501 clicks at 2.73 Kč, which is 34% cheaper than the average CPC of 4.16 Kč.",
-    "Women show CTR from 2.22% to 4.58% across all age groups, while men range from 1.22% to 2.75%.",
-    "Instagram Feed proved the most expensive placement (11.37 Kč per click) with low click volume (73).",
-    "The power of attorney campaign collected 14,230 video views, indicating content attention even with lower CTR of 1.79%.",
-    "Women 65+ showed 4.58% CTR with small reach (533 people), indicating high engagement in this group."
+    "You reached 41,214 people for 11,003 Kč, with an average frequency of 2.94 impressions per person.",
+    "The Pardubice job ad achieved 3.12% CTR at 3.94 Kč per click, indicating precise audience targeting.",
+    "The Ukrainian audience campaign generated 15,113 engagements and 14,235 video views, though CTR was lower (1.79%).",
+    "Women aged 45-54 and 65+ showed the highest CTR (2.91% and 4.58%) but received less budget than the 35-44 group.",
+    "Facebook Feed delivered clicks at 2.73 Kč, while Reels and Stories cost between 5.49 and 11.37 Kč per click.",
+    "Overall CTR across campaigns was 2.19%, with an average CPC of 4.16 Kč."
   ],
   "recommendations_ru": [
-    "Увеличить бюджет на Facebook ленту, так как она даёт клики в два раза дешевле среднего и собирает больше всего трафика.",
-    "Усилить таргетинг на женщин 25–54 лет и протестировать отдельные креативы для женщин 65+, учитывая их высокий CTR 4.58%.",
-    "Пересмотреть размещение в Instagram ленте: либо отключить, либо создать специальный креатив, так как текущая цена 11.37 Kč слишком высока.",
-    "Продолжить локальные кампании с узким таргетингом по типу Пардубице, так как они показывают CTR почти в два раза выше общего.",
-    "Сохранить видеоформат для кампаний с широкой аудиторией (как доверенности), чтобы поддерживать узнаваемость и интерес.",
-    "Отслеживать конверсии в директ после кликов, чтобы понять, какие аудитории не только кликают, но и пишут."
+    "Дать больше бюджета женщинам 45+ в обеих кампаниях: их CTR выше, а стоимость клика может оказаться ниже при масштабировании.",
+    "Продолжить использовать ленту Facebook для кампаний, где важна цена клика, она стабильно даёт самые дешёвые переходы.",
+    "Проверить креативы для мужской аудитории: их CTR в 1.5–2 раза ниже женского во всех возрастах, возможно, нужны отдельные объявления.",
+    "Оставить Reels и сторис для задач на охват и вовлечение, но не ждать от них дешёвых кликов – это не их сильная сторона.",
+    "Собрать обратную связь от откликнувшихся на вакансию в Pardубице: высокий CTR показывает, что формат работает, можно повторить для других городов.",
+    "Следить за частотой показов в локальных кампаниях: при превышении 4–5 раз эффективность обычно падает, нужно освежать креативы или расширять аудиторию."
   ],
   "recommendations_en": [
-    "Increase budget for Facebook Feed, as it delivers clicks at half the average cost and generates the most traffic.",
-    "Strengthen targeting for women 25–54 and test separate creatives for women 65+, given their high 4.58% CTR.",
-    "Review Instagram Feed placement: either disable it or create a specialized creative, as the current 11.37 Kč cost is too high.",
-    "Continue local campaigns with narrow targeting like Pardubice, as they show nearly double the overall CTR.",
-    "Maintain video format for broad audience campaigns (like power of attorney) to sustain brand awareness and interest.",
-    "Track conversions to Direct after clicks to understand which audiences not only click but also message."
+    "Allocate more budget to women 45+ in both campaigns: their CTR is higher, and CPC may decrease when scaled.",
+    "Continue using Facebook Feed for campaigns where click cost matters – it consistently delivers the cheapest clicks.",
+    "Review creatives for male audiences: their CTR is 1.5–2× lower than women's across all ages, separate ads might help.",
+    "Keep Reels and Stories for reach and engagement goals, but don't expect cheap clicks – that's not their strength.",
+    "Gather feedback from Pardubice job ad respondents: the high CTR shows the format works and could be replicated for other cities.",
+    "Monitor frequency in local campaigns: beyond 4–5 impressions, performance usually drops, requiring fresh creatives or broader audiences."
   ],
   "euNote_ru": "Важно знать: в рекламных кабинетах ЕС Meta не показывает число начатых переписок в директ. Кампании «IG direct» реально приводят людей в сообщения, но эта цифра в отчёте технически недоступна. Реальное число обращений видно только вручную (в директе или через учёт менеджеров).",
   "euNote_en": "Worth knowing: in EU ad accounts Meta does not report the number of started Direct conversations. The IG direct campaigns do bring people into messages, but that number is technically unavailable in reporting. The real count of inquiries is only visible manually (in Direct or via a managers' log).",
   "meta": {
-    "generatedAt": "2026-08-01T08:36:41.672703Z",
+    "generatedAt": "2026-08-02T17:48:27.203785Z",
     "generatedBy": "automation"
   },
   "footer_ru": "Данные: Meta Marketing API · рекламный кабинет KB Preklady · период 1 – 31 июля",
