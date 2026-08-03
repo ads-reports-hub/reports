@@ -83,7 +83,9 @@ def build_kpi_defs(totals, prev_totals, show_dynamics, currency, metrics=KPI_MET
             "sub_key": sub_key,
             "delta": None,
         }
-        if show_dynamics and prev_totals and prev_totals.get(field):
+        # raw is None бывает у частоты, когда Meta её за период не отдала.
+        # Без этой проверки ниже считается (None - prev) и падает весь отчёт.
+        if show_dynamics and raw is not None and prev_totals and prev_totals.get(field):
             prev = prev_totals[field]
             if prev:
                 pct = (raw - prev) / prev * 100

@@ -27,15 +27,14 @@ API = "https://graph.facebook.com/v20.0"
 INSIGHT_FIELDS = "reach,impressions,frequency,spend,clicks,ctr,cpc,cpm,actions"
 THUMB_MAX_WIDTH = 140
 THUMB_JPEG_QUALITY = 55
+MAX_PAGES = 50
 
 
 class MetaFetchError(Exception):
     pass
 
 
-def _get(path, token, **params):
-    params["access_token"] = token
-    url = f"{API}/{path}?{urllib.parse.urlencode(params)}"
+def _fetch_url(url: str, path: str) -> dict:
     try:
         with urllib.request.urlopen(url, timeout=30) as r:
             data = json.load(r)
@@ -49,6 +48,36 @@ def _get(path, token, **params):
     if "error" in data:
         raise MetaFetchError(f"Meta API error on {path}: {data['error'].get('message')}")
     return data
+
+
+def _get(path, token, **params):
+    """Забирает ВСЕ страницы ответа, а не только первую. Meta отдаёт данные
+    постранично и кладёт ссылку на следующую страницу в paging.next; раньше
+    мы её игнорировали, поэтому у клиента с числом кампаний больше limit
+    часть кампаний, групп и объявлений молча не попадала в отчёт (при этом
+    итоги по кабинету оставались верными, и расхождение было незаметным).
+    MAX_PAGES - страховка от бесконечного цикла, а не ожидаемый предел."""
+    params["access_token"] = token
+    url = f"{API}/{path}?{urllib.parse.urlencode(params)}"
+
+    first = _fetch_url(url, path)
+    if not isinstance(first.get("data"), list):
+        return first
+
+    rows = list(first["data"])
+    next_url = (first.get("paging") or {}).get("next")
+    pages = 1
+    while next_url and pages < MAX_PAGES:
+        page = _fetch_url(next_url, path)
+        rows.extend(page.get("data", []))
+        next_url = (page.get("paging") or {}).get("next")
+        pages += 1
+    if next_url:
+        print(f"[meta_client] {path}: остановились на {MAX_PAGES} страницах, данные могут быть неполными", file=sys.stderr)
+
+    result = dict(first)
+    result["data"] = rows
+    return result
 
 
 def _time_range(since, until):
@@ -71,12 +100,16 @@ def fetch(token: str, account: str, since: str, until: str,
         "currency": account_info.get("currency", "CZK"),
         "account": _get(f"{account}/insights", token, level="account",
                          fields=INSIGHT_FIELDS, time_range=tr),
+        # campaign_id/adset_id обязательны: названия кампаний и групп у клиентов
+        # не уникальны (у TravelForever четыре кампании называются одинаково,
+        # потому что Meta сама генерирует имя из текста продвигаемой публикации),
+        # и склейка по имени подмешивала объявления одной кампании в другую.
         "campaigns": _get(f"{account}/insights", token, level="campaign",
-                           fields="campaign_name," + INSIGHT_FIELDS, time_range=tr, limit=100),
+                           fields="campaign_id,campaign_name," + INSIGHT_FIELDS, time_range=tr, limit=100),
         "adsets": _get(f"{account}/insights", token, level="adset",
-                        fields="campaign_name,adset_name," + INSIGHT_FIELDS, time_range=tr, limit=200),
+                        fields="campaign_id,campaign_name,adset_id,adset_name," + INSIGHT_FIELDS, time_range=tr, limit=200),
         "ads": _get(f"{account}/insights", token, level="ad",
-                     fields="campaign_name,adset_name,ad_name,ad_id," + INSIGHT_FIELDS,
+                     fields="campaign_id,campaign_name,adset_id,adset_name,ad_name,ad_id," + INSIGHT_FIELDS,
                      time_range=tr, limit=200),
         "demographics": _get(f"{account}/insights", token, level="account",
                               fields="reach,impressions,spend,clicks,ctr",

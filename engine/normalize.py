@@ -128,8 +128,11 @@ def _row_totals(row: dict) -> dict:
 
 
 def build_totals(account_raw: dict) -> dict:
-    row = account_raw["data"][0]
-    return _row_totals(row)
+    # Meta присылает {"data": []} у кабинета без открутки за период. Раньше
+    # это падало по IndexError; отдаём нули, а осмысленную остановку с
+    # понятным текстом делает orchestrator (см. NoDeliveryError).
+    rows = account_raw.get("data") or [{}]
+    return _row_totals(rows[0])
 
 
 def build_prev_totals(prev_account_raw: dict | None) -> dict | None:
@@ -140,25 +143,35 @@ def build_prev_totals(prev_account_raw: dict | None) -> dict | None:
     return {k: t[k] for k in ("spend", "reach", "impressions", "frequency", "clicks", "ctr", "cpc", "leads", "costPerLead", "addToCart", "costPerCart")}
 
 
+def _campaign_key(row: dict) -> str:
+    """Ключ склейки кампании с её группами и объявлениями. Имя кампании для
+    этого не годится: у клиентов, которые продвигают публикации прямо из
+    Instagram, Meta называет все такие кампании одинаково по тексту поста, и
+    склейка по имени показывала в каждой из них объявления всех остальных.
+    campaign_id уникален всегда; на имя откатываемся только если его нет."""
+    return str(row.get("campaign_id") or row.get("campaign_name", ""))
+
+
 def build_campaigns(campaigns_raw: dict, adsets_raw: dict, ads_raw: dict) -> list[dict]:
     adset_by_campaign = defaultdict(list)
     for row in adsets_raw.get("data", []):
-        adset_by_campaign[row["campaign_name"]].append(row["adset_name"])
+        adset_by_campaign[_campaign_key(row)].append(row["adset_name"])
 
     ads_by_campaign = defaultdict(list)
     for row in ads_raw.get("data", []):
-        ads_by_campaign[row["campaign_name"]].append(row)
+        ads_by_campaign[_campaign_key(row)].append(row)
 
     campaigns = []
     for row in campaigns_raw.get("data", []):
         raw_name = row["campaign_name"]
+        key = _campaign_key(row)
         totals = _row_totals(row)
         goal_ru, goal_en = _guess_goal(raw_name)
-        adset_names = adset_by_campaign.get(raw_name, [])
+        adset_names = adset_by_campaign.get(key, [])
         audience = adset_names[0] if adset_names else ""
 
         ads = []
-        for i, ad_row in enumerate(ads_by_campaign.get(raw_name, []), start=1):
+        for i, ad_row in enumerate(ads_by_campaign.get(key, []), start=1):
             ad_totals = _row_totals(ad_row)
             ad_name = _strip_em_dash(ad_row.get("ad_name") or str(i))
             ad_audience = _strip_em_dash(ad_row.get("adset_name", audience))

@@ -35,6 +35,14 @@ REPO_ROOT = Path(__file__).parent.parent
 DOCS_DIR = REPO_ROOT / "docs"
 PAGES_BASE_URL = os.environ.get("PAGES_BASE_URL", "https://ads-reports-hub.github.io/reports")
 
+
+class NoDeliveryError(Exception):
+    """У кабинета не было открутки за период. Это не сбой техники, но и не
+    повод публиковать клиенту пустой отчёт: скорее всего клиент на паузе и в
+    таблице ему пора поставить active=нет. Поэтому прогон помечается красным,
+    чтобы это увидели, а не молча пропускается."""
+
+
 MONTHS_RU = ["", "января", "февраля", "марта", "апреля", "мая", "июня",
              "июля", "августа", "сентября", "октября", "ноября", "декабря"]
 MONTHS_EN = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -82,6 +90,13 @@ def run_one_client(client_row: dict, since: datetime.date, until: datetime.date,
         prev_since=prev_since.isoformat(), prev_until=prev_until.isoformat(),
         assets_out_dir=out_dir / "assets",
     )
+
+    if not (raw.get("account") or {}).get("data"):
+        raise NoDeliveryError(
+            f"за период {since} .. {until} по кабинету не было открутки "
+            f"(Meta вернула пустой ответ). Если клиент на паузе, поставьте ему "
+            f"active=нет в таблице, тогда он перестанет попадать в прогон."
+        )
 
     normalized = normalize.normalize(
         client=client_row["client"], account_id=client_row["account_id"],
