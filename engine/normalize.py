@@ -27,6 +27,22 @@ GOAL_KEYWORDS = [
     (["reels"], "вовлечённость (Reels)", "Engagement (Reels)"),
 ]
 
+# Meta отдаёт валюту рекламного кабинета трёхбуквенным ISO-кодом (currency
+# field на act_<id>). Показываем клиенту привычный символ, а не код; для
+# валюты, которой нет в словаре, показываем сам код, чтобы отчёт не сломался
+# и одновременно было сразу видно, что символ ещё не добавлен.
+CURRENCY_SYMBOLS = {
+    "CZK": "Kč",
+    "EUR": "€",
+    "USD": "$",
+    "GBP": "£",
+    "INR": "₹",
+}
+
+
+def currency_symbol(iso_code: str) -> str:
+    return CURRENCY_SYMBOLS.get(iso_code, iso_code)
+
 
 # Названия кампаний в кабинете Meta могут содержать длинное тире и разделители
 # "|"/" - " (так их называет сама Лиза, напр. "VIP | IG direct |  — 14.5.").
@@ -250,7 +266,7 @@ def build_demographics(demographics_raw: dict) -> dict:
     return {"rows": rows}  # note_ru/en добавляет commentary.py
 
 
-def build_top_ads(campaigns: list[dict]) -> list[dict]:
+def build_top_ads(campaigns: list[dict], currency: str) -> list[dict]:
     """3 фиксированных слота, вычисленных детерминированно: лучший CTR,
     самый дешёвый клик среди объявлений с заметным объёмом, наибольшая
     вовлечённость. Тексты reason_ru/en дополняет commentary.py."""
@@ -280,7 +296,7 @@ def build_top_ads(campaigns: list[dict]) -> list[dict]:
         if ad["adId"] in seen_ids:
             continue
         seen_ids.add(ad["adId"])
-        metric_en = f"CTR {ad['ctr']}% · CPC {ad['cpc']} Kč"
+        metric_en = f"CTR {ad['ctr']}% · CPC {ad['cpc']} {currency}"
         picks.append({
             "adId": ad["adId"], "thumb": ad["thumb"],
             "name_ru": ad["_campaign_name"], "name_en": ad["_campaign_name"],
@@ -296,13 +312,14 @@ def normalize(client: str, account_id: str, since: str, until: str,
               show_dynamics: bool, raw: dict) -> dict:
     """Собирает всё, кроме AI-текстовых полей, в структуру report.schema.json."""
     campaigns = build_campaigns(raw["campaigns"], raw["adsets"], raw["ads"])
+    currency = currency_symbol(raw.get("currency", "CZK"))
     return {
         "client": client,
         "accountId": account_id,
         "period": {"since": since, "until": until, "label_ru": "", "label_en": ""},  # заполняет orchestrator (знает формат дат целиком)
         "prevPeriod": {"since": prev_since, "until": prev_until, "label_ru": "", "label_en": ""} if prev_since else None,
         "platform": "Meta Ads (Instagram / Facebook)",
-        "currency": "Kč",
+        "currency": currency,
         "source": "Meta Marketing API",
         "showDynamics": show_dynamics,
         "totals": build_totals(raw["account"]),
@@ -311,5 +328,5 @@ def normalize(client: str, account_id: str, since: str, until: str,
         "audiences": build_audiences(raw["adsets"]),
         "platforms": build_platforms(raw["platforms"]),
         "demographics": build_demographics(raw["demographics"]),
-        "topAds": build_top_ads(campaigns),
+        "topAds": build_top_ads(campaigns, currency),
     }

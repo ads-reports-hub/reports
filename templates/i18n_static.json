@@ -44,7 +44,7 @@
 
     "sec.compare": "Сравнение кампаний",
     "chart1.title": "Клики по кампаниям",
-    "chart2.title": "Цена клика по кампаниям, Kč",
+    "chart2.title": "Цена клика по кампаниям",
 
     "sec.campaigns": "Кампании",
     "table.h.campaign": "Кампания",
@@ -134,7 +134,7 @@
 
     "sec.compare": "Campaign comparison",
     "chart1.title": "Clicks by campaign",
-    "chart2.title": "Cost per click by campaign, Kč",
+    "chart2.title": "Cost per click by campaign",
 
     "sec.campaigns": "Campaigns",
     "table.h.campaign": "Campaign",

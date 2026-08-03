@@ -58,14 +58,17 @@ def _time_range(since, until):
 def fetch(token: str, account: str, since: str, until: str,
           prev_since: str | None, prev_until: str | None,
           assets_out_dir: Path) -> dict:
-    """Возвращает {account, campaigns, adsets, ads, demographics, platforms,
-    prev_account, creatives} — те же данные, что раньше писались в raw/*.json,
+    """Возвращает {currency, account, campaigns, adsets, ads, demographics,
+    platforms, prev_account, creatives}, те же данные, что раньше писались в raw/*.json,
     только в памяти. Превью креативов уменьшаются и сохраняются в
     assets_out_dir (только для объявлений, которые реально были активны в
     периоде — то есть встречаются в ads['data'])."""
     tr = _time_range(since, until)
 
+    account_info = _get(account, token, fields="currency")
+
     result = {
+        "currency": account_info.get("currency", "CZK"),
         "account": _get(f"{account}/insights", token, level="account",
                          fields=INSIGHT_FIELDS, time_range=tr),
         "campaigns": _get(f"{account}/insights", token, level="campaign",

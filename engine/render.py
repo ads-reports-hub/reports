@@ -21,14 +21,18 @@ TEMPLATE_DIR = ENGINE_DIR.parent / "templates"
 LOWER_IS_BETTER = {"cpc", "costPerLead", "costPerCart"}
 NEUTRAL_METRICS = {"spend", "frequency"}
 
+# Поля, чей суффикс - валюта конкретного клиента (data["currency"]), а не
+# фиксированный текст из таблицы ниже - см. currency= в build_kpi_defs.
+CURRENCY_METRICS = {"spend", "cpc", "costPerLead", "costPerCart"}
+
 # (i18n-ключ, поле в totals, знаков после запятой, суффикс, ключ доп. подписи)
 KPI_METRICS = [
-    ("kpi.spend",  "spend",          0, "Kč", None),
+    ("kpi.spend",  "spend",          0, None, None),
     ("kpi.reach",  "reach",          0, None, None),
     ("kpi.impr",   "impressions",    0, None, None),
     ("kpi.clicks", "clicks",         0, None, None),
     ("kpi.ctr",    "ctr",            2, "%",  None),
-    ("kpi.cpc",    "cpc",            2, "Kč", None),
+    ("kpi.cpc",    "cpc",            2, None, None),
     ("kpi.freq",   "frequency",      2, None, "kpi.freq.sub"),
     ("kpi.eng",    "postEngagement", 0, None, "kpi.eng.sub"),
     ("kpi.video",  "videoViews",     0, None, "kpi.video.sub"),
@@ -39,9 +43,9 @@ KPI_METRICS = [
 # фильтр по totals.get(field) в render_report.
 CONDITIONAL_KPI_METRICS = [
     ("kpi.leads",        "leads",       0, None, None),
-    ("kpi.cost_lead",    "costPerLead", 2, "Kč", None),
+    ("kpi.cost_lead",    "costPerLead", 2, None, None),
     ("kpi.cart",         "addToCart",   0, None, None),
-    ("kpi.cost_cart",    "costPerCart", 2, "Kč", None),
+    ("kpi.cost_cart",    "costPerCart", 2, None, None),
 ]
 
 GLOSSARY_KEYS = ["term1", "term2", "term3", "term4", "term5", "term6", "term7"]
@@ -64,9 +68,11 @@ def fmt_en(value, dec):
     return ("-" + f) if value < 0 else f
 
 
-def build_kpi_defs(totals, prev_totals, show_dynamics, metrics=KPI_METRICS):
+def build_kpi_defs(totals, prev_totals, show_dynamics, currency, metrics=KPI_METRICS):
     defs = []
     for key, field, dec, suffix, sub_key in metrics:
+        if field in CURRENCY_METRICS:
+            suffix = currency
         raw = totals.get(field)
         entry = {
             "key": key,
@@ -152,11 +158,12 @@ def render_report(data: dict, out_dir: Path, assets_src_dir: Path | None = None)
     totals = data["totals"]
     prev_totals = data.get("prevTotals") or {}
     campaigns = data.get("campaigns", [])
+    currency = data.get("currency", "Kč")
 
-    kpi_defs = build_kpi_defs(totals, prev_totals, show_dynamics)
+    kpi_defs = build_kpi_defs(totals, prev_totals, show_dynamics, currency)
     active_conditional = [m for m in CONDITIONAL_KPI_METRICS if totals.get(m[1])]
     if active_conditional:
-        kpi_defs += build_kpi_defs(totals, prev_totals, show_dynamics, metrics=active_conditional)
+        kpi_defs += build_kpi_defs(totals, prev_totals, show_dynamics, currency, metrics=active_conditional)
     ad_key_map = build_ad_key_map(campaigns)
 
     # ---- собираем полные RU/EN словари: статичные строки интерфейса + контент ----
@@ -165,6 +172,9 @@ def render_report(data: dict, out_dir: Path, assets_src_dir: Path | None = None)
 
     i18n_ru["header.dates"] = data["period"]["label_ru"]
     i18n_en["header.dates"] = data["period"]["label_en"]
+
+    i18n_ru["chart2.title"] = f"Цена клика по кампаниям, {currency}"
+    i18n_en["chart2.title"] = f"Cost per click by campaign, {currency}"
 
     i18n_ru["insight.text"] = data["insight_ru"]
     i18n_en["insight.text"] = data.get("insight_en", data["insight_ru"])
@@ -192,8 +202,8 @@ def render_report(data: dict, out_dir: Path, assets_src_dir: Path | None = None)
 
         for ai, ad in enumerate(camp.get("ads", []), start=1):
             adKey = ad_key_map[(ci, ai)]
-            ad["met_ru"] = f"{fmt_ru(ad['clicks'], 0)} кликов · CTR {fmt_ru(ad['ctr'], 2)}% · CPC <b>{fmt_ru(ad['cpc'], 2)} Kč</b>"
-            ad["met_en"] = f"{fmt_en(ad['clicks'], 0)} clicks · CTR {fmt_en(ad['ctr'], 2)}% · CPC <b>{fmt_en(ad['cpc'], 2)} Kč</b>"
+            ad["met_ru"] = f"{fmt_ru(ad['clicks'], 0)} кликов · CTR {fmt_ru(ad['ctr'], 2)}% · CPC <b>{fmt_ru(ad['cpc'], 2)} {currency}</b>"
+            ad["met_en"] = f"{fmt_en(ad['clicks'], 0)} clicks · CTR {fmt_en(ad['ctr'], 2)}% · CPC <b>{fmt_en(ad['cpc'], 2)} {currency}</b>"
             i18n_ru[f"{adKey}.name"] = ad["label_ru"]
             i18n_en[f"{adKey}.name"] = ad["label_en"]
             i18n_ru[f"{adKey}.aud"] = ad["audience_ru"]
@@ -221,8 +231,8 @@ def render_report(data: dict, out_dir: Path, assets_src_dir: Path | None = None)
         aud["discovery"] = bool(aud.get("badge_ru"))
         i18n_ru[f"aud{i}.name"] = aud["name_ru"]; i18n_en[f"aud{i}.name"] = aud["name_en"]
         i18n_ru[f"aud{i}.ctr"] = f"CTR {aud['ctr_range']}"; i18n_en[f"aud{i}.ctr"] = f"CTR {aud['ctr_range']}"
-        i18n_ru[f"aud{i}.stats"] = f"{fmt_ru(aud['spend'], 0)} Kč · охват {fmt_ru(aud['reach'], 0)}"
-        i18n_en[f"aud{i}.stats"] = f"{fmt_en(aud['spend'], 0)} Kč · reach {fmt_en(aud['reach'], 0)}"
+        i18n_ru[f"aud{i}.stats"] = f"{fmt_ru(aud['spend'], 0)} {currency} · охват {fmt_ru(aud['reach'], 0)}"
+        i18n_en[f"aud{i}.stats"] = f"{fmt_en(aud['spend'], 0)} {currency} · reach {fmt_en(aud['reach'], 0)}"
         i18n_ru[f"aud{i}.note"] = aud["note_ru"]; i18n_en[f"aud{i}.note"] = aud["note_en"]
         if aud.get("badge_ru"):
             i18n_ru[f"aud{i}.badge"] = aud["badge_ru"]; i18n_en[f"aud{i}.badge"] = aud.get("badge_en", "")
@@ -233,8 +243,8 @@ def render_report(data: dict, out_dir: Path, assets_src_dir: Path | None = None)
         for i, p in enumerate(platforms, start=1):
             p["bar_pct"] = round(p["spend"] / max_spend * 100, 2)
             i18n_ru[f"plat{i}.label"] = p["label_ru"]; i18n_en[f"plat{i}.label"] = p["label_en"]
-            stat_ru = f"{fmt_ru(p['spend'], 0)} Kč · {fmt_ru(p['clicks'], 0)} кликов · клик {fmt_ru(p['cpc'], 2)} Kč"
-            stat_en = f"{fmt_en(p['spend'], 0)} Kč · {fmt_en(p['clicks'], 0)} clicks · {fmt_en(p['cpc'], 2)} Kč per click"
+            stat_ru = f"{fmt_ru(p['spend'], 0)} {currency} · {fmt_ru(p['clicks'], 0)} кликов · клик {fmt_ru(p['cpc'], 2)} {currency}"
+            stat_en = f"{fmt_en(p['spend'], 0)} {currency} · {fmt_en(p['clicks'], 0)} clicks · {fmt_en(p['cpc'], 2)} {currency} per click"
             i18n_ru[f"plat{i}.stat"] = stat_ru; i18n_en[f"plat{i}.stat"] = stat_en
         i18n_ru["plat.note"] = data.get("platforms_note_ru", "")
         i18n_en["plat.note"] = data.get("platforms_note_en", "")
@@ -252,8 +262,8 @@ def render_report(data: dict, out_dir: Path, assets_src_dir: Path | None = None)
             r["label_en"] = f"{gender_en[r['gender']]} {r['age']}"
             r["bar_pct"] = round(r["spend"] / rows_sorted[0]["spend"] * 100, 2) if rows_sorted[0]["spend"] else 0
             i18n_ru[f"demo.r{i}.label"] = r["label_ru"]; i18n_en[f"demo.r{i}.label"] = r["label_en"]
-            stat_ru = f"{fmt_ru(r['spend'], 0)} Kč · CTR {fmt_ru(r['ctr'], 2)}%"
-            stat_en = f"{fmt_en(r['spend'], 0)} Kč · CTR {fmt_en(r['ctr'], 2)}%"
+            stat_ru = f"{fmt_ru(r['spend'], 0)} {currency} · CTR {fmt_ru(r['ctr'], 2)}%"
+            stat_en = f"{fmt_en(r['spend'], 0)} {currency} · CTR {fmt_en(r['ctr'], 2)}%"
             i18n_ru[f"demo.r{i}.stat"] = stat_ru; i18n_en[f"demo.r{i}.stat"] = stat_en
         demo["rows_sorted"] = rows_sorted
         i18n_ru["demo.note"] = demo["note_ru"]; i18n_en["demo.note"] = demo["note_en"]
@@ -326,6 +336,7 @@ def render_report(data: dict, out_dir: Path, assets_src_dir: Path | None = None)
         "chart_clicks_colors": json.dumps(clicks_colors),
         "chart_cpc_data": json.dumps([c["cpc"] for c in campaigns]),
         "chart_cpc_colors": json.dumps(cpc_colors),
+        "currency_json": json.dumps(currency, ensure_ascii=False),
     }
 
     env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)))

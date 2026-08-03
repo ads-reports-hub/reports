@@ -450,8 +450,8 @@ footer.foot .handle{color:var(--accent-text);margin-top:4px;display:block}
             <td><span data-num="{{ c.impressions }}" data-dec="0">{{ c.impressions | fmt_ru(0) }}</span></td>
             <td class="val-strong"><span data-num="{{ c.clicks }}" data-dec="0">{{ c.clicks | fmt_ru(0) }}</span></td>
             <td><span data-num="{{ c.ctr }}" data-dec="2" data-suffix="%">{{ c.ctr | fmt_ru(2) }}%</span></td>
-            <td><span{% if c.cpc_pill %} class="pill {{ c.cpc_pill }}"{% endif %} data-num="{{ c.cpc }}" data-dec="2" data-suffix="Kč">{{ c.cpc | fmt_ru(2) }} Kč</span></td>
-            <td><span data-num="{{ c.spend }}" data-dec="0" data-suffix="Kč">{{ c.spend | fmt_ru(0) }} Kč</span></td>
+            <td><span{% if c.cpc_pill %} class="pill {{ c.cpc_pill }}"{% endif %} data-num="{{ c.cpc }}" data-dec="2" data-suffix="{{ data.currency }}">{{ c.cpc | fmt_ru(2) }} {{ data.currency }}</span></td>
+            <td><span data-num="{{ c.spend }}" data-dec="0" data-suffix="{{ data.currency }}">{{ c.spend | fmt_ru(0) }} {{ data.currency }}</span></td>
           </tr>
           <tr class="detail-row">
             <td colspan="7" class="verdict-cell"><span class="vlabel" data-i18n="verdict.label">{{ i18n_static.ru['verdict.label'] }}</span><span data-i18n="camp{{ i }}.verdict">{{ c.verdict_ru | safe }}</span></td>
@@ -475,8 +475,8 @@ footer.foot .handle{color:var(--accent-text);margin-top:4px;display:block}
             <td><span data-num="{{ data.totals.impressions }}" data-dec="0">{{ data.totals.impressions | fmt_ru(0) }}</span></td>
             <td><span data-num="{{ data.totals.clicks }}" data-dec="0">{{ data.totals.clicks | fmt_ru(0) }}</span></td>
             <td><span data-num="{{ data.totals.ctr }}" data-dec="2" data-suffix="%">{{ data.totals.ctr | fmt_ru(2) }}%</span></td>
-            <td><span data-num="{{ data.totals.cpc }}" data-dec="2" data-suffix="Kč">{{ data.totals.cpc | fmt_ru(2) }} Kč</span></td>
-            <td><span data-num="{{ data.totals.spend }}" data-dec="0" data-suffix="Kč">{{ data.totals.spend | fmt_ru(0) }} Kč</span></td>
+            <td><span data-num="{{ data.totals.cpc }}" data-dec="2" data-suffix="{{ data.currency }}">{{ data.totals.cpc | fmt_ru(2) }} {{ data.currency }}</span></td>
+            <td><span data-num="{{ data.totals.spend }}" data-dec="0" data-suffix="{{ data.currency }}">{{ data.totals.spend | fmt_ru(0) }} {{ data.currency }}</span></td>
           </tr>
         </tfoot>
       </table>
@@ -492,7 +492,7 @@ footer.foot .handle{color:var(--accent-text);margin-top:4px;display:block}
       {% if aud.discovery %}<span class="aud-star"><span aria-hidden="true">★</span><span data-i18n="aud{{ i }}.badge">{{ aud.badge_ru }}</span></span>{% endif %}
       <div class="aud-name" data-i18n="aud{{ i }}.name">{{ aud.name_ru }}</div>
       <div class="aud-ctr" data-i18n="aud{{ i }}.ctr">CTR {{ aud.ctr_range }}</div>
-      <div class="aud-stats" data-i18n="aud{{ i }}.stats">{{ aud.spend | fmt_ru(0) }} Kč · охват {{ aud.reach | fmt_ru(0) }}</div>
+      <div class="aud-stats" data-i18n="aud{{ i }}.stats">{{ aud.spend | fmt_ru(0) }} {{ data.currency }} · охват {{ aud.reach | fmt_ru(0) }}</div>
       <p class="aud-note" data-i18n="aud{{ i }}.note">{{ aud.note_ru }}</p>
     </article>
     {% endfor %}
@@ -507,7 +507,7 @@ footer.foot .handle{color:var(--accent-text);margin-top:4px;display:block}
     <div class="plat-row">
       <span class="plat-label" data-i18n="plat{{ i }}.label">{{ p.label_ru }}</span>
       <div class="bar-track"><div class="bar-fill" style="width:{{ p.bar_pct }}%"></div></div>
-      <span class="plat-stat" data-i18n="plat{{ i }}.stat">{{ p.spend | fmt_ru(0) }} Kč · {{ p.clicks | fmt_ru(0) }} кликов · клик {{ p.cpc | fmt_ru(2) }} Kč</span>
+      <span class="plat-stat" data-i18n="plat{{ i }}.stat">{{ p.spend | fmt_ru(0) }} {{ data.currency }} · {{ p.clicks | fmt_ru(0) }} кликов · клик {{ p.cpc | fmt_ru(2) }} {{ data.currency }}</span>
     </div>
     {% endfor %}
     <p class="cap" data-i18n="plat.note">{{ data.platforms_note_ru }}</p>
@@ -528,7 +528,7 @@ footer.foot .handle{color:var(--accent-text);margin-top:4px;display:block}
     <div class="demo-row">
       <span class="demo-label" data-i18n="demo.r{{ i }}.label">{{ row.label_ru }}</span>
       <div class="bar-track"><div class="bar-fill {{ 'men' if row.gender == 'male' else 'women' }}" style="width:{{ row.bar_pct }}%"></div></div>
-      <span class="demo-stat{{ ' hot' if row.hot else '' }}" data-i18n="demo.r{{ i }}.stat">{{ row.spend | fmt_ru(0) }} Kč · CTR {{ row.ctr | fmt_ru(2) }}%</span>
+      <span class="demo-stat{{ ' hot' if row.hot else '' }}" data-i18n="demo.r{{ i }}.stat">{{ row.spend | fmt_ru(0) }} {{ data.currency }} · CTR {{ row.ctr | fmt_ru(2) }}%</span>
     </div>
     {% endfor %}
     <p class="cap" data-i18n="demo.note">{{ data.demographics.note_ru }}</p>
@@ -691,6 +691,7 @@ var chartLabels = {
 /* Подписи на оси обрезаны по длине (см. render.py); полное название
    кампании - для подсказки при наведении/тапе - берём отсюда. */
 var chartFullNames = {{ chart_full_names | safe }};
+var currency = {{ currency_json | safe }};
 
 function updateChartLang(lang){
   if(clicksChart){ clicksChart.data.labels = chartLabels[lang]; clicksChart.update(); }
@@ -790,8 +791,8 @@ window.addEventListener('load', function(){
         }]
       },
       options: baseOptions(
-        function(c){ return fmtNum(c.parsed.y, 2, currentLang) + (currentLang === 'ru' ? ' Kč за клик' : ' Kč per click'); },
-        function(v){ return v + ' Kč'; }
+        function(c){ return fmtNum(c.parsed.y, 2, currentLang) + (currentLang === 'ru' ? ' ' + currency + ' за клик' : ' ' + currency + ' per click'); },
+        function(v){ return v + ' ' + currency; }
       )
     });
     allCharts.push(cpcChart);
