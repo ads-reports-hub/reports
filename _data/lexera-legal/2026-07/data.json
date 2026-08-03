@@ -31,8 +31,8 @@
     "reactions": 488,
     "comments": 41,
     "saves": 155,
-    "leads": 262,
-    "costPerLead": 53.51,
+    "leads": 131,
+    "costPerLead": 107.01,
     "addToCart": 0,
     "costPerCart": 0
   },
@@ -44,8 +44,8 @@
     "clicks": 2670,
     "ctr": 2.0,
     "cpc": 4.48,
-    "leads": 136,
-    "costPerLead": 88.01,
+    "leads": 68,
+    "costPerLead": 176.02,
     "addToCart": 0,
     "costPerCart": 0
   },
@@ -110,8 +110,8 @@
           "met_en": "433 clicks · CTR 3.16% · CPC <b>3.01 Kč</b>"
         }
       ],
-      "verdict_ru": "Кампания показала хороший отклик (CTR 2,62%) и самую низкую цену клика среди всех запусков на тему воссоединения. Аудитория активно смотрела видео (8449 просмотров) и вовлекалась в контент.",
-      "verdict_en": "The campaign delivered strong engagement (2.62% CTR) and the lowest cost per click among all family reunification launches. The audience actively watched videos (8,449 views) and engaged with the content.",
+      "verdict_ru": "Воссоединение (26.6) показало сильный отклик: CTR 2,62% и клик за 2,8 Kč – один из самых низких среди всех кампаний. Тема резонирует с аудиторией, люди охотно переходят.",
+      "verdict_en": "Family Reunification (26.6) delivered strong engagement: 2.62% CTR and 2.8 Kč per click – among the lowest across all campaigns. The topic resonates well, driving high click-through rates.",
       "tag_kind": "direct",
       "cpc_pill": "good"
     },
@@ -147,8 +147,8 @@
           "met_en": "374 clicks · CTR 1.80% · CPC <b>5.85 Kč</b>"
         }
       ],
-      "verdict_ru": "CTR оказался ниже среднего (1,8%), а цена клика 5,85 Kč говорит о том, что тема перехода с ВНЖ на ПМЖ конкурентная и требует более точного таргетинга или цепляющего креатива.",
-      "verdict_en": "The 1.8% CTR came in below average, and the 5.85 Kč CPC indicates that the residence-to-permanent-residency topic is competitive and needs sharper targeting or more compelling creative.",
+      "verdict_ru": "Переход с ВНЖ Европы (26.6) работает дороже: клик 5,85 Kč при CTR 1,8%. Сложная тема требует больше касаний, чтобы человек решился на действие.",
+      "verdict_en": "EU Residence Permit Transfer (26.6) costs more: 5.85 Kč per click at 1.8% CTR. This complex topic requires more touchpoints before people take action.",
       "tag_kind": "direct",
       "cpc_pill": "watch"
     },
@@ -212,8 +212,8 @@
           "met_en": "71 clicks · CTR 2.87% · CPC <b>2.77 Kč</b>"
         }
       ],
-      "verdict_ru": "Reels-кампания на чешскую аудиторию принесла высокий CTR 2,85% при низкой цене 2,86 Kč, что говорит о правильном попадании в интересы местной аудитории.",
-      "verdict_en": "The Czech Reels campaign achieved a strong 2.85% CTR at 2.86 Kč per click, showing precise alignment with local audience interests.",
+      "verdict_ru": "Reels для чешской аудитории (FW · REELS · CZ) дал CTR 2,85% и клик 2,86 Kč при небольшом бюджете. Формат работает, можно масштабировать.",
+      "verdict_en": "Czech audience Reels (FW · REELS · CZ) achieved 2.85% CTR and 2.86 Kč per click on a modest budget. The format performs well and can be scaled.",
       "tag_kind": "direct",
       "cpc_pill": null
     },
@@ -263,8 +263,8 @@
           "met_en": "232 clicks · CTR 2.22% · CPC <b>4.37 Kč</b>"
         }
       ],
-      "verdict_ru": "Средний результат: CTR 2,25% и CPC 4,32 Kč. Кампания собрала 2249 просмотров видео, но не выделилась среди других запусков на ту же тему.",
-      "verdict_en": "Average performance: 2.25% CTR and 4.32 Kč CPC. The campaign gathered 2,249 video views but didn't stand out among other launches on the same topic.",
+      "verdict_ru": "Переход с ВНЖ Европы (9.7) показал CTR 2,25% при клике 4,32 Kč. Средний результат – тема сложная, но объявление находит свою аудиторию.",
+      "verdict_en": "EU Residence Permit Transfer (9.7) reached 2.25% CTR at 4.32 Kč per click. Moderate performance – challenging topic but the ad finds its audience.",
       "tag_kind": "direct",
       "cpc_pill": null
     },
@@ -300,8 +300,8 @@
           "met_en": "1,517 clicks · CTR 2.41% · CPC <b>3.51 Kč</b>"
         }
       ],
-      "verdict_ru": "Самая крупная кампания по охвату (29 042 человека) с хорошей ценой клика 3,51 Kč и высоким вовлечением (18 723 действий). Это самый масштабный и результативный запуск месяца.",
-      "verdict_en": "The largest campaign by reach (29,042 people) with a solid 3.51 Kč CPC and strong engagement (18,723 actions). This was the most impactful launch of the month.",
+      "verdict_ru": "Воссоединение (10.7) собрало больше всего бюджета (5 328,11 Kč) и вовлечённости (18 723 действий). CTR 2,41%, клик 3,51 Kč – стабильный результат на большом охвате.",
+      "verdict_en": "Family Reunification (10.7) received the largest budget (5,328.11 Kč) and engagement (18,723 actions). 2.41% CTR, 3.51 Kč per click – consistent performance at scale.",
       "tag_kind": "direct",
       "cpc_pill": null
     },
@@ -351,8 +351,8 @@
           "met_en": "243 clicks · CTR 1.95% · CPC <b>3.98 Kč</b>"
         }
       ],
-      "verdict_ru": "Частота показов 2,27 при невысоком CTR 2,09% и цене 4,0 Kč. Аудитория видела объявления чаще, но не спешила кликать, возможно, из-за усталости от темы.",
-      "verdict_en": "Frequency of 2.27 with a modest 2.09% CTR and 4.0 Kč CPC. People saw the ads more often but didn't rush to click, possibly due to topic fatigue.",
+      "verdict_ru": "Переход с ВНЖ Европы (15.7) дал CTR 2,09% и клик 4 Kč. Частота показов 2,27 – аудитория видела объявление чаще, но откликалась сдержанно.",
+      "verdict_en": "EU Residence Permit Transfer (15.7) delivered 2.09% CTR and 4 Kč per click. Frequency of 2.27 means the audience saw the ad more often but responded moderately.",
       "tag_kind": "direct",
       "cpc_pill": null
     },
@@ -402,8 +402,8 @@
           "met_en": "274 clicks · CTR 1.92% · CPC <b>4.69 Kč</b>"
         }
       ],
-      "verdict_ru": "Самая дорогая цена клика в серии (4,72 Kč) при частоте 2,25 и CTR 1,98%. Видимо, к концу месяца аудитория насытилась этой темой и стала менее отзывчивой.",
-      "verdict_en": "The highest CPC in the series (4.72 Kč) with 2.25 frequency and 1.98% CTR. By the end of the month, the audience likely became saturated with this topic and less responsive.",
+      "verdict_ru": "Переход с ВНЖ Европы (25.7) показал CTR 1,98% при самом дорогом клике – 4,72 Kč. Тема требует дополнительной работы с креативом или уточнения таргетинга.",
+      "verdict_en": "EU Residence Permit Transfer (25.7) achieved 1.98% CTR with the highest cost per click at 4.72 Kč. The topic needs creative refinement or targeting adjustments.",
       "tag_kind": "direct",
       "cpc_pill": null
     }
@@ -417,8 +417,8 @@
       "ctr_range": "1,8–2,62%",
       "badge_ru": null,
       "badge_en": null,
-      "note_ru": "Русско- и украиноязычная аудитория показала стабильную кликабельность 1,8–2,62% и забрала 98% бюджета, подтверждая своё центральное значение для бизнеса.",
-      "note_en": "Russian and Ukrainian-speaking audiences delivered consistent 1.8–2.62% CTR and consumed 98% of the budget, confirming their central importance to the business.",
+      "note_ru": "Русско-украинская аудитория собрала 98% бюджета и показала стабильный CTR от 1,8% до 2,62% в зависимости от кампании.",
+      "note_en": "Russian-Ukrainian audience received 98% of budget and showed stable CTR from 1.8% to 2.62% depending on campaign.",
       "discovery": false
     },
     {
@@ -429,8 +429,8 @@
       "ctr_range": "2.85%",
       "badge_ru": "Лучшая аудитория",
       "badge_en": "Best audience",
-      "note_ru": "Чешская мобильная аудитория 28–50 лет показала высокий CTR 2,85%, но получила всего 243,22 Kč бюджета, что говорит о потенциале для расширения.",
-      "note_en": "The Czech mobile audience aged 28–50 achieved a strong 2.85% CTR but received only 243.22 Kč in budget, suggesting potential for scaling.",
+      "note_ru": "Чешская аудитория (28–50 лет, мобильные) отработала небольшой бюджет с хорошим откликом: CTR 2,85%.",
+      "note_en": "Czech audience (28–50, mobile) worked a small budget with good response: 2.85% CTR.",
       "discovery": true
     }
   ],
@@ -631,8 +631,8 @@
         "bar_pct": 7.27
       }
     ],
-    "note_ru": "Женщины 55+ кликают активнее всех (CTR до 4,6%), но получают меньше бюджета. Мужчины 18–24 лет имеют самый низкий CTR (1,2%), но на них тратится 741,34 Kč.",
-    "note_en": "Women 55+ click most actively (up to 4.6% CTR) but receive less budget. Men aged 18–24 have the lowest CTR (1.2%) yet consume 741.34 Kč in spend.",
+    "note_ru": "Женщины 55–64 лет и 65+ показали самый высокий CTR (3,34% и 4,6%), но получили минимум бюджета. Мужчины 18–24 лет кликают реже всех (1,2%), но на них потрачено 741,34 Kč.",
+    "note_en": "Women 55–64 and 65+ showed the highest CTR (3.34% and 4.6%) but received minimal budget. Men 18–24 click least often (1.2%) yet received 741.34 Kč in spend.",
     "rows_sorted": [
       {
         "gender": "male",
@@ -779,8 +779,8 @@
       "metric_ru": "CTR 3.16% · CPC 3.01 Kč",
       "metric_en": "CTR 3.16% · CPC 3.01 Kč",
       "best": true,
-      "reason_ru": "Объявление из кампании воссоединения семьи вызвало самый сильный отклик аудитории благодаря эмоциональной теме и точному попаданию в потребность.",
-      "reason_en": "This family reunification ad resonated most strongly with the audience due to its emotional appeal and precise alignment with their needs."
+      "reason_ru": "Объявление из кампании «Воссоединение · 26.6» получило самый высокий CTR среди всех креативов периода.",
+      "reason_en": "Ad from 'Family Reunification · 26.6' campaign achieved the highest CTR among all creatives in the period."
     },
     {
       "adId": "120247307777000413",
@@ -792,8 +792,8 @@
       "metric_ru": "CTR 2.29% · CPC 2.48 Kč",
       "metric_en": "CTR 2.29% · CPC 2.48 Kč",
       "best": false,
-      "reason_ru": "То же объявление обеспечило самую низкую цену клика за счёт высокой релевантности и качественного креатива, который зацепил аудиторию с первого показа.",
-      "reason_en": "The same ad achieved the lowest cost per click through high relevance and compelling creative that captured attention from the first impression."
+      "reason_ru": "Креатив из той же кампании собрал клики по самой низкой цене за весь период.",
+      "reason_en": "Creative from the same campaign collected clicks at the lowest cost throughout the entire period."
     },
     {
       "adId": "120247998028880413",
@@ -805,50 +805,50 @@
       "metric_ru": "CTR 2.41% · CPC 3.51 Kč",
       "metric_en": "CTR 2.41% · CPC 3.51 Kč",
       "best": false,
-      "reason_ru": "Объявление из крупной кампании воссоединения собрало больше всего вовлечённости (18 723 действий) благодаря масштабному охвату и привлекательному видеоконтенту.",
-      "reason_en": "This ad from the large family reunification campaign generated the most engagement (18,723 actions) through its extensive reach and compelling video content."
+      "reason_ru": "Объявление из «Воссоединение · 10.7» собрало максимум вовлечённости: 18 723 действия на одну кампанию.",
+      "reason_en": "Ad from 'Family Reunification · 10.7' generated maximum engagement: 18,723 actions in a single campaign."
     }
   ],
-  "insight_ru": "За период реклама охватила <b>47 289 человек</b> и собрала <b>262 лида</b> при цене <b>53,51 Kč</b> за обращение. Основной бюджет (<b>13 775,74 Kč</b>) ушёл на русско- и украиноязычную аудиторию, которая показала стабильную кликабельность 1,8–2,62%. Лучше всего сработала лента Facebook с самым низким CPC <b>2,28 Kč</b>.",
-  "insight_en": "The campaign reached <b>47,289 people</b> and generated <b>262 leads</b> at <b>53.51 Kč</b> per lead. The majority of the budget (<b>13,775.74 Kč</b>) went to Russian and Ukrainian-speaking audiences, delivering a consistent CTR of 1.8–2.62%. Facebook Feed performed best with the lowest CPC of <b>2.28 Kč</b>.",
-  "platforms_note_ru": "Лента Facebook принесла клики дешевле всего (2,28 Kč), в то время как Instagram Stories и лента Instagram оказались самыми дорогими (11,12–12,44 Kč). Reels на обеих площадках собрали основной объём кликов и вовлечённости.",
-  "platforms_note_en": "Facebook Feed delivered the cheapest clicks (2.28 Kč), while Instagram Stories and Feed were the most expensive (11.12–12.44 Kč). Reels on both platforms generated the bulk of clicks and engagement.",
+  "insight_ru": "За период потрачено <b>14 018,96 Kč</b>, охвачено <b>47 289 человек</b>. Основной результат – <b>131 лид</b> по цене <b>107,01 Kč</b> за контакт. Лучше всех отработали кампании по воссоединению семей: они собрали самый высокий отклик при низкой цене клика.",
+  "insight_en": "The period spent <b>14,018.96 Kč</b>, reaching <b>47,289 people</b>. Main result: <b>131 leads</b> at <b>107.01 Kč</b> per contact. Family reunification campaigns performed strongest, delivering high engagement at a low cost per click.",
+  "platforms_note_ru": "Facebook-лента дала самый дешёвый клик – 2,28 Kč при 1 806 кликах. Instagram-позиции дороже: Reels 7,49 Kč, лента 12,44 Kč – там аудитория реже переходит по ссылкам.",
+  "platforms_note_en": "Facebook Feed delivered the cheapest click at 2.28 Kč with 1,806 clicks. Instagram placements cost more: Reels 7.49 Kč, Feed 12.44 Kč – audiences there click through less frequently.",
   "findings_ru": [
-    "За период потрачено 14 018,96 Kč, собрано 262 лида по цене 53,51 Kč, что является приемлемым результатом для юридических услуг по миграционным вопросам.",
-    "Лента Facebook показала самую низкую цену клика (2,28 Kč) и собрала 1806 кликов, что делает её наиболее эффективной площадкой для этого типа контента.",
-    "Женщины 55+ демонстрируют самую высокую кликабельность (3,34–4,6%), но получают лишь 747,05 Kč бюджета, что говорит о недоиспользовании активного сегмента.",
-    "Instagram Stories и лента Instagram оказались в 4–5 раз дороже по CPC (11,12–12,44 Kč), чем лента Facebook, при минимальном количестве кликов.",
-    "Кампании на тему воссоединения семьи показывают лучший CTR (2,41–2,62%) и более низкие CPC (2,8–3,51 Kč), чем кампании про переход с ВНЖ на ПМЖ.",
-    "Русско- и украиноязычная аудитория стабильно приносит 1,8–2,62% CTR и забирает 98% бюджета, подтверждая свою ключевую роль в продвижении."
+    "За период получено 131 лид по средней цене 107,01 Kč за контакт.",
+    "Кампании по воссоединению семей стабильно показывают CTR 2,41–2,62% и клик от 2,8 Kč до 3,51 Kč.",
+    "Кампании по переходу с ВНЖ Европы работают дороже: клик от 4 Kč до 5,85 Kč при более низком отклике.",
+    "Facebook-лента даёт самый дешёвый клик (2,28 Kč), Instagram-позиции в 3–5 раз дороже.",
+    "Женщины старше 55 лет показывают CTR до 4,6%, но получают меньше 10% бюджета.",
+    "Русско-украинская аудитория собрала 98% расходов и остаётся основным источником лидов."
   ],
   "findings_en": [
-    "The period spent 14,018.96 Kč and generated 262 leads at 53.51 Kč per lead, a reasonable result for legal migration services.",
-    "Facebook Feed delivered the lowest CPC (2.28 Kč) and collected 1,806 clicks, making it the most efficient placement for this content type.",
-    "Women 55+ show the highest click-through rates (3.34–4.6%) but receive only 747.05 Kč in budget, indicating an underutilized active segment.",
-    "Instagram Stories and Feed proved 4–5 times more expensive per click (11.12–12.44 Kč) than Facebook Feed while generating minimal clicks.",
-    "Family reunification campaigns deliver better CTR (2.41–2.62%) and lower CPC (2.8–3.51 Kč) compared to residence-to-permanent-residency campaigns.",
-    "Russian and Ukrainian-speaking audiences consistently deliver 1.8–2.62% CTR and consume 98% of the budget, confirming their central role in promotion."
+    "The period generated 131 leads at an average cost of 107.01 Kč per contact.",
+    "Family reunification campaigns consistently deliver 2.41–2.62% CTR and clicks from 2.8 Kč to 3.51 Kč.",
+    "EU residence permit transfer campaigns cost more: 4 Kč to 5.85 Kč per click with lower engagement.",
+    "Facebook Feed provides the cheapest click (2.28 Kč), Instagram placements cost 3–5× more.",
+    "Women over 55 show CTR up to 4.6% but receive less than 10% of budget.",
+    "Russian-Ukrainian audience accounted for 98% of spend and remains the primary lead source."
   ],
   "recommendations_ru": [
-    "Увеличить бюджет на женщин 55–64 и 65+, которые кликают в 2–3 раза активнее молодых сегментов, но получают непропорционально мало показов.",
-    "Снизить или приостановить показы в Instagram Stories и ленте Instagram, где CPC превышает 11 Kč, и перенаправить бюджет в ленту и Reels Facebook.",
-    "Масштабировать чешскую аудиторию 28–50 лет, которая показала CTR 2,85% при минимальном бюджете, проверив потенциал расширения географии или интересов.",
-    "Обновить креативы для кампаний про переход с ВНЖ на ПМЖ, так как их CTR (1,8–2,25%) и CPC (4,0–5,85 Kč) заметно слабее кампаний про воссоединение.",
-    "Снизить частоту показов в кампаниях с frequency выше 2,2, чтобы избежать усталости аудитории и падения кликабельности к концу периода.",
-    "Протестировать отдельные объявления для мужчин 18–24 лет с CTR 1,2%, либо исключить этот сегмент, перераспределив 741,34 Kč на более отзывчивые группы."
+    "Увеличить бюджет на кампании «Воссоединение»: они стабильно дают низкую цену клика и высокий отклик.",
+    "Пересмотреть креативы по теме перехода с ВНЖ Европы: упростить посыл или добавить конкретные кейсы, чтобы снизить цену клика.",
+    "Перераспределить часть бюджета с Instagram-ленты и сторис на Facebook-ленту, где клик в 5 раз дешевле.",
+    "Выделить отдельный бюджет для женщин 55+ лет: их CTR в 2 раза выше среднего, а расходы минимальны.",
+    "Протестировать чешскую аудиторию на большем бюджете: формат Reels дал хороший результат на старте.",
+    "Снизить расходы на мужчин 18–24 лет: их CTR самый низкий (1,2%), а бюджет непропорционально высокий."
   ],
   "recommendations_en": [
-    "Increase budget for women aged 55–64 and 65+, who click 2–3 times more actively than younger segments but receive disproportionately low exposure.",
-    "Reduce or pause placements in Instagram Stories and Feed where CPC exceeds 11 Kč, and redirect budget to Facebook Feed and Reels.",
-    "Scale the Czech audience aged 28–50, which delivered 2.85% CTR on minimal budget, by testing broader geography or interest targeting.",
-    "Refresh creative for residence-to-permanent-residency campaigns, as their CTR (1.8–2.25%) and CPC (4.0–5.85 Kč) lag noticeably behind family reunification campaigns.",
-    "Lower frequency in campaigns exceeding 2.2 to prevent audience fatigue and declining click-through rates toward the end of the period.",
-    "Test separate ads for men aged 18–24 with 1.2% CTR, or exclude this segment and reallocate 741.34 Kč to more responsive groups."
+    "Increase budget for 'Family Reunification' campaigns: they consistently deliver low cost per click and high engagement.",
+    "Revise creatives for EU residence permit transfer: simplify the message or add specific case studies to lower cost per click.",
+    "Reallocate budget from Instagram Feed and Stories to Facebook Feed, where clicks cost 5× less.",
+    "Allocate separate budget for women 55+: their CTR is 2× above average while spend remains minimal.",
+    "Test Czech audience with larger budget: the Reels format showed promising results at launch.",
+    "Reduce spend on men 18–24: their CTR is lowest (1.2%) while budget allocation is disproportionately high."
   ],
   "euNote_ru": "Важно знать: в рекламных кабинетах ЕС Meta не показывает число начатых переписок в директ. Кампании «IG direct» реально приводят людей в сообщения, но эта цифра в отчёте технически недоступна. Реальное число обращений видно только вручную (в директе или через учёт менеджеров).",
   "euNote_en": "Worth knowing: in EU ad accounts Meta does not report the number of started Direct conversations. The IG direct campaigns do bring people into messages, but that number is technically unavailable in reporting. The real count of inquiries is only visible manually (in Direct or via a managers' log).",
   "meta": {
-    "generatedAt": "2026-08-02T18:41:37.670535Z",
+    "generatedAt": "2026-08-03T22:18:22.251461Z",
     "generatedBy": "automation"
   },
   "footer_ru": "Данные: Meta Marketing API · рекламный кабинет Lexera Legal · период 1 – 31 июля",
