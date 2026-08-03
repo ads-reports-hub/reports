@@ -68,6 +68,22 @@ def _contains_em_dash(obj) -> bool:
     return False
 
 
+def _contains_wrong_currency(obj, currency: str) -> bool:
+    """Модель по привычке из прошлых отчётов иногда пишет 'Kč' даже когда
+    ей явно указана другая валюта в промпте, поэтому одной текстовой
+    инструкции недостаточно - нужна отдельная проверка с ретраем, как для
+    длинного тире выше."""
+    if currency == "Kč":
+        return False
+    if isinstance(obj, str):
+        return "Kč" in obj
+    if isinstance(obj, list):
+        return any(_contains_wrong_currency(x, currency) for x in obj)
+    if isinstance(obj, dict):
+        return any(_contains_wrong_currency(v, currency) for v in obj.values())
+    return False
+
+
 def _call_anthropic(client, prompt: str, error_context: str = "") -> dict:
     full_prompt = prompt if not error_context else f"{prompt}\n\n## Предыдущая попытка не подошла\n{error_context}\nПопробуй ещё раз, строго следуя формату и правилам."
     resp = client.messages.create(
@@ -96,10 +112,18 @@ def generate(normalized: dict, api_key: str) -> dict:
         "prevTotals во входных данных — можно упоминать рост/падение метрик и вероятные причины."
     )
 
+    currency = normalized.get("currency", "Kč")
+    currency_instruction = (
+        f"Валюта этого клиента: {currency}. Во всех текстах пиши денежные суммы "
+        f"именно с этим символом, не с `Kč` по умолчанию."
+    )
+
     slim = _strip_ai_only_fields(normalized)
     prompt = (
         _load_prompt_template()
         .replace("{{DYNAMICS_INSTRUCTION}}", dynamics_instruction)
+        .replace("{{CURRENCY_INSTRUCTION}}", currency_instruction)
+        .replace("{{CURRENCY}}", currency)
         .replace("{{SHOW_DYNAMICS}}", "да" if show_dynamics else "нет")
         .replace("{{METRICS_JSON}}", json.dumps(slim, ensure_ascii=False, indent=2))
     )
@@ -114,6 +138,10 @@ def generate(normalized: dict, api_key: str) -> dict:
 
         if _contains_em_dash(result):
             last_error = "В ответе найден запрещённый символ длинного тире (—). Перепиши без него."
+            continue
+
+        if _contains_wrong_currency(result, currency):
+            last_error = f"В ответе встречается 'Kč', а валюта этого клиента {currency}. Перепиши все денежные суммы с правильным символом."
             continue
 
         n_campaigns = len(normalized["campaigns"])
