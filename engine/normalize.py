@@ -18,7 +18,7 @@ topAds[].reason_ru/en) — сам normalize.py текст не придумыв�
 что определение цели кампании по имени работает идеально для всех.
 """
 import re
-from collections import defaultdict
+from collections import Counter, defaultdict
 
 GOAL_KEYWORDS = [
     (["direct", "директ", "message", "переписк"], "переписки в директ", "Direct messages"),
@@ -209,26 +209,90 @@ def build_campaigns(campaigns_raw: dict, adsets_raw: dict, ads_raw: dict) -> lis
     return campaigns
 
 
+def _audience_hint(campaign_name: str, adset_name: str) -> str:
+    """Чем различить две группы с одинаковым названием: берём из названия
+    кампании только те куски, которых нет в названии самой группы.
+
+    Просто дописать название кампании нельзя: у клиентов, которые продвигают
+    посты прямо из Instagram, Meta называет и группу, и кампанию одинаково
+    (текстом поста), и подпись превращалась в один и тот же текст, написанный
+    дважды подряд. Если после отбрасывания повторов ничего не осталось,
+    возвращаем пустую строку, и тогда вызывающий код просто пронумерует.
+    """
+    base = (adset_name or "").strip().strip(".").strip().lower()
+    keep = []
+    for seg in re.split(r"\s*[|—·]\s*|\s+-\s+", campaign_name or ""):
+        seg = seg.strip().strip(".").strip()
+        if not seg:
+            continue
+        low = seg.lower()
+        same = low == base or (len(base) >= 3 and (low in base or base in low))
+        if same:
+            continue
+        keep.append(seg)
+    return " · ".join(keep)
+
+
+def _unique_audience_labels(rows: list[dict]) -> list[str]:
+    """Подписи карточек аудиторий, гарантированно различимые между собой.
+
+    Несколько групп могут называться одинаково: одну и ту же аудиторию
+    запускают разными кампаниями в течение месяца. Четыре карточки с
+    одинаковой подписью бесполезны, поэтому к повторам дописываем то, чем
+    отличается кампания (обычно это её название и дата запуска), а если
+    отличить нечем, нумеруем по порядку.
+    """
+    names = [_strip_em_dash(r.get("adset_name", "")) for r in rows]
+    counts = Counter(names)
+
+    labeled = []
+    for row, name in zip(rows, names):
+        if counts[name] == 1:
+            labeled.append(name)
+            continue
+        hint = _strip_em_dash(_audience_hint(row.get("campaign_name", ""), name))
+        labeled.append(f"{name} · {hint}" if hint else name)
+
+    dup = Counter(labeled)
+    seen: dict[str, int] = defaultdict(int)
+    out = []
+    for lab in labeled:
+        if dup[lab] == 1:
+            out.append(lab)
+        else:
+            seen[lab] += 1
+            out.append(f"{lab} · {seen[lab]}")
+    return out
+
+
 def build_audiences(adsets_raw: dict) -> list[dict]:
-    grouped = defaultdict(lambda: {"spend": 0.0, "reach": 0, "ctrs": []})
-    for row in adsets_raw.get("data", []):
-        g = grouped[row["adset_name"]]
-        g["spend"] += float(row.get("spend", 0))
-        g["reach"] += int(float(row.get("reach", 0)))
-        g["ctrs"].append(round(float(row.get("ctr", 0)), 2))
+    """Одна карточка на КАЖДУЮ группу объявлений, без склейки по названию.
+
+    Раньше группы с одинаковым названием склеивались в одну карточку, а их
+    охваты складывались. Складывать охват нельзя: это число РАЗНЫХ людей, и
+    тот, кто попал в две группы, считался дважды. На живых данных это давало
+    карточку аудитории с охватом БОЛЬШЕ, чем охват всего кабинета (JuniKa за
+    июль: 20 817 в карточке против 19 025 по кабинету, обе цифры на одной
+    странице отчёта). Теперь в карточке стоит охват ровно одной группы, как
+    его отдаёт Meta, поэтому любое число сходится с рекламным кабинетом.
+    Вариант выбран Лизой из двух предложенных 2026-08-25.
+    """
+    rows = list(adsets_raw.get("data", []))
+    labels = _unique_audience_labels(rows)
 
     result = []
-    for name, g in sorted(grouped.items(), key=lambda kv: kv[1]["spend"], reverse=True):
-        ctrs = sorted(g["ctrs"])
-        ctr_range = f"{ctrs[0]}%" if len(ctrs) == 1 else f"{ctrs[0]}–{ctrs[-1]}%".replace(".", ",")
-        name = _strip_em_dash(name)
+    for row, label in zip(rows, labels):
+        ctr = round(float(row.get("ctr", 0)), 2)
         result.append({
-            "name_ru": name, "name_en": name,
-            "spend": round(g["spend"], 2), "reach": g["reach"],
-            "ctr_range": ctr_range, "_max_ctr": ctrs[-1],
+            "name_ru": label, "name_en": label,
+            "spend": round(float(row.get("spend", 0)), 2),
+            "reach": int(float(row.get("reach", 0))),
+            "ctr_range": f"{ctr}%".replace(".", ","),
+            "_max_ctr": ctr,
         })
+    result.sort(key=lambda a: a["spend"], reverse=True)
 
-    # Аудитория с лучшим CTR получает бейдж "Лучшая аудитория" — только если
+    # Аудитория с лучшим CTR получает бейдж "Лучшая аудитория", только если
     # их больше одной (иначе бейдж бессмысленен, это единственный вариант).
     if len(result) > 1:
         best = max(result, key=lambda a: a["_max_ctr"])
