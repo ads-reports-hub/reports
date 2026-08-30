@@ -82,8 +82,8 @@
           "met_en": "41 clicks · CTR 1.55% · CPC <b>7.28 Kč</b>"
         }
       ],
-      "verdict_ru": "Клик обошёлся в 7,28 Kč при CTR 1,55% – это дороже среднего по аккаунту. Причина в том, что объявление показывалось узкой аудитории вовлечённых пользователей публикации, где конкуренция за внимание выше.",
-      "verdict_en": "Click cost was 7.28 Kč with 1.55% CTR – above account average. This happened because the ad targeted a narrow audience of post engagers where competition for attention is higher.",
+      "verdict_ru": "Публикация набрала 880 просмотров видео при клике за 7,28 Kč. Цена выше средней, потому что охват небольшой (2 401) и аудитория ещё холодная. Для прогрева это нормально.",
+      "verdict_en": "The post generated 880 video views at 7.28 Kč per click. Cost is above average because reach is limited (2,401) and the audience is still cold. Normal for warming up.",
       "tag_kind": "direct",
       "cpc_pill": "watch"
     },
@@ -119,8 +119,8 @@
           "met_en": "550 clicks · CTR 3.00% · CPC <b>3.89 Kč</b>"
         }
       ],
-      "verdict_ru": "Самая эффективная кампания: клик всего 3,89 Kč при CTR 3,0%. Аудитория ru+ukr хорошо отреагировала на тестовый креатив, и алгоритм нашёл заинтересованных людей по низкой цене.",
-      "verdict_en": "Most effective campaign: just 3.89 Kč per click with 3.0% CTR. The ru+ukr audience responded well to the test creative, and the algorithm found interested people at a low cost.",
+      "verdict_ru": "Тестовая кампания дала лучший результат: 550 кликов по 3,89 Kč при CTR 3,0%. Аудитория «ru+ukr» откликается активнее остальных, стоит масштабировать именно её.",
+      "verdict_en": "Test campaign delivered the best performance: 550 clicks at 3.89 Kč with 3.0% CTR. The 'ru+ukr' audience responds more actively than others – worth scaling up.",
       "tag_kind": "direct",
       "cpc_pill": "good"
     },
@@ -156,8 +156,8 @@
           "met_en": "230 clicks · CTR 1.91% · CPC <b>6.08 Kč</b>"
         }
       ],
-      "verdict_ru": "Клик стоил 6,08 Kč при CTR 1,91%. Аудитория вовлечённых в публикацию дала средний результат – люди видели контент, но не всегда переходили по ссылке.",
-      "verdict_en": "Click cost 6.08 Kč with 1.91% CTR. The post engagement audience delivered average results – people saw the content but didn't always click through.",
+      "verdict_ru": "Публикация принесла 230 кликов по 6,08 Kč и 4 206 просмотров видео. Цена клика средняя для публикаций с холодной аудиторией, вовлечённость приличная.",
+      "verdict_en": "This post brought 230 clicks at 6.08 Kč and 4,206 video views. Cost per click is typical for posts targeting cold audiences, engagement is solid.",
       "tag_kind": "direct",
       "cpc_pill": null
     },
@@ -193,8 +193,8 @@
           "met_en": "200 clicks · CTR 1.67% · CPC <b>6.98 Kč</b>"
         }
       ],
-      "verdict_ru": "Клик обошёлся в 6,98 Kč при CTR 1,67% – самый низкий показатель кликабельности. Аудитория публикации оказалась менее заинтересованной в переходе, хотя смотрели видео активно.",
-      "verdict_en": "Click cost 6.98 Kč with 1.67% CTR – the lowest clickthrough rate. This post audience was less interested in clicking, though they watched videos actively.",
+      "verdict_ru": "200 кликов по 6,98 Kč – самая высокая цена среди кампаний. Охват 9 378, но CTR всего 1,67%, значит креатив или аудитория цепляют слабее.",
+      "verdict_en": "200 clicks at 6.98 Kč – the highest cost among campaigns. Reach of 9,378 but only 1.67% CTR means creative or audience engagement is weaker.",
       "tag_kind": "direct",
       "cpc_pill": null
     },
@@ -244,8 +244,8 @@
           "met_en": "9 clicks · CTR 1.22% · CPC <b>5.16 Kč</b>"
         }
       ],
-      "verdict_ru": "Клик стоил 4,10 Kč при CTR 1,87%, но вовлечённость была низкой – всего 263 действия. Это кампания с предложением отелей: люди кликали, но не реагировали на пост эмоционально.",
-      "verdict_en": "Click cost 4.10 Kč with 1.87% CTR, but engagement was low at just 263 actions. This hotel offers campaign got clicks but didn't trigger emotional reactions to the post.",
+      "verdict_ru": "Кампания про отели показала 376 кликов по 4,10 Kč, но почти без видео и низкое вовлечение (263). Скорее всего, формат карусели или статики, который работает хуже видео.",
+      "verdict_en": "Hotel offers campaign delivered 376 clicks at 4.10 Kč but minimal video views and low engagement (263). Likely carousel or static format, which performs worse than video.",
       "tag_kind": "direct",
       "cpc_pill": null
     },
@@ -281,8 +281,8 @@
           "met_en": "290 clicks · CTR 2.68% · CPC <b>4.06 Kč</b>"
         }
       ],
-      "verdict_ru": "Хороший результат: клик 4,06 Kč при CTR 2,68%. Аудитория ru+ukr откликнулась на креатив, алгоритм нашёл заинтересованных людей по разумной цене.",
-      "verdict_en": "Good result: 4.06 Kč per click with 2.68% CTR. The ru+ukr audience responded to the creative, and the algorithm found interested people at a reasonable price.",
+      "verdict_ru": "290 кликов по 4,06 Kč при CTR 2,68% – хороший баланс цены и отклика. Аудитория «ru+ukr» снова подтверждает, что заходит лучше узких таргетингов.",
+      "verdict_en": "290 clicks at 4.06 Kč with 2.68% CTR – solid balance of cost and response. 'ru+ukr' audience again proves it outperforms narrower targeting.",
       "tag_kind": "direct",
       "cpc_pill": null
     },
@@ -318,8 +318,8 @@
           "met_en": "221 clicks · CTR 1.84% · CPC <b>6.33 Kč</b>"
         }
       ],
-      "verdict_ru": "Клик стоил 6,33 Kč при CTR 1,84%. Аудитория публикации показала средний результат – люди смотрели видео, но кликали реже, чем в кампаниях на широкую аудиторию.",
-      "verdict_en": "Click cost 6.33 Kč with 1.84% CTR. The post audience showed average performance – people watched videos but clicked less often than broad audience campaigns.",
+      "verdict_ru": "221 клик по 6,33 Kč, CTR 1,84%. Цена высокая из-за узкого таргетинга на подписчиков публикации, но для прогрева аудитории это допустимо.",
+      "verdict_en": "221 clicks at 6.33 Kč, 1.84% CTR. Cost is high due to narrow targeting of post engagers, but acceptable for audience warming.",
       "tag_kind": "direct",
       "cpc_pill": null
     },
@@ -355,35 +355,71 @@
           "met_en": "318 clicks · CTR 2.74% · CPC <b>4.39 Kč</b>"
         }
       ],
-      "verdict_ru": "Хороший CTR 2,74% при цене клика 4,39 Kč. Это та же аудитория публикации, но креатив сработал лучше – люди охотнее переходили по ссылке.",
-      "verdict_en": "Good 2.74% CTR with 4.39 Kč per click. Same post audience but the creative worked better – people clicked through more willingly.",
+      "verdict_ru": "318 кликов по 4,39 Kč при CTR 2,74% – один из лучших результатов среди публикаций. Аудитория реагирует активно, стоит дать больше бюджета.",
+      "verdict_en": "318 clicks at 4.39 Kč with 2.74% CTR – one of the best results among posts. Audience responds actively, worth increasing budget.",
       "tag_kind": "direct",
       "cpc_pill": null
     }
   ],
   "audiences": [
     {
-      "name_ru": "ru+ukr",
-      "name_en": "ru+ukr",
-      "spend": 4855.86,
-      "reach": 27268,
-      "ctr_range": "1,87–3,0%",
+      "name_ru": "ru+ukr · direсt · тест · сообщения",
+      "name_en": "ru+ukr · direсt · тест · сообщения",
+      "spend": 2136.91,
+      "reach": 11439,
+      "ctr_range": "3,0%",
       "badge_ru": "Лучшая аудитория",
       "badge_en": "Best audience",
-      "note_ru": "Аудитория ru+ukr дала лучший CTR (до 3,0%) и самые дешёвые клики, охватив при этом больше всего людей.",
-      "note_en": "The ru+ukr audience delivered the best CTR (up to 3.0%) and cheapest clicks while reaching the most people.",
+      "note_ru": "Лидер по отклику с CTR 3,0% и самым низким CPC среди масштабных аудиторий – 3,89 Kč.",
+      "note_en": "Top performer with 3.0% CTR and lowest CPC among scalable audiences at 3.89 Kč.",
       "discovery": true
     },
     {
-      "name_ru": "Публикация в Instagram: Добро пожаловать в Travel...",
-      "name_en": "Публикация в Instagram: Добро пожаловать в Travel...",
-      "spend": 4493.36,
-      "reach": 26829,
-      "ctr_range": "1,55–2,74%",
+      "name_ru": "ru+ukr · direсt · отели предложения · сообщения",
+      "name_en": "ru+ukr · direсt · отели предложения · сообщения",
+      "spend": 1541.3,
+      "reach": 7841,
+      "ctr_range": "1,87%",
       "badge_ru": null,
       "badge_en": null,
-      "note_ru": "Аудитория вовлечённых в публикацию показала CTR от 1,55% до 2,74% – результат зависел от креатива больше, чем от самой аудитории.",
-      "note_en": "Post engagement audience showed 1.55% to 2.74% CTR – performance depended more on creative than the audience itself.",
+      "note_ru": "CTR 1,87%, клик 4,10 Kč – результат слабее тестовой кампании, но охват приличный.",
+      "note_en": "1.87% CTR, 4.10 Kč per click – weaker than test campaign but decent reach.",
+      "discovery": false
+    },
+    {
+      "name_ru": "Публикация в Instagram: Добро пожаловать в Travel... · 3",
+      "name_en": "Публикация в Instagram: Добро пожаловать в Travel... · 3",
+      "spend": 1399.75,
+      "reach": 8083,
+      "ctr_range": "1,84%",
+      "badge_ru": null,
+      "badge_en": null,
+      "note_ru": "CTR 1,84% при клике 6,33 Kč – узкий таргетинг даёт дорогой трафик.",
+      "note_en": "1.84% CTR at 6.33 Kč per click – narrow targeting yields expensive traffic.",
+      "discovery": false
+    },
+    {
+      "name_ru": "Публикация в Instagram: Добро пожаловать в Travel... · 2",
+      "name_en": "Публикация в Instagram: Добро пожаловать в Travel... · 2",
+      "spend": 1397.88,
+      "reach": 8381,
+      "ctr_range": "1,91%",
+      "badge_ru": null,
+      "badge_en": null,
+      "note_ru": "CTR 1,91%, клик 6,08 Kč – средний результат для холодной аудитории публикации.",
+      "note_en": "1.91% CTR, 6.08 Kč per click – average result for cold post audience.",
+      "discovery": false
+    },
+    {
+      "name_ru": "Публикация в Instagram: Добро пожаловать в Travel... · 4",
+      "name_en": "Публикация в Instagram: Добро пожаловать в Travel... · 4",
+      "spend": 1397.31,
+      "reach": 7964,
+      "ctr_range": "2,74%",
+      "badge_ru": null,
+      "badge_en": null,
+      "note_ru": "CTR 2,74%, клик 4,39 Kč – один из лучших показателей среди публикаций, аудитория откликается активно.",
+      "note_en": "2.74% CTR, 4.39 Kč per click – one of the best among posts, audience responds actively.",
       "discovery": false
     },
     {
@@ -391,11 +427,35 @@
       "name_en": "Instagram post: Добро пожаловать в Travel Forever...",
       "spend": 1396.71,
       "reach": 9378,
-      "ctr_range": "1.67%",
+      "ctr_range": "1,67%",
       "badge_ru": null,
       "badge_en": null,
-      "note_ru": "Небольшая аудитория с CTR 1,67% – люди смотрели контент, но кликали реже остальных сегментов.",
-      "note_en": "Small audience with 1.67% CTR – people viewed content but clicked less than other segments.",
+      "note_ru": "CTR 1,67% при самом дорогом клике 6,98 Kč – аудитория цепляет слабее остальных.",
+      "note_en": "1.67% CTR with most expensive click at 6.98 Kč – audience engagement is weakest.",
+      "discovery": false
+    },
+    {
+      "name_ru": "ru+ukr · direсt · сообщения",
+      "name_en": "ru+ukr · direсt · сообщения",
+      "spend": 1177.65,
+      "reach": 7988,
+      "ctr_range": "2,68%",
+      "badge_ru": null,
+      "badge_en": null,
+      "note_ru": "CTR 2,68%, клик 4,06 Kč – стабильный результат, аудитория работает хорошо.",
+      "note_en": "2.68% CTR, 4.06 Kč per click – stable performance, audience works well.",
+      "discovery": false
+    },
+    {
+      "name_ru": "Публикация в Instagram: Добро пожаловать в Travel... · 1",
+      "name_en": "Публикация в Instagram: Добро пожаловать в Travel... · 1",
+      "spend": 298.42,
+      "reach": 2401,
+      "ctr_range": "1,55%",
+      "badge_ru": null,
+      "badge_en": null,
+      "note_ru": "Минимальный охват 2 401, CTR 1,55% – тестовая аудитория, рано судить о потенциале.",
+      "note_en": "Minimal reach of 2,401, 1.55% CTR – test audience, too early to judge potential.",
       "discovery": false
     }
   ],
@@ -597,8 +657,8 @@
         "bar_pct": 0.01
       }
     ],
-    "note_ru": "Самый высокий CTR у молодёжи 18–24 лет (4,56–5,36%) и старшего поколения 55+ (2,45–3,64%), но львиная доля бюджета (7 786 Kč) ушла на женщин 35–54 лет с более скромным откликом 1,89–2,43%. Мужчины получили в 3 раза меньше бюджета при сопоставимом CTR.",
-    "note_en": "Highest CTR came from 18–24 year-olds (4.56–5.36%) and 55+ (2.45–3.64%), but the lion's share of budget (7,786 Kč) went to women 35–54 with more modest 1.89–2.43% response. Men received 3x less budget despite comparable CTR.",
+    "note_ru": "Самый активный отклик у женщин 55–64 (CTR 2,98%) и 65+ (3,64%), но больше всего бюджета ушло на женщин 45–54 (2 805,58 Kč) и 35–44 (2 396,45 Kč). Молодёжь 18–24 кликает охотнее всех (4,56–5,36%), но охват маленький.",
+    "note_en": "Highest engagement from women 55–64 (2.98% CTR) and 65+ (3.64%), but most budget went to women 45–54 (2,805.58 Kč) and 35–44 (2,396.45 Kč). Ages 18–24 click most eagerly (4.56–5.36%) but reach is small.",
     "rows_sorted": [
       {
         "gender": "female",
@@ -756,50 +816,50 @@
       "metric_ru": "CTR 3.0% · CPC 3.89 Kč",
       "metric_en": "CTR 3.0% · CPC 3.89 Kč",
       "best": true,
-      "reason_ru": "Кампания собрала самое большое количество реакций, комментариев и сохранений – люди не просто кликали, но активно взаимодействовали с постом.",
-      "reason_en": "This campaign collected the most reactions, comments and saves – people didn't just click but actively engaged with the post."
+      "reason_ru": "Тестовая кампания с аудиторией «ru+ukr» показала лучший CTR 3,0% и самый низкий CPC 3,89 Kč среди всех кампаний периода.",
+      "reason_en": "Test campaign with 'ru+ukr' audience achieved best CTR of 3.0% and lowest CPC of 3.89 Kč across all campaigns in the period."
     }
   ],
-  "insight_ru": "За период вы потратили <b>10 745,93 Kč</b> и получили <b>2 226 кликов</b> по цене <b>4,83 Kč</b> за клик. Реклама охватила <b>39 487 человек</b>, которые увидели объявления в среднем 2,5 раза. Лучше всего сработала кампания с тестовым креативом для директа: клик стоил всего 3,89 Kč при высокой активности аудитории.",
-  "insight_en": "During this period you spent <b>10,745.93 Kč</b> and received <b>2,226 clicks</b> at <b>4.83 Kč</b> per click. Your ads reached <b>39,487 people</b> who saw them 2.5 times on average. The best performing campaign was the direct test creative, with clicks costing just 3.89 Kč and strong audience engagement.",
-  "platforms_note_ru": "Instagram принёс 99% трафика: сторис оказались дешевле всего (4,36 Kč за клик), лента и Reels – чуть дороже (5,35–5,41 Kč). Facebook почти не использовался, хотя клики там стоили всего 2,45 Kč.",
-  "platforms_note_en": "Instagram brought 99% of traffic: Stories were cheapest at 4.36 Kč per click, Feed and Reels slightly higher at 5.35–5.41 Kč. Facebook was barely used, though clicks there cost only 2.45 Kč.",
+  "insight_ru": "За период на рекламу потрачено <b>10 745,93 Kč</b>, охвачено <b>39 487 человек</b>. Все кампании работали на переписки в директ, получили <b>2 226 кликов</b> по средней цене <b>4,83 Kč</b>. Лучше других сработала аудитория «ru+ukr» в тестовой кампании с CTR <b>3,0%</b>, остальные аудитории показали 1,55–2,74%.",
+  "insight_en": "Total ad spend reached <b>10,745.93 Kč</b>, delivering <b>39,487 reach</b>. All campaigns focused on Direct messages, generating <b>2,226 clicks</b> at an average cost of <b>4.83 Kč</b>. The 'ru+ukr' test audience outperformed with <b>3.0% CTR</b>, while other audiences ranged from 1.55% to 2.74%.",
+  "platforms_note_ru": "Instagram принёс 98% трафика: лента и сторис работают примерно одинаково (899 и 891 клик), но сторис дешевле на 1 Kč. Facebook дал всего 104 клика, хотя цена там низкая (2,45 Kč) – не хватает охвата.",
+  "platforms_note_en": "Instagram delivered 98% of traffic: Feed and Stories perform similarly (899 vs 891 clicks), but Stories cost 1 Kč less. Facebook only brought 104 clicks despite low cost (2.45 Kč) – lacks reach.",
   "findings_ru": [
-    "Общий CTR 2,24% при цене клика 4,83 Kč – средний результат для турбизнеса, но есть резерв для оптимизации через перераспределение бюджета.",
-    "Аудитория ru+ukr принесла клики по 3,89–4,10 Kč, а похожие аудитории публикаций – по 4,39–7,28 Kč. Разница в эффективности достигает 87%.",
-    "Instagram Stories дали самый дешёвый клик (4,36 Kč), но получили только 36% бюджета. Лента и Reels забрали 61% при более высокой цене.",
-    "Женщины 35–54 лет получили 48% всех денег (5 202 Kč), хотя их CTR 1,89–2,43% ниже, чем у молодёжи 18–24 (4,56–5,36%) и аудитории 55+ (2,98–3,64%).",
-    "Видеоконтент собрал 24 707 просмотров при 27 001 взаимодействии с постами – люди смотрели ролики и реагировали на них, но не всегда переходили по ссылке.",
-    "Facebook принёс всего 104 клика по 2,45 Kč – платформа почти не использовалась, хотя могла бы дать дешёвый трафик при правильной настройке."
+    "Потрачено 10 745,93 Kč, получено 2 226 кликов по средней цене 4,83 Kč при охвате 39 487 человек.",
+    "Аудитория «ru+ukr» в тестовой кампании дала CTR 3,0% и клик 3,89 Kč – лучший результат периода.",
+    "Узкие таргетинги на подписчиков публикаций стоят 6,08–7,28 Kč за клик, почти в два раза дороже широких.",
+    "Instagram сторис обходятся на 1 Kč дешевле ленты (4,36 Kč против 5,35 Kč), при схожем количестве кликов.",
+    "Женщины 55+ кликают активнее всех (CTR 2,98–3,64%), но основной бюджет уходит на возраст 35–54.",
+    "Видеоконтент собирает 24 707 просмотров и держит вовлечённость, статика даёт низкий отклик (263 взаимодействия)."
   ],
   "findings_en": [
-    "Overall 2.24% CTR at 4.83 Kč per click – average for travel business, but there's room for optimization through budget redistribution.",
-    "The ru+ukr audience delivered 3.89–4.10 Kč clicks while lookalike post audiences cost 4.39–7.28 Kč. The efficiency difference reaches 87%.",
-    "Instagram Stories gave the cheapest clicks (4.36 Kč) but received only 36% of budget. Feed and Reels took 61% at higher cost.",
-    "Women 35–54 received 48% of all spend (5,202 Kč) despite their 1.89–2.43% CTR being lower than 18–24 year-olds (4.56–5.36%) and 55+ audience (2.98–3.64%).",
-    "Video content generated 24,707 views with 27,001 post engagements – people watched videos and reacted to them but didn't always click through.",
-    "Facebook brought just 104 clicks at 2.45 Kč – the platform was barely used, though it could provide cheap traffic with proper setup."
+    "Spent 10,745.93 Kč, generated 2,226 clicks at average 4.83 Kč with 39,487 reach.",
+    "'ru+ukr' audience in test campaign delivered 3.0% CTR and 3.89 Kč per click – best result of the period.",
+    "Narrow targeting of post engagers costs 6.08–7.28 Kč per click, almost twice as much as broad audiences.",
+    "Instagram Stories cost 1 Kč less than Feed (4.36 Kč vs 5.35 Kč) with similar click volume.",
+    "Women 55+ click most actively (2.98–3.64% CTR), but most budget goes to ages 35–54.",
+    "Video content drives 24,707 views and maintains engagement, while static formats yield low response (263 interactions)."
   ],
   "recommendations_ru": [
-    "Увеличить долю бюджета на аудиторию ru+ukr до 60–70% от общих расходов: она даёт клики на 40–50% дешевле при высоком CTR.",
-    "Перераспределить 30–40% бюджета из ленты Instagram в Stories: разница в цене клика (4,36 Kč против 5,35 Kč) даст 500–700 Kč экономии в месяц.",
-    "Протестировать отдельные кампании на сегменты 18–24 и 55+ с бюджетом 500–700 Kč каждая: их CTR в 1,5–2 раза выше среднего.",
-    "Выделить 10–15% бюджета на мужскую аудиорию 25–54 лет: сейчас они получают всего 1 867 Kč при CTR 1,52–2,27%, сопоставимом с женским.",
-    "Запустить тестовую кампанию на Facebook с бюджетом 500 Kč: клики там стоят 2,45 Kč, но платформа почти не использовалась.",
-    "Повторить формат креатива из кампании «direсt · тест · сообщения» в других наборах: он дал CTR 3,0% и клик по 3,89 Kč – лучший результат за период."
+    "Дать больше бюджета на аудиторию «ru+ukr» в кампаниях с CTR выше 2,5% – они приносят клики дешевле 4,10 Kč.",
+    "Сократить траты на узкие таргетинги подписчиков публикаций (клик выше 6 Kč) или перевести их в ретаргетинг с другим креативом.",
+    "Перенести часть бюджета из ленты Instagram в сторис – там клик дешевле на 1 Kč при том же отклике.",
+    "Протестировать больше креативов для женщин 55+ и мужчин 18–24 – у них самый высокий CTR, но маленький охват.",
+    "Заменить статичные форматы (карусели, фото) на видео – они дают в 10 раз больше вовлечённости.",
+    "Проверить качество лидов из кампаний с CTR выше 2,5% – если конверсия в продажу хорошая, масштабировать их в первую очередь."
   ],
   "recommendations_en": [
-    "Increase ru+ukr audience budget share to 60–70% of total spend: it delivers clicks 40–50% cheaper with high CTR.",
-    "Redistribute 30–40% of budget from Instagram Feed to Stories: the click price difference (4.36 Kč vs 5.35 Kč) will save 500–700 Kč monthly.",
-    "Test separate campaigns for 18–24 and 55+ segments with 500–700 Kč budget each: their CTR is 1.5–2x above average.",
-    "Allocate 10–15% budget to male audience 25–54: they currently get just 1,867 Kč with 1.52–2.27% CTR comparable to female segments.",
-    "Launch a Facebook test campaign with 500 Kč budget: clicks cost 2.45 Kč there but the platform was barely used.",
-    "Replicate the creative format from «direсt · тест · сообщения» campaign in other ad sets: it delivered 3.0% CTR and 3.89 Kč clicks – best performance this period."
+    "Increase budget for 'ru+ukr' audience in campaigns with CTR above 2.5% – they deliver clicks under 4.10 Kč.",
+    "Reduce spend on narrow post-engager targeting (clicks above 6 Kč) or shift them to retargeting with different creative.",
+    "Move part of budget from Instagram Feed to Stories – clicks cost 1 Kč less with similar response.",
+    "Test more creatives for women 55+ and men 18–24 – they show highest CTR but small reach.",
+    "Replace static formats (carousels, photos) with video – they generate 10x more engagement.",
+    "Review lead quality from campaigns with CTR above 2.5% – if conversion to sales is strong, scale them first."
   ],
   "euNote_ru": "Важно знать: в рекламных кабинетах ЕС Meta не показывает число начатых переписок в директ. Кампании «IG direct» реально приводят людей в сообщения, но эта цифра в отчёте технически недоступна. Реальное число обращений видно только вручную (в директе или через учёт менеджеров).",
   "euNote_en": "Worth knowing: in EU ad accounts Meta does not report the number of started Direct conversations. The IG direct campaigns do bring people into messages, but that number is technically unavailable in reporting. The real count of inquiries is only visible manually (in Direct or via a managers' log).",
   "meta": {
-    "generatedAt": "2026-08-03T22:45:26.572398Z",
+    "generatedAt": "2026-08-30T12:11:07.869571Z",
     "generatedBy": "automation"
   },
   "footer_ru": "Данные: Meta Marketing API · рекламный кабинет TravelForever · период 1 – 31 июля",
