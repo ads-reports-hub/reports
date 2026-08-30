@@ -28,7 +28,7 @@ def translate_ru_to_en(text_ru: str, api_key: str) -> str:
         prompt = prompt_base if not last_error else (
             f"{prompt_base}\n\n(Предыдущий ответ отклонён: {last_error} Попробуй ещё раз.)"
         )
-        resp = client.messages.create(model=MODEL, max_tokens=1024, messages=[{"role": "user", "content": prompt}])
+        resp = client.messages.create(model=MODEL, max_tokens=4096, messages=[{"role": "user", "content": prompt}])
         text = resp.content[0].text.strip()
         if EM_DASH in text:
             last_error = "В ответе найден запрещённый символ длинного тире (—)."

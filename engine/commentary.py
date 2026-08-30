@@ -16,8 +16,19 @@ import anthropic
 ENGINE_DIR = Path(__file__).parent
 MODEL = "claude-sonnet-4-5"
 MAX_ATTEMPTS = 3
+# Ответ должен целиком поместиться в один вызов: это ОДИН JSON, и обрезанный
+# по лимиту ответ невозможно разобрать в принципе. Потолок 4096 упирался у
+# клиентов с большим числом аудиторий и кампаний (Lexera, 7 аудиторий: JSON
+# обрывался на середине, а в логе это выглядело как "невалидный JSON" и
+# уводило от настоящей причины). Платим только за реально сгенерированное,
+# так что запас ничего не стоит.
+MAX_TOKENS = 16000
 
 EM_DASH = "—"
+
+
+class TruncatedResponseError(Exception):
+    """Модель упёрлась в лимит вывода и вернула оборванный JSON."""
 
 
 class CommentaryError(Exception):
@@ -88,9 +99,13 @@ def _call_anthropic(client, prompt: str, error_context: str = "") -> dict:
     full_prompt = prompt if not error_context else f"{prompt}\n\n## Предыдущая попытка не подошла\n{error_context}\nПопробуй ещё раз, строго следуя формату и правилам."
     resp = client.messages.create(
         model=MODEL,
-        max_tokens=4096,
+        max_tokens=MAX_TOKENS,
         messages=[{"role": "user", "content": full_prompt}],
     )
+    if resp.stop_reason == "max_tokens":
+        raise TruncatedResponseError(
+            f"ответ не поместился в {MAX_TOKENS} токенов и оборвался"
+        )
     text = resp.content[0].text.strip()
     text = re.sub(r"^```(json)?|```$", "", text.strip(), flags=re.MULTILINE).strip()
     return json.loads(text)
@@ -132,6 +147,9 @@ def generate(normalized: dict, api_key: str) -> dict:
     for attempt in range(1, MAX_ATTEMPTS + 1):
         try:
             result = _call_anthropic(client, prompt, last_error)
+        except TruncatedResponseError as e:
+            last_error = f"{e}. Пиши короче, уложись в лимит."
+            continue
         except json.JSONDecodeError as e:
             last_error = f"Ответ не был валидным JSON: {e}"
             continue
