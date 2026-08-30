@@ -98,8 +98,8 @@
           "met_en": "145 clicks · CTR 1.69% · CPC <b>3.83 ₹</b>"
         }
       ],
-      "verdict_ru": "Кампания показала самый высокий CTR среди всех (2,56%) и получила клик по цене ₹1,84. Аудитория INDIAN активно реагирует на креативы, что делает эту связку эффективной для привлечения переписок.",
-      "verdict_en": "The campaign achieved the highest CTR across all campaigns (2.56%) with a click cost of ₹1.84. The INDIAN audience responds actively to the creatives, making this setup effective for generating direct messages.",
+      "verdict_ru": "Кампания показала высокий CTR <b>2,56%</b> и самую низкую цену клика <b>₹1,84</b> среди всех. Тестовая индийская аудитория активно реагирует на контент, что делает эту связку эффективной для генерации переписок.",
+      "verdict_en": "Campaign showed high CTR of <b>2.56%</b> and the lowest cost per click at <b>₹1.84</b> across all campaigns. The test Indian audience actively engages with the content, making this setup effective for generating direct messages.",
       "tag_kind": "direct",
       "cpc_pill": null
     },
@@ -205,8 +205,8 @@
           "met_en": "913 clicks · CTR 1.60% · CPC <b>2.35 ₹</b>"
         }
       ],
-      "verdict_ru": "CTR 1,6%, клик стоит ₹2,35. Ретаргетинговая аудитория WhatsApp и Instagram показывает средний отклик, цена клика выше, чем у воронок с лидами, но это нормально для прямых переписок без промежуточного шага.",
-      "verdict_en": "CTR of 1.6% with a click cost of ₹2.35. The WhatsApp and Instagram retargeting audience shows moderate response, with a higher cost per click than lead funnel campaigns, which is typical for direct messaging without an intermediate step.",
+      "verdict_ru": "CTR <b>1,6%</b> и цена клика <b>₹2,35</b> находятся в средних значениях. Связка Instagram и WhatsApp работает стабильно на прогретой аудитории, но без выдающихся результатов.",
+      "verdict_en": "CTR of <b>1.6%</b> and cost per click of <b>₹2.35</b> are at average levels. The Instagram and WhatsApp combination works steadily with warm audience, though without exceptional results.",
       "tag_kind": "direct",
       "cpc_pill": null
     },
@@ -284,8 +284,8 @@
           "met_en": "2,548 clicks · CTR 1.98% · CPC <b>1.83 ₹</b>"
         }
       ],
-      "verdict_ru": "Самая крупная кампания по бюджету (₹15 216) с хорошим CTR 2,27% и выгодной ценой клика ₹1,66. Ретаргетинг Instagram охватывает широкую аудиторию и стабильно приводит людей на следующий шаг воронки.",
-      "verdict_en": "The largest campaign by budget (₹15,216) with a solid CTR of 2.27% and an attractive click cost of ₹1.66. Instagram retargeting reaches a broad audience and consistently moves people to the next funnel step.",
+      "verdict_ru": "Самая крупная кампания по охвату (300 652 человека) с хорошим CTR <b>2,27%</b> и низкой ценой клика <b>₹1,66</b>. Ретаргетинг аудитории Instagram даёт стабильно качественный отклик при масштабировании.",
+      "verdict_en": "The largest campaign by reach (300,652 people) with solid CTR of <b>2.27%</b> and low cost per click at <b>₹1.66</b>. Instagram retargeting delivers consistently quality response at scale.",
       "tag_kind": "direct",
       "cpc_pill": "good"
     },
@@ -391,13 +391,13 @@
           "met_en": "979 clicks · CTR 1.16% · CPC <b>2.65 ₹</b>"
         }
       ],
-      "verdict_ru": "Частота показа 2,1 говорит о том, что одни и те же люди видели объявления чаще остальных. CTR 1,4%, клик ₹2,51. Возможно, аудитория уже знакома с предложением и нужны свежие креативы или пауза.",
-      "verdict_en": "A frequency of 2.1 indicates the same people saw the ads more often than in other campaigns. CTR of 1.4% and a click cost of ₹2.51 suggest the audience may already be familiar with the offer and could benefit from fresh creatives or a break.",
+      "verdict_ru": "Частота показов выросла до <b>2,1</b>, что объясняет снижение CTR до <b>1,4%</b> и рост цены клика до <b>₹2,51</b>. Аудитория видит объявления чаще, поэтому реагирует менее охотно.",
+      "verdict_en": "Frequency increased to <b>2.1</b>, which explains the drop in CTR to <b>1.4%</b> and rise in cost per click to <b>₹2.51</b>. The audience sees ads more often, so they respond less eagerly.",
       "tag_kind": "direct",
       "cpc_pill": "watch"
     },
     {
-      "name": "Sales · workshop funnel · LAL · leads 25.7",
+      "name": "Sales · workshop funnel · LAL · leads",
       "date": "",
       "goal_ru": "переписки в директ",
       "goal_en": "Direct messages",
@@ -470,8 +470,8 @@
           "met_en": "14 clicks · CTR 1.87% · CPC <b>2.16 ₹</b>"
         }
       ],
-      "verdict_ru": "Lookalike-аудитория показала CTR 1,74% и клик по ₹2,37. Низкая частота (1,06) означает, что охват был широким и каждый человек видел объявление примерно один раз, это хороший старт для холодной аудитории.",
-      "verdict_en": "The Lookalike audience delivered a CTR of 1.74% with a click cost of ₹2.37. A low frequency of 1.06 means the reach was broad and each person saw the ad roughly once, which is a solid start for a cold audience.",
+      "verdict_ru": "Lookalike-аудитория показала CTR <b>1,74%</b> и цену клика <b>₹2,37</b>. Результаты средние, что типично для холодной аудитории, которая ещё не знакома с брендом.",
+      "verdict_en": "Lookalike audience showed CTR of <b>1.74%</b> and cost per click of <b>₹2.37</b>. Results are average, which is typical for cold audience not yet familiar with the brand.",
       "tag_kind": "direct",
       "cpc_pill": null
     }
@@ -482,35 +482,11 @@
       "name_en": "Retarget IG",
       "spend": 15216.53,
       "reach": 300652,
-      "ctr_range": "2.27%",
+      "ctr_range": "2,27%",
       "badge_ru": null,
       "badge_en": null,
-      "note_ru": "Самая результативная аудитория: высокий CTR 2,27% при охвате 300 652 человек, получила наибольший бюджет и оправдала его.",
-      "note_en": "The top-performing audience: high CTR of 2.27% with a reach of 300,652 people, received the largest budget and justified it.",
-      "discovery": false
-    },
-    {
-      "name_ru": "IG | Retarget Audience -",
-      "name_en": "IG | Retarget Audience -",
-      "spend": 8364.01,
-      "reach": 166896,
-      "ctr_range": "1,62–1,94%",
-      "badge_ru": null,
-      "badge_en": null,
-      "note_ru": "CTR в диапазоне 1,62–1,94%, средний отклик при охвате 166 896 человек.",
-      "note_en": "CTR ranges from 1.62% to 1.94%, showing moderate engagement with a reach of 166,896 people.",
-      "discovery": false
-    },
-    {
-      "name_ru": "WhatsApp = IG retarget audience",
-      "name_en": "WhatsApp = IG retarget audience",
-      "spend": 8051.59,
-      "reach": 120709,
-      "ctr_range": "1,14–1,26%",
-      "badge_ru": null,
-      "badge_en": null,
-      "note_ru": "CTR 1,14–1,26%, самый низкий среди аудиторий, но охват компактный (120 709), возможно, нужно обновить креативы или расширить сегмент.",
-      "note_en": "CTR of 1.14–1.26%, the lowest among audiences, with a compact reach of 120,709; may benefit from updated creatives or a broader segment.",
+      "note_ru": "Ретаргетинг Instagram дал лучший баланс охвата и вовлечённости с CTR <b>2,27%</b>, это самая отзывчивая аудитория.",
+      "note_en": "Instagram retargeting delivered the best balance of reach and engagement with CTR of <b>2.27%</b>, making it the most responsive audience.",
       "discovery": false
     },
     {
@@ -518,11 +494,11 @@
       "name_en": "INDIAN",
       "spend": 8036.49,
       "reach": 151406,
-      "ctr_range": "2.56%",
+      "ctr_range": "2,56%",
       "badge_ru": "Лучшая аудитория",
       "badge_en": "Best audience",
-      "note_ru": "Лидер по кликабельности: CTR 2,56%, охват 151 406, клик обошёлся дешевле остальных.",
-      "note_en": "Leader in clickability: CTR of 2.56%, reach of 151,406, and the lowest cost per click among all audiences.",
+      "note_ru": "Индийская аудитория показала наивысший CTR <b>2,56%</b>, активно реагирует на контент и даёт дешёвые клики.",
+      "note_en": "Indian audience showed the highest CTR of <b>2.56%</b>, actively engages with content and delivers cheap clicks.",
       "discovery": true
     },
     {
@@ -530,11 +506,59 @@
       "name_en": "LAL",
       "spend": 6328.64,
       "reach": 145382,
-      "ctr_range": "1.74%",
+      "ctr_range": "1,74%",
       "badge_ru": null,
       "badge_en": null,
-      "note_ru": "CTR 1,74%, похожая аудитория работает стабильно для первого касания, охват 145 382 человека.",
-      "note_en": "CTR of 1.74%, the lookalike audience performs steadily for initial contact, reaching 145,382 people.",
+      "note_ru": "Lookalike-аудитория дала CTR <b>1,74%</b>, что ниже тёплых сегментов, но нормально для поиска новых клиентов.",
+      "note_en": "Lookalike audience delivered CTR of <b>1.74%</b>, lower than warm segments but acceptable for finding new customers.",
+      "discovery": false
+    },
+    {
+      "name_ru": "IG | Retarget Audience - · direct ads · IG + WhatsApp · Test Audience · updated · 16.7",
+      "name_en": "IG | Retarget Audience - · direct ads · IG + WhatsApp · Test Audience · updated · 16.7",
+      "spend": 5479.14,
+      "reach": 94679,
+      "ctr_range": "1,62%",
+      "badge_ru": null,
+      "badge_en": null,
+      "note_ru": "Ретаргетинг Instagram в связке с директ-объявлениями показал CTR <b>1,62%</b>, работает стабильно.",
+      "note_en": "Instagram retargeting combined with direct ads showed CTR of <b>1.62%</b>, performing steadily.",
+      "discovery": false
+    },
+    {
+      "name_ru": "WhatsApp = IG retarget audience · direct ads · IG + WhatsApp · Test Audience · updated · 16.7",
+      "name_en": "WhatsApp = IG retarget audience · direct ads · IG + WhatsApp · Test Audience · updated · 16.7",
+      "spend": 5458.99,
+      "reach": 67384,
+      "ctr_range": "1,26%",
+      "badge_ru": null,
+      "badge_en": null,
+      "note_ru": "WhatsApp-аудитория в обновлённой кампании дала самый низкий CTR <b>1,26%</b>, требует проверки креативов или настроек.",
+      "note_en": "WhatsApp audience in the updated campaign delivered the lowest CTR of <b>1.26%</b>, requires review of creatives or settings.",
+      "discovery": false
+    },
+    {
+      "name_ru": "IG | Retarget Audience - · direct ads · IG + WhatsApp · Test Audience · 15.7",
+      "name_en": "IG | Retarget Audience - · direct ads · IG + WhatsApp · Test Audience · 15.7",
+      "spend": 2884.87,
+      "reach": 72217,
+      "ctr_range": "1,94%",
+      "badge_ru": null,
+      "badge_en": null,
+      "note_ru": "Ретаргетинг Instagram в первой версии кампании показал приличный CTR <b>1,94%</b>, аудитория откликается.",
+      "note_en": "Instagram retargeting in the first campaign version showed decent CTR of <b>1.94%</b>, audience responds well.",
+      "discovery": false
+    },
+    {
+      "name_ru": "WhatsApp = IG retarget audience · direct ads · IG + WhatsApp · Test Audience · 15.7",
+      "name_en": "WhatsApp = IG retarget audience · direct ads · IG + WhatsApp · Test Audience · 15.7",
+      "spend": 2592.6,
+      "reach": 53325,
+      "ctr_range": "1,14%",
+      "badge_ru": null,
+      "badge_en": null,
+      "note_ru": "WhatsApp-аудитория в первой версии дала CTR <b>1,14%</b>, немного ниже средних значений по проекту.",
+      "note_en": "WhatsApp audience in the first version delivered CTR of <b>1.14%</b>, slightly below project averages.",
       "discovery": false
     }
   ],
@@ -757,8 +781,8 @@
         "bar_pct": 0.0
       }
     ],
-    "note_ru": "Женщины 35–44 и 65+ показывают CTR выше 3,8%, но получают малую долю бюджета (₹2 399 и ₹86). Мужчины 18–24 охвачены широко (303 348), но их CTR ниже (1,54%), при этом они съедают ₹14 090.",
-    "note_en": "Women aged 35–44 and 65+ show CTR above 3.8% but receive a small share of the budget (₹2,399 and ₹86). Men aged 18–24 have a broad reach (303,348) but a lower CTR of 1.54%, yet they consume ₹14,090 in spend.",
+    "note_ru": "Женщины 35-44 и 65+ показали самый высокий CTR (<b>3,9%</b> и <b>5,1%</b>), но получают мало бюджета из-за небольшого размера сегмента. Мужчины 18-24 забирают больше всего трафика (<b>₹14 090</b>), хотя их CTR ниже (<b>1,54%</b>).",
+    "note_en": "Women aged 35-44 and 65+ showed the highest CTR (<b>3.9%</b> and <b>5.1%</b>) but receive little budget due to small segment size. Men aged 18-24 take most traffic (<b>₹14,090</b>), though their CTR is lower (<b>1.54%</b>).",
     "rows_sorted": [
       {
         "gender": "male",
@@ -927,8 +951,8 @@
       "metric_ru": "CTR 4.94% · CPC 0.77 ₹",
       "metric_en": "CTR 4.94% · CPC 0.77 ₹",
       "best": true,
-      "reason_ru": "Объявление из кампании с ретаргетингом Instagram получило максимальное вовлечение: 179 486 взаимодействий с постом и 167 633 просмотра видео.",
-      "reason_en": "The ad from the Instagram retargeting campaign earned the highest engagement: 179,486 post interactions and 167,633 video views."
+      "reason_ru": "Креатив вызвал максимальную вовлечённость аудитории в кампании с ретаргетингом Instagram, где люди уже знакомы с брендом.",
+      "reason_en": "Creative generated maximum audience engagement in the Instagram retargeting campaign, where people are already familiar with the brand."
     },
     {
       "adId": "120251559039590216",
@@ -940,50 +964,50 @@
       "metric_ru": "CTR 3.0% · CPC 0.64 ₹",
       "metric_en": "CTR 3.0% · CPC 0.64 ₹",
       "best": false,
-      "reason_ru": "Клик в этой кампании обошёлся всего в ₹2,35, что ниже среднего по аккаунту (₹2,01 считая все форматы), при прямом призыве к переписке.",
-      "reason_en": "The click in this campaign cost just ₹2.35, below the account average of ₹2.01 across all formats, with a direct call to message."
+      "reason_ru": "Объявление получило самую низкую цену клика благодаря связке Instagram и WhatsApp на прогретой аудитории.",
+      "reason_en": "Ad achieved the lowest cost per click thanks to Instagram and WhatsApp combination with warm audience."
     }
   ],
-  "insight_ru": "За период на рекламу потрачено <b>₹45 997</b>, охвачено <b>700 595</b> человек. Получено <b>2 681</b> лид по средней цене <b>₹17,16</b>. CTR всей рекламы составил <b>1,93%</b>, что говорит о хорошем отклике аудитории на креативы.",
-  "insight_en": "During the period, <b>₹45,997</b> was spent on advertising, reaching <b>700,595</b> people. Generated <b>2,681</b> leads at an average cost of <b>₹17.16</b> per lead. Overall CTR reached <b>1.93%</b>, indicating strong audience response to the creatives.",
-  "platforms_note_ru": "Основная доля бюджета (₹32 461) ушла в Instagram Reels, клик там стоит ₹2,14. Лента Facebook показала самую низкую цену клика ₹0,84, но получила всего ₹1 391 бюджета, её стоит усилить.",
-  "platforms_note_en": "The majority of the budget (₹32,461) went to Instagram Reels, with a click cost of ₹2.14. Facebook Feed showed the lowest click cost at ₹0.84 but received only ₹1,391 in budget and deserves more allocation.",
+  "insight_ru": "За период охват составил <b>700 595 человек</b>, реклама показалась <b>1 183 539 раз</b> со средней частотой <b>1,69</b>. Получено <b>2 681 лид</b> по средней цене <b>₹17,16</b>, что говорит о хорошей вовлечённости аудитории. Основная активность пришлась на Instagram Reels и ретаргетинговые аудитории, давшие самый высокий CTR.",
+  "insight_en": "During the period, the ads reached <b>700,595 people</b> with <b>1,183,539 impressions</b> at an average frequency of <b>1.69</b>. Generated <b>2,681 leads</b> at an average cost of <b>₹17.16</b>, showing strong audience engagement. Most activity came from Instagram Reels and retargeting audiences, which delivered the highest CTR.",
+  "platforms_note_ru": "Instagram Reels забрал основной бюджет <b>₹32 461</b> и дал <b>15 142 клика</b> по цене <b>₹2,14</b>. Facebook показал самые дешёвые клики в ленте (<b>₹0,84</b>) и Reels (<b>₹1,32</b>), но с меньшим объёмом трафика.",
+  "platforms_note_en": "Instagram Reels took the main budget of <b>₹32,461</b> and delivered <b>15,142 clicks</b> at <b>₹2.14</b> each. Facebook showed the cheapest clicks in Feed (<b>₹0.84</b>) and Reels (<b>₹1.32</b>), but with lower traffic volume.",
   "findings_ru": [
-    "Потрачено ₹45 997, охвачено 700 595 человек, получено 2 681 лид по ₹17,16 за лид.",
-    "Аудитория INDIAN показала наивысший CTR 2,56% и самую низкую цену клика ₹1,84 среди всех кампаний.",
-    "Instagram Reels забрал ₹32 461 (71% бюджета), в то время как лента Facebook при цене клика ₹0,84 получила только ₹1 391.",
-    "Женщины 35+ кликают в 2–3 раза охотнее молодых мужчин (CTR до 5,1% у женщин 65+ против 1,54% у мужчин 18–24), но их бюджет в 15–20 раз меньше.",
-    "Кампания с lookalike-аудиторией показала частоту 1,06, что идеально для первого знакомства с холодной аудиторией.",
-    "Ретаргетинг Instagram (CTR 2,27%, охват 300 652) оправдал вложение ₹15 216 и привёл к 167 633 просмотрам видео."
+    "Ретаргетинговые аудитории Instagram показали CTR от <b>1,94%</b> до <b>2,56%</b>, в то время как холодный Lookalike дал <b>1,74%</b>.",
+    "Instagram Reels забрал <b>71%</b> бюджета (<b>₹32 461</b>) и обеспечил большую часть кликов по цене <b>₹2,14</b>.",
+    "Женщины 35+ демонстрируют CTR от <b>3,65%</b> до <b>5,1%</b>, но их охват составляет всего <b>23 500 человек</b> против <b>303 348</b> у мужчин 18-24.",
+    "Цена клика варьируется от <b>₹1,66</b> до <b>₹2,51</b> в зависимости от аудитории и частоты показов.",
+    "Кампания с частотой <b>2,1</b> показала снижение CTR до <b>1,4%</b>, что говорит об усталости аудитории от повторных показов.",
+    "Facebook даёт самые дешёвые клики (<b>₹0,84</b> в ленте), но объём трафика значительно меньше, чем в Instagram."
   ],
   "findings_en": [
-    "Spent ₹45,997, reached 700,595 people, and generated 2,681 leads at ₹17.16 per lead.",
-    "The INDIAN audience delivered the highest CTR of 2.56% and the lowest click cost at ₹1.84 across all campaigns.",
-    "Instagram Reels consumed ₹32,461 (71% of the budget), while Facebook Feed, with a click cost of ₹0.84, received only ₹1,391.",
-    "Women aged 35+ click 2–3 times more readily than younger men (CTR up to 5.1% for women 65+ versus 1.54% for men 18–24), yet their budget is 15–20 times smaller.",
-    "The lookalike audience campaign showed a frequency of 1.06, ideal for first contact with a cold audience.",
-    "Instagram retargeting (CTR 2.27%, reach 300,652) justified the ₹15,216 investment and drove 167,633 video views."
+    "Instagram retargeting audiences showed CTR from <b>1.94%</b> to <b>2.56%</b>, while cold Lookalike delivered <b>1.74%</b>.",
+    "Instagram Reels consumed <b>71%</b> of budget (<b>₹32,461</b>) and provided most clicks at <b>₹2.14</b> each.",
+    "Women 35+ demonstrate CTR from <b>3.65%</b> to <b>5.1%</b>, but their reach is only <b>23,500 people</b> versus <b>303,348</b> for men 18-24.",
+    "Cost per click ranges from <b>₹1.66</b> to <b>₹2.51</b> depending on audience and frequency.",
+    "Campaign with frequency of <b>2.1</b> showed CTR drop to <b>1.4%</b>, indicating audience fatigue from repeated impressions.",
+    "Facebook delivers the cheapest clicks (<b>₹0.84</b> in Feed), but traffic volume is significantly lower than Instagram."
   ],
   "recommendations_ru": [
-    "Увеличить бюджет на ленту Facebook: клик там стоит ₹0,84, это вдвое дешевле Reels, но сейчас позиция получает всего 3% общих расходов.",
-    "Перераспределить часть бюджета с мужчин 18–24 (₹14 090 при CTR 1,54%) на женщин 35–54, которые показывают CTR 3,65–3,9% при малых вложениях.",
-    "Обновить креативы для кампании с частотой 2,1 (WhatsApp + IG retarget, обновлённая 16.7): высокая частота говорит о выгорании, нужны свежие видео или картинки.",
-    "Протестировать отдельную кампанию на женщин 35+ с бюджетом от ₹3 000, чтобы проверить, масштабируется ли их высокий CTR при росте охвата.",
-    "Сохранить текущую стратегию для аудитории INDIAN (CTR 2,56%, CPC ₹1,84) и постепенно увеличивать её бюджет, пока цена не начнёт расти.",
-    "Запустить A/B-тест креативов в Reels: при таком объёме бюджета (₹32 461) даже 10% снижение цены клика сэкономит ₹650+ в месяц."
+    "Увеличить бюджет на кампании с ретаргетингом Instagram, которые дают CTR выше <b>2%</b> и цену клика ниже <b>₹2</b>.",
+    "Протестировать отдельные креативы для женщин 35-44, чтобы масштабировать сегмент с CTR <b>3,9%</b>.",
+    "Снизить частоту показов в кампании с WhatsApp-аудиторией до <b>1,5</b> или обновить креативы, чтобы поднять CTR выше <b>1,4%</b>.",
+    "Перераспределить часть бюджета с мужчин 18-24 (CTR <b>1,54%</b>) на сегменты 25-34 и 35-44 с более высокой вовлечённостью.",
+    "Увеличить долю Facebook Reels и ленты, где цена клика в два раза ниже (<b>₹0,84-1,32</b>), если цель - максимум переходов.",
+    "Создать отдельную кампанию для Lookalike-аудитории с более агрессивными креативами, чтобы повысить CTR выше <b>1,74%</b>."
   ],
   "recommendations_en": [
-    "Increase budget allocation to Facebook Feed: clicks cost ₹0.84 there, half the price of Reels, yet the placement currently receives only 3% of total spend.",
-    "Reallocate part of the budget from men 18–24 (₹14,090 at CTR 1.54%) to women 35–54, who show CTR of 3.65–3.9% with minimal investment.",
-    "Refresh creatives for the campaign with frequency 2.1 (WhatsApp + IG retarget, updated July 16): high frequency indicates fatigue and calls for new videos or images.",
-    "Test a dedicated campaign targeting women 35+ with a budget starting at ₹3,000 to see if their high CTR scales with increased reach.",
-    "Maintain the current strategy for the INDIAN audience (CTR 2.56%, CPC ₹1.84) and gradually grow its budget until the cost begins to rise.",
-    "Launch an A/B test of creatives in Reels: with a budget of ₹32,461, even a 10% reduction in click cost would save ₹650+ per month."
+    "Increase budget for Instagram retargeting campaigns that deliver CTR above <b>2%</b> and cost per click below <b>₹2</b>.",
+    "Test separate creatives for women 35-44 to scale the segment with CTR of <b>3.9%</b>.",
+    "Reduce frequency in WhatsApp audience campaign to <b>1.5</b> or refresh creatives to lift CTR above <b>1.4%</b>.",
+    "Reallocate part of budget from men 18-24 (CTR <b>1.54%</b>) to segments 25-34 and 35-44 with higher engagement.",
+    "Increase share of Facebook Reels and Feed where cost per click is half the price (<b>₹0.84-1.32</b>) if the goal is maximum clicks.",
+    "Create separate campaign for Lookalike audience with more aggressive creatives to boost CTR above <b>1.74%</b>."
   ],
   "euNote_ru": "Важно знать: в рекламных кабинетах ЕС Meta не показывает число начатых переписок в директ. Кампании «IG direct» реально приводят людей в сообщения, но эта цифра в отчёте технически недоступна. Реальное число обращений видно только вручную (в директе или через учёт менеджеров).",
   "euNote_en": "Worth knowing: in EU ad accounts Meta does not report the number of started Direct conversations. The IG direct campaigns do bring people into messages, but that number is technically unavailable in reporting. The real count of inquiries is only visible manually (in Direct or via a managers' log).",
   "meta": {
-    "generatedAt": "2026-08-03T22:25:42.204605Z",
+    "generatedAt": "2026-08-30T12:09:30.105234Z",
     "generatedBy": "automation"
   },
   "footer_ru": "Данные: Meta Marketing API · рекламный кабинет Akashi - Guitar Lessons · период 1 – 31 июля",
