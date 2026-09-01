@@ -1,0 +1,610 @@
+{
+  "client": "KB Preklady",
+  "accountId": "act_32456485993942764",
+  "period": {
+    "since": "2026-08-01",
+    "until": "2026-08-31",
+    "label_ru": "1 – 31 августа",
+    "label_en": "Aug 1 – 31"
+  },
+  "prevPeriod": {
+    "since": "2026-07-01",
+    "until": "2026-07-31",
+    "label_ru": "1 – 31 июля",
+    "label_en": "Jul 1 – 31"
+  },
+  "platform": "Meta Ads (Instagram / Facebook)",
+  "currency": "Kč",
+  "source": "Meta Marketing API",
+  "showDynamics": false,
+  "totals": {
+    "spend": 8922.49,
+    "reach": 48398,
+    "impressions": 125507,
+    "frequency": 2.59,
+    "clicks": 2042,
+    "ctr": 1.63,
+    "cpc": 4.37,
+    "linkClicks": 908,
+    "postEngagement": 24860,
+    "videoViews": 23492,
+    "reactions": 273,
+    "comments": 33,
+    "saves": 125,
+    "leads": 67,
+    "costPerLead": 133.17,
+    "addToCart": 0,
+    "costPerCart": 0
+  },
+  "prevTotals": {
+    "spend": 11003.35,
+    "reach": 41214,
+    "impressions": 121085,
+    "frequency": 2.94,
+    "clicks": 2647,
+    "ctr": 2.19,
+    "cpc": 4.16,
+    "leads": 141,
+    "costPerLead": 78.04,
+    "addToCart": 0,
+    "costPerCart": 0
+  },
+  "campaigns": [
+    {
+      "name": "Доверенности · лиды · директ+фб · 25.6 · ukr",
+      "date": "",
+      "goal_ru": "переписки в директ",
+      "goal_en": "Direct messages",
+      "reach": 42819,
+      "impressions": 113653,
+      "frequency": 2.65,
+      "spend": 7815.74,
+      "clicks": 1749,
+      "ctr": 1.54,
+      "cpc": 4.47,
+      "linkClicks": 721,
+      "postEngagement": 21305,
+      "videoViews": 20208,
+      "audience": "общая - укр",
+      "ads": [
+        {
+          "adId": "120250566861920418",
+          "thumb": "assets/120250566861920418.jpg",
+          "label_ru": "Объявление 2 видео инст",
+          "label_en": "Ad 2 видео инст",
+          "audience_ru": "общая - укр",
+          "audience_en": "общая - укр",
+          "spend": 7815.74,
+          "clicks": 1749,
+          "ctr": 1.54,
+          "cpc": 4.47,
+          "met_ru": "1 749 кликов · CTR 1,54% · CPC <b>4,47 Kč</b>",
+          "met_en": "1,749 clicks · CTR 1.54% · CPC <b>4.47 Kč</b>"
+        }
+      ],
+      "verdict_ru": "Кампания принесла основной объём результатов: 42 819 охвата, 1 749 кликов и массу вовлечённости по цене клика 4,47 Kč. Лидогенерирующая кампания на украинскую аудиторию показала стабильную работу, CTR 1,54% говорит о том, что предложение находит отклик у целевой аудитории.",
+      "verdict_en": "This campaign delivered the bulk of results: 42,819 reach, 1,749 clicks, and substantial engagement at 4.47 Kč per click. The lead generation campaign targeting the Ukrainian audience performed steadily, with a 1.54% CTR indicating the offer resonates with the target audience.",
+      "tag_kind": "direct",
+      "cpc_pill": "watch"
+    },
+    {
+      "name": "IG Page · Reels",
+      "date": "",
+      "goal_ru": "вовлечённость (Reels)",
+      "goal_en": "Engagement (Reels)",
+      "reach": 6860,
+      "impressions": 11854,
+      "frequency": 1.73,
+      "spend": 1106.75,
+      "clicks": 293,
+      "ctr": 2.47,
+      "cpc": 3.78,
+      "linkClicks": 187,
+      "postEngagement": 3555,
+      "videoViews": 3284,
+      "audience": "ru + ukr",
+      "ads": [
+        {
+          "adId": "120252562884680418",
+          "thumb": "assets/120252562884680418.jpg",
+          "label_ru": "Объявление 1",
+          "label_en": "Ad 1",
+          "audience_ru": "ru + ukr",
+          "audience_en": "ru + ukr",
+          "spend": 50.73,
+          "clicks": 12,
+          "ctr": 2.28,
+          "cpc": 4.23,
+          "met_ru": "12 кликов · CTR 2,28% · CPC <b>4,23 Kč</b>",
+          "met_en": "12 clicks · CTR 2.28% · CPC <b>4.23 Kč</b>"
+        },
+        {
+          "adId": "120252562884690418",
+          "thumb": "assets/120252562884690418.jpg",
+          "label_ru": "Объявление 2",
+          "label_en": "Ad 2",
+          "audience_ru": "ru + ukr",
+          "audience_en": "ru + ukr",
+          "spend": 984.57,
+          "clicks": 256,
+          "ctr": 2.46,
+          "cpc": 3.85,
+          "met_ru": "256 кликов · CTR 2,46% · CPC <b>3,85 Kč</b>",
+          "met_en": "256 clicks · CTR 2.46% · CPC <b>3.85 Kč</b>"
+        },
+        {
+          "adId": "120252562912630418",
+          "thumb": "assets/120252562912630418.jpg",
+          "label_ru": "Объявление 3",
+          "label_en": "Ad 3",
+          "audience_ru": "ru + ukr",
+          "audience_en": "ru + ukr",
+          "spend": 71.45,
+          "clicks": 25,
+          "ctr": 2.77,
+          "cpc": 2.86,
+          "met_ru": "25 кликов · CTR 2,77% · CPC <b>2,86 Kč</b>",
+          "met_en": "25 clicks · CTR 2.77% · CPC <b>2.86 Kč</b>"
+        }
+      ],
+      "verdict_ru": "Reels-кампания на смешанную русско-украинскую аудиторию показала высокий CTR 2,47% при цене клика 3,78 Kč. Это самая дешёвая цена клика из обеих кампаний, что говорит о сильной вовлечённости формата Reels и правильном попадании в интересы этой аудитории.",
+      "verdict_en": "The Reels campaign targeting the mixed Russian-Ukrainian audience achieved a strong 2.47% CTR at 3.78 Kč per click. This is the lowest cost per click across both campaigns, showing that the Reels format drives strong engagement and resonates well with this audience.",
+      "tag_kind": "direct",
+      "cpc_pill": "good"
+    }
+  ],
+  "audiences": [
+    {
+      "name_ru": "общая - укр",
+      "name_en": "общая - укр",
+      "spend": 7815.74,
+      "reach": 42819,
+      "ctr_range": "1,54%",
+      "badge_ru": null,
+      "badge_en": null,
+      "note_ru": "Основная украинская аудитория получила львиную долю бюджета (7 816 Kč) и показала CTR 1,54%, что нормально для лидогенерирующей кампании.",
+      "note_en": "The main Ukrainian audience received the lion's share of budget (7,816 Kč) and delivered a 1.54% CTR, which is solid for a lead generation campaign.",
+      "discovery": false
+    },
+    {
+      "name_ru": "ru + ukr",
+      "name_en": "ru + ukr",
+      "spend": 1106.75,
+      "reach": 6860,
+      "ctr_range": "2,47%",
+      "badge_ru": "Лучшая аудитория",
+      "badge_en": "Best audience",
+      "note_ru": "Смешанная русско-украинская аудитория при меньшем бюджете (1 107 Kč) показала заметно более высокий CTR 2,47%, что делает её перспективной для масштабирования.",
+      "note_en": "The mixed Russian-Ukrainian audience, with a smaller budget (1,107 Kč), delivered a noticeably higher 2.47% CTR, making it a promising segment for scaling.",
+      "discovery": true
+    }
+  ],
+  "platforms": [
+    {
+      "key": "facebook_reels",
+      "label_ru": "Facebook · Reels",
+      "label_en": "Facebook · Reels",
+      "reach": 24302,
+      "spend": 3622.85,
+      "clicks": 737,
+      "cpc": 4.92,
+      "bar_pct": 100.0
+    },
+    {
+      "key": "facebook_feed",
+      "label_ru": "Facebook · лента",
+      "label_en": "Facebook · feed",
+      "reach": 21782,
+      "spend": 2888.54,
+      "clicks": 956,
+      "cpc": 3.02,
+      "bar_pct": 79.73
+    },
+    {
+      "key": "instagram_reels",
+      "label_ru": "Instagram · Reels",
+      "label_en": "Instagram · Reels",
+      "reach": 6844,
+      "spend": 826.34,
+      "clicks": 143,
+      "cpc": 5.78,
+      "bar_pct": 22.81
+    },
+    {
+      "key": "instagram_feed",
+      "label_ru": "Instagram · лента",
+      "label_en": "Instagram · feed",
+      "reach": 3554,
+      "spend": 623.97,
+      "clicks": 77,
+      "cpc": 8.1,
+      "bar_pct": 17.22
+    },
+    {
+      "key": "instagram_stories",
+      "label_ru": "Instagram · сторис",
+      "label_en": "Instagram · stories",
+      "reach": 1593,
+      "spend": 343.51,
+      "clicks": 37,
+      "cpc": 9.28,
+      "bar_pct": 9.48
+    },
+    {
+      "key": "facebook_stories",
+      "label_ru": "Facebook · сторис",
+      "label_en": "Facebook · stories",
+      "reach": 1277,
+      "spend": 330.58,
+      "clicks": 52,
+      "cpc": 6.36,
+      "bar_pct": 9.12
+    }
+  ],
+  "demographics": {
+    "rows": [
+      {
+        "gender": "female",
+        "age": "18-24",
+        "reach": 704,
+        "spend": 119.56,
+        "ctr": 1.96,
+        "hot": false,
+        "label_ru": "Ж 18-24",
+        "label_en": "F 18-24",
+        "bar_pct": 6.57
+      },
+      {
+        "gender": "male",
+        "age": "18-24",
+        "reach": 800,
+        "spend": 104.7,
+        "ctr": 1.59,
+        "hot": false,
+        "label_ru": "М 18-24",
+        "label_en": "M 18-24",
+        "bar_pct": 5.75
+      },
+      {
+        "gender": "female",
+        "age": "25-34",
+        "reach": 2663,
+        "spend": 516.04,
+        "ctr": 1.35,
+        "hot": false,
+        "label_ru": "Ж 25-34",
+        "label_en": "F 25-34",
+        "bar_pct": 28.34
+      },
+      {
+        "gender": "male",
+        "age": "25-34",
+        "reach": 5505,
+        "spend": 703.45,
+        "ctr": 1.02,
+        "hot": false,
+        "label_ru": "М 25-34",
+        "label_en": "M 25-34",
+        "bar_pct": 38.63
+      },
+      {
+        "gender": "female",
+        "age": "35-44",
+        "reach": 6288,
+        "spend": 1233.66,
+        "ctr": 1.76,
+        "hot": false,
+        "label_ru": "Ж 35-44",
+        "label_en": "F 35-44",
+        "bar_pct": 67.75
+      },
+      {
+        "gender": "male",
+        "age": "35-44",
+        "reach": 10196,
+        "spend": 1625.86,
+        "ctr": 1.31,
+        "hot": false,
+        "label_ru": "М 35-44",
+        "label_en": "M 35-44",
+        "bar_pct": 89.28
+      },
+      {
+        "gender": "female",
+        "age": "45-54",
+        "reach": 6092,
+        "spend": 1259.67,
+        "ctr": 1.87,
+        "hot": false,
+        "label_ru": "Ж 45-54",
+        "label_en": "F 45-54",
+        "bar_pct": 69.17
+      },
+      {
+        "gender": "male",
+        "age": "45-54",
+        "reach": 8724,
+        "spend": 1821.01,
+        "ctr": 1.56,
+        "hot": false,
+        "label_ru": "М 45-54",
+        "label_en": "M 45-54",
+        "bar_pct": 100.0
+      },
+      {
+        "gender": "female",
+        "age": "55-64",
+        "reach": 2335,
+        "spend": 555.58,
+        "ctr": 2.59,
+        "hot": true,
+        "label_ru": "Ж 55-64",
+        "label_en": "F 55-64",
+        "bar_pct": 30.51
+      },
+      {
+        "gender": "male",
+        "age": "55-64",
+        "reach": 2999,
+        "spend": 625.08,
+        "ctr": 1.85,
+        "hot": false,
+        "label_ru": "М 55-64",
+        "label_en": "M 55-64",
+        "bar_pct": 34.33
+      },
+      {
+        "gender": "female",
+        "age": "65+",
+        "reach": 706,
+        "spend": 157.9,
+        "ctr": 3.45,
+        "hot": true,
+        "label_ru": "Ж 65+",
+        "label_en": "F 65+",
+        "bar_pct": 8.67
+      },
+      {
+        "gender": "male",
+        "age": "65+",
+        "reach": 693,
+        "spend": 172.25,
+        "ctr": 2.46,
+        "hot": true,
+        "label_ru": "М 65+",
+        "label_en": "M 65+",
+        "bar_pct": 9.46
+      },
+      {
+        "gender": "female",
+        "age": "Unknown",
+        "reach": 1,
+        "spend": 0.05,
+        "ctr": 0.0,
+        "hot": false,
+        "label_ru": "Ж Unknown",
+        "label_en": "F Unknown",
+        "bar_pct": 0.0
+      }
+    ],
+    "note_ru": "Самый высокий отклик показали женщины 65+ (CTR 3,45%) и 55–64 (2,59%), хотя их охват невелик. Основная масса бюджета ушла на мужчин и женщин 35–54 лет, где женщины кликают активнее (1,76–1,87% против 1,31–1,56% у мужчин).",
+    "note_en": "Women aged 65+ showed the highest response (3.45% CTR) and 55–64 (2.59%), though their reach is limited. The bulk of the budget went to men and women aged 35–54, where women click more actively (1.76–1.87% vs. 1.31–1.56% for men).",
+    "rows_sorted": [
+      {
+        "gender": "male",
+        "age": "45-54",
+        "reach": 8724,
+        "spend": 1821.01,
+        "ctr": 1.56,
+        "hot": false,
+        "label_ru": "М 45-54",
+        "label_en": "M 45-54",
+        "bar_pct": 100.0
+      },
+      {
+        "gender": "male",
+        "age": "35-44",
+        "reach": 10196,
+        "spend": 1625.86,
+        "ctr": 1.31,
+        "hot": false,
+        "label_ru": "М 35-44",
+        "label_en": "M 35-44",
+        "bar_pct": 89.28
+      },
+      {
+        "gender": "female",
+        "age": "45-54",
+        "reach": 6092,
+        "spend": 1259.67,
+        "ctr": 1.87,
+        "hot": false,
+        "label_ru": "Ж 45-54",
+        "label_en": "F 45-54",
+        "bar_pct": 69.17
+      },
+      {
+        "gender": "female",
+        "age": "35-44",
+        "reach": 6288,
+        "spend": 1233.66,
+        "ctr": 1.76,
+        "hot": false,
+        "label_ru": "Ж 35-44",
+        "label_en": "F 35-44",
+        "bar_pct": 67.75
+      },
+      {
+        "gender": "male",
+        "age": "25-34",
+        "reach": 5505,
+        "spend": 703.45,
+        "ctr": 1.02,
+        "hot": false,
+        "label_ru": "М 25-34",
+        "label_en": "M 25-34",
+        "bar_pct": 38.63
+      },
+      {
+        "gender": "male",
+        "age": "55-64",
+        "reach": 2999,
+        "spend": 625.08,
+        "ctr": 1.85,
+        "hot": false,
+        "label_ru": "М 55-64",
+        "label_en": "M 55-64",
+        "bar_pct": 34.33
+      },
+      {
+        "gender": "female",
+        "age": "55-64",
+        "reach": 2335,
+        "spend": 555.58,
+        "ctr": 2.59,
+        "hot": true,
+        "label_ru": "Ж 55-64",
+        "label_en": "F 55-64",
+        "bar_pct": 30.51
+      },
+      {
+        "gender": "female",
+        "age": "25-34",
+        "reach": 2663,
+        "spend": 516.04,
+        "ctr": 1.35,
+        "hot": false,
+        "label_ru": "Ж 25-34",
+        "label_en": "F 25-34",
+        "bar_pct": 28.34
+      },
+      {
+        "gender": "male",
+        "age": "65+",
+        "reach": 693,
+        "spend": 172.25,
+        "ctr": 2.46,
+        "hot": true,
+        "label_ru": "М 65+",
+        "label_en": "M 65+",
+        "bar_pct": 9.46
+      },
+      {
+        "gender": "female",
+        "age": "65+",
+        "reach": 706,
+        "spend": 157.9,
+        "ctr": 3.45,
+        "hot": true,
+        "label_ru": "Ж 65+",
+        "label_en": "F 65+",
+        "bar_pct": 8.67
+      },
+      {
+        "gender": "female",
+        "age": "18-24",
+        "reach": 704,
+        "spend": 119.56,
+        "ctr": 1.96,
+        "hot": false,
+        "label_ru": "Ж 18-24",
+        "label_en": "F 18-24",
+        "bar_pct": 6.57
+      },
+      {
+        "gender": "male",
+        "age": "18-24",
+        "reach": 800,
+        "spend": 104.7,
+        "ctr": 1.59,
+        "hot": false,
+        "label_ru": "М 18-24",
+        "label_en": "M 18-24",
+        "bar_pct": 5.75
+      },
+      {
+        "gender": "female",
+        "age": "Unknown",
+        "reach": 1,
+        "spend": 0.05,
+        "ctr": 0.0,
+        "hot": false,
+        "label_ru": "Ж Unknown",
+        "label_en": "F Unknown",
+        "bar_pct": 0.0
+      }
+    ]
+  },
+  "topAds": [
+    {
+      "adId": "120252562912630418",
+      "thumb": "assets/120252562912630418.jpg",
+      "name_ru": "IG Page · Reels",
+      "name_en": "IG Page · Reels",
+      "badge_ru": "Лучший отклик",
+      "badge_en": "Best response",
+      "metric_ru": "CTR 2.77% · CPC 2.86 Kč",
+      "metric_en": "CTR 2.77% · CPC 2.86 Kč",
+      "best": true,
+      "reason_ru": "Это объявление из Reels-кампании показало самый высокий CTR среди всех креативов, привлекая внимание аудитории эффективнее остальных.",
+      "reason_en": "This ad from the Reels campaign achieved the highest CTR among all creatives, capturing audience attention more effectively than others."
+    },
+    {
+      "adId": "120250566861920418",
+      "thumb": "assets/120250566861920418.jpg",
+      "name_ru": "Доверенности · лиды · директ+фб · 25.6 · ukr",
+      "name_en": "Доверенности · лиды · директ+фб · 25.6 · ukr",
+      "badge_ru": "Магнит вовлечённости",
+      "badge_en": "Engagement magnet",
+      "metric_ru": "CTR 1.54% · CPC 4.47 Kč",
+      "metric_en": "CTR 1.54% · CPC 4.47 Kč",
+      "best": false,
+      "reason_ru": "Креатив собрал максимальное количество вовлечённости (реакции, сохранения, комментарии), что говорит о сильном эмоциональном отклике аудитории.",
+      "reason_en": "This creative generated the highest engagement (reactions, saves, comments), indicating strong emotional resonance with the audience."
+    }
+  ],
+  "insight_ru": "За период проведены две кампании с общим бюджетом <b>8 922 Kč</b>. Реклама охватила <b>48 398 человек</b>, получено <b>67 лидов</b> по цене <b>133 Kč</b> за каждый. Основной результат дала кампания на украинскую аудиторию, нацеленная на переписки в директе, она собрала большую часть вовлечённости и показов.",
+  "insight_en": "Two campaigns ran during the period with a total budget of <b>8,922 Kč</b>. Ads reached <b>48,398 people</b> and generated <b>67 leads</b> at <b>133 Kč</b> per lead. The Ukrainian audience campaign focused on direct messages delivered most of the engagement and impressions.",
+  "platforms_note_ru": "Лучшую цену клика дала лента Facebook (3,02 Kč за клик при 956 кликах), тогда как сторис в Instagram оказались самыми дорогими (9,28 Kč). Facebook Reels собрали больше всего бюджета (3 623 Kč), но по цене клика (4,92 Kč) уступают ленте.",
+  "platforms_note_en": "Facebook Feed delivered the best cost per click (3.02 Kč for 956 clicks), while Instagram Stories were the most expensive (9.28 Kč). Facebook Reels consumed the most budget (3,623 Kč) but had a higher cost per click (4.92 Kč) compared to Feed.",
+  "findings_ru": [
+    "Получено 67 лидов по цене 133 Kč за лид, что является основным результатом рекламных усилий за период",
+    "Формат Reels показал лучший CTR (2,47%) и самую низкую цену клика (3,78 Kč) в кампании на вовлечённость",
+    "Лента Facebook обеспечила самую дешёвую цену клика среди всех площадок (3,02 Kč при 956 кликах)",
+    "Женская аудитория старше 55 лет демонстрирует аномально высокий отклик (CTR до 3,45%), но получает небольшую долю показов",
+    "Сторис в Instagram показали самую высокую цену клика (9,28 Kč), что делает их наименее эффективной позицией",
+    "Общий охват составил 48 398 человек при частоте показов 2,59, что говорит о сбалансированном распределении без переспама"
+  ],
+  "findings_en": [
+    "Generated 67 leads at 133 Kč per lead, which is the main outcome of advertising efforts for the period",
+    "Reels format showed the best CTR (2.47%) and lowest cost per click (3.78 Kč) in the engagement campaign",
+    "Facebook Feed provided the cheapest cost per click across all placements (3.02 Kč for 956 clicks)",
+    "Female audience aged 55+ shows exceptionally high response rates (up to 3.45% CTR) but receives a small share of impressions",
+    "Instagram Stories delivered the highest cost per click (9.28 Kč), making it the least efficient placement",
+    "Total reach was 48,398 people with a frequency of 2.59, indicating balanced distribution without oversaturation"
+  ],
+  "recommendations_ru": [
+    "Увеличить бюджет на смешанную русско-украинскую аудиторию, которая показывает CTR почти в два раза выше основной",
+    "Перераспределить часть бюджета с Instagram Stories (9,28 Kč за клик) на Facebook Feed (3,02 Kč за клик)",
+    "Протестировать отдельную кампанию на женщин 55+, у которых CTR достигает 3,45%, с креативами под эту аудиторию",
+    "Создать больше Reels-контента, так как этот формат даёт лучшую вовлечённость и цену клика",
+    "Проанализировать, почему Instagram Reels стоят дороже Facebook Reels (5,78 Kč против 4,92 Kč), и оптимизировать ставки",
+    "Масштабировать показы в ленте Facebook, которая собрала 956 кликов по самой низкой цене среди всех позиций"
+  ],
+  "recommendations_en": [
+    "Increase budget for the mixed Russian-Ukrainian audience, which shows nearly double the CTR of the main segment",
+    "Reallocate some budget from Instagram Stories (9.28 Kč per click) to Facebook Feed (3.02 Kč per click)",
+    "Test a separate campaign targeting women 55+, who achieve 3.45% CTR, with creatives tailored to this demographic",
+    "Create more Reels content, as this format delivers better engagement and cost per click",
+    "Analyze why Instagram Reels cost more than Facebook Reels (5.78 Kč vs. 4.92 Kč) and optimize bidding",
+    "Scale Facebook Feed placements, which generated 956 clicks at the lowest cost across all positions"
+  ],
+  "euNote_ru": "Важно знать: в рекламных кабинетах ЕС Meta не показывает число начатых переписок в директ. Кампании «IG direct» реально приводят людей в сообщения, но эта цифра в отчёте технически недоступна. Реальное число обращений видно только вручную (в директе или через учёт менеджеров).",
+  "euNote_en": "Worth knowing: in EU ad accounts Meta does not report the number of started Direct conversations. The IG direct campaigns do bring people into messages, but that number is technically unavailable in reporting. The real count of inquiries is only visible manually (in Direct or via a managers' log).",
+  "meta": {
+    "generatedAt": "2026-09-01T11:37:19.192526Z",
+    "generatedBy": "automation"
+  },
+  "footer_ru": "Данные: Meta Marketing API · рекламный кабинет KB Preklady · период 1 – 31 августа",
+  "client_initials": "KP"
+}

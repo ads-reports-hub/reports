@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TravelForever · Отчёт по рекламе · 1 – 31 августа</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Archivo+Black&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+/* ============================================================
+   БРЕНД: цвета и шрифты Elza Butirina (@elzabutirina), из BRANDING.pdf.
+   Этот файл СГЕНЕРИРОВАН из engine/templates/report.html.jinja, не
+   редактировать руками. Любые правки внешнего вида делаются в шаблоне,
+   иначе они потеряются при следующей автогенерации отчёта.
+
+   ШРИФТЫ (временная замена, пока нет файлов лицензии):
+   - TT Fors (платный, нет файла лицензии) -> замена: 'Sora' для основного
+     текста (--font-body).
+   - Заголовки/цифры (--font-display) намеренно другой шрифт. Замена:
+     'Archivo Black'.
+
+   ТЕМЫ: все "тонозависимые" цвета вынесены в переменные, которые
+   переопределяются в body.light ниже. Разметка не хардкодит цвета.
+
+   showDynamics: управляется полем data.showDynamics (из строки клиента
+   в таблице). Когда false, блоки с дельтами физически не попадают в
+   HTML (условный блок шаблона, не CSS display:none), а тексты от ИИ не
+   упоминают сравнение с прошлым периодом (обеспечивается промптом в
+   engine/commentary.py, не этим шаблоном).
+   ============================================================ */
+:root{
+  /* --- фирменные цвета (ровно из BRANDING.pdf) --- */
+  --pink:      #faa1d4;   /* ГЛАВНЫЙ АКЦЕНТНЫЙ */
+  --charcoal:  #2b2a2a;   /* ФОН (тёмная тема) / ТЕКСТ (светлая) */
+  --cream:     #f0f1ed;   /* ТЕКСТ (тёмная тема) / ФОН (светлая) */
+  --burgundy:  #a62e3e;   /* ДЛЯ ВЫДЕЛЕНИЯ ЭЛЕМЕНТОВ */
+  --pink-deep: #f17fc0;   /* насыщенный розовый для градиентов и графиков */
+
+  /* --- тёмная тема (база): фон и поверхности от charcoal --- */
+  --bg:        #2b2a2a;
+  --surface:   #343331;
+  --surface-2: #3c3a37;
+  --border:    rgba(240,241,237,.12);
+  --border-soft: rgba(240,241,237,.06);
+
+  /* --- текст от cream --- */
+  --text:      #f0f1ed;
+  --text-dim:  #c9c6bf;
+  --text-mute: #96938b;
+
+  /* --- тонозависимые акценты (переопределяются в body.light) --- */
+  --accent-text:    #faa1d4;  /* голый розовый текст на фоне страницы */
+  --burg-text:      #dd6d7a;  /* голый бордовый текст на фоне страницы */
+  --chip-pink-bg:   #4a2f3d;  /* плашка "хорошо/дёшево" */
+  --chip-pink-text: #faa1d4;
+  --chip-burg-bg:   #3d2225;  /* плашка "внимание/дороже" */
+  --chip-burg-text: #dd6d7a;
+  --chart-grid:     rgba(240,241,237,.08);
+  --hint-hover-text: #2b2a2a; /* текст на розовой кнопке "?" при наведении */
+  --mode-active-bg:  #dd6d7a; /* активная кнопка Кратко/Подробно */
+  --mode-active-text: #2b2a2a;
+
+  /* --- цвета полос демографии (одинаковы в обеих темах) --- */
+  --bar-men:   #f17fc0;
+  --bar-women: #dd6d7a;
+
+  /* --- шрифты --- */
+  --font-display: 'Archivo Black', Impact, sans-serif;
+  --font-body:    'Sora', system-ui, sans-serif;
+
+  /* --- геометрия --- */
+  --r:    14px;
+  --maxw: 1080px;
+  --shadow: 0 1px 2px rgba(0,0,0,.18), 0 8px 22px rgba(0,0,0,.22);
+}
+
+/* --- светлая тема: палитра из variant-f-light.html --- */
+body.light{
+  --bg:        #f0f1ed;
+  --surface:   #ffffff;
+  --surface-2: #f7f6f2;
+  --border:    rgba(43,42,42,.12);
+  --border-soft: rgba(43,42,42,.06);
+
+  --text:      #2b2a2a;
+  --text-dim:  #57544e;
+  --text-mute: #8a867c;
+
+  --accent-text:    #b8306f;  /* pink-ink: читаемый розовый на светлом */
+  --burg-text:      #a62e3e;
+  --chip-pink-bg:   #fbe4f1;  /* светлые пастельные плашки */
+  --chip-pink-text: #b8306f;
+  --chip-burg-bg:   #fbe6e8;
+  --chip-burg-text: #a62e3e;
+  --chart-grid:     rgba(43,42,42,.08);
+  --hint-hover-text: #ffffff;
+  --mode-active-bg:  #a62e3e;
+  --mode-active-text: #ffffff;
+
+  --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 22px rgba(0,0,0,.08);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  transition:background .25s,color .25s;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:28px 22px 56px}
+.panel,.kpi,.table-card,.textcard,.aud-card,.ad-card,.eu-note,.glossary,.insight{
+  transition:background .25s,border-color .25s;
+}
+
+/* ---------- шапка ---------- */
+header.head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.head-left{display:flex;align-items:center;gap:12px}
+.logo{
+  width:42px;height:42px;border-radius:12px;flex:none;
+  background:var(--pink);color:var(--charcoal);
+  display:grid;place-items:center;font-family:var(--font-display);font-size:16px;
+}
+.head-left h1{font-family:var(--font-display);font-weight:400;font-size:17px;letter-spacing:.005em}
+.head-left .sub{color:var(--text-dim);font-size:12.5px;margin-top:3px}
+.head-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.period{text-align:right;font-size:12.5px;color:var(--text-mute)}
+.period strong{display:block;color:var(--text);font-size:14px;font-weight:600}
+
+.toggles{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.theme-toggle,.lang-toggle,.mode-toggle{display:flex;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:4px}
+.theme-btn,.lang-btn,.mode-btn{
+  border:none;background:transparent;color:var(--text-mute);font-family:var(--font-display);
+  font-weight:400;font-size:11.5px;letter-spacing:.03em;padding:6px 12px;border-radius:999px;
+  cursor:pointer;transition:background .18s,color .18s;
+}
+.theme-btn.active,.lang-btn.active{background:var(--pink);color:var(--charcoal)}
+.mode-btn.active{background:var(--mode-active-bg);color:var(--mode-active-text)}
+.theme-btn:not(.active):hover,.lang-btn:not(.active):hover,.mode-btn:not(.active):hover{color:var(--text)}
+
+/* ---------- заголовки секций ---------- */
+h2.section{
+  font-family:var(--font-display);font-weight:400;font-size:13px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--accent-text);
+  margin:32px 0 13px;
+}
+
+/* ---------- инсайт-абзац ---------- */
+.insight{
+  background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--pink);
+  border-radius:var(--r);padding:16px 20px;font-size:14px;color:var(--text-dim);
+}
+.insight b{color:var(--accent-text)}
+
+/* ---------- KPI ---------- */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kpi{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:14px 16px;position:relative;overflow:hidden;
+}
+.kpi::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--pink)}
+.kpi .label{display:flex;align-items:center;gap:5px;flex-wrap:wrap;font-size:11.5px;color:var(--text-dim);margin-bottom:7px;text-transform:uppercase;letter-spacing:.03em}
+.kpi .value{font-family:var(--font-display);font-weight:400;font-size:21px;color:var(--text);letter-spacing:-.01em;white-space:nowrap}
+.kpi .meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px}
+.kpi .sub{font-size:10.5px;color:var(--text-mute)}
+.delta{display:inline-flex;align-items:center;padding:2px 8px;border-radius:999px;font-size:10.5px;font-weight:700;white-space:nowrap}
+.delta.neutral{background:var(--surface-2);color:var(--text-dim)}
+.delta.watch{background:var(--chip-burg-bg);color:var(--chip-burg-text)}
+.delta.good{background:var(--chip-pink-bg);color:var(--chip-pink-text)}
+
+/* ---------- KPI: подсказки «?» (только режим «Подробно») ---------- */
+.kpi-hint-wrap{position:relative;display:none}
+body.detailed .kpi-hint-wrap{display:inline-flex;animation:detailFade .3s ease}
+.kpi-hint{
+  width:14px;height:14px;border-radius:50%;border:1px solid var(--accent-text);color:var(--accent-text);
+  background:transparent;font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;
+  cursor:help;line-height:1;padding:0;font-family:var(--font-body);
+}
+.kpi-hint:hover,.kpi-hint:focus{background:var(--accent-text);color:var(--hint-hover-text);outline:none}
+.kpi-tip{
+  position:absolute;bottom:calc(100% + 8px);left:0;width:210px;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  font-size:11.5px;font-weight:400;line-height:1.5;text-transform:none;letter-spacing:normal;
+  padding:10px 12px;border-radius:10px;box-shadow:var(--shadow);
+  opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;transform:translateY(4px);z-index:30;
+}
+.kpi-tip::after{content:"";position:absolute;top:100%;left:14px;border:6px solid transparent;border-top-color:var(--surface-2)}
+.kpi-hint-wrap:hover .kpi-tip,.kpi-hint-wrap:focus-within .kpi-tip,.kpi-hint-wrap.open .kpi-tip{opacity:1;transform:translateY(0);pointer-events:auto}
+@media(max-width:520px){
+  .kpi-tip{width:170px;left:auto;right:0}
+  .kpi-tip::after{left:auto;right:14px}
+}
+
+/* ---------- detail-only: единый механизм показа/скрытия ---------- */
+@keyframes detailFade{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:translateY(0)}}
+.detail-block{display:none}
+body.detailed .detail-block{display:block;animation:detailFade .32s ease}
+tr.detail-row{display:none}
+body.detailed tr.detail-row{display:table-row}
+body.detailed tr.detail-row td{animation:detailFade .32s ease}
+
+/* ---------- графики ---------- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid2 > .panel{min-width:0} /* иначе canvas Chart.js не даёт ячейке грида сжаться и страница уезжает вбок */
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px 18px}
+.chart-box canvas{max-width:100%}
+.panel h3{font-family:var(--font-display);font-weight:400;font-size:13px;color:var(--text);margin-bottom:12px}
+.chart-box{position:relative;height:225px}
+
+/* ---------- таблица кампаний ---------- */
+.table-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.tbl-scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:660px}
+thead th{
+  text-align:right;padding:11px 13px;font-size:10px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--text-mute);border-bottom:1px solid var(--border);
+  white-space:nowrap;background:var(--surface-2);
+}
+thead th:first-child{text-align:left}
+tbody td{padding:11px 13px;text-align:right;border-bottom:1px solid var(--border-soft);font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--text)}
+tbody tr:last-child td{border-bottom:none}
+tbody td:first-child{text-align:left;white-space:normal}
+.camp-name{font-weight:600;font-size:13px}
+.camp-tag{display:inline-block;margin-top:3px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.tag-direct{background:var(--chip-burg-bg);color:var(--chip-burg-text)}
+.tag-traffic{background:var(--chip-pink-bg);color:var(--chip-pink-text)}
+.camp-aud{display:block;margin-top:4px;font-size:10.5px;color:var(--text-mute)}
+.val-strong{font-weight:700}
+.pill{display:inline-flex;align-items:center;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700}
+.pill.good{background:var(--chip-pink-bg);color:var(--chip-pink-text)}
+.pill.watch{background:var(--chip-burg-bg);color:var(--chip-burg-text)}
+tfoot td{padding:11px 13px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums;background:var(--surface-2)}
+tfoot td:first-child{text-align:left;text-transform:uppercase;font-size:10px;letter-spacing:.05em;color:var(--text-dim)}
+
+/* вердикт-строка под каждой кампанией (только «Подробно») */
+.verdict-cell{padding:12px 14px 14px !important;text-align:left !important;white-space:normal !important;background:var(--surface-2);font-size:12.5px;color:var(--text-dim);line-height:1.55}
+.verdict-cell b{color:var(--accent-text)}
+.verdict-cell .vlabel{color:var(--accent-text);font-family:var(--font-display);font-weight:400;font-size:10px;text-transform:uppercase;letter-spacing:.05em;margin-right:6px}
+
+/* объявления внутри кампании (только «Подробно») */
+.ads-cell{padding:12px 14px 14px !important;text-align:left !important;white-space:normal !important;background:var(--surface-2);border-top:1px dashed var(--border)}
+.ads-cell .alabel{display:block;color:var(--accent-text);font-family:var(--font-display);font-weight:400;font-size:10px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:9px}
+.adm-row{display:flex;flex-wrap:wrap;gap:10px}
+.adm{display:flex;align-items:center;gap:11px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:9px 13px 9px 9px;min-width:250px;flex:1 1 260px;max-width:420px}
+.adm img{width:52px;height:52px;border-radius:9px;object-fit:cover;flex:none;background:var(--surface-2)}
+.adm .adm-name{font-weight:600;font-size:12.5px;color:var(--text);line-height:1.3}
+.adm .adm-aud{font-size:11px;color:var(--text-mute);margin-top:1px}
+.adm .adm-met{font-size:11.5px;color:var(--text-dim);margin-top:4px;font-variant-numeric:tabular-nums}
+.adm .adm-met b{color:var(--accent-text);font-weight:700}
+@media(max-width:560px){.adm{max-width:none}}
+
+/* ---------- аудитории ---------- */
+.aud-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.aud-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 16px 15px}
+.aud-card.discovery{box-shadow:0 0 0 2px var(--pink)}
+.aud-star{
+  position:absolute;top:-11px;left:12px;display:inline-flex;align-items:center;gap:4px;
+  background:var(--pink);color:var(--charcoal);font-size:10px;font-weight:800;letter-spacing:.02em;
+  text-transform:uppercase;padding:4px 9px;border-radius:999px;
+}
+.aud-name{font-family:var(--font-display);font-weight:400;font-size:12.5px;color:var(--text)}
+.aud-ctr{font-family:var(--font-display);font-weight:400;font-size:20px;color:var(--accent-text);margin:8px 0 2px}
+.aud-stats{font-size:11.5px;color:var(--text-mute);font-variant-numeric:tabular-nums}
+.aud-note{font-size:12px;color:var(--text-dim);margin-top:9px;line-height:1.5}
+
+/* ---------- площадки и демография: горизонтальные полосы ---------- */
+.plat-row{display:grid;grid-template-columns:150px 1fr 235px;gap:10px;align-items:center;margin:8px 0}
+.plat-label{font-size:12px;font-weight:600;white-space:nowrap}
+.plat-stat{font-size:11.5px;color:var(--text-dim);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar-track{height:13px;background:var(--surface-2);border-radius:999px;overflow:hidden}
+.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--pink-deep),var(--pink));min-width:4px}
+.bar-fill.men{background:var(--bar-men)}
+.bar-fill.women{background:var(--bar-women)}
+.cap{margin-top:13px;font-size:12px;color:var(--text-mute);line-height:1.55}
+
+.demo-legend{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text-dim);margin-bottom:11px;flex-wrap:wrap}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
+.dot.men{background:var(--bar-men)}
+.dot.women{background:var(--bar-women)}
+.demo-legend .gap{width:6px}
+.demo-scale{margin-left:auto;color:var(--text-mute)}
+.demo-row{display:grid;grid-template-columns:70px 1fr 150px;gap:10px;align-items:center;margin:7px 0}
+.demo-label{font-size:11.5px;font-weight:600;white-space:nowrap}
+.demo-stat{font-size:11px;color:var(--text-dim);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.demo-stat.hot{color:var(--accent-text);font-weight:700}
+
+/* ---------- лучшие объявления ---------- */
+.ads-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ad-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  overflow:hidden;display:flex;flex-direction:column;position:relative;
+}
+.ad-card.best{box-shadow:0 0 0 2px var(--pink)}
+.ad-star{
+  position:absolute;top:10px;left:10px;z-index:2;display:inline-flex;align-items:center;gap:4px;
+  background:var(--pink);color:var(--charcoal);font-size:10px;font-weight:800;letter-spacing:.02em;
+  text-transform:uppercase;padding:5px 9px;border-radius:999px;
+}
+.ad-star.info{background:var(--burgundy);color:var(--cream)}
+.ad-visual{height:200px;background:var(--surface-2)}
+.ad-visual img{width:100%;height:100%;object-fit:cover;display:block}
+.ad-body{padding:13px 14px 15px;display:flex;flex-direction:column;gap:6px;flex:1}
+.ad-name{font-family:var(--font-display);font-weight:400;font-size:13px;color:var(--text)}
+.ad-cost{font-size:12px;color:var(--text-dim)}
+.ad-cost b{color:var(--accent-text);font-family:var(--font-display);font-weight:400}
+.ad-reason{font-size:12px;color:var(--text-dim);line-height:1.5}
+
+/* ---------- текстовые блоки: выводы, рекомендации ---------- */
+.textcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px}
+.textcard ol,.textcard ul{margin:0;padding-left:19px}
+.textcard li{font-size:13.5px;color:var(--text-dim);margin:8px 0}
+.textcard li b{color:var(--accent-text);font-weight:600}
+
+/* ---------- дисклеймер про переписки (ЕС) ---------- */
+.eu-note{
+  margin-top:32px;background:var(--chip-burg-bg);border:1px solid var(--border);
+  border-left:3px solid var(--burgundy);border-radius:var(--r);padding:16px 20px;
+}
+.eu-title{font-family:var(--font-display);font-weight:400;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--chip-burg-text);margin-bottom:7px}
+.eu-note p{font-size:13px;color:var(--text-dim);line-height:1.6}
+
+/* ---------- глоссарий (режим «Подробно») ---------- */
+.glossary{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.gloss-item{border-bottom:1px solid var(--border)}
+.gloss-item:last-child{border-bottom:none}
+.gloss-item summary{
+  list-style:none;cursor:pointer;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;
+  gap:12px;font-weight:400;font-size:13px;color:var(--text);transition:background .18s;font-family:var(--font-display);
+}
+.gloss-item summary::-webkit-details-marker{display:none}
+.gloss-item summary:hover{background:var(--surface-2)}
+.gloss-item summary .chev{color:var(--accent-text);transition:transform .25s;font-size:16px;flex:none}
+.gloss-item[open] summary .chev{transform:rotate(45deg)}
+.gloss-item .gloss-body{padding:0 18px 16px;font-size:12.5px;color:var(--text-dim);line-height:1.6}
+.gloss-body .ex{
+  display:block;margin-top:7px;padding:9px 11px;background:var(--surface-2);border-radius:9px;
+  font-size:12px;color:var(--text);border-left:3px solid var(--pink);
+}
+
+/* ---------- футер ---------- */
+footer.foot{margin-top:32px;font-size:12px;color:var(--text-mute);text-align:center}
+footer.foot .handle{color:var(--accent-text);margin-top:4px;display:block}
+
+@media (max-width:760px){
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .grid2{grid-template-columns:1fr}
+  .ads-grid{grid-template-columns:1fr}
+  .aud-grid{grid-template-columns:1fr;row-gap:22px}
+  .head-right{align-items:flex-end}
+}
+@media (max-width:640px){
+  .plat-row{grid-template-columns:1fr;gap:4px;margin:12px 0}
+  .plat-stat{text-align:left}
+  .demo-row{grid-template-columns:52px 1fr 128px;gap:7px}
+  .demo-stat{font-size:10px}
+}
+</style>
+</head>
+<body class="brief">
+<div class="wrap">
+
+  <header class="head">
+    <div class="head-left">
+      <div class="logo" aria-hidden="true">T</div>
+      <div>
+        <h1>TravelForever</h1>
+        <div class="sub" data-i18n="header.sub">Отчёт по рекламе · Meta Ads (Instagram / Facebook)</div>
+      </div>
+    </div>
+    <div class="head-right">
+      <div class="period">
+        <strong data-i18n="header.dates">1 – 31 августа</strong>
+        <span data-i18n="header.period">месячный отчёт</span>
+      </div>
+      <div class="toggles">
+        <div class="theme-toggle" role="group" aria-label="Тема оформления">
+          <button class="theme-btn active" id="btn-dark" onclick="setTheme('dark')" data-i18n="theme.dark">Тёмная</button>
+          <button class="theme-btn" id="btn-light" onclick="setTheme('light')" data-i18n="theme.light">Светлая</button>
+        </div>
+        <div class="mode-toggle" role="group" aria-label="Режим отчёта">
+          <button class="mode-btn active" id="btn-brief" onclick="setMode('brief')" data-i18n="mode.brief">Кратко</button>
+          <button class="mode-btn" id="btn-detailed" onclick="setMode('detailed')" data-i18n="mode.detailed">Подробно</button>
+        </div>
+        <div class="lang-toggle" role="group" aria-label="Language / Язык">
+          <button class="lang-btn active" id="btn-ru" onclick="setLang('ru')">RU</button>
+          <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <h2 class="section" data-i18n="sec.insight">Коротко о месяце</h2>
+  <div class="insight" data-i18n="insight.text">За период реклама охватила <b>42 976 человек</b> при бюджете <b>10 853 Kč</b>. Получено <b>2 150 кликов</b> по средней цене <b>5,05 Kč</b>, что говорит о хорошем интересе аудитории к предложениям по отелям. Особенно активно сработали публикации про Travel Forever: они показали CTR до 3,03%, что выше среднего по рынку туристических услуг.</div>
+
+  <h2 class="section" data-i18n="sec.result">Общий результат за период</h2>
+  <section class="kpis">
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.spend">Расход</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.spend.tip">Сколько Meta списала за показ рекламы в этом месяце.</span></span>
+      </div>
+      <div class="value"><span data-num="10853.37" data-dec="0" data-suffix="Kč">10 853</span></div>
+      
+    </div>
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.reach">Охват</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.reach.tip">Сколько разных людей увидели рекламу хотя бы раз. Один человек считается один раз.</span></span>
+      </div>
+      <div class="value"><span data-num="42976" data-dec="0">42 976</span></div>
+      
+    </div>
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.impr">Показы</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.impr.tip">Сколько всего раз реклама появилась на экранах. Больше, чем людей, потому что один человек видит рекламу несколько раз.</span></span>
+      </div>
+      <div class="value"><span data-num="111063" data-dec="0">111 063</span></div>
+      
+    </div>
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.clicks">Клики</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.clicks.tip">Сколько раз люди нажали на рекламу.</span></span>
+      </div>
+      <div class="value"><span data-num="2150" data-dec="0">2 150</span></div>
+      
+    </div>
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.ctr">CTR</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.ctr.tip">Доля кликнувших из всех, кто увидел рекламу.</span></span>
+      </div>
+      <div class="value"><span data-num="1.94" data-dec="2" data-suffix="%">1,94</span></div>
+      
+    </div>
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.cpc">CPC</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.cpc.tip">Средняя цена одного клика по счёту за месяц.</span></span>
+      </div>
+      <div class="value"><span data-num="5.05" data-dec="2" data-suffix="Kč">5,05</span></div>
+      
+    </div>
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.freq">Частота</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.freq.tip">Сколько раз в среднем один человек видел рекламу. Чем частота выше, тем больше риск, что аудитория подустала от одного и того же креатива.</span></span>
+      </div>
+      <div class="value"><span data-num="2.58" data-dec="2">2,58</span></div>
+      
+      <div class="meta"><span class="sub" data-i18n="kpi.freq.sub">показы ÷ охват</span></div>
+      
+    </div>
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.eng">Взаимодействия</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.eng.tip">Лайки, комментарии, сохранения, клики и просмотры видео: любые действия людей с рекламой.</span></span>
+      </div>
+      <div class="value"><span data-num="15241" data-dec="0">15 241</span></div>
+      
+      <div class="meta"><span class="sub" data-i18n="kpi.eng.sub">лайки, комментарии, видео, клики</span></div>
+      
+    </div>
+    
+    <div class="kpi">
+      <div class="label">
+        <span data-i18n="kpi.video">Видео-просмотры</span>
+        <span class="kpi-hint-wrap"><button class="kpi-hint" aria-label="?">?</button><span class="kpi-tip" data-i18n="kpi.video.tip">Сколько раз люди запускали видео в рекламе.</span></span>
+      </div>
+      <div class="value"><span data-num="13205" data-dec="0">13 205</span></div>
+      
+      <div class="meta"><span class="sub" data-i18n="kpi.video.sub">запуски видео в рекламе</span></div>
+      
+    </div>
+    
+  </section>
+
+  <h2 class="section" data-i18n="sec.compare">Сравнение кампаний</h2>
+  <div class="grid2">
+    <div class="panel"><h3 data-i18n="chart1.title">Клики по кампаниям</h3><div class="chart-box"><canvas id="clicksChart"></canvas></div></div>
+    <div class="panel"><h3 data-i18n="chart2.title">Цена клика по кампаниям</h3><div class="chart-box"><canvas id="cpcChart"></canvas></div></div>
+  </div>
+
+  <h2 class="section" data-i18n="sec.campaigns">Кампании</h2>
+  <div class="table-card">
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="table.h.campaign">Кампания</th>
+            <th data-i18n="table.h.reach">Охват</th>
+            <th data-i18n="table.h.impr">Показы</th>
+            <th data-i18n="table.h.clicks">Клики</th>
+            <th data-i18n="table.h.ctr">CTR</th>
+            <th data-i18n="table.h.cpc">CPC</th>
+            <th data-i18n="table.h.budget">Бюджет</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          
+          <tr>
+            <td>
+              <div class="camp-name">Публикация в Instagram: Добро пожаловать в Travel</div>
+              <span class="camp-tag tag-direct" data-i18n="camp1.tag"></span>
+              <span class="camp-aud" data-i18n="camp1.aud">Публикация в Instagram: Добро пожаловать в Travel...</span>
+            </td>
+            <td><span data-num="8518" data-dec="0">8 518</span></td>
+            <td><span data-num="12186" data-dec="0">12 186</span></td>
+            <td class="val-strong"><span data-num="260" data-dec="0">260</span></td>
+            <td><span data-num="2.13" data-dec="2" data-suffix="%">2,13%</span></td>
+            <td><span data-num="5.38" data-dec="2" data-suffix="Kč">5,38 Kč</span></td>
+            <td><span data-num="1399.84" data-dec="0" data-suffix="Kč">1 400 Kč</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="verdict-cell"><span class="vlabel" data-i18n="verdict.label">Вывод</span><span data-i18n="camp1.verdict">Охватила 8 518 человек с CTR 2,13% и ценой клика 5,38 Kč. Публикация собрала 4 310 взаимодействий и 4 008 просмотров видео, что показывает хорошую вовлечённость аудитории в контент про Travel Forever.</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="ads-cell"><span class="alabel" data-i18n="ads.label">Объявления кампании</span>
+              <div class="adm-row">
+                
+                
+                <div class="adm"><img src="assets/120252406403810612.jpg" alt=""><div><div class="adm-name" data-i18n="campAd1.name">Объявление Публикация в Instagram: Добро пожаловать в Travel...</div><div class="adm-aud" data-i18n="campAd1.aud">Публикация в Instagram: Добро пожаловать в Travel...</div><div class="adm-met" data-i18n="campAd1.met">260 кликов · CTR 2,13% · CPC <b>5,38 Kč</b></div></div></div>
+                
+              </div>
+            </td>
+          </tr>
+          
+          
+          <tr>
+            <td>
+              <div class="camp-name">direсt · отели предложения · сообщения</div>
+              <span class="camp-tag tag-direct" data-i18n="camp2.tag"></span>
+              <span class="camp-aud" data-i18n="camp2.aud">ru+ukr</span>
+            </td>
+            <td><span data-num="25493" data-dec="0">25 493</span></td>
+            <td><span data-num="71394" data-dec="0">71 394</span></td>
+            <td class="val-strong"><span data-num="1166" data-dec="0">1 166</span></td>
+            <td><span data-num="1.63" data-dec="2" data-suffix="%">1,63%</span></td>
+            <td><span class="pill good" data-num="4.59" data-dec="2" data-suffix="Kč">4,59 Kč</span></td>
+            <td><span data-num="5347.88" data-dec="0" data-suffix="Kč">5 348 Kč</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="verdict-cell"><span class="vlabel" data-i18n="verdict.label">Вывод</span><span data-i18n="camp2.verdict">Самая масштабная кампания с охватом 25 493 человека, получила 1 166 кликов по самой низкой цене 4,59 Kč. Частота показов 2,8 означает, что люди видели рекламу в среднем почти 3 раза, это помогло запомниться.</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="ads-cell"><span class="alabel" data-i18n="ads.label">Объявления кампании</span>
+              <div class="adm-row">
+                
+                
+                <div class="adm"><img src="assets/120252593090740612.jpg" alt=""><div><div class="adm-name" data-i18n="campAd2.name">Объявление 1</div><div class="adm-aud" data-i18n="campAd2.aud">ru+ukr</div><div class="adm-met" data-i18n="campAd2.met">1 166 кликов · CTR 1,63% · CPC <b>4,59 Kč</b></div></div></div>
+                
+              </div>
+            </td>
+          </tr>
+          
+          
+          <tr>
+            <td>
+              <div class="camp-name">Instagram post: Добро пожаловать в Travel Forever</div>
+              <span class="camp-tag tag-direct" data-i18n="camp3.tag"></span>
+              <span class="camp-aud" data-i18n="camp3.aud">Instagram post: Добро пожаловать в Travel Forever...</span>
+            </td>
+            <td><span data-num="8044" data-dec="0">8 044</span></td>
+            <td><span data-num="10297" data-dec="0">10 297</span></td>
+            <td class="val-strong"><span data-num="261" data-dec="0">261</span></td>
+            <td><span data-num="2.53" data-dec="2" data-suffix="%">2,53%</span></td>
+            <td><span data-num="5.35" data-dec="2" data-suffix="Kč">5,35 Kč</span></td>
+            <td><span data-num="1397.62" data-dec="0" data-suffix="Kč">1 398 Kč</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="verdict-cell"><span class="vlabel" data-i18n="verdict.label">Вывод</span><span data-i18n="camp3.verdict">Показала лучший CTR среди всех кампаний: 2,53%. Охватила 8 044 человека, собрала 4 038 взаимодействий и 3 736 просмотров видео при цене клика 5,35 Kč.</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="ads-cell"><span class="alabel" data-i18n="ads.label">Объявления кампании</span>
+              <div class="adm-row">
+                
+                
+                <div class="adm"><img src="assets/120252621510520612.jpg" alt=""><div><div class="adm-name" data-i18n="campAd3.name">Объявление Instagram post: Добро пожаловать в Travel Forever...</div><div class="adm-aud" data-i18n="campAd3.aud">Instagram post: Добро пожаловать в Travel Forever...</div><div class="adm-met" data-i18n="campAd3.met">261 кликов · CTR 2,53% · CPC <b>5,35 Kč</b></div></div></div>
+                
+              </div>
+            </td>
+          </tr>
+          
+          
+          <tr>
+            <td>
+              <div class="camp-name">Публикация в Instagram: Добро пожаловать в Travel</div>
+              <span class="camp-tag tag-direct" data-i18n="camp4.tag"></span>
+              <span class="camp-aud" data-i18n="camp4.aud">Публикация в Instagram: Добро пожаловать в Travel...</span>
+            </td>
+            <td><span data-num="7364" data-dec="0">7 364</span></td>
+            <td><span data-num="9277" data-dec="0">9 277</span></td>
+            <td class="val-strong"><span data-num="281" data-dec="0">281</span></td>
+            <td><span data-num="3.03" data-dec="2" data-suffix="%">3,03%</span></td>
+            <td><span data-num="4.96" data-dec="2" data-suffix="Kč">4,96 Kč</span></td>
+            <td><span data-num="1394.14" data-dec="0" data-suffix="Kč">1 394 Kč</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="verdict-cell"><span class="vlabel" data-i18n="verdict.label">Вывод</span><span data-i18n="camp4.verdict">Лидер по кликабельности с CTR 3,03% и самым дешёвым кликом 4,96 Kč. Это значит, что креатив максимально точно попал в интересы аудитории и побуждал к действию.</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="ads-cell"><span class="alabel" data-i18n="ads.label">Объявления кампании</span>
+              <div class="adm-row">
+                
+                
+                <div class="adm"><img src="assets/120252800377580612.jpg" alt=""><div><div class="adm-name" data-i18n="campAd4.name">Объявление Публикация в Instagram: Добро пожаловать в Travel...</div><div class="adm-aud" data-i18n="campAd4.aud">Публикация в Instagram: Добро пожаловать в Travel...</div><div class="adm-met" data-i18n="campAd4.met">281 кликов · CTR 3,03% · CPC <b>4,96 Kč</b></div></div></div>
+                
+              </div>
+            </td>
+          </tr>
+          
+          
+          <tr>
+            <td>
+              <div class="camp-name">Публикация в Instagram: Добро пожаловать в Travel</div>
+              <span class="camp-tag tag-direct" data-i18n="camp5.tag"></span>
+              <span class="camp-aud" data-i18n="camp5.aud">Публикация в Instagram: Добро пожаловать в Travel...</span>
+            </td>
+            <td><span data-num="6251" data-dec="0">6 251</span></td>
+            <td><span data-num="7909" data-dec="0">7 909</span></td>
+            <td class="val-strong"><span data-num="182" data-dec="0">182</span></td>
+            <td><span data-num="2.3" data-dec="2" data-suffix="%">2,30%</span></td>
+            <td><span class="pill watch" data-num="7.22" data-dec="2" data-suffix="Kč">7,22 Kč</span></td>
+            <td><span data-num="1313.89" data-dec="0" data-suffix="Kč">1 314 Kč</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="verdict-cell"><span class="vlabel" data-i18n="verdict.label">Вывод</span><span data-i18n="camp5.verdict">Охватила 6 251 человека с CTR 2,3%. Цена клика 7,22 Kč оказалась выше остальных, вероятно из-за более узкой или конкурентной аудитории.</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="7" class="ads-cell"><span class="alabel" data-i18n="ads.label">Объявления кампании</span>
+              <div class="adm-row">
+                
+                
+                <div class="adm"><img src="assets/120252924197230612.jpg" alt=""><div><div class="adm-name" data-i18n="campAd5.name">Объявление Публикация в Instagram: Добро пожаловать в Travel...</div><div class="adm-aud" data-i18n="campAd5.aud">Публикация в Instagram: Добро пожаловать в Travel...</div><div class="adm-met" data-i18n="campAd5.met">182 кликов · CTR 2,30% · CPC <b>7,22 Kč</b></div></div></div>
+                
+              </div>
+            </td>
+          </tr>
+          
+        </tbody>
+        <tfoot>
+          <tr>
+            <td data-i18n="table.total">Итого / среднее</td>
+            <td><span data-num="42976" data-dec="0">42 976</span></td>
+            <td><span data-num="111063" data-dec="0">111 063</span></td>
+            <td><span data-num="2150" data-dec="0">2 150</span></td>
+            <td><span data-num="1.94" data-dec="2" data-suffix="%">1,94%</span></td>
+            <td><span data-num="5.05" data-dec="2" data-suffix="Kč">5,05 Kč</span></td>
+            <td><span data-num="10853.37" data-dec="0" data-suffix="Kč">10 853 Kč</span></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  
+  <h2 class="section" data-i18n="sec.aud">Аудитории</h2>
+  <div class="aud-grid">
+    
+    
+    <article class="aud-card">
+      
+      <div class="aud-name" data-i18n="aud1.name">ru+ukr</div>
+      <div class="aud-ctr" data-i18n="aud1.ctr">CTR 1,63%</div>
+      <div class="aud-stats" data-i18n="aud1.stats">5 348 Kč · охват 25 493</div>
+      <p class="aud-note" data-i18n="aud1.note">Самая крупная аудитория с охватом 25 493, показала CTR 1,63%, что ниже остальных сегментов, но дала наибольший объём трафика.</p>
+    </article>
+    
+    
+    <article class="aud-card">
+      
+      <div class="aud-name" data-i18n="aud2.name">Публикация в Instagram: Добро пожаловать в Travel... · 1</div>
+      <div class="aud-ctr" data-i18n="aud2.ctr">CTR 2,13%</div>
+      <div class="aud-stats" data-i18n="aud2.stats">1 400 Kč · охват 8 518</div>
+      <p class="aud-note" data-i18n="aud2.note">Показала CTR 2,13% при охвате 8 518 человек, сработала стабильно и эффективно для публикации про Travel.</p>
+    </article>
+    
+    
+    <article class="aud-card">
+      
+      <div class="aud-name" data-i18n="aud3.name">Instagram post: Добро пожаловать в Travel Forever...</div>
+      <div class="aud-ctr" data-i18n="aud3.ctr">CTR 2,53%</div>
+      <div class="aud-stats" data-i18n="aud3.stats">1 398 Kč · охват 8 044</div>
+      <p class="aud-note" data-i18n="aud3.note">Одна из лучших по отклику с CTR 2,53%, охватила 8 044 человека и показала высокую заинтересованность.</p>
+    </article>
+    
+    
+    <article class="aud-card discovery">
+      <span class="aud-star"><span aria-hidden="true">★</span><span data-i18n="aud4.badge">Лучшая аудитория</span></span>
+      <div class="aud-name" data-i18n="aud4.name">Публикация в Instagram: Добро пожаловать в Travel... · 2</div>
+      <div class="aud-ctr" data-i18n="aud4.ctr">CTR 3,03%</div>
+      <div class="aud-stats" data-i18n="aud4.stats">1 394 Kč · охват 7 364</div>
+      <p class="aud-note" data-i18n="aud4.note">Лидер по кликабельности с CTR 3,03%, охватила 7 364 человека и продемонстрировала максимальную вовлечённость.</p>
+    </article>
+    
+    
+    <article class="aud-card">
+      
+      <div class="aud-name" data-i18n="aud5.name">Публикация в Instagram: Добро пожаловать в Travel... · 3</div>
+      <div class="aud-ctr" data-i18n="aud5.ctr">CTR 2,3%</div>
+      <div class="aud-stats" data-i18n="aud5.stats">1 314 Kč · охват 6 251</div>
+      <p class="aud-note" data-i18n="aud5.note">Охватила 6 251 человека с CTR 2,3%, показала хороший результат, но цена клика оказалась выше из-за особенностей сегмента.</p>
+    </article>
+    
+  </div>
+  
+
+  
+  <h2 class="section" data-i18n="sec.plat">Площадки</h2>
+  <div class="panel">
+    
+    
+    <div class="plat-row">
+      <span class="plat-label" data-i18n="plat1.label">Instagram · сторис</span>
+      <div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div>
+      <span class="plat-stat" data-i18n="plat1.stat">4 630 Kč · 902 кликов · клик 5,13 Kč</span>
+    </div>
+    
+    
+    <div class="plat-row">
+      <span class="plat-label" data-i18n="plat2.label">Instagram · лента</span>
+      <div class="bar-track"><div class="bar-fill" style="width:88.36%"></div></div>
+      <span class="plat-stat" data-i18n="plat2.stat">4 091 Kč · 762 кликов · клик 5,37 Kč</span>
+    </div>
+    
+    
+    <div class="plat-row">
+      <span class="plat-label" data-i18n="plat3.label">Instagram · Reels</span>
+      <div class="bar-track"><div class="bar-fill" style="width:40.19%"></div></div>
+      <span class="plat-stat" data-i18n="plat3.stat">1 861 Kč · 403 кликов · клик 4,62 Kč</span>
+    </div>
+    
+    
+    <div class="plat-row">
+      <span class="plat-label" data-i18n="plat4.label">Facebook · лента</span>
+      <div class="bar-track"><div class="bar-fill" style="width:5.85%"></div></div>
+      <span class="plat-stat" data-i18n="plat4.stat">271 Kč · 82 кликов · клик 3,30 Kč</span>
+    </div>
+    
+    
+    <div class="plat-row">
+      <span class="plat-label" data-i18n="plat5.label">Facebook · сторис</span>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <span class="plat-stat" data-i18n="plat5.stat">0 Kč · 0 кликов · клик 0,00 Kč</span>
+    </div>
+    
+    <p class="cap" data-i18n="plat.note">Основной трафик пришёл из Instagram: сторис дали 902 клика по 5,13 Kč, лента 762 клика по 5,37 Kč, Reels 403 клика по самой выгодной цене 4,62 Kč. Facebook показал минимальный объём, но с самой низкой ценой клика 3,30 Kč в ленте.</p>
+  </div>
+  
+
+  
+  <h2 class="section" data-i18n="sec.demo">Аудитория по полу и возрасту</h2>
+  <div class="panel">
+    <div class="demo-legend">
+      <span class="dot men"></span><span data-i18n="demo.men">мужчины</span>
+      <span class="gap"></span>
+      <span class="dot women"></span><span data-i18n="demo.women">женщины</span>
+      <span class="demo-scale" data-i18n="demo.scale">длина полосы: расход за месяц</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r1.label">Ж 25-34</span>
+      <div class="bar-track"><div class="bar-fill women" style="width:100.0%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r1.stat">2 655 Kč · CTR 1,81%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r2.label">Ж 35-44</span>
+      <div class="bar-track"><div class="bar-fill women" style="width:88.02%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r2.stat">2 337 Kč · CTR 1,98%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r3.label">Ж 45-54</span>
+      <div class="bar-track"><div class="bar-fill women" style="width:83.77%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r3.stat">2 224 Kč · CTR 2,24%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r4.label">М 25-34</span>
+      <div class="bar-track"><div class="bar-fill men" style="width:39.0%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r4.stat">1 036 Kč · CTR 1,40%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r5.label">Ж 55-64</span>
+      <div class="bar-track"><div class="bar-fill women" style="width:32.11%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r5.stat">853 Kč · CTR 2,37%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r6.label">М 35-44</span>
+      <div class="bar-track"><div class="bar-fill men" style="width:20.99%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r6.stat">557 Kč · CTR 1,87%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r7.label">М 45-54</span>
+      <div class="bar-track"><div class="bar-fill men" style="width:13.24%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r7.stat">352 Kč · CTR 1,72%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r8.label">Ж 65+</span>
+      <div class="bar-track"><div class="bar-fill women" style="width:13.15%"></div></div>
+      <span class="demo-stat hot" data-i18n="demo.r8.stat">349 Kč · CTR 2,65%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r9.label">Ж 18-24</span>
+      <div class="bar-track"><div class="bar-fill women" style="width:5.19%"></div></div>
+      <span class="demo-stat hot" data-i18n="demo.r9.stat">138 Kč · CTR 3,34%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r10.label">М 55-64</span>
+      <div class="bar-track"><div class="bar-fill men" style="width:4.97%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r10.stat">132 Kč · CTR 2,20%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r11.label">М 18-24</span>
+      <div class="bar-track"><div class="bar-fill men" style="width:3.52%"></div></div>
+      <span class="demo-stat hot" data-i18n="demo.r11.stat">94 Kč · CTR 2,43%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r12.label">М 65+</span>
+      <div class="bar-track"><div class="bar-fill men" style="width:2.75%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r12.stat">73 Kč · CTR 2,08%</span>
+    </div>
+    
+    
+    <div class="demo-row">
+      <span class="demo-label" data-i18n="demo.r13.label">Ж Unknown</span>
+      <div class="bar-track"><div class="bar-fill women" style="width:0.04%"></div></div>
+      <span class="demo-stat" data-i18n="demo.r13.stat">1 Kč · CTR 0,00%</span>
+    </div>
+    
+    <p class="cap" data-i18n="demo.note">Самый высокий CTR показали женщины 18-24 (3,34%) и 65+ (2,65%), но основной бюджет ушёл на женщин 25-34 и 45-54. Женщины во всех возрастах кликают активнее мужчин, при этом получают пропорционально больше показов.</p>
+  </div>
+  
+
+  
+  <h2 class="section" data-i18n="sec.ads">Лучшие объявления</h2>
+  <div class="ads-grid">
+    
+    
+    <article class="ad-card best">
+      <span class="ad-star"><span data-i18n="ad1.badge">Лучший отклик</span></span>
+      <div class="ad-visual"><img src="assets/120252800377580612.jpg" alt="Превью креатива Публикация в Instagram: Добро пожаловать в Travel"></div>
+      <div class="ad-body">
+        <div class="ad-name" data-i18n="ad1.name">Публикация в Instagram: Добро пожаловать в Travel</div>
+        <div class="ad-cost" data-i18n="ad1.metric">CTR 3.03% · CPC 4.96 Kč</div>
+        <p class="ad-reason" data-i18n="ad1.reason">CTR 3,03% оказался самым высоким среди всех объявлений, что говорит о максимальном интересе аудитории к этому креативу.</p>
+      </div>
+    </article>
+    
+    
+    <article class="ad-card">
+      <span class="ad-star info"><span data-i18n="ad2.badge">Самый дешёвый клик</span></span>
+      <div class="ad-visual"><img src="assets/120252593090740612.jpg" alt="Превью креатива direсt · отели предложения · сообщения"></div>
+      <div class="ad-body">
+        <div class="ad-name" data-i18n="ad2.name">direсt · отели предложения · сообщения</div>
+        <div class="ad-cost" data-i18n="ad2.metric">CTR 1.63% · CPC 4.59 Kč</div>
+        <p class="ad-reason" data-i18n="ad2.reason">Цена клика 4,59 Kč стала самой низкой в периоде, при этом кампания охватила максимальную аудиторию 25 493 человека.</p>
+      </div>
+    </article>
+    
+    
+    <article class="ad-card">
+      <span class="ad-star info"><span data-i18n="ad3.badge">Магнит вовлечённости</span></span>
+      <div class="ad-visual"><img src="assets/120252406403810612.jpg" alt="Превью креатива Публикация в Instagram: Добро пожаловать в Travel"></div>
+      <div class="ad-body">
+        <div class="ad-name" data-i18n="ad3.name">Публикация в Instagram: Добро пожаловать в Travel</div>
+        <div class="ad-cost" data-i18n="ad3.metric">CTR 2.13% · CPC 5.38 Kč</div>
+        <p class="ad-reason" data-i18n="ad3.reason">Собрала рекордные 4 310 взаимодействий с постом, что в 4-5 раз больше других кампаний и показывает сильную связь с аудиторией.</p>
+      </div>
+    </article>
+    
+  </div>
+  
+
+  <h2 class="section" data-i18n="sec.findings">Основные выводы</h2>
+  <div class="textcard"><ol>
+    
+    <li data-i18n="find.1">За период потрачено 10 853 Kč, получено 2 150 кликов по средней цене 5,05 Kč при охвате 42 976 человек.</li>
+    
+    <li data-i18n="find.2">Публикации про Travel Forever показали CTR от 2,13% до 3,03%, что выше базовых показателей для туристической ниши.</li>
+    
+    <li data-i18n="find.3">Женщины активнее кликают во всех возрастах: их CTR от 1,81% до 3,34%, у мужчин от 1,4% до 2,43%.</li>
+    
+    <li data-i18n="find.4">Instagram Reels дали самую низкую цену клика 4,62 Kč при 403 переходах, что делает формат выгодным для масштабирования.</li>
+    
+    <li data-i18n="find.5">Аудитория ru+ukr охватила 25 493 человека (59% от общего охвата) и принесла основной объём трафика.</li>
+    
+    <li data-i18n="find.6">Частота показов 2,58 означает, что каждый человек видел рекламу в среднем почти 3 раза, это помогло запоминанию бренда.</li>
+    
+  </ol></div>
+
+  <h2 class="section" data-i18n="sec.recs">Рекомендации</h2>
+  <div class="textcard"><ul>
+    
+    <li data-i18n="rec.1">Увеличить бюджет на Instagram Reels: там самая низкая цена клика 4,62 Kč, а формат хорошо работает на вовлечение молодой аудитории.</li>
+    
+    <li data-i18n="rec.2">Дать больше бюджета на женщин 18-24 и 65+: их CTR 3,34% и 2,65% при небольших затратах, можно масштабировать эти сегменты.</li>
+    
+    <li data-i18n="rec.3">Протестировать больше креативов в стиле публикации с CTR 3,03%: этот формат показал максимальный отклик и самую низкую цену клика 4,96 Kč.</li>
+    
+    <li data-i18n="rec.4">Использовать частоту показов 2,5-3 как оптимальную: текущая 2,58 даёт баланс между запоминанием и эффективностью без переутомления аудитории.</li>
+    
+    <li data-i18n="rec.5">Проверить Facebook-ленту отдельно: там всего 270,91 Kč бюджета, но цена клика 3,30 Kč самая низкая, возможно стоит протестировать с большим бюджетом.</li>
+    
+    <li data-i18n="rec.6">Подготовить несколько вариантов видео для Travel Forever: текущие собрали 13 205 просмотров, формат явно интересен аудитории.</li>
+    
+  </ul></div>
+
+  
+
+  
+  <div class="eu-note">
+    <div class="eu-title" data-i18n="eu.title">Про переписки в директ</div>
+    <p data-i18n="eu.body">Важно знать: в рекламных кабинетах ЕС Meta не показывает число начатых переписок в директ. Кампании «IG direct» реально приводят людей в сообщения, но эта цифра в отчёте технически недоступна. Реальное число обращений видно только вручную (в директе или через учёт менеджеров).</p>
+  </div>
+  
+
+  <h2 class="section detail-block" data-i18n="sec.glossary">Словарик терминов</h2>
+  <div class="glossary detail-block">
+    
+    <details class="gloss-item">
+      <summary><span data-i18n="term1.title">Охват: сколько людей вас увидели</span><span class="chev">+</span></summary>
+      <div class="gloss-body" data-i18n="term1.body">Число разных людей, которым хотя бы раз показали рекламу. Каждый человек считается один раз, даже если видел рекламу несколько дней подряд.</div>
+    </details>
+    
+    <details class="gloss-item">
+      <summary><span data-i18n="term2.title">Показы: сколько раз реклама мелькнула</span><span class="chev">+</span></summary>
+      <div class="gloss-body" data-i18n="term2.body">Сколько всего раз реклама появилась на экранах. Их всегда больше, чем людей, потому что одному человеку рекламу показывают несколько раз, так лучше запоминается.</div>
+    </details>
+    
+    <details class="gloss-item">
+      <summary><span data-i18n="term3.title">Частота: как часто один человек видит рекламу</span><span class="chev">+</span></summary>
+      <div class="gloss-body" data-i18n="term3.body">Показы, делённые на охват. Пока частота 1–3, реклама мягко напоминает о себе. Когда выше 3–4, одни и те же люди видят её слишком часто и начинают пролистывать.</div>
+    </details>
+    
+    <details class="gloss-item">
+      <summary><span data-i18n="term4.title">CTR: насколько реклама цепляет</span><span class="chev">+</span></summary>
+      <div class="gloss-body" data-i18n="term4.body">Кликабельность: доля тех, кто нажал на рекламу, из всех увидевших. Чем выше, тем интереснее объявление для аудитории.</div>
+    </details>
+    
+    <details class="gloss-item">
+      <summary><span data-i18n="term5.title">CPC: цена одного клика</span><span class="chev">+</span></summary>
+      <div class="gloss-body" data-i18n="term5.body">Сколько в среднем стоил один переход по рекламе. Чем ниже, тем дешевле обходится внимание аудитории.</div>
+    </details>
+    
+    <details class="gloss-item">
+      <summary><span data-i18n="term6.title">Взаимодействия: любые действия с рекламой</span><span class="chev">+</span></summary>
+      <div class="gloss-body" data-i18n="term6.body">Лайки, комментарии, сохранения, клики и просмотры видео вместе. Показывают, что реклама не просто мелькает: с ней что-то делают.</div>
+    </details>
+    
+    <details class="gloss-item">
+      <summary><span data-i18n="term7.title">Видео-просмотры: сколько раз смотрели видео</span><span class="chev">+</span></summary>
+      <div class="gloss-body" data-i18n="term7.body">Сколько раз люди запускали видео в рекламе. Важная метрика для роликов: она показывает, что креатив смотрят, а не пролистывают.</div>
+    </details>
+    
+  </div>
+
+  <footer class="foot">
+    <span data-i18n="footer.text">Данные: Meta Marketing API · рекламный кабинет TravelForever · период 1 – 31 августа</span>
+    <span class="handle"></span>
+  </footer>
+
+</div>
+
+<script>
+/* ============================================================
+   I18N: словарь RU / EN. СГЕНЕРИРОВАН из data.json автогенератором
+   отчётов (engine/render.py), не редактировать руками.
+   ============================================================ */
+var i18n = {
+  ru: {"header.sub": "Отчёт по рекламе · Meta Ads (Instagram / Facebook)", "header.period": "месячный отчёт", "theme.dark": "Тёмная", "theme.light": "Светлая", "mode.brief": "Кратко", "mode.detailed": "Подробно", "sec.insight": "Коротко о месяце", "sec.result": "Общий результат за период", "sec.liza_comment": "Комментарий", "kpi.spend": "Расход", "kpi.spend.tip": "Сколько Meta списала за показ рекламы в этом месяце.", "kpi.reach": "Охват", "kpi.reach.tip": "Сколько разных людей увидели рекламу хотя бы раз. Один человек считается один раз.", "kpi.impr": "Показы", "kpi.impr.tip": "Сколько всего раз реклама появилась на экранах. Больше, чем людей, потому что один человек видит рекламу несколько раз.", "kpi.clicks": "Клики", "kpi.clicks.tip": "Сколько раз люди нажали на рекламу.", "kpi.ctr": "CTR", "kpi.ctr.tip": "Доля кликнувших из всех, кто увидел рекламу.", "kpi.cpc": "CPC", "kpi.cpc.tip": "Средняя цена одного клика по счёту за месяц.", "kpi.freq": "Частота", "kpi.freq.tip": "Сколько раз в среднем один человек видел рекламу. Чем частота выше, тем больше риск, что аудитория подустала от одного и того же креатива.", "kpi.freq.sub": "показы ÷ охват", "kpi.eng": "Взаимодействия", "kpi.eng.tip": "Лайки, комментарии, сохранения, клики и просмотры видео: любые действия людей с рекламой.", "kpi.eng.sub": "лайки, комментарии, видео, клики", "kpi.video": "Видео-просмотры", "kpi.video.tip": "Сколько раз люди запускали видео в рекламе.", "kpi.video.sub": "запуски видео в рекламе", "kpi.leads": "Лиды", "kpi.leads.tip": "Сколько людей оставили заявку: через форму для лидов или через пиксель на сайте.", "kpi.cost_lead": "Цена за лид", "kpi.cost_lead.tip": "Сколько в среднем стоила одна заявка (расход, делённый на число лидов).", "kpi.cart": "Добавления в корзину", "kpi.cart.tip": "Сколько раз товар добавили в корзину на сайте (по данным пикселя).", "kpi.cost_cart": "Цена за добавление в корзину", "kpi.cost_cart.tip": "Сколько в среднем стоило одно добавление в корзину (расход, делённый на число добавлений).", "sec.compare": "Сравнение кампаний", "chart1.title": "Клики по кампаниям", "chart2.title": "Цена клика по кампаниям, Kč", "sec.campaigns": "Кампании", "table.h.campaign": "Кампания", "table.h.reach": "Охват", "table.h.impr": "Показы", "table.h.clicks": "Клики", "table.h.ctr": "CTR", "table.h.cpc": "CPC", "table.h.budget": "Бюджет", "table.total": "Итого / среднее", "verdict.label": "Вывод", "ads.label": "Объявления кампании", "sec.aud": "Аудитории", "sec.plat": "Площадки", "sec.demo": "Аудитория по полу и возрасту", "demo.men": "мужчины", "demo.women": "женщины", "demo.scale": "длина полосы: расход за месяц", "sec.ads": "Лучшие объявления", "sec.findings": "Основные выводы", "sec.recs": "Рекомендации", "eu.title": "Про переписки в директ", "sec.glossary": "Словарик терминов", "term1.title": "Охват: сколько людей вас увидели", "term1.body": "Число разных людей, которым хотя бы раз показали рекламу. Каждый человек считается один раз, даже если видел рекламу несколько дней подряд.", "term2.title": "Показы: сколько раз реклама мелькнула", "term2.body": "Сколько всего раз реклама появилась на экранах. Их всегда больше, чем людей, потому что одному человеку рекламу показывают несколько раз, так лучше запоминается.", "term3.title": "Частота: как часто один человек видит рекламу", "term3.body": "Показы, делённые на охват. Пока частота 1–3, реклама мягко напоминает о себе. Когда выше 3–4, одни и те же люди видят её слишком часто и начинают пролистывать.", "term4.title": "CTR: насколько реклама цепляет", "term4.body": "Кликабельность: доля тех, кто нажал на рекламу, из всех увидевших. Чем выше, тем интереснее объявление для аудитории.", "term5.title": "CPC: цена одного клика", "term5.body": "Сколько в среднем стоил один переход по рекламе. Чем ниже, тем дешевле обходится внимание аудитории.", "term6.title": "Взаимодействия: любые действия с рекламой", "term6.body": "Лайки, комментарии, сохранения, клики и просмотры видео вместе. Показывают, что реклама не просто мелькает: с ней что-то делают.", "term7.title": "Видео-просмотры: сколько раз смотрели видео", "term7.body": "Сколько раз люди запускали видео в рекламе. Важная метрика для роликов: она показывает, что креатив смотрят, а не пролистывают.", "header.dates": "1 – 31 августа", "insight.text": "За период реклама охватила <b>42 976 человек</b> при бюджете <b>10 853 Kč</b>. Получено <b>2 150 кликов</b> по средней цене <b>5,05 Kč</b>, что говорит о хорошем интересе аудитории к предложениям по отелям. Особенно активно сработали публикации про Travel Forever: они показали CTR до 3,03%, что выше среднего по рынку туристических услуг.", "camp1.tag": "", "camp1.aud": "Публикация в Instagram: Добро пожаловать в Travel...", "camp1.verdict": "Охватила 8 518 человек с CTR 2,13% и ценой клика 5,38 Kč. Публикация собрала 4 310 взаимодействий и 4 008 просмотров видео, что показывает хорошую вовлечённость аудитории в контент про Travel Forever.", "campAd1.name": "Объявление Публикация в Instagram: Добро пожаловать в Travel...", "campAd1.aud": "Публикация в Instagram: Добро пожаловать в Travel...", "campAd1.met": "260 кликов · CTR 2,13% · CPC <b>5,38 Kč</b>", "camp2.tag": "", "camp2.aud": "ru+ukr", "camp2.verdict": "Самая масштабная кампания с охватом 25 493 человека, получила 1 166 кликов по самой низкой цене 4,59 Kč. Частота показов 2,8 означает, что люди видели рекламу в среднем почти 3 раза, это помогло запомниться.", "campAd2.name": "Объявление 1", "campAd2.aud": "ru+ukr", "campAd2.met": "1 166 кликов · CTR 1,63% · CPC <b>4,59 Kč</b>", "camp3.tag": "", "camp3.aud": "Instagram post: Добро пожаловать в Travel Forever...", "camp3.verdict": "Показала лучший CTR среди всех кампаний: 2,53%. Охватила 8 044 человека, собрала 4 038 взаимодействий и 3 736 просмотров видео при цене клика 5,35 Kč.", "campAd3.name": "Объявление Instagram post: Добро пожаловать в Travel Forever...", "campAd3.aud": "Instagram post: Добро пожаловать в Travel Forever...", "campAd3.met": "261 кликов · CTR 2,53% · CPC <b>5,35 Kč</b>", "camp4.tag": "", "camp4.aud": "Публикация в Instagram: Добро пожаловать в Travel...", "camp4.verdict": "Лидер по кликабельности с CTR 3,03% и самым дешёвым кликом 4,96 Kč. Это значит, что креатив максимально точно попал в интересы аудитории и побуждал к действию.", "campAd4.name": "Объявление Публикация в Instagram: Добро пожаловать в Travel...", "campAd4.aud": "Публикация в Instagram: Добро пожаловать в Travel...", "campAd4.met": "281 кликов · CTR 3,03% · CPC <b>4,96 Kč</b>", "camp5.tag": "", "camp5.aud": "Публикация в Instagram: Добро пожаловать в Travel...", "camp5.verdict": "Охватила 6 251 человека с CTR 2,3%. Цена клика 7,22 Kč оказалась выше остальных, вероятно из-за более узкой или конкурентной аудитории.", "campAd5.name": "Объявление Публикация в Instagram: Добро пожаловать в Travel...", "campAd5.aud": "Публикация в Instagram: Добро пожаловать в Travel...", "campAd5.met": "182 кликов · CTR 2,30% · CPC <b>7,22 Kč</b>", "aud1.name": "ru+ukr", "aud1.ctr": "CTR 1,63%", "aud1.stats": "5 348 Kč · охват 25 493", "aud1.note": "Самая крупная аудитория с охватом 25 493, показала CTR 1,63%, что ниже остальных сегментов, но дала наибольший объём трафика.", "aud2.name": "Публикация в Instagram: Добро пожаловать в Travel... · 1", "aud2.ctr": "CTR 2,13%", "aud2.stats": "1 400 Kč · охват 8 518", "aud2.note": "Показала CTR 2,13% при охвате 8 518 человек, сработала стабильно и эффективно для публикации про Travel.", "aud3.name": "Instagram post: Добро пожаловать в Travel Forever...", "aud3.ctr": "CTR 2,53%", "aud3.stats": "1 398 Kč · охват 8 044", "aud3.note": "Одна из лучших по отклику с CTR 2,53%, охватила 8 044 человека и показала высокую заинтересованность.", "aud4.name": "Публикация в Instagram: Добро пожаловать в Travel... · 2", "aud4.ctr": "CTR 3,03%", "aud4.stats": "1 394 Kč · охват 7 364", "aud4.note": "Лидер по кликабельности с CTR 3,03%, охватила 7 364 человека и продемонстрировала максимальную вовлечённость.", "aud4.badge": "Лучшая аудитория", "aud5.name": "Публикация в Instagram: Добро пожаловать в Travel... · 3", "aud5.ctr": "CTR 2,3%", "aud5.stats": "1 314 Kč · охват 6 251", "aud5.note": "Охватила 6 251 человека с CTR 2,3%, показала хороший результат, но цена клика оказалась выше из-за особенностей сегмента.", "plat1.label": "Instagram · сторис", "plat1.stat": "4 630 Kč · 902 кликов · клик 5,13 Kč", "plat2.label": "Instagram · лента", "plat2.stat": "4 091 Kč · 762 кликов · клик 5,37 Kč", "plat3.label": "Instagram · Reels", "plat3.stat": "1 861 Kč · 403 кликов · клик 4,62 Kč", "plat4.label": "Facebook · лента", "plat4.stat": "271 Kč · 82 кликов · клик 3,30 Kč", "plat5.label": "Facebook · сторис", "plat5.stat": "0 Kč · 0 кликов · клик 0,00 Kč", "plat.note": "Основной трафик пришёл из Instagram: сторис дали 902 клика по 5,13 Kč, лента 762 клика по 5,37 Kč, Reels 403 клика по самой выгодной цене 4,62 Kč. Facebook показал минимальный объём, но с самой низкой ценой клика 3,30 Kč в ленте.", "demo.r1.label": "Ж 25-34", "demo.r1.stat": "2 655 Kč · CTR 1,81%", "demo.r2.label": "Ж 35-44", "demo.r2.stat": "2 337 Kč · CTR 1,98%", "demo.r3.label": "Ж 45-54", "demo.r3.stat": "2 224 Kč · CTR 2,24%", "demo.r4.label": "М 25-34", "demo.r4.stat": "1 036 Kč · CTR 1,40%", "demo.r5.label": "Ж 55-64", "demo.r5.stat": "853 Kč · CTR 2,37%", "demo.r6.label": "М 35-44", "demo.r6.stat": "557 Kč · CTR 1,87%", "demo.r7.label": "М 45-54", "demo.r7.stat": "352 Kč · CTR 1,72%", "demo.r8.label": "Ж 65+", "demo.r8.stat": "349 Kč · CTR 2,65%", "demo.r9.label": "Ж 18-24", "demo.r9.stat": "138 Kč · CTR 3,34%", "demo.r10.label": "М 55-64", "demo.r10.stat": "132 Kč · CTR 2,20%", "demo.r11.label": "М 18-24", "demo.r11.stat": "94 Kč · CTR 2,43%", "demo.r12.label": "М 65+", "demo.r12.stat": "73 Kč · CTR 2,08%", "demo.r13.label": "Ж Unknown", "demo.r13.stat": "1 Kč · CTR 0,00%", "demo.note": "Самый высокий CTR показали женщины 18-24 (3,34%) и 65+ (2,65%), но основной бюджет ушёл на женщин 25-34 и 45-54. Женщины во всех возрастах кликают активнее мужчин, при этом получают пропорционально больше показов.", "ad1.badge": "Лучший отклик", "ad1.name": "Публикация в Instagram: Добро пожаловать в Travel", "ad1.metric": "CTR 3.03% · CPC 4.96 Kč", "ad1.reason": "CTR 3,03% оказался самым высоким среди всех объявлений, что говорит о максимальном интересе аудитории к этому креативу.", "ad2.badge": "Самый дешёвый клик", "ad2.name": "direсt · отели предложения · сообщения", "ad2.metric": "CTR 1.63% · CPC 4.59 Kč", "ad2.reason": "Цена клика 4,59 Kč стала самой низкой в периоде, при этом кампания охватила максимальную аудиторию 25 493 человека.", "ad3.badge": "Магнит вовлечённости", "ad3.name": "Публикация в Instagram: Добро пожаловать в Travel", "ad3.metric": "CTR 2.13% · CPC 5.38 Kč", "ad3.reason": "Собрала рекордные 4 310 взаимодействий с постом, что в 4-5 раз больше других кампаний и показывает сильную связь с аудиторией.", "find.1": "За период потрачено 10 853 Kč, получено 2 150 кликов по средней цене 5,05 Kč при охвате 42 976 человек.", "find.2": "Публикации про Travel Forever показали CTR от 2,13% до 3,03%, что выше базовых показателей для туристической ниши.", "find.3": "Женщины активнее кликают во всех возрастах: их CTR от 1,81% до 3,34%, у мужчин от 1,4% до 2,43%.", "find.4": "Instagram Reels дали самую низкую цену клика 4,62 Kč при 403 переходах, что делает формат выгодным для масштабирования.", "find.5": "Аудитория ru+ukr охватила 25 493 человека (59% от общего охвата) и принесла основной объём трафика.", "find.6": "Частота показов 2,58 означает, что каждый человек видел рекламу в среднем почти 3 раза, это помогло запоминанию бренда.", "rec.1": "Увеличить бюджет на Instagram Reels: там самая низкая цена клика 4,62 Kč, а формат хорошо работает на вовлечение молодой аудитории.", "rec.2": "Дать больше бюджета на женщин 18-24 и 65+: их CTR 3,34% и 2,65% при небольших затратах, можно масштабировать эти сегменты.", "rec.3": "Протестировать больше креативов в стиле публикации с CTR 3,03%: этот формат показал максимальный отклик и самую низкую цену клика 4,96 Kč.", "rec.4": "Использовать частоту показов 2,5-3 как оптимальную: текущая 2,58 даёт баланс между запоминанием и эффективностью без переутомления аудитории.", "rec.5": "Проверить Facebook-ленту отдельно: там всего 270,91 Kč бюджета, но цена клика 3,30 Kč самая низкая, возможно стоит протестировать с большим бюджетом.", "rec.6": "Подготовить несколько вариантов видео для Travel Forever: текущие собрали 13 205 просмотров, формат явно интересен аудитории.", "eu.body": "Важно знать: в рекламных кабинетах ЕС Meta не показывает число начатых переписок в директ. Кампании «IG direct» реально приводят людей в сообщения, но эта цифра в отчёте технически недоступна. Реальное число обращений видно только вручную (в директе или через учёт менеджеров).", "footer.text": "Данные: Meta Marketing API · рекламный кабинет TravelForever · период 1 – 31 августа"},
+  en: {"header.sub": "Ad report · Meta Ads (Instagram / Facebook)", "header.period": "monthly report", "theme.dark": "Dark", "theme.light": "Light", "mode.brief": "Brief", "mode.detailed": "Detailed", "sec.insight": "The month in short", "sec.result": "Overall result for the period", "sec.liza_comment": "Note", "kpi.spend": "Spend", "kpi.spend.tip": "What Meta charged for showing the ads this month.", "kpi.reach": "Reach", "kpi.reach.tip": "How many different people saw the ads at least once. Each person counts once.", "kpi.impr": "Impressions", "kpi.impr.tip": "How many times the ads appeared on screens in total. More than people, because one person sees an ad several times.", "kpi.clicks": "Clicks", "kpi.clicks.tip": "How many times people clicked the ads.", "kpi.ctr": "CTR", "kpi.ctr.tip": "The share of people who clicked out of everyone who saw the ads.", "kpi.cpc": "CPC", "kpi.cpc.tip": "The average price of one click across the account this month.", "kpi.freq": "Frequency", "kpi.freq.tip": "How many times one person saw the ads on average. The higher the frequency, the greater the risk the audience is getting tired of the same creative.", "kpi.freq.sub": "impressions ÷ reach", "kpi.eng": "Interactions", "kpi.eng.tip": "Likes, comments, saves, clicks and video views: any actions people take with the ads.", "kpi.eng.sub": "likes, comments, videos, clicks", "kpi.video": "Video views", "kpi.video.tip": "How many times people played the videos in the ads.", "kpi.video.sub": "video plays in the ads", "kpi.leads": "Leads", "kpi.leads.tip": "How many people submitted a lead: via a lead form or via the website pixel.", "kpi.cost_lead": "Cost per lead", "kpi.cost_lead.tip": "The average cost of one lead (spend divided by the number of leads).", "kpi.cart": "Add to cart", "kpi.cart.tip": "How many times a product was added to cart on the website (per pixel data).", "kpi.cost_cart": "Cost per add to cart", "kpi.cost_cart.tip": "The average cost of one add-to-cart event (spend divided by the number of add-to-carts).", "sec.compare": "Campaign comparison", "chart1.title": "Clicks by campaign", "chart2.title": "Cost per click by campaign, Kč", "sec.campaigns": "Campaigns", "table.h.campaign": "Campaign", "table.h.reach": "Reach", "table.h.impr": "Impressions", "table.h.clicks": "Clicks", "table.h.ctr": "CTR", "table.h.cpc": "CPC", "table.h.budget": "Budget", "table.total": "Total / average", "verdict.label": "Verdict", "ads.label": "Campaign ads", "sec.aud": "Audiences", "sec.plat": "Placements", "sec.demo": "Audience by gender and age", "demo.men": "men", "demo.women": "women", "demo.scale": "bar length: spend for the month", "sec.ads": "Top ads", "sec.findings": "Key takeaways", "sec.recs": "Recommendations", "eu.title": "About Direct conversations", "sec.glossary": "Glossary of terms", "term1.title": "Reach: how many people saw you", "term1.body": "The number of different people who were shown the ads at least once. Each person counts once, even if they saw the ad several days in a row.", "term2.title": "Impressions: how many times the ad appeared", "term2.body": "How many times the ads appeared on screens in total. There are always more impressions than people, because the same person is shown the ad several times, which helps it stick.", "term3.title": "Frequency: how often one person sees the ad", "term3.body": "Impressions divided by reach. At 1–3 the ad gently reminds about itself. Above 3–4 the same people see it too often and start scrolling past.", "term4.title": "CTR: how well the ad grabs attention", "term4.body": "Click-through rate: the share of viewers who clicked the ad. The higher it is, the more interesting the ad looks to the audience.", "term5.title": "CPC: the price of one click", "term5.body": "The average cost of one click on the ad. The lower it is, the cheaper the audience's attention.", "term6.title": "Interactions: any actions with the ad", "term6.body": "Likes, comments, saves, clicks and video views combined. They show the ad is not just flashing by: people do something with it.", "term7.title": "Video views: how many times the videos were watched", "term7.body": "How many times people played the videos in the ads. An important metric for video creatives: it shows the ad is watched, not scrolled past.", "header.dates": "Aug 1 – 31", "insight.text": "The campaign reached <b>42,976 people</b> with a budget of <b>10,853 Kč</b>. Generated <b>2,150 clicks</b> at an average cost of <b>5.05 Kč</b>, showing strong audience interest in hotel offers. Travel Forever welcome posts performed particularly well, achieving CTR up to 3.03%, which is above average for travel services.", "camp1.tag": "", "camp1.aud": "Публикация в Instagram: Добро пожаловать в Travel...", "camp1.verdict": "Reached 8,518 people with 2.13% CTR and 5.38 Kč cost per click. The post generated 4,310 engagements and 4,008 video views, demonstrating strong audience engagement with Travel Forever content.", "campAd1.name": "Ad Публикация в Instagram: Добро пожаловать в Travel...", "campAd1.aud": "Публикация в Instagram: Добро пожаловать в Travel...", "campAd1.met": "260 clicks · CTR 2.13% · CPC <b>5.38 Kč</b>", "camp2.tag": "", "camp2.aud": "ru+ukr", "camp2.verdict": "The largest campaign reaching 25,493 people, generated 1,166 clicks at the lowest cost of 4.59 Kč. Frequency of 2.8 means people saw the ad almost 3 times on average, helping with brand recall.", "campAd2.name": "Ad 1", "campAd2.aud": "ru+ukr", "campAd2.met": "1,166 clicks · CTR 1.63% · CPC <b>4.59 Kč</b>", "camp3.tag": "", "camp3.aud": "Instagram post: Добро пожаловать в Travel Forever...", "camp3.verdict": "Achieved the best CTR among all campaigns at 2.53%. Reached 8,044 people, generated 4,038 engagements and 3,736 video views with a 5.35 Kč cost per click.", "campAd3.name": "Ad Instagram post: Добро пожаловать в Travel Forever...", "campAd3.aud": "Instagram post: Добро пожаловать в Travel Forever...", "campAd3.met": "261 clicks · CTR 2.53% · CPC <b>5.35 Kč</b>", "camp4.tag": "", "camp4.aud": "Публикация в Instagram: Добро пожаловать в Travel...", "camp4.verdict": "Top performer in clickability with 3.03% CTR and the cheapest click at 4.96 Kč. This means the creative resonated perfectly with audience interests and drove action.", "campAd4.name": "Ad Публикация в Instagram: Добро пожаловать в Travel...", "campAd4.aud": "Публикация в Instagram: Добро пожаловать в Travel...", "campAd4.met": "281 clicks · CTR 3.03% · CPC <b>4.96 Kč</b>", "camp5.tag": "", "camp5.aud": "Публикация в Instagram: Добро пожаловать в Travel...", "camp5.verdict": "Reached 6,251 people with 2.30% CTR. Cost per click of 7.22 Kč was higher than others, likely due to a narrower or more competitive audience.", "campAd5.name": "Ad Публикация в Instagram: Добро пожаловать в Travel...", "campAd5.aud": "Публикация в Instagram: Добро пожаловать в Travel...", "campAd5.met": "182 clicks · CTR 2.30% · CPC <b>7.22 Kč</b>", "aud1.name": "ru+ukr", "aud1.ctr": "CTR 1,63%", "aud1.stats": "5,348 Kč · reach 25,493", "aud1.note": "The largest audience with 25,493 reach showed 1.63% CTR, lower than other segments but delivered the highest traffic volume.", "aud2.name": "Публикация в Instagram: Добро пожаловать в Travel... · 1", "aud2.ctr": "CTR 2,13%", "aud2.stats": "1,400 Kč · reach 8,518", "aud2.note": "Delivered 2.13% CTR with 8,518 reach, performed consistently and effectively for the Travel post.", "aud3.name": "Instagram post: Добро пожаловать в Travel Forever...", "aud3.ctr": "CTR 2,53%", "aud3.stats": "1,398 Kč · reach 8,044", "aud3.note": "One of the best responders with 2.53% CTR, reached 8,044 people showing high interest.", "aud4.name": "Публикация в Instagram: Добро пожаловать в Travel... · 2", "aud4.ctr": "CTR 3,03%", "aud4.stats": "1,394 Kč · reach 7,364", "aud4.note": "Leader in clickability with 3.03% CTR, reached 7,364 people demonstrating maximum engagement.", "aud4.badge": "Best audience", "aud5.name": "Публикация в Instagram: Добро пожаловать в Travel... · 3", "aud5.ctr": "CTR 2,3%", "aud5.stats": "1,314 Kč · reach 6,251", "aud5.note": "Reached 6,251 people with 2.30% CTR, showed good results but cost per click was higher due to segment specifics.", "plat1.label": "Instagram · stories", "plat1.stat": "4,630 Kč · 902 clicks · 5.13 Kč per click", "plat2.label": "Instagram · feed", "plat2.stat": "4,091 Kč · 762 clicks · 5.37 Kč per click", "plat3.label": "Instagram · Reels", "plat3.stat": "1,861 Kč · 403 clicks · 4.62 Kč per click", "plat4.label": "Facebook · feed", "plat4.stat": "271 Kč · 82 clicks · 3.30 Kč per click", "plat5.label": "Facebook · stories", "plat5.stat": "0 Kč · 0 clicks · 0.00 Kč per click", "plat.note": "Instagram drove the main traffic: Stories generated 902 clicks at 5.13 Kč, Feed 762 clicks at 5.37 Kč, Reels 403 clicks at the best price of 4.62 Kč. Facebook showed minimal volume but the lowest click cost of 3.30 Kč in Feed.", "demo.r1.label": "F 25-34", "demo.r1.stat": "2,655 Kč · CTR 1.81%", "demo.r2.label": "F 35-44", "demo.r2.stat": "2,337 Kč · CTR 1.98%", "demo.r3.label": "F 45-54", "demo.r3.stat": "2,224 Kč · CTR 2.24%", "demo.r4.label": "M 25-34", "demo.r4.stat": "1,036 Kč · CTR 1.40%", "demo.r5.label": "F 55-64", "demo.r5.stat": "853 Kč · CTR 2.37%", "demo.r6.label": "M 35-44", "demo.r6.stat": "557 Kč · CTR 1.87%", "demo.r7.label": "M 45-54", "demo.r7.stat": "352 Kč · CTR 1.72%", "demo.r8.label": "F 65+", "demo.r8.stat": "349 Kč · CTR 2.65%", "demo.r9.label": "F 18-24", "demo.r9.stat": "138 Kč · CTR 3.34%", "demo.r10.label": "M 55-64", "demo.r10.stat": "132 Kč · CTR 2.20%", "demo.r11.label": "M 18-24", "demo.r11.stat": "94 Kč · CTR 2.43%", "demo.r12.label": "M 65+", "demo.r12.stat": "73 Kč · CTR 2.08%", "demo.r13.label": "F Unknown", "demo.r13.stat": "1 Kč · CTR 0.00%", "demo.note": "Women 18-24 (3.34% CTR) and 65+ (2.65% CTR) showed the highest click rates, but most budget went to women 25-34 and 45-54. Women across all ages click more actively than men and receive proportionally more impressions.", "ad1.badge": "Best response", "ad1.name": "Публикация в Instagram: Добро пожаловать в Travel", "ad1.metric": "CTR 3.03% · CPC 4.96 Kč", "ad1.reason": "CTR of 3.03% was the highest among all ads, indicating maximum audience interest in this creative.", "ad2.badge": "Cheapest click", "ad2.name": "direсt · отели предложения · сообщения", "ad2.metric": "CTR 1.63% · CPC 4.59 Kč", "ad2.reason": "Cost per click of 4.59 Kč was the lowest in the period, while reaching the largest audience of 25,493 people.", "ad3.badge": "Engagement magnet", "ad3.name": "Публикация в Instagram: Добро пожаловать в Travel", "ad3.metric": "CTR 2.13% · CPC 5.38 Kč", "ad3.reason": "Generated a record 4,310 post engagements, 4-5 times more than other campaigns, showing strong audience connection.", "find.1": "Spent 10,853 Kč in the period, generated 2,150 clicks at an average cost of 5.05 Kč with a reach of 42,976 people.", "find.2": "Travel Forever posts showed CTR from 2.13% to 3.03%, above baseline metrics for the travel niche.", "find.3": "Women click more actively across all ages: their CTR ranges from 1.81% to 3.34%, men from 1.40% to 2.43%.", "find.4": "Instagram Reels delivered the lowest cost per click at 4.62 Kč with 403 clicks, making the format cost-effective for scaling.", "find.5": "The ru+ukr audience reached 25,493 people (59% of total reach) and drove the main traffic volume.", "find.6": "Frequency of 2.58 means each person saw the ad almost 3 times on average, helping with brand memorability.", "rec.1": "Increase budget for Instagram Reels: it has the lowest cost per click at 4.62 Kč and the format works well for engaging younger audiences.", "rec.2": "Allocate more budget to women 18-24 and 65+: their CTR of 3.34% and 2.65% with low spend means these segments can be scaled.", "rec.3": "Test more creatives in the style of the 3.03% CTR post: this format showed maximum response and the lowest cost per click at 4.96 Kč.", "rec.4": "Use frequency of 2.5-3 as optimal: current 2.58 provides balance between memorability and efficiency without audience fatigue.", "rec.5": "Test Facebook Feed separately: it only had 270.91 Kč budget but the lowest cost per click at 3.30 Kč, worth testing with higher spend.", "rec.6": "Prepare several video variations for Travel Forever: current ones generated 13,205 views, the format clearly resonates with the audience.", "eu.body": "Worth knowing: in EU ad accounts Meta does not report the number of started Direct conversations. The IG direct campaigns do bring people into messages, but that number is technically unavailable in reporting. The real count of inquiries is only visible manually (in Direct or via a managers' log).", "footer.text": "Data: Meta Marketing API · TravelForever ad account · Aug 1 – 31"}
+};
+
+var currentLang = 'ru';
+
+/* ---- Числа: форматирование по языку (RU: пробел + запятая, EN: запятая + точка) ---- */
+function fmtNum(n, dec, lang){
+  var f = Math.abs(Number(n)).toFixed(dec);
+  var parts = f.split('.');
+  var sep = lang === 'ru' ? ' ' : ',';
+  var intp = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+  var out = intp;
+  if(dec > 0) out += (lang === 'ru' ? ',' : '.') + parts[1];
+  return (Number(n) < 0 ? '-' : '') + out;
+}
+function formatNums(lang){
+  document.querySelectorAll('[data-num]').forEach(function(el){
+    var n = parseFloat(el.getAttribute('data-num'));
+    var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+    var suf = el.getAttribute('data-suffix') || '';
+    var txt = fmtNum(n, dec, lang);
+    if(suf === '%') txt += '%';
+    else if(suf) txt += ' ' + suf;
+    el.textContent = txt;
+  });
+}
+
+function setLang(lang){
+  currentLang = lang;
+  var dict = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key = el.getAttribute('data-i18n');
+    if(dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+  formatNums(lang);
+  document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang;
+  updateChartLang(lang);
+}
+
+/* ---- Режим: Кратко / Подробно ---- */
+function setMode(mode){
+  var detailed = mode === 'detailed';
+  document.body.classList.toggle('detailed', detailed);
+  document.body.classList.toggle('brief', !detailed);
+  document.getElementById('btn-brief').classList.toggle('active', !detailed);
+  document.getElementById('btn-detailed').classList.toggle('active', detailed);
+  requestAnimationFrame(function(){
+    setTimeout(function(){
+      allCharts.forEach(function(c){ try{ c.resize(); }catch(e){} });
+    }, 60);
+  });
+}
+
+/* ---- Тема: Тёмная / Светлая. Переключает body.light и перекрашивает графики ---- */
+function setTheme(theme){
+  var light = theme === 'light';
+  document.body.classList.toggle('light', light);
+  document.getElementById('btn-dark').classList.toggle('active', !light);
+  document.getElementById('btn-light').classList.toggle('active', light);
+  applyChartTheme();
+}
+
+/* ---- Подсказки KPI: тап на мобильных (hover недоступен) ---- */
+document.querySelectorAll('.kpi-hint-wrap').forEach(function(wrap){
+  wrap.addEventListener('click', function(e){
+    if(window.matchMedia('(hover: none)').matches){
+      e.stopPropagation();
+      document.querySelectorAll('.kpi-hint-wrap.open').forEach(function(o){ if(o !== wrap) o.classList.remove('open'); });
+      wrap.classList.toggle('open');
+    }
+  });
+});
+document.addEventListener('click', function(){
+  document.querySelectorAll('.kpi-hint-wrap.open').forEach(function(o){ o.classList.remove('open'); });
+});
+
+/* ---- Графики: разбивка по кампаниям текущего периода ---- */
+var clicksChart, cpcChart;
+var allCharts = [];
+var chartLabels = {
+  ru: [["Публикация в…", ""], ["direсt", "отели предлож…"], ["Instagram pos…", ""], ["Публикация в…", ""], ["Публикация в…", ""]],
+  en: [["Публикация в…", ""], ["direсt", "отели предлож…"], ["Instagram pos…", ""], ["Публикация в…", ""], ["Публикация в…", ""]]
+};
+/* Подписи на оси обрезаны по длине (см. render.py); полное название
+   кампании - для подсказки при наведении/тапе - берём отсюда. */
+var chartFullNames = ["Публикация в Instagram: Добро пожаловать в Travel", "direсt · отели предложения · сообщения", "Instagram post: Добро пожаловать в Travel Forever", "Публикация в Instagram: Добро пожаловать в Travel", "Публикация в Instagram: Добро пожаловать в Travel"];
+var currency = "Kč";
+
+function updateChartLang(lang){
+  if(clicksChart){ clicksChart.data.labels = chartLabels[lang]; clicksChart.update(); }
+  if(cpcChart){ cpcChart.data.labels = chartLabels[lang]; cpcChart.update(); }
+}
+
+/* Читает актуальные цвета темы из CSS-переменных на body */
+function themeColors(){
+  var cs = getComputedStyle(document.body);
+  return {
+    text:  cs.getPropertyValue('--text').trim(),
+    mute:  cs.getPropertyValue('--text-mute').trim(),
+    grid:  cs.getPropertyValue('--chart-grid').trim(),
+    tipBg: cs.getPropertyValue('--surface-2').trim()
+  };
+}
+
+/* Применяет цвета темы к осям, сетке и тултипам обоих графиков */
+function applyChartTheme(){
+  var t = themeColors();
+  allCharts.forEach(function(chart){
+    chart.options.plugins.tooltip.backgroundColor = t.tipBg;
+    chart.options.plugins.tooltip.titleColor = t.text;
+    chart.options.plugins.tooltip.bodyColor = t.text;
+    chart.options.scales.x.ticks.color = t.text;
+    chart.options.scales.x.border.color = t.grid;
+    chart.options.scales.y.grid.color = t.grid;
+    chart.options.scales.y.ticks.color = t.mute;
+    chart.update();
+  });
+}
+
+window.addEventListener('load', function(){
+  if(typeof Chart === 'undefined') return;
+
+  var pink = '#faa1d4';
+  var pinkDeep = '#f17fc0';
+  var burgundy = '#a62e3e';
+
+  function baseOptions(labelCb, yTickCb){
+    return {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          padding: 10,
+          titleFont: { family: 'Sora', size: 12.5 },
+          bodyFont: { family: 'Sora', size: 12.5 },
+          callbacks: {
+            label: labelCb,
+            title: function(items){ return items.length ? chartFullNames[items[0].dataIndex] : ''; }
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, border: {}, ticks: { font: { family: 'Sora', size: 10.5 }, autoSkip: false } },
+        y: { beginAtZero: true, grid: {}, border: { display: false }, ticks: { font: { family: 'Sora', size: 10.5 }, callback: yTickCb } }
+      }
+    };
+  }
+
+  var clicksCtx = document.getElementById('clicksChart');
+  if(clicksCtx){
+    clicksChart = new Chart(clicksCtx, {
+      type: 'bar',
+      data: {
+        labels: chartLabels.ru,
+        datasets: [{
+          data: [260, 1166, 261, 281, 182],
+          backgroundColor: ["#f17fc0", "#faa1d4", "#f17fc0", "#f17fc0", "#f17fc0"],
+          borderRadius: 6,
+          borderSkipped: false,
+          maxBarThickness: 56
+        }]
+      },
+      options: baseOptions(
+        function(c){ return fmtNum(c.parsed.y, 0, currentLang) + (currentLang === 'ru' ? ' кликов' : ' clicks'); },
+        function(v){ return fmtNum(v, 0, currentLang); }
+      )
+    });
+    allCharts.push(clicksChart);
+  }
+
+  var cpcCtx = document.getElementById('cpcChart');
+  if(cpcCtx){
+    cpcChart = new Chart(cpcCtx, {
+      type: 'bar',
+      data: {
+        labels: chartLabels.ru,
+        datasets: [{
+          data: [5.38, 4.59, 5.35, 4.96, 7.22],
+          backgroundColor: ["#f17fc0", "#faa1d4", "#f17fc0", "#f17fc0", "#a62e3e"],
+          borderRadius: 6,
+          borderSkipped: false,
+          maxBarThickness: 56
+        }]
+      },
+      options: baseOptions(
+        function(c){ return fmtNum(c.parsed.y, 2, currentLang) + (currentLang === 'ru' ? ' ' + currency + ' за клик' : ' ' + currency + ' per click'); },
+        function(v){ return v + ' ' + currency; }
+      )
+    });
+    allCharts.push(cpcChart);
+  }
+
+  applyChartTheme();
+
+  /* Подстраховка от бага «canvas нулевой высоты» */
+  function fixAll(){ allCharts.forEach(function(c){ try{ c.resize(); }catch(e){} }); }
+  requestAnimationFrame(fixAll);
+  allCharts.forEach(function(chart){
+    var wrap = chart.canvas.closest('.chart-box');
+    if(!wrap) return;
+    if('ResizeObserver' in window){ new ResizeObserver(fixAll).observe(wrap); }
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(en){ if(en[0].isIntersecting) fixAll(); }, { threshold: .05 }).observe(wrap);
+    }
+  });
+  window.addEventListener('resize', fixAll);
+
+  formatNums(currentLang);
+});
+</script>
+
+</body>
+</html>
